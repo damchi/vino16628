@@ -14,11 +14,12 @@ console.log(BaseURL);
 window.addEventListener('load', function() {
     console.log("load");
     document.querySelectorAll(".btnBoire").forEach(function(element){
-        console.log(element);
+
         element.addEventListener("click", function(evt){
+            console.log(element);
             let id = evt.target.parentElement.dataset.id;
             let requete = new Request(BaseURL+"index.php?requete=boireBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
-
+                console.log(requete);
             fetch(requete)
             .then(response => {
                 if (response.status === 200) {
@@ -28,7 +29,8 @@ window.addEventListener('load', function() {
                 }
               })
               .then(response => {
-                console.debug(response);
+                  location.reload();
+                 console.debug(response);
               }).catch(error => {
                 console.error(error);
               });
@@ -37,7 +39,7 @@ window.addEventListener('load', function() {
     });
 
     document.querySelectorAll(".btnAjouter").forEach(function(element){
-        console.log(element);
+        // console.log(element);
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
             let requete = new Request(BaseURL+"index.php?requete=ajouterBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
@@ -51,7 +53,8 @@ window.addEventListener('load', function() {
                 }
               })
               .then(response => {
-                console.debug(response);
+                  location.reload();
+                    console.debug(response);
               }).catch(error => {
                 console.error(error);
               });
@@ -83,7 +86,7 @@ window.addEventListener('load', function() {
                   
                  
                   response.forEach(function(element){
-                    liste.innerHTML += "<li data-id='"+element.id +"'>"+element.nom+"</li>";
+                    liste.innerHTML += "<li data-id='"+ element.id +"'>"+element.nom+"</li>";
                   })
                 }).catch(error => {
                   console.error(error);

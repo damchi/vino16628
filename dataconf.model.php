@@ -1,9 +1,9 @@
 <?php
 	// Remplir et renommer dataconf.php
-	define("BASEURL", "");
+	define("BASEURL", "/vino16628/");
 
 	define('HOST', 'localhost');
-	define('USER', '');
-	define('PASSWORD', '');
-	define('DATABASE', '');
+	define('USER', 'root');
+	define('PASSWORD', 'root');
+	define('DATABASE', 'vino16628');
 ?>

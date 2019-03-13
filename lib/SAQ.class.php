@@ -21,7 +21,7 @@ class SAQ extends Modele {
 
 	public function __construct() {
 		parent::__construct();
-		if (!($this -> stmt = $this -> _db -> prepare("INSERT INTO vino__bouteille(nom, type, image, code_saq, pays, description, prix_saq, url_saq, url_img, format) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"))) {
+		if (!($this -> stmt = $this -> _db -> prepare("INSERT INTO vino__bouteille__saq(nom, type, image, code_saq, pays, description, prix_saq, url_saq, url_img, format) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"))) {
 			echo "Echec de la préparation : (" . $mysqli -> errno . ") " . $mysqli -> error;
 		}
 	}
@@ -35,8 +35,14 @@ class SAQ extends Modele {
 		$s = curl_init();
 
 		//curl_setopt($s, CURLOPT_URL, "http://www.saq.com/webapp/wcs/stores/servlet/SearchDisplay?searchType=&orderBy=&categoryIdentifier=06&showOnly=product&langId=-2&beginIndex=".$debut."&tri=&metaData=YWRpX2YxOjA8TVRAU1A%2BYWRpX2Y5OjE%3D&pageSize=". $nombre ."&catalogId=50000&searchTerm=*&sensTri=&pageView=&facet=&categoryId=39919&storeId=20002");
-		curl_setopt($s, CURLOPT_URL, "https://www.saq.com/webapp/wcs/stores/servlet/SearchDisplay?categoryIdentifier=06&showOnly=product&langId=-2&beginIndex=" . $debut . "&pageSize=" . $nombre . "&catalogId=50000&searchTerm=*&categoryId=39919&storeId=20002");
+		curl_setopt($s, CURLOPT_URL, "https://fr.simplesite.com");
+		curl_setopt($s, CURLOPT_URL, 
+        "https://www.saq.com/webapp/wcs/stores/servlet/SearchDisplay?categoryIdentifier=06&showOnly=product&langId=-2&beginIndex=" . $debut . "&pageSize=" . $nombre . "&catalogId=50000&searchTerm=*&categoryId=39919&storeId=20002");
 		curl_setopt($s, CURLOPT_RETURNTRANSFER, true);
+        
+        // Quick fix pour que ça marche sous Windows sans installer les root certificates
+        curl_setopt($s, CURLOPT_SSL_VERIFYPEER, false);
+        
 		//curl_setopt($s, CURLOPT_FOLLOWLOCATION, 1);
 
 		self::$_webpage = curl_exec($s);
@@ -85,40 +91,67 @@ class SAQ extends Modele {
 	private function recupereInfo($noeud) {
 		$info = new stdClass();
 		$info -> img = $noeud -> getElementsByTagName("img") -> item(0) -> getAttribute('src');
-		;
 		$info -> url = $noeud -> getElementsByTagName("a") -> item(0) -> getAttribute('href');
 		$p = $noeud -> getElementsByTagName("p");
+        
 		foreach ($p as $node) {
 			if ($node -> getAttribute('class') == 'nom') {
 				$info -> nom = utf8_decode(trim($node -> textContent));
-			} else if ($node -> getAttribute('class') == 'desc') {
+			}
+            else if ($node -> getAttribute('class') == 'desc') {
 				$info -> desc = new stdClass();
 				$info -> desc -> texte = $node -> textContent;
 				$res = preg_match_all("/\r\n\s*(.*)\r\n/", $info -> desc -> texte, $aDesc);
+                
+//                echo "<pre>";
+//                var_dump($aDesc[1]);
+//                echo "</pre>";
+//                
 				if (isset($aDesc[1][2])) {
 					preg_match("/\d{8}/", $aDesc[1][2], $aRes);
 					//var_dump($aRes);
 					$info -> desc -> code_SAQ = utf8_decode(trim($aRes[0]));
 				}
+                
 				if (isset($aDesc[1][1])) {
 					preg_match("/(.*),(.*)/", $aDesc[1][1], $aRes);
 					$info -> desc -> pays = utf8_decode(trim($aRes[1]));
 					$info -> desc -> format = utf8_decode(trim($aRes[2]));
 				}
+                
 				if (isset($aDesc[1][0])) {
 					$info -> desc -> type = utf8_decode(trim($aDesc[1][0]));
 				}
+                
 				$info -> desc -> texte = utf8_decode(trim($info -> desc -> texte));
+//                
+//                echo "<pre>";
+//                var_dump($info);
+//                echo "</pre>";
 			}
 		}
+        
 		$p = $noeud -> getElementsByTagName("td");
+        
+//        echo "<pre>";
 		foreach ($p as $node) {
+//            var_dump($node -> textContent);
 			if ($node -> getAttribute('class') == 'price') {
 				$info -> prix = trim($node -> textContent);
+//                echo "PRIX (1)\n";
+//                var_dump($info -> prix);
 				preg_match("/ \r\n(.*)$/", $info -> prix, $aRes);
+//                echo "aRes[1]\n";
+//                var_dump($aRes[1]);
 				$info -> prix = utf8_decode(trim($aRes[1]));
+//                echo "PRIX (2)\n";
+//                var_dump($info -> prix);
+                $info -> prix = preg_replace("/,/", ".", $info -> prix); // Pour avoir un float
+//                echo "PRIX (3)\n";
+//                var_dump($info -> prix);
 			}
 		}
+//        echo "</pre>";
 
 		return $info;
 	}
@@ -128,18 +161,27 @@ class SAQ extends Modele {
 		$retour -> succes = false;
 		$retour -> raison = '';
 
-		var_dump($bte);
+//        echo "<pre>";
+//        echo "BTE\n";
+//        var_dump($bte);
+//        echo "</pre>";
+//
 		// Récupère le type
-		$rows = $this -> _db -> query("select id from vino__type where type = '" . $bte -> desc -> type . "'");
+        $sql = "select id_type from vino__type where type = '" . $bte -> desc -> type . "'";
+        echo $sql . "\n";            
+		$rows = $this -> _db -> query($sql);
 		
 		if ($rows -> num_rows == 1) {
 			$type = $rows -> fetch_assoc();
-			var_dump($type);
-			$type = $type['id'];
+			$type = $type['id_type'];
 
-			$rows = $this -> _db -> query("select id from vino__bouteille where code_saq = '" . $bte -> desc -> code_SAQ . "'");
+            $sql = "select id_bouteille_saq from vino__bouteille__saq where code_saq = '" . $bte -> desc -> code_SAQ . "'";
+
+            echo $sql . "\n";            
+			$rows = $this -> _db -> query($sql);
+            
 			if ($rows -> num_rows < 1) {
-				$this -> stmt -> bind_param("sissssssss", $bte -> nom, $type, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> desc -> texte, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);
+				$this -> stmt -> bind_param("sissssdsss", $bte -> nom, $type, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> desc -> texte, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);
 				$retour -> succes = $this -> stmt -> execute();
 
 			} else {
