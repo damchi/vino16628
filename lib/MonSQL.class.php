@@ -26,7 +26,7 @@ class MonSQL {
 	 */
 	private function __construct($host, $user, $password, $database) 
 	{
-		
+		mysqli_report(MYSQLI_REPORT_ALL);
 	}
 
 	/**
@@ -44,7 +44,7 @@ class MonSQL {
 				echo "Echec lors de la connexion à MySQL : (" . self::$_instance -> connect_errno . ") " . self::$_instance-> connect_error;
 			}
 			else {
-				self::$_instance->set_charset("UTF-8");	
+				self::$_instance->set_charset("utf8");	
 			}
 		}
 
