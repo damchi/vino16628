@@ -11,68 +11,80 @@
  * 
  */
 class Bouteille extends Modele {
-	const TABLE = 'vino__bouteille';
+	public function __construct() {
+		parent::__construct();
+        
+        $sql = "
+            INSERT INTO vino__bouteille__saq (nom, type, image, code_saq,
+            pays, description, prix_saq, url_saq, url_img, format)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ";
+        
+		if (!($this -> stmtAjouterBouteilleCellier = $this -> _db -> prepare($sql))) {
+			echo "Echec de la préparation: " . $mysqli -> error;
+		}
+        
+        $sql = "SELECT * FROM vino__bouteille__saq WHERE id_bouteille_saq = ?";
+        
+		if (!($this -> stmtGetBouteilleSaq = $this -> _db -> prepare($sql))) {
+			echo "Echec de la préparation: " . $mysqli -> error;
+		}
+	}
+
+	/**
+	 * Retourne la liste des bouteilles d'un cellier donné.
+	 * 
+	 * @param int idCellier
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+	 * 
+	 * @return Tableau des bouteilles avec tous leurs attributs
+	 */
     
-	public function getListeBouteille()
-	{
-		
-		$rows = Array();
-		$res = $this->_db->query('Select * from '. self::TABLE);
-		if($res->num_rows)
-		{
-			while($row = $res->fetch_assoc())
-			{
-				$rows[] = $row;
-			}
+	public function getListeBouteilleCellier($idCellier = 0) {
+		$liste = Array();
+        
+		$sql = "
+            SELECT b.*, t.type FROM vino__bouteille b
+			INNER JOIN vino__type t ON t.id_type = b.type
+        ";
+
+        if ($idCellier) {
+            $sql .= " WHERE id_cellier = " . (int) $idCellier;
+        }
+        
+        if (!($res = $this->_db->query($sql))) {
+			throw new Exception("Erreur de requête sur la base de donnée: " . $this->_db->error, 1);
 		}
 		
-		return $rows;
+        while ($row = $res->fetch_assoc()) {
+            $liste[] = $row;
+        }
+
+        return $liste;
 	}
 	
-	public function getListeBouteilleCellier()
-	{
-		
-		$rows = Array();
-		$requete ='SELECT 
-						b.id_bouteille, 
-						b.id_cellier,
-						b.date_achat, 
-						b.garde_jusqua, 
-						b.notes, 
-						b.prix, 
-						b.quantite,
-						b.millesime, 
-						b.nom, 
-						b.type, 
-						b.image, 
-						b.code_saq, 
-						b.url_saq, 
-						b.pays, 
-						b.description,
-						t.type 
-						from vino__bouteille b
-						INNER JOIN vino__type t ON t.id_type = b.type
-						'; 
-		if(($res = $this->_db->query($requete)) ==	 true)
-		{
-			if($res->num_rows)
-			{
-				while($row = $res->fetch_assoc())
-				{
-					$row['nom'] = trim(utf8_encode($row['nom']));
-					$rows[] = $row;
-				}
-			}
-		}
-		else 
-		{
-			throw new Exception("Erreur de requête sur la base de donnée", 1);
-			 //$this->_db->error;
+	/**
+	 * Retourne les attributs d'une bouteille SAQ donnée.
+	 * 
+	 * @param int idBouteilleSaq
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+	 * 
+	 * @return Tableau associatif des attributs
+	 */
+    
+	public function getBouteilleSaq($idBouteilleSaq = 0) {
+		$sql = "
+            SELECT * FROM vino__bouteille__saq
+            WHERE id_bouteille_saq = " . (int) $idBouteilleSaq . "
+        ";
+
+        if (!($res = $this->_db->query($sql))) {
+			throw new Exception("Erreur de requête sur la base de donnée: " . $this->_db->error, 1);
 		}
 		
-		
-		
-		return $rows;
+        return $res->fetch_assoc();
 	}
 	
 	/**
@@ -102,7 +114,8 @@ class Bouteille extends Modele {
 			{
 				while($row = $res->fetch_assoc())
 				{
-					$row['nom'] = trim(utf8_encode($row['nom']));
+					$row['id'] = $row['id_bouteille_saq'];
+                    unset($row['id_bouteille_saq']);
 					$rows[] = $row;
 					
 				}
