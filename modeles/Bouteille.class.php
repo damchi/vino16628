@@ -145,8 +145,15 @@ class Bouteille extends Modele {
 		//TODO : Valider les données.
 		//var_dump($data);	
 		
-		$requete = "INSERT INTO vino__bouteille(id_bouteille,date_achat,garde_jusqua,notes,prix,quantite,millesime) VALUES (".
-		"'".$data->id_bouteille."',".
+		$requete = "INSERT INTO vino__bouteille(nom,image,code_saq,pays,description,url_saq,url_img,format,date_achat,garde_jusqua,notes,prix,quantite,millesime) VALUES (".
+		"'".$data->nom."',".
+		"'".$data->image."',".
+		"'".$data->code_saq."',".
+		"'".$data->pays."',".
+		"'".$data->description."',".
+		"'".$data->url_saq."',".
+		"'".$data->url_img."',".
+		"'".$data->format."',".
 		"'".$data->date_achat."',".
 		"'".$data->garde_jusqua."',".
 		"'".$data->notes."',".
