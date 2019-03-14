@@ -37,6 +37,12 @@ class Controler
 				case 'boireBouteilleCellier':
 					$this->boireBouteilleCellier();
 					break;
+				case 'inscription':
+					$this->formInscription();
+					break;
+				case 'ajoutUsager':
+					$this->ajoutUsager();
+					break;
 				default:
 					$this->accueil();
 					break;
@@ -112,7 +118,27 @@ class Controler
 			$resultat = $bte->modifierQuantiteBouteilleCellier($body->id, 1);
 			echo json_encode($resultat);
 		}
-		
+
+		private function formInscription(){
+			include ('vues/entete.php');
+			include ('vues/ajoutUsager.php');
+			include ('vues/pied.php');
+
+		}
+
+		private function ajoutUsager(){
+            $body = json_decode(file_get_contents('php://input'));
+
+            if(!empty($body)){
+                $usager = new Usager();
+                //var_dump($_POST['data']);
+
+                //var_dump($data);
+                $resultat = $usager->ajoutNouveauUsager($body);
+                echo json_encode($resultat);
+            }
+
+		}
 }
 ?>
 
