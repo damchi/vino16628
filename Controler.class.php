@@ -20,10 +20,12 @@ class Controler
 		 */
 		public function gerer()
 		{
-			
 			switch ($_GET['requete']) {
 				case 'listeBouteille':
 					$this->listeBouteille();
+					break;
+				case 'getBouteilleSaq':
+					$this->getBouteilleSAQ();
 					break;
 				case 'autocompleteBouteille':
 					$this->autocompleteBouteille();
@@ -53,7 +55,6 @@ class Controler
                   
 		}
 		
-
 		private function listeBouteille()
 		{
 			$bte = new Bouteille();
@@ -61,6 +62,14 @@ class Controler
             
             echo json_encode($cellier);
                   
+		}
+		
+		private function getBouteilleSAQ()
+		{
+			$bte = new Bouteille();
+			$body = json_decode(file_get_contents('php://input'));
+            $bouteilleSaq = $bte->getBouteilleSaq($body->id_bouteille_saq);
+            echo json_encode($bouteilleSaq);
 		}
 		
 		private function autocompleteBouteille()
