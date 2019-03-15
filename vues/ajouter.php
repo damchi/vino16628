@@ -112,7 +112,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fas fa-calendar-alt text-secondary"></i></div>
                                 </div>
-                                <input type="text" class="form-control" id="date_achat" name="date_achat" placeholder="Date d'achat">
+                                <input type="date" class="form-control" id="date_achat" name="date_achat" placeholder="Date d'achat">
                             </div>
                         </div>
                         <div class="form-group">

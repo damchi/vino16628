@@ -11,9 +11,11 @@
  * 
  */
 
+
+
 class Controler 
 {
-	
+
 		/**
 		 * Traite la requête
 		 * @return void
@@ -31,6 +33,7 @@ class Controler
 					$this->autocompleteBouteille();
 					break;
 				case 'ajouterNouvelleBouteilleCellier':
+//					var_dump('eee');
 					$this->ajouterNouvelleBouteilleCellier();
 					break;
 				case 'ajouterBouteilleCellier':
@@ -39,8 +42,34 @@ class Controler
 				case 'boireBouteilleCellier':
 					$this->boireBouteilleCellier();
 					break;
+				case 'inscription':
+					$this->formInscription();
+					break;
+				case 'ajoutUsager':
+					$this->ajoutUsager();
+					break;
+
+                case 'login':
+					$this->formlogin();
+
+                    break;
+                case 'logedin':
+           	 		$this->connexion();
+                    break;
+
+				case 'accueil':
+					if (isset($_SESSION['user_pseudo'])){
+//					var_dump($_SESSION['user_pseudo']);
+                        $this->accueil();
+					}
+					else{
+                        header("Location:index.php?action=login");
+
+                    }
+
+					break;
 				default:
-					$this->accueil();
+					$this->formlogin();
 					break;
 			}
 		}
@@ -85,9 +114,6 @@ class Controler
 		}
 		private function ajouterNouvelleBouteilleCellier()
 		{
-//            var_dump($_SERVER['REQUEST_METHOD']);
-//            die;
-//            
 			switch($_SERVER['REQUEST_METHOD']){
                 case 'GET':
                     include("vues/entete.php");
@@ -120,7 +146,48 @@ class Controler
 			$resultat = $bte->modifierQuantiteBouteilleCellier($body->id, 1);
 			echo json_encode($resultat);
 		}
-		
+
+		private function formInscription(){
+			include ('vues/entete.php');
+			include ('vues/ajoutUsager.php');
+			include ('vues/pied.php');
+
+		}
+
+		private function ajoutUsager(){
+            $body = json_decode(file_get_contents('php://input'));
+
+            if(!empty($body)){
+                $usager = new Usager();
+                //var_dump($_POST['data']);
+
+                //var_dump($data);
+                $resultat = $usager->ajoutNouveauUsager($body);
+                echo json_encode($resultat);
+            }
+
+		}
+
+		private function formlogin(){
+            include ('vues/entete.php');
+            include ('vues/login.php');
+            include ('vues/pied.php');
+		}
+
+		private function connexion(){
+
+            $body = json_decode(file_get_contents('php://input'));
+
+            if(!empty($body)){
+                $usager = new Usager();
+                //var_dump($_POST['data']);
+
+                //var_dump($data);
+                $resultat = $usager->login($body);
+                echo json_encode($resultat);
+            }
+
+		}
 }
 ?>
 
