@@ -82,6 +82,7 @@ window.addEventListener('load', function() {
     let liste = document.querySelector('.listeAutoComplete');
 
     let formNouvelleBouteille = {
+        form: document.querySelector(".ajouter form"),
         nom: document.querySelector("[name='nom_bouteille']"),
         image: document.querySelector("[name='image']"),
         img: document.querySelector("form img"),
@@ -101,8 +102,6 @@ window.addEventListener('load', function() {
         notes: document.querySelector("[name='notes']"),
     };
 
-    let btnAjouterBouteilleCellier = document.querySelector("[name='ajouterBouteilleCellier']");
-
     /*
         On cache par défaut l'image de la bouteille dans le formulaire parce qu'il n'y en a pas encore et qu'on ne veut pas avoir le petit icône.
     */
@@ -118,6 +117,7 @@ window.addEventListener('load', function() {
     if (inputRecherche) {
         inputRecherche.addEventListener("keyup", function(evt){
             console.log(evt);
+            
             let nom = inputRecherche.value;
             liste.innerHTML = "";
 
@@ -204,9 +204,12 @@ window.addEventListener('load', function() {
         Le bouton ajouter soumet le formulaire d'ajout de bouteille.
     */
 
-    if (btnAjouterBouteilleCellier) {
-        btnAjouterBouteilleCellier.addEventListener("click", function(evt) {
-            var param = {
+    if (formNouvelleBouteille.form) {
+        formNouvelleBouteille.form.addEventListener("submit", function(evt) {
+            console.log(evt);
+            evt.preventDefault();
+                        
+            let param = {
                 "nom": formNouvelleBouteille.nom.value,
                 "image": formNouvelleBouteille.image.value,
                 "code_saq": formNouvelleBouteille.code_saq.value,

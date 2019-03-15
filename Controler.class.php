@@ -33,7 +33,7 @@ class Controler
 					$this->autocompleteBouteille();
 					break;
 				case 'ajouterNouvelleBouteilleCellier':
-					var_dump('eee');
+//					var_dump('eee');
 					$this->ajouterNouvelleBouteilleCellier();
 					break;
 				case 'ajouterBouteilleCellier':
@@ -114,26 +114,20 @@ class Controler
 		}
 		private function ajouterNouvelleBouteilleCellier()
 		{
-
-
-			$body = json_decode(file_get_contents('php://input'));
-//			var_dump($body);
-			if(!empty($body)){
-				$bte = new Bouteille();
-				//var_dump($_POST['data']);
-				
-				//var_dump($data);
-				$resultat = $bte->ajouterBouteilleCellier($body);
-				echo json_encode($resultat);
+			switch($_SERVER['REQUEST_METHOD']){
+                case 'GET':
+                    include("vues/entete.php");
+                    include("vues/ajouter.php");
+                    include("vues/pied.php");
+                    break;
+                case 'POST':
+                    $bte = new Bouteille();
+                    $body = json_decode(file_get_contents('php://input'));
+                    $resultat = $bte->ajouterBouteilleCellier($body);
+                    echo json_encode($resultat);
+                    break;
 			}
-			else{
-				include("vues/entete.php");
-				include("vues/ajouter.php");
-				include("vues/pied.php");
-			}
-			
-            
-		}
+        }
 		
 		private function boireBouteilleCellier()
 		{
