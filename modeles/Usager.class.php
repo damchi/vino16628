@@ -63,39 +63,27 @@ class Usager extends Modele
     }
 
     public function login($data){
-            var_dump($data->identifiant);
-            var_dump($data->mdp);
+
+                $identifiant = $this->_db->real_escape_string($data->identifiant);
+//            var_dump($data->identifiant);
+//            var_dump($data->mdp);
+//
+            $stmt = "SELECT * FROM " . self::TABLE. " WHERE mail = '".$identifiant ."' OR pseudo ='" . $identifiant ."'";
+//            var_dump($stmt);
+            $stmt_result = $this->_db->query($stmt);
 
 
-            $stmt = $this->_db->prepare("SELECT * FROM " . self::TABLE. " WHERE mail = ? OR pseudo = ?" ) or trigger_error($stmt->error, E_USER_ERROR);;
-            $stmt ->bind_param("ss",$data->identifiant,$data->identifiant );
-            $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
-            ($stmt_result = $stmt->get_result()) or trigger_error($stmt->error, E_USER_ERROR);
-
-            var_dump($stmt_result->num_rows);
-            if ($stmt_result->num_rows > 0) {
-
-                while($row_data = $stmt_result->fetch_assoc()) {
-                    # Action to do
-                    if(password_verify($data->mdp, $row_data["mdp"])){
-
-                        return true;
-                    }
-                    else
-                    {
-
-                        //ce n'est pas le bon mot de passe
-                        return false;
-                    }
+            if ($stmt_result->num_rows == 1) {
+                $row_data = $stmt_result->fetch_assoc();
+                if (password_verify($data->mdp, $row_data["mdp"])) {
+                    $_SESSION['user_pseudo']= $row_data["pseudo"];
+                    return true;
                 }
-
-            } else {
-
-                return false;
             }
             $stmt->close();
 
 
     }
+
 
 }

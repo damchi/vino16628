@@ -11,9 +11,11 @@
  * 
  */
 
+
+
 class Controler 
 {
-	
+
 		/**
 		 * Traite la requête
 		 * @return void
@@ -31,6 +33,7 @@ class Controler
 					$this->autocompleteBouteille();
 					break;
 				case 'ajouterNouvelleBouteilleCellier':
+					var_dump('eee');
 					$this->ajouterNouvelleBouteilleCellier();
 					break;
 				case 'ajouterBouteilleCellier':
@@ -45,14 +48,28 @@ class Controler
 				case 'ajoutUsager':
 					$this->ajoutUsager();
 					break;
+
                 case 'login':
 					$this->formlogin();
+
                     break;
                 case 'logedin':
-                    $this->connexion();
+           	 		$this->connexion();
                     break;
+
+				case 'accueil':
+					if (isset($_SESSION['user_pseudo'])){
+//					var_dump($_SESSION['user_pseudo']);
+                        $this->accueil();
+					}
+					else{
+                        header("Location:index.php?action=login");
+
+                    }
+
+					break;
 				default:
-					$this->accueil();
+					$this->formlogin();
 					break;
 			}
 		}
@@ -97,8 +114,10 @@ class Controler
 		}
 		private function ajouterNouvelleBouteilleCellier()
 		{
+
+
 			$body = json_decode(file_get_contents('php://input'));
-			//var_dump($body);
+//			var_dump($body);
 			if(!empty($body)){
 				$bte = new Bouteille();
 				//var_dump($_POST['data']);

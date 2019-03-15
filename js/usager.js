@@ -1,7 +1,7 @@
 window.addEventListener('load',()=>{
     let btnAjouterUsager = document.querySelector("[name='ajouterUsager']");
     let btnLogin = document.querySelector("[name='btnLogin']");
-    console.log(btnAjouterUsager);
+    // console.log(btnAjouterUsager);
     if (btnAjouterUsager){
         btnAjouterUsager.addEventListener('click',()=>{
             var param ={
@@ -44,6 +44,11 @@ window.addEventListener('load',()=>{
                         return response.json();
                     } else {
                         throw new Error('Erreur');
+                    }
+                })
+                .then(response =>{
+                    if(response === true){
+                        window.location.replace(BaseURL + "index.php?requete=accueil");
                     }
                 });
 
