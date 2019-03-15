@@ -63,7 +63,7 @@ class Controler
                         $this->accueil();
 					}
 					else{
-                        header("Location:index.php?action=login");
+                        header("Location:index.php?requete=login");
 
                     }
 
@@ -116,8 +116,10 @@ class Controler
 		{
 			switch($_SERVER['REQUEST_METHOD']){
                 case 'GET':
+                    $bte = new Bouteille();
+                    $data['types'] = $bte->getTypes();
                     include("vues/entete.php");
-                    include("vues/ajouter.php");
+                    include("vues/ajoutBouteille.php");
                     include("vues/pied.php");
                     break;
                 case 'POST':

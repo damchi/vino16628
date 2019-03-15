@@ -69,7 +69,7 @@ class Usager extends Modele
 //            var_dump($data->mdp);
 //
             $stmt = "SELECT * FROM " . self::TABLE. " WHERE mail = '".$identifiant ."' OR pseudo ='" . $identifiant ."'";
-//            var_dump($stmt);
+            //var_dump($stmt);
             $stmt_result = $this->_db->query($stmt);
 
 
@@ -80,9 +80,9 @@ class Usager extends Modele
                     return true;
                 }
             }
-            $stmt->close();
+            //$stmt->close();
 
-
+            return false;
     }
 
 

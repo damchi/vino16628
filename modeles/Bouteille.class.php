@@ -11,26 +11,6 @@
  * 
  */
 class Bouteille extends Modele {
-	public function __construct() {
-		parent::__construct();
-        
-        $sql = "
-            INSERT INTO vino__bouteille__saq (nom, type, image, code_saq,
-            pays, description, prix_saq, url_saq, url_img, format)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ";
-        
-		if (!($this -> stmtAjouterBouteilleCellier = $this -> _db -> prepare($sql))) {
-			echo "Echec de la préparation: " . $mysqli -> error;
-		}
-        
-        $sql = "SELECT * FROM vino__bouteille__saq WHERE id_bouteille_saq = ?";
-        
-		if (!($this -> stmtGetBouteilleSaq = $this -> _db -> prepare($sql))) {
-			echo "Echec de la préparation: " . $mysqli -> error;
-		}
-	}
-
 	/**
 	 * Retourne la liste des bouteilles d'un cellier donné.
 	 * 
@@ -88,6 +68,29 @@ class Bouteille extends Modele {
 	}
 	
 	/**
+	 * Retourne la liste des types de bouteilles.
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+	 * 
+	 * @return Tableau des types de bouteilles
+	 */
+    
+	public function getTypes() {
+		$types = Array();
+		$sql = "SELECT * from vino__type";
+
+        if (!($res = $this->_db->query($sql))) {
+			throw new Exception("Erreur de requête sur la base de donnée: " . $this->_db->error, 1);
+		}
+		
+        while ($row = $res->fetch_assoc()) {
+            $types[] = $row;
+        }
+
+        return $types;
+	}
+	
+	/**
 	 * Cette méthode permet de retourner les résultats de recherche pour la fonction d'autocomplete de l'ajout des bouteilles dans le cellier
 	 * 
 	 * @param string $nom La chaine de caractère à rechercher
@@ -99,16 +102,23 @@ class Bouteille extends Modele {
 	 */
        
 	public function autocomplete($nom, $nb_resultat=10)
-	{
-		
+	{		
 		$rows = Array();
 		$nom = $this->_db->real_escape_string($nom);
 		$nom = preg_replace("/\*/","%" , $nom);
+        $nom = '%'.$nom.'%';
 		 
 		//echo $nom;
-		$requete ='SELECT id_bouteille_saq, nom FROM vino__bouteille__saq where LOWER(nom) like LOWER("%'. $nom .'%") LIMIT 0,'. $nb_resultat;
-		//var_dump($requete);
-		if(($res = $this->_db->query($requete)) ==	 true)
+		$requete = "
+            SELECT id_bouteille_saq, nom FROM vino__bouteille__saq
+            WHERE LOWER(nom) LIKE LOWER(?) LIMIT 0, ?
+        ";
+        
+        $stmt = $this->_db->prepare($requete);
+        $stmt->bind_param("si", $nom, $nb_resultat);
+        $stmt->execute();
+        
+		if($res = $stmt->get_result())
 		{
 			if($res->num_rows)
 			{
@@ -116,17 +126,14 @@ class Bouteille extends Modele {
 				{
 					$row['id'] = $row['id_bouteille_saq'];
                     unset($row['id_bouteille_saq']);
-					$rows[] = $row;
-					
+					$rows[] = $row;					
 				}
 			}
 		}
 		else 
 		{
-			throw new Exception("Erreur de requête sur la base de données", 1);
-			 
+			throw new Exception("Erreur de requête sur la base de données", 1);			 
 		}
-		
 		
 		//var_dump($rows);
 		return $rows;
@@ -142,26 +149,29 @@ class Bouteille extends Modele {
 	 */
 	public function ajouterBouteilleCellier($data)
 	{
-		//TODO : Valider les données.
+        $sql = "
+            INSERT INTO vino__bouteille (id_cellier, nom, image, code_saq,
+            pays, description, url_saq, url_img, format, date_achat,
+            garde_jusqua, notes, prix, quantite, millesime, type)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ";        
 
+        $stmt = $this->_db->prepare($sql);
 
-		$requete = "
-            INSERT INTO vino__bouteille (
-                nom,image,code_saq,pays,description,url_saq,url_img,format,
-                date_achat,garde_jusqua,notes,prix,quantite,millesime,type
-            )
-            VALUES (
-                '$data->nom', '$data->image', '$data->code_saq', '$data->pays',
-                '$data->description', '$data->url_saq','$data->url_img',
-                '$data->format', '$data->date_achat', '$data->garde_jusqua',
-                '$data->notes', '$data->prix', '$data->quantite',
-                '$data->millesime', '$data->type'
-            )
-        ";
+        // Temporaire le temps de faire la programmation des celliers multiples
+        $data->id_cellier = 0;
+        
+        $stmt->bind_param(
+            "isssssssssssdiii", $data->id_cellier, $data->nom, $data->image,
+            $data->code_saq, $data->pays, $data->description, $data->url_saq,
+            $data->url_img, $data->format, $data->date_achat,
+            $data->garde_jusqua, $data->notes, $data->prix, $data->quantite,
+            $data->millesime, $data->type
+        );
+        
+        ($res = $stmt->execute()) or trigger_error($stmt->error);
 
-		var_dump($requete);
-
-        return $this->_db->query($requete);
+        return $res;
 	}
 	
 	
@@ -175,14 +185,14 @@ class Bouteille extends Modele {
 	 */
 	public function modifierQuantiteBouteilleCellier($id, $nombre)
 	{
-		//TODO : Valider les données.
-			
-			
-		$requete = "UPDATE vino__bouteille SET quantite = GREATEST(quantite + ". $nombre. ", 0) WHERE id_bouteille = ". $id;
-		//echo $requete;
-        $res = $this->_db->query($requete);
+		$requete = "
+            UPDATE vino__bouteille
+            SET quantite = GREATEST(quantite + ". (int) $nombre .", 0)
+            WHERE id_bouteille = ". (int) $id ."
+        ";
         
-		return $res;
+		//echo $requete;
+        return $this->_db->query($requete);
 	}
 }
 

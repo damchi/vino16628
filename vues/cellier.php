@@ -10,7 +10,7 @@ foreach ($data as $cle => $bouteille) {
 
         <!-- Card image -->
         <div class="view view-cascade overlay">
-            <img  class="card-img-top" src="https:<?php echo $bouteille['image'] ?>" alt="Card image cap">
+            <img  class="card-img-top" src="https:<?php echo $bouteille['url_img'] ?>" alt="Card image cap">
             <a>
                 <div class="mask rgba-white-slight"></div>
             </a>
