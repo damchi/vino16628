@@ -62,34 +62,40 @@ class Usager extends Modele
         }
     }
 
-//    public function login($data){
-//        if ($this->existUsager($data->mail,$data->pseudo) == true){
-//
-//            $stmt = $this->_db->prepare("SELECT * FROM " . self::TABLE. " WHERE mail = ? OR pseudo = ?" ) or trigger_error($stmt->error, E_USER_ERROR);;
-//            $stmt ->bind_param("ss",$data->mail,$data->pseudo );
-//            $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
-//            ($stmt_result = $stmt->get_result()) or trigger_error($stmt->error, E_USER_ERROR);
-//
-//            if ($stmt_result->num_rows > 0) {
-//
-//                while($row_data = $stmt_result->fetch_assoc()) {
-//                    # Action to do
-//                    if(password_verify($data->mail, $row_data["mdp"]))
-//                        return true;
-//                    else
-//                    {
-//                        //ce n'est pas le bon mot de passe
-//                        return false;
-//                    }
-//                }
-//
-//            } else {
-//
-//                return false;
-//            }
-//            $stmt->close();
-//        }
-//
-//    }
+    public function login($data){
+            var_dump($data->identifiant);
+            var_dump($data->mdp);
+
+
+            $stmt = $this->_db->prepare("SELECT * FROM " . self::TABLE. " WHERE mail = ? OR pseudo = ?" ) or trigger_error($stmt->error, E_USER_ERROR);;
+            $stmt ->bind_param("ss",$data->identifiant,$data->identifiant );
+            $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
+            ($stmt_result = $stmt->get_result()) or trigger_error($stmt->error, E_USER_ERROR);
+
+            var_dump($stmt_result->num_rows);
+            if ($stmt_result->num_rows > 0) {
+
+                while($row_data = $stmt_result->fetch_assoc()) {
+                    # Action to do
+                    if(password_verify($data->mdp, $row_data["mdp"])){
+
+                        return true;
+                    }
+                    else
+                    {
+
+                        //ce n'est pas le bon mot de passe
+                        return false;
+                    }
+                }
+
+            } else {
+
+                return false;
+            }
+            $stmt->close();
+
+
+    }
 
 }
