@@ -16,7 +16,7 @@
 
             <!--Form with header-->
 
-            <form action="ajouter.php" method="post" class="border border-secondary border-0">
+            <form class="border border-secondary border-0">
                 <input type="hidden" name="image">
                 <input type="hidden" name="description">
                 <input type="hidden" name="url_saq">
@@ -30,7 +30,6 @@
                         </div>
                     </div>
                     <div class="card-body p-3">
-
                         <!--Body-->
                         <div class="form-group">
                             <img src="" alt="bouteille">
@@ -129,7 +128,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-comment text-secondary"></i></div>
                                 </div>
-                                <textarea class="form-control" placeholder="Notes" id="notes" name="notes" required></textarea>
+                                <textarea class="form-control" placeholder="Notes" id="notes" name="notes"></textarea>
                             </div>
                         </div>
 
@@ -137,76 +136,8 @@
                             <button name="ajouterBouteilleCellier" class="btn purple darken-3 text-white btn-block rounded-0 py-2">Ajouter la bouteille</button>
                         </div>
                     </div>
-
                 </div>
             </form>
         </div>
     </div>
 </div>
-</div>
-
-<!--
-                    @abbr: Changer l'interface du formulaire Ajout de bouteille
-                    Modifier par Max Germain
-                    date: 13-03-2019
--->
-<!--
-<div class="ajouter">
-
-    <div class="nouvelleBouteille" vertical layout>
-        Recherche : <input type="text" name="nom_bouteille">
-        <ul class="listeAutoComplete">
-
-        </ul>
-            <div >
-                <p>Nom : <span data-id="" class="nom_bouteille"></span></p>
-                <p>Millesime : <input name="millesime"></p>
-                <p>Quantite : <input name="quantite" value="1"></p>
-                <p>Date achat : <input name="date_achat"></p>
-                <p>Prix : <input name="prix"></p>
-                <p>Garde : <input name="garde_jusqua"></p>
-                <p>Notes <input name="notes"></p>
-            </div>
-            <button name="ajouterBouteilleCellier">Ajouter la bouteille</button>
-        </div>
-    </div>
-</div>
--->
-
-
-<!--
-<div class="ajouter">
-    <p>Recherche : <input name="recherche"></p>
-    <ul class="listeAutoComplete"></ul>
-    
-    <form class="nouvelleBouteille" vertical layout>
-        <input type="hidden" name="image">
-        <input type="hidden" name="description">
-        <input type="hidden" name="url_img">
-        
-        <p><img src="" alt="bouteille"></p>
-        
-        <p>Nom : <input name="nom"></p>
-        <p>Code SAQ : <input name="code_saq"></p>
-        <p>Pays : <input name="pays"></p>
-        <p>Prix SAQ : <input name="prix_saq"></p>
-        <p>URL SAQ : <input name="url_saq"></p>
-        <p>Format : <input name="format"></p>
-        <p>Type : <input name="type"></p>
-        <p>Millesime : <input name="millesime"></p>
-        <p>Quantite : <input name="quantite" value="1"></p>
-        <p>Date achat : <input name="date_achat"></p>
-        <p>Prix : <input name="prix"></p>
-        <p>Garde : <input name="garde_jusqua"></p>
-        <p>Notes <input name="notes"></p>
-        
-        <button type="submit" name="ajouterBouteilleCellier">Ajouter la bouteille</button>
-    </form>
-</div>
-<<<<<<< HEAD
-
-<p>asd</p>
-<p>asd</p>
-=======
--->
->>>>>>> a0e15dc4f73a7864df645765f741e4ba59f29fec
