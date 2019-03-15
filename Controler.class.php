@@ -43,6 +43,12 @@ class Controler
 				case 'ajoutUsager':
 					$this->ajoutUsager();
 					break;
+                case 'login':
+					$this->formlogin();
+                    break;
+                case 'logedin':
+                    $this->connexion();
+                    break;
 				default:
 					$this->accueil();
 					break;
@@ -135,6 +141,27 @@ class Controler
 
                 //var_dump($data);
                 $resultat = $usager->ajoutNouveauUsager($body);
+                echo json_encode($resultat);
+            }
+
+		}
+
+		private function formlogin(){
+            include ('vues/entete.php');
+            include ('vues/login.php');
+            include ('vues/pied.php');
+		}
+
+		private function connexion(){
+
+            $body = json_decode(file_get_contents('php://input'));
+
+            if(!empty($body)){
+                $usager = new Usager();
+                //var_dump($_POST['data']);
+
+                //var_dump($data);
+                $resultat = $usager->login($body);
                 echo json_encode($resultat);
             }
 

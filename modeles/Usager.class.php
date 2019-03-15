@@ -39,7 +39,8 @@ class Usager extends Modele
             }
             $stmt->close();
 
-        } catch(Exception $e) {
+        }
+        catch(Exception $e) {
             error_log($e->getMessage());
             exit('Error');
         }
@@ -49,19 +50,46 @@ class Usager extends Modele
      * @param $data
      */
     public function ajoutNouveauUsager($data){
-        var_dump($this->existUsager($data->mail,$data->pseudo));
         if ($this->existUsager($data->mail,$data->pseudo) == false){
 
 
             $mdp = password_hash($data->mdp, PASSWORD_DEFAULT);
             $admin = '0';
-
             $stmt = $this->_db->prepare("INSERT INTO " .self::TABLE . " (nom, prenom, mail, mdp, admin,pseudo) VALUES (?, ?, ?,?,?,?)");
 
             $stmt->bind_param("ssssis", $data->nom, $data->nom, $data->mail,$mdp,$admin,$data->pseudo);
-
             $stmt->execute();
         }
     }
+
+//    public function login($data){
+//        if ($this->existUsager($data->mail,$data->pseudo) == true){
+//
+//            $stmt = $this->_db->prepare("SELECT * FROM " . self::TABLE. " WHERE mail = ? OR pseudo = ?" ) or trigger_error($stmt->error, E_USER_ERROR);;
+//            $stmt ->bind_param("ss",$data->mail,$data->pseudo );
+//            $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
+//            ($stmt_result = $stmt->get_result()) or trigger_error($stmt->error, E_USER_ERROR);
+//
+//            if ($stmt_result->num_rows > 0) {
+//
+//                while($row_data = $stmt_result->fetch_assoc()) {
+//                    # Action to do
+//                    if(password_verify($data->mail, $row_data["mdp"]))
+//                        return true;
+//                    else
+//                    {
+//                        //ce n'est pas le bon mot de passe
+//                        return false;
+//                    }
+//                }
+//
+//            } else {
+//
+//                return false;
+//            }
+//            $stmt->close();
+//        }
+//
+//    }
 
 }
