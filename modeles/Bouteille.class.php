@@ -10,7 +10,7 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  * 
  */
-class Bouteille extends Modele {
+class Bouteille extends Modele {    
 	/**
 	 * Retourne la liste des bouteilles d'un cellier donné.
 	 * 
@@ -34,7 +34,7 @@ class Bouteille extends Modele {
         }
         
         if (!($res = $this->_db->query($sql))) {
-			throw new Exception("Erreur de requête sur la base de donnée: " . $this->_db->error, 1);
+			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
 		}
 		
         while ($row = $res->fetch_assoc()) {
@@ -61,7 +61,7 @@ class Bouteille extends Modele {
         ";
 
         if (!($res = $this->_db->query($sql))) {
-			throw new Exception("Erreur de requête sur la base de donnée: " . $this->_db->error, 1);
+			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
 		}
 		
         return $res->fetch_assoc();
@@ -80,7 +80,7 @@ class Bouteille extends Modele {
 		$sql = "SELECT * from vino__type";
 
         if (!($res = $this->_db->query($sql))) {
-			throw new Exception("Erreur de requête sur la base de donnée: " . $this->_db->error, 1);
+			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
 		}
 		
         while ($row = $res->fetch_assoc()) {
@@ -101,8 +101,7 @@ class Bouteille extends Modele {
 	 * @return array id et nom de la bouteille trouvée dans le catalogue
 	 */
        
-	public function autocomplete($nom, $nb_resultat=10)
-	{		
+	public function autocomplete($nom, $nb_resultat = 10) {		
 		$rows = Array();
 		$nom = $this->_db->real_escape_string($nom);
 		$nom = preg_replace("/\*/","%" , $nom);
@@ -147,8 +146,7 @@ class Bouteille extends Modele {
 	 * 
 	 * @return Boolean Succès ou échec de l'ajout.
 	 */
-	public function ajouterBouteilleCellier($data)
-	{
+	public function ajouterBouteilleCellier($data) {
         $sql = "
             INSERT INTO vino__bouteille (id_cellier, nom, image, code_saq,
             pays, description, url_saq, url_img, format, date_achat,
@@ -169,8 +167,10 @@ class Bouteille extends Modele {
             $data->millesime, $data->type
         );
         
-        ($res = $stmt->execute()) or trigger_error($stmt->error);
-
+        if (!($res = $stmt->execute())) {
+			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+		}
+		
         return $res;
 	}
 	
@@ -183,16 +183,18 @@ class Bouteille extends Modele {
 	 * 
 	 * @return Boolean Succès ou échec de l'ajout.
 	 */
-	public function modifierQuantiteBouteilleCellier($id, $nombre)
-	{
+	public function modifierQuantiteBouteilleCellier($id, $nombre) {
 		$requete = "
             UPDATE vino__bouteille
             SET quantite = GREATEST(quantite + ". (int) $nombre .", 0)
             WHERE id_bouteille = ". (int) $id ."
         ";
         
-		//echo $requete;
-        return $this->_db->query($requete);
+        if (!($res = $this->_db->query($requete))) {
+			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+		}
+		
+        return $res;
 	}
 }
 

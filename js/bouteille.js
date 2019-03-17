@@ -60,6 +60,8 @@ window.addEventListener('load', function() {
                     {method: 'POST', body: '{"nom": "'+nom+'"}'}
                 );
 
+                console.log(requete);
+                
                 fetch(requete).then(response => {
                     if (response.status === 200) {
                         return response.json();
@@ -98,6 +100,8 @@ window.addEventListener('load', function() {
                     {method: 'POST', body: '{"id_bouteille_saq": "'+idBouteilleSaq+'"}'}
                 );
 
+                console.log(requete);
+                
                 fetch(requete).then(response => {
                     if (response.status === 200) {
                         return response.json();
@@ -163,6 +167,8 @@ window.addEventListener('load', function() {
                 {method: 'POST', body: JSON.stringify(param)}
             );
 
+            console.log(requete);
+                
             fetch(requete).then(response => {
                 if (response.status === 200) {
                     return response.json();
