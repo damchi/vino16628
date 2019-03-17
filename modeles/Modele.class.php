@@ -11,20 +11,14 @@
  * 
  */
 class Modele {
-	
     protected $_db;
-	function __construct ()
-	{
+    
+    protected $_err = [
+        'requete' => "Erreur de requête sur la base de donnée: "
+    ];
+
+	function __construct ()	{
 		$this->_db = MonSQL::getInstance();
 	}
-	
-	function __destruct ()
-	{
-		
-	}
 }
-
-
-
-
 ?>

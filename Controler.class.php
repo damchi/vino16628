@@ -119,7 +119,7 @@ class Controler
                     $bte = new Bouteille();
                     $data['types'] = $bte->getTypes();
                     include("vues/entete.php");
-                    include("vues/ajoutBouteille.php");
+                    include("vues/formBouteille.php");
                     include("vues/pied.php");
                     break;
                 case 'POST':
