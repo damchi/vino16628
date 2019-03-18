@@ -24,9 +24,9 @@ class Cellier extends Modele
             while ($rows = $stmt_result-> fetch_assoc()){
                 $cellier[] = $rows;
             }
-            return $cellier;
         }
 //        $stmt->close();
+        return $cellier;
     }
 
 }

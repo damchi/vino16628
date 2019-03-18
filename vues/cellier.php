@@ -8,13 +8,6 @@
 ?>
 <div class="cellier">
     <div class="">
-<?php
-    if ($data == null){
-        ?>
-        <button name="ajouterCellier">Ajouter un cellier</button>
-        <?php
-    }
-    ?>
 <!--        <form method="post" action="index.php?requete=listeBouteilleCellier">-->
 
     <?php

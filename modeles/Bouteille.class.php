@@ -21,32 +21,24 @@ class Bouteille extends Modele {
 	 * @return Tableau des bouteilles avec tous leurs attributs
 	 */
 
-	public function getListeBouteilleCellier($idCellier = 0) {
-//	public function getListeBouteilleCellier($data = 0) {
-    var_dump($idCellier);
-
+	public function getListeBouteillesCellier($idCellier) {
 		$liste = Array();
         
 		$sql = "
             SELECT b.*, t.type FROM vino__bouteille b
 			INNER JOIN vino__type t ON t.id_type = b.type
+            WHERE id_cellier = " . (int) $idCellier . "
         ";
 
-        if ($idCellier) {
-//        if ($data->id) {
-            $sql .= " WHERE id_cellier = " . (int) $idCellier;
-//            $sql .= " WHERE id_cellier = " . (int) $data->id;
-        }
-//        var_dump($sql);
         if (!($res = $this->_db->query($sql))) {
 			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
 		}
+        
         while ($row = $res->fetch_assoc()) {
             $liste[] = $row;
         }
 
         return $liste;
-//        return true;
 	}
 	
 	/**
@@ -161,9 +153,6 @@ class Bouteille extends Modele {
 
         $stmt = $this->_db->prepare($sql);
 
-        // Temporaire le temps de faire la programmation des celliers multiples
-        $data->id_cellier = 0;
-        
         $stmt->bind_param(
             "isssssssssssdiii", $data->id_cellier, $data->nom, $data->image,
             $data->code_saq, $data->pays, $data->description, $data->url_saq,
