@@ -1,7 +1,7 @@
 <div class="cellier">
     <div>
         <button>
-            <a href="index.php?requete=ajouterNouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>">Ajouter une bouteille</a>
+            <a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>">Ajouter une bouteille</a>
         </button>
     </div>
     

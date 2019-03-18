@@ -137,59 +137,5 @@ window.addEventListener('load', function() {
             }
         });        
     }
-
-    /*
-        Le bouton ajouter soumet le formulaire d'ajout de bouteille.
-    */
-
-    if (form) {
-        form.addEventListener("submit", function(evt) {
-            console.log(evt);
-            evt.preventDefault();
-                        
-            let param = {
-                "id_cellier": champs.id_cellier.value,
-                "nom": champs.nom.value,
-                "code_saq": champs.code_saq.value || null,
-                "pays": champs.pays.value || null,
-                "prix": champs.prix.value || null,
-                "url_saq": champs.url_saq.value || null,
-                "url_img": champs.url_img.value || null,
-                "format": champs.format.value || null,
-                "type": champs.type.value || null,
-                "date_achat": champs.date_achat.value || null,
-                "garde_jusqua": champs.garde_jusqua.value || null,
-                "notes": champs.date_achat.value || null,
-                "quantite": champs.quantite.value || null,
-                "millesime": champs.millesime.value || null
-            };
-
-            let requete = new Request(
-                BaseURL+"index.php?requete=ajouterNouvelleBouteilleCellier",
-                {method: 'POST', body: JSON.stringify(param)}
-            );
-
-            console.log(requete);
-                
-            fetch(requete).then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                }
-                else {
-                    throw new Error('Erreur');
-                }
-            })
-            .then(response => {
-                console.log(response);
-                
-                if(response === true){
-                    window.location.replace(BaseURL + "index.php?requete=listeBouteilleCellier&idCellier="+champs.id_cellier.value);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        });        
-    }
 });
 

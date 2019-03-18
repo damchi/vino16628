@@ -161,11 +161,11 @@ class Bouteille extends Modele {
             $data->millesime, $data->type
         );
         
-        if (!($res = $stmt->execute())) {
+        if (!$stmt->execute()) {
 			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
 		}
 		
-        return $res;
+        return $this->_db->insert_id;
 	}
 	
 	
