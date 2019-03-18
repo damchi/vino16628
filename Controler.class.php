@@ -71,18 +71,32 @@ class Controler
 					$this->formInscription();
 					break;
 				case 'ajoutUsager':
-					$this->ajoutUsager();
+				    if (isset($_POST['ajouterUsager'])){
+				         if (trim($_POST['nom']) != "" || trim($_POST['prenom'])||trim($_POST['mail']) != "" || trim($_POST['password']) != "" || trim($_POST['pseudo']) != "") {
+                             $this->ajoutUsager($_POST["nom"], $_POST["prenom"], $_POST['mail'], $_POST['password'], $_POST['pseudo']);
+                             $this->formlogin();
+                         }
+                    }
+                    else{
+                        header("Location:index.php?requete=login");
+                    }
+//					$this->ajoutUsager();
 					break;
                 case 'login':
                         $this->formlogin();
                     break;
                 case 'logedin':
-//					if (isset($_SESSION['user_pseudo'])){
-						$this->connexion();
-//                    }
-//                    else{
-//                        header("Location:index.php?requete=login");
-//                    }
+                    if (isset($_POST['btnLogin'])){
+                        if (trim($_POST['identifiant']) != "" || trim($_POST['password'])){
+                            $this->connexion($_POST['identifiant'],$_POST['password']);
+                            $this->accueil();
+                        }
+                    }
+                    else{
+                        header("Location:index.php?requete=login");
+                    }
+
+//
                     break;
 				case 'accueil':
 					if (isset($_SESSION['user_pseudo'])){
@@ -208,17 +222,22 @@ class Controler
 
 		}
 
-		private function ajoutUsager(){
-            $body = json_decode(file_get_contents('php://input'));
+		private function ajoutUsager($nom,$prenom,$mail,$password,$pseudo){
+//            $body = json_decode(file_get_contents('php://input'));
+//
+//            if(!empty($body)){
+//                $usager = new Usager();
+//                //var_dump($_POST['data']);
+//
+//                //var_dump($data);
+//                $resultat = $usager->ajoutNouveauUsager($body);
+//                echo json_encode($resultat);
+//            }
 
-            if(!empty($body)){
-                $usager = new Usager();
-                //var_dump($_POST['data']);
+            $usager = new Usager();
+            $usager->ajoutNouveauUsager($nom,$prenom,$mail,$password,$pseudo);
 
-                //var_dump($data);
-                $resultat = $usager->ajoutNouveauUsager($body);
-                echo json_encode($resultat);
-            }
+
 
 		}
 
@@ -228,13 +247,16 @@ class Controler
             include ('vues/pied.php');
 		}
 
-		private function connexion(){
-            $body = json_decode(file_get_contents('php://input'));
-            if(!empty($body)){
-                $usager = new Usager();
-                $resultat = $usager->login($body);
-                echo json_encode($resultat);
-            }
+		private function connexion($identifiant,$mdp){
+//            $body = json_decode(file_get_contents('php://input'));
+//            if(!empty($body)){
+//                $usager = new Usager();
+//                $resultat = $usager->login($body);
+//                echo json_encode($resultat);
+//            }
+
+            $usager = new Usager();
+            $usager->login($identifiant,$mdp);
 		}
 
 		private function ajoutCellier(){

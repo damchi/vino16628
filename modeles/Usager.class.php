@@ -46,44 +46,66 @@ class Usager extends Modele
         }
     }
 
+
+//    public function ajoutNouveauUsager($data){
+
+
     /**
-     * @param $data
+     * @param $nom
+     * @param $prenom
+     * @param $mail
+     * @param $password
+     * @param $pseudo
+     * @return mixed
      */
-    public function ajoutNouveauUsager($data){
-        if ($this->existUsager($data->mail,$data->pseudo) == false){
-
-
-            $mdp = password_hash($data->mdp, PASSWORD_DEFAULT);
-            $admin = '0';
-            $stmt = $this->_db->prepare("INSERT INTO " .self::TABLE . " (nom, prenom, mail, mdp, admin,pseudo) VALUES (?, ?, ?,?,?,?)");
-
-            $stmt->bind_param("ssssis", $data->nom, $data->nom, $data->mail,$mdp,$admin,$data->pseudo);
-            $stmt->execute();
+    public function ajoutNouveauUsager($nom,$prenom,$mail,$password,$pseudo){
+//        if ($this->existUsager($data->mail,$data->pseudo) == false){
+        if ($this->existUsager($mail,$pseudo) == false){
+                //            $mdp = password_hash($data->mdp, PASSWORD_DEFAULT);
+                $mdp = password_hash($password, PASSWORD_DEFAULT);
+                $admin = '0';
+                $stmt = $this->_db->prepare("INSERT INTO " .self::TABLE . " (nom, prenom, mail, mdp, admin,pseudo) VALUES (?, ?, ?,?,?,?)");
+//            $stmt->bind_param("ssssis", $data->nom, $data->prenom, $data->mail,$mdp,$admin,$data->pseudo);
+                $stmt->bind_param("ssssis", $nom, $prenom, $mail,$mdp,$admin,$pseudo);
+//                $stmt->execute();
         }
+        return $stmt->execute();
     }
 
-    public function login($data){
 
-                $identifiant = $this->_db->real_escape_string($data->identifiant);
-//            var_dump($data->identifiant);
-//            var_dump($data->mdp);
-//
-            $stmt = "SELECT * FROM " . self::TABLE. " WHERE mail = '".$identifiant ."' OR pseudo ='" . $identifiant ."'";
-            //var_dump($stmt);
+    /**
+     * @param $data
+     * @return bool
+     */
+//    public function login($data){
+    /**
+     * @param $identifiant
+     * @param $password
+     * @return bool
+     */
+    public function login($identifiant,$password){
+//        var_dump($identifiant);
+//        var_dump($password);
+
+                $identifiantEscape = $this->_db->real_escape_string($identifiant);
+//                $identifiant = $this->_db->real_escape_string($data->identifiant);
+
+            $stmt = "SELECT * FROM " . self::TABLE. " WHERE mail = '".$identifiantEscape ."' OR pseudo ='" . $identifiantEscape ."'";
+//            var_dump($stmt);
             $stmt_result = $this->_db->query($stmt);
-
+//            var_dump($stmt_result->num_rows);
 
             if ($stmt_result->num_rows == 1) {
                 $row_data = $stmt_result->fetch_assoc();
-                if (password_verify($data->mdp, $row_data["mdp"])) {
+//                var_dump($row_data);
+                if (password_verify($password, $row_data["mdp"])) {
+//                if (password_verify($data->mdp, $row_data["mdp"])) {
                     $_SESSION['user_pseudo']= $row_data["pseudo"];
                     $_SESSION['user_id']= $row_data["id_usager"];
+
                     return true;
                 }
             }
-            //$stmt->close();
-
-            return false;
     }
 
 
