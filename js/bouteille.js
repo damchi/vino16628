@@ -19,6 +19,7 @@ window.addEventListener('load', function() {
         var img = form.querySelector(".ajouter form img");
         
         var champs = {
+            "id_cellier": form.querySelector("[name='id_cellier']"),
             "nom": form.querySelector("[name='nom']"),
             "code_saq": form.querySelector("[name='code_saq']"),
             "pays": form.querySelector("[name='pays']"),
@@ -147,6 +148,7 @@ window.addEventListener('load', function() {
             evt.preventDefault();
                         
             let param = {
+                "id_cellier": champs.id_cellier.value,
                 "nom": champs.nom.value,
                 "code_saq": champs.code_saq.value || null,
                 "pays": champs.pays.value || null,
@@ -181,7 +183,7 @@ window.addEventListener('load', function() {
                 console.log(response);
                 
                 if(response === true){
-                    window.location.replace(BaseURL + "index.php?requete=accueil");
+                    window.location.replace(BaseURL + "index.php?requete=listeBouteilleCellier&idCellier="+champs.id_cellier.value);
                 }
             })
             .catch(error => {
