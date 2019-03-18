@@ -24,9 +24,16 @@ class Cellier extends Modele
             while ($rows = $stmt_result-> fetch_assoc()){
                 $cellier[] = $rows;
             }
-            return $cellier;
+
         }
 //        $stmt->close();
+        return $cellier;
     }
 
+    public function ajoutCellierUsager($data){
+        $stmt = $this->_db->prepare("INSERT INTO " . self::TABLE. "(nom,id_usager_cellier) VALUES (?,?)");
+        $stmt->bind_param('si',$data->nomCellier,$data->id);
+        $stmt->execute();
+        return $this->_db->insert_id;
+    }
 }
