@@ -66,18 +66,20 @@ window.addEventListener('load', () => {
     
     let btnAffichetCellier = document.querySelector("[name='afficheFormCellier']");
     let formCellier = document.getElementById("formCellier");
+    if (formCellier){
         formCellier.style.display='none';
-        if (btnAffichetCellier) {
-            btnAffichetCellier.addEventListener('click',()=> {
-                if (formCellier.style.display == 'none'){
-                    formCellier.style.display='block';
-                }
-                else {
-                    formCellier.style.display='none';
-                }
+    }
+    if (btnAffichetCellier) {
+        btnAffichetCellier.addEventListener('click',()=> {
+            if (formCellier.style.display == 'none'){
+                formCellier.style.display='block';
+            }
+            else {
+                formCellier.style.display='none';
+            }
 
-            });
-        }
+        });
+    }
     let btnAjoutCellier = document.querySelector("[name='ajouterCellier']");
 
         if (btnAjoutCellier){
