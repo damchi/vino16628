@@ -23,9 +23,9 @@
     <script src="./js/cellier.js"></script>
     <script src="./js/bouteille.js"></script>
 
-    include("menu_user.php");
     
-    <?php  ?>
+    
+    <?php include("menu_user.php"); ?>
 
 <!--
 </head>
