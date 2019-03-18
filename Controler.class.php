@@ -25,7 +25,7 @@ class Controler
 			switch ($_GET['requete']) {
 				case 'listeBouteilleCellier':
 					if (isset($_SESSION['user_pseudo'])){
-                        $this->afficheBouteilleCellier($_GET['idCellier']);
+                        $this->afficheBouteillesCellier($_GET['idCellier']);
 					}
                     else{
                         header("Location:index.php?requete=login");
@@ -43,9 +43,9 @@ class Controler
 				case 'autocompleteBouteille':
 					$this->autocompleteBouteille();
 					break;
-				case 'ajouterNouvelleBouteilleCellier':
+				case 'nouvelleBouteilleCellier':
 					if (isset($_SESSION['user_pseudo'])){
-						$this->ajouterNouvelleBouteilleCellier();
+						$this->nouvelleBouteilleCellier();
                     }
                     else{
                         header("Location:index.php?requete=login");
@@ -126,18 +126,19 @@ class Controler
 			$cellier = new Cellier();
 			$data = $cellier->getUsagerCellier($_SESSION['user_id']);
 			include("vues/entete.php");
-//			include("vues/listeBouteille.php");
-			include("vues/listeCellier.php");
+			include("vues/listeCelliers.php");
 			include("vues/pied.php");
 
 		}
-    	private function afficheBouteilleCellier($idCellier){
+    	private function afficheBouteillesCellier($idCellier){
             $bte = new Bouteille();
-            $data = $bte->getListeBouteilleCellier($idCellier);
+            
+            $data['idCellier'] = $idCellier;
+            $data['listeBouteilles'] = $bte->getListeBouteillesCellier($idCellier);
+            
             include("vues/entete.php");
-			include("vues/listeBouteille.php");
+			include("vues/listeBouteilles.php");
             include("vues/pied.php");
-
     	}
 		
 		private function getBouteilleSAQ()
@@ -159,21 +160,25 @@ class Controler
             echo json_encode($listeBouteille);
                   
 		}
-		private function ajouterNouvelleBouteilleCellier()
+		private function nouvelleBouteilleCellier()
 		{
 			switch($_SERVER['REQUEST_METHOD']){
                 case 'GET':
                     $bte = new Bouteille();
+                    
+                    $data['idCellier'] = $_GET['idCellier'];
                     $data['types'] = $bte->getTypes();
+                    
                     include("vues/entete.php");
                     include("vues/formBouteille.php");
                     include("vues/pied.php");
+                    
                     break;
+                    
                 case 'POST':
                     $bte = new Bouteille();
-                    $body = json_decode(file_get_contents('php://input'));
-                    $resultat = $bte->ajouterBouteilleCellier($body);
-                    echo json_encode($resultat);
+                    $bte->ajouterBouteilleCellier((Object) $_POST);
+                    $this->afficheBouteillesCellier($_POST['id_cellier']);
                     break;
 			}
         }

@@ -14,7 +14,8 @@
 
                 <!--Form with header-->
 
-                <form class="border border-secondary border-0">
+                <form class="border border-secondary border-0" method="post">
+                    <input type="hidden" name="id_cellier" value="<?= $data['idCellier'] ?>">
                     <input type="hidden" name="url_saq">
                     <input type="hidden" name="url_img">
 
