@@ -1,88 +1,23 @@
-/********
- * Votre CSS
- ********/
+/* --- Components design --- */
+@import url("normalize.css");
+@import url("base_h5bp.css");
+@import url("components/entete.css");
+@import url("components/menu.css");
+@import url("components/cellier.css");
+@import url("components/button.css");
+@import url("components/pied.css");
+@import url("components/carte.css");
+@import url("components/typographie.css");
 
-html, body {
-	height: 100%;
-	margin: 0;
-	/*background-color: #E5E5E5;*//*Nouvelle mise en page */
-	
-	font-family: 'Roboto', 'RobotoDraft', sans-serif;
-	font-size: 95%;
-	
-}
-.liste {
-	display: block;
-	border-top: 1px solid #ccc;
-	border-bottom: none;
-	/*background: #666;*/
-	/*color: #03a9f4;*/
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.liste > div {
-	height: 40px;
-	line-height: 40px;
-	padding: 0 20px;
-	border-bottom: 1px solid #ccc;
-	/*background: #666;*/
-	cursor: pointer;
-	transition: color 200ms ease-in-out;
-	/*background-color: #003777;*/
-	background-color:#e85e30;
-	color:#FFFFFF;
-}
-.liste > div:hover {
-	color:#000000;
-	transition: color 200ms ease-in-out;
-	
-}
-
-@media all and (max-width:640px)
-{
-	footer
-	{
-		display:none;
-	}
-	
-}
-
-footer
-{
-	margin-top: 50px;
-	position: fixed;;
-	bottom:0px;
-	padding-top:3px;
-	text-align: center;
-	background-color:#FFFFFF;
-}
-footer p
-{
-	display:inline;
-	padding-right:50px;
-	font-size : 10px;
+body{
+	margin:20px;
 }
 
 
-/*********************************
-*	Page ceillier.php
-*
-**********************************/
-.card-text{
-	line-height: .5rem;
+header{
+	grid-area: entete;
 }
 
-main{
-	margin-top: 5%;
-}
-
-.card{
-	max-content:80%;
-}
-
-.card-img-top{
-	width: 95%;
-	borfer: 95%;
+footer{
+	grid-area: pied;
 }

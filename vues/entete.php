@@ -10,17 +10,12 @@
     <meta name="description" content="Un petit verre de vino">
     <meta name="author" content="Jonathan Martel (jmartel@cmaisonneuve.qc.ca)">
 
-    <link rel="stylesheet" href="./css/normalize.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="./css/base_h5bp.css" type="text/css" media="screen">
     <link rel="stylesheet" href="./css/main.css" type="text/css" media="screen">
     <base href="<?php echo BASEURL; ?>">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/css/mdb.min.css" rel="stylesheet">
+
 
     <!--<script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
     <script src="./js/main.js"></script>
@@ -28,7 +23,11 @@
     <script src="./js/cellier.js"></script>
     <script src="./js/bouteille.js"></script>
 
+    include("menu_user.php");
+    
+    <?php  ?>
 
+<!--
 </head>
 <body >
 <header>
@@ -72,15 +71,7 @@
             </div>
         </nav>
 
-        <!--<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-			<h5 class="my-0 mr-md-auto font-weight-normal">Vino</h5>
-			<nav class="my-2 my-md-0 mr-md-3">
-				<a class="p-2 text-dark" href="?requete=accueil">Mon cellier</a>
-				<a class="p-2 text-dark" href="?requete=ajouterNouvelleBouteilleCellier">Ajouter une bouteille au cellier</a>
-			</nav>
-			<a class="btn btn-outline-primary" href="#">Connexion</a>
-		</div>-->
     </div>
 </header>
-
+-->
 <main>
