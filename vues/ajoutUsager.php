@@ -7,16 +7,27 @@
  */
 ?>
 <div class="ajouter">
+<!---->
+<!--    <div class="" vertical layout>-->
+<!--            <div >-->
+<!--                <p>Nom : <input type="text" name="nom"></p>-->
+<!--                <p>Prénom : <input type="text" name="prenom"></p>-->
+<!--                <p>Mail : <input type="email" name="mail" ></p>-->
+<!--                <p>Mot de passe : <input type="password" name="mdp"></p>-->
+<!--                <p>Nom usager : <input  type="text" name="pseudo"></p>-->
+<!--            </div>-->
+<!--            <button name="ajouterUsager">S'inscrire</button>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <div class="" vertical layout>
-            <div >
-                <p>Nom : <input type="text" name="nom"></p>
-                <p>Prénom : <input type="text" name="prenom"></p>
-                <p>Mail : <input type="email" name="mail" ></p>
-                <p>Mot de passe : <input type="password" name="mdp"></p>
-                <p>Nom usager : <input  type="text" name="pseudo"></p>
-            </div>
-            <button name="ajouterUsager">S'inscrire</button>
+    <form method="post" action="index.php?requete=ajoutUsager">
+        <div>
+            <p>Nom : <input type="text" name="nom"></p>
+            <p>Prénom : <input type="text" name="prenom"></p>
+            <p>Mail : <input type="email" name="mail" ></p>
+            <p>Mot de passe : <input type="password" name="password"></p>
+            <p>Nom usager : <input  type="text" name="pseudo"></p>
         </div>
-    </div>
+        <input type="submit" name="ajouterUsager" value="S'inscrire">
+    </form>
 </div>
