@@ -39,11 +39,10 @@
                 <p class="card-text"><a href="<?php echo $bouteille['url_saq'] ?>">Voir SAQ</a></p>
 
                 <!-- Button -->
-                <div class="options" data-id="<?php echo $bouteille['id_bouteille'] ?>">
+                <div class="options">
                     <button>Modifier</button>
                     <button class='btnAjouter'>Ajouter</button>
                     <button class='btnBoire'>Boire</button>
-
                 </div>
             </div>
         </div>

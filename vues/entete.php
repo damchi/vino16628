@@ -26,7 +26,8 @@
     <script src="./js/main.js"></script>
     <script src="./js/usager.js"></script>
     <script src="./js/cellier.js"></script>
-    <script src="./js/bouteille.js"></script>
+    <script src="./js/listeBouteilles.js"></script>
+    <script src="./js/formBouteille.js"></script>
 
 
 </head>
