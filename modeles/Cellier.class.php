@@ -29,4 +29,10 @@ class Cellier extends Modele
         return $cellier;
     }
 
+    public function ajoutCellierUsager($data){
+        $stmt = $this->_db->prepare("INSERT INTO " . self::TABLE. "(nom,id_usager_cellier) VALUES (?,?)");
+        $stmt->bind_param('si',$data->nomCellier,$data->id);
+        $stmt->execute();
+        return $this->_db->insert_id;
+    }
 }

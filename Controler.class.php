@@ -105,6 +105,14 @@ class Controler
                     session_destroy();
                     header('location:index.php?requete=login');
 					break;
+                case 'ajoutCellier':
+                    if (isset($_SESSION['user_pseudo'])) {
+                        $this->ajoutCellier();
+                    }
+                    else{
+                        header("Location:index.php?requete=login");
+                    }
+                    break;
 				default:
 					$this->formlogin();
 					break;
@@ -118,8 +126,7 @@ class Controler
 			$cellier = new Cellier();
 			$data = $cellier->getUsagerCellier($_SESSION['user_id']);
 			include("vues/entete.php");
-//			include("vues/listeBouteilles.php");
-			include("vues/cellier.php");
+			include("vues/listeCelliers.php");
 			include("vues/pied.php");
 
 		}
@@ -229,6 +236,15 @@ class Controler
                 echo json_encode($resultat);
             }
 		}
+
+		private function ajoutCellier(){
+            $body = json_decode(file_get_contents('php://input'));
+            if(!empty($body)){
+                $cellier = new Cellier();
+                $resultat = $cellier->ajoutCellierUsager($body);
+                echo json_encode($resultat);
+            }
+        }
 }
 ?>
 
