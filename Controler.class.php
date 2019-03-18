@@ -43,9 +43,9 @@ class Controler
 				case 'autocompleteBouteille':
 					$this->autocompleteBouteille();
 					break;
-				case 'ajouterNouvelleBouteilleCellier':
+				case 'nouvelleBouteilleCellier':
 					if (isset($_SESSION['user_pseudo'])){
-						$this->ajouterNouvelleBouteilleCellier();
+						$this->nouvelleBouteilleCellier();
                     }
                     else{
                         header("Location:index.php?requete=login");
@@ -153,7 +153,7 @@ class Controler
             echo json_encode($listeBouteille);
                   
 		}
-		private function ajouterNouvelleBouteilleCellier()
+		private function nouvelleBouteilleCellier()
 		{
 			switch($_SERVER['REQUEST_METHOD']){
                 case 'GET':
@@ -170,9 +170,8 @@ class Controler
                     
                 case 'POST':
                     $bte = new Bouteille();
-                    $body = json_decode(file_get_contents('php://input'));
-                    $resultat = $bte->ajouterBouteilleCellier($body);
-                    echo json_encode($resultat);
+                    $bte->ajouterBouteilleCellier((Object) $_POST);
+                    $this->afficheBouteillesCellier($_POST['id_cellier']);
                     break;
 			}
         }
