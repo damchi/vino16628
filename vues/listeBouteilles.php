@@ -11,8 +11,7 @@
         ?>
 
         <!-- Card Narrower -->
-        <div class="card card-cascade narrower col-lg-4 col-sm-6 mb-4">
-
+        <div class="bouteille card card-cascade narrower col-lg-4 col-sm-6 mb-4" data-id="<?= $bouteille['id_bouteille'] ?>">
             <!-- Card image -->
             <div class="view view-cascade overlay">
                 <img  class="card-img-top" src="https:<?php echo $bouteille['url_img'] ?>" alt="Card image cap">
@@ -32,7 +31,7 @@
 
                 <!-- Text -->
                 <p class="card-text">
-                    <span>Quantité : <?php echo $bouteille['quantite'] ?></span>
+                    Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span>
                 </p>
                 <p class="card-text">Pays : <?php echo $bouteille['pays'] ?></p>
                 <p class="card-text">Type : <?php echo $bouteille['type'] ?></p>

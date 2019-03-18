@@ -181,14 +181,20 @@ class Bouteille extends Modele {
 		$requete = "
             UPDATE vino__bouteille
             SET quantite = GREATEST(quantite + ". (int) $nombre .", 0)
-            WHERE id_bouteille = ". (int) $id ."
+            WHERE id_bouteille = " . (int) $id . "
         ";
         
         if (!($res = $this->_db->query($requete))) {
 			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
 		}
 		
-        return $res;
+		$sql = "SELECT quantite from vino__bouteille WHERE id_bouteille = " . (int) $id;
+
+        if (!($res = $this->_db->query($sql))) {
+			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+		}
+		
+        return $res->fetch_assoc();
 	}
 }
 
