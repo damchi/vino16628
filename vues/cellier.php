@@ -24,6 +24,7 @@
                 <div> Nom du cellier:<a href='index.php?requete=listeBouteilleCellier&idCellier=<?=$cellier['id_cellier']?>' >  <?= $cellier['nom'];?> </a> </div>
 
 
+
                 <!--                <input type="hidden" name="idCellier" value="--><?//= $cellier['id_cellier']?><!--">-->
 <!--                <input type="submit" name="entrerCellier" value="Entrer dans le celllier">-->
 <!--                <button class="entrerCellier" name="entrerCellier" data-id="--><?//= $cellier['id_cellier']?><!--">Entrer dans le cellier</button>-->

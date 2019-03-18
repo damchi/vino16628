@@ -155,8 +155,10 @@ class Controler
 		{
 			switch($_SERVER['REQUEST_METHOD']){
                 case 'GET':
+                    $bte = new Bouteille();
+                    $data['types'] = $bte->getTypes();
                     include("vues/entete.php");
-                    include("vues/ajouter.php");
+                    include("vues/formBouteille.php");
                     include("vues/pied.php");
                     break;
                 case 'POST':
