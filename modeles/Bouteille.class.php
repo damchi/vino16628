@@ -20,8 +20,11 @@ class Bouteille extends Modele {
 	 * 
 	 * @return Tableau des bouteilles avec tous leurs attributs
 	 */
-    
+
 	public function getListeBouteilleCellier($idCellier = 0) {
+//	public function getListeBouteilleCellier($data = 0) {
+    var_dump($idCellier);
+
 		$liste = Array();
         
 		$sql = "
@@ -30,18 +33,20 @@ class Bouteille extends Modele {
         ";
 
         if ($idCellier) {
+//        if ($data->id) {
             $sql .= " WHERE id_cellier = " . (int) $idCellier;
+//            $sql .= " WHERE id_cellier = " . (int) $data->id;
         }
-        
+//        var_dump($sql);
         if (!($res = $this->_db->query($sql))) {
 			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
 		}
-		
         while ($row = $res->fetch_assoc()) {
             $liste[] = $row;
         }
 
         return $liste;
+//        return true;
 	}
 	
 	/**

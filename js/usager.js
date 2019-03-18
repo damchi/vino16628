@@ -21,11 +21,13 @@ window.addEventListener('load',()=>{
                     } else {
                         throw new Error('Erreur');
                     }
-                });
-
-
+                })
+                .then(response =>{
+                if(response === true){
+                    window.location.replace(BaseURL + "index.php?requete=accueil");
+                }
+            });
         });
-
     }
 
 

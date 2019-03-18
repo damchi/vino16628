@@ -103,10 +103,10 @@ CREATE TABLE `vino__cellier` (
 --
 
 INSERT INTO `vino__cellier` (`id_cellier`, `nom`, `id_usager_cellier`) VALUES
-(1, 'Cellier damien 1', 1),
-(3, 'Cellier Damien 2', 1),
-(6, 'Cellier julien 1', 2),
-(7, 'Cellier julien 2', 2);
+(1, 'Cellier.class damien 1', 1),
+(3, 'Cellier.class Damien 2', 1),
+(6, 'Cellier.class julien 1', 2),
+(7, 'Cellier.class julien 2', 2);
 
 -- --------------------------------------------------------
 

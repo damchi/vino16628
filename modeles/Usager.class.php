@@ -77,6 +77,7 @@ class Usager extends Modele
                 $row_data = $stmt_result->fetch_assoc();
                 if (password_verify($data->mdp, $row_data["mdp"])) {
                     $_SESSION['user_pseudo']= $row_data["pseudo"];
+                    $_SESSION['user_id']= $row_data["id_usager"];
                     return true;
                 }
             }
