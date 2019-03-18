@@ -26,6 +26,7 @@
     <script src="./js/plugins.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/usager.js"></script>
+    <script src="./js/cellier.js"></script>
 
 
 </head>
@@ -52,6 +53,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="?requete=ajouterNouvelleBouteilleCellier">Ajouter une bouteille au cellier</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?requete=logout">Se deconnecter</a>
+                    </li>
+
                 </ul>
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">

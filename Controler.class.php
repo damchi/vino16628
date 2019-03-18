@@ -23,24 +23,49 @@ class Controler
 		public function gerer()
 		{
 			switch ($_GET['requete']) {
-				case 'listeBouteille':
-					$this->listeBouteille();
+				case 'listeBouteilleCellier':
+					if (isset($_SESSION['user_pseudo'])){
+                        $this->afficheBouteilleCellier($_GET['idCellier']);
+					}
+                    else{
+                        header("Location:index.php?requete=login");
+                    }
 					break;
 				case 'getBouteilleSaq':
-					$this->getBouteilleSAQ();
+                    if (isset($_SESSION['user_pseudo'])){
+
+                        $this->getBouteilleSAQ();
+                    }
+					else{
+						header("Location:index.php?requete=login");
+					}
 					break;
 				case 'autocompleteBouteille':
 					$this->autocompleteBouteille();
 					break;
 				case 'ajouterNouvelleBouteilleCellier':
-//					var_dump('eee');
-					$this->ajouterNouvelleBouteilleCellier();
+					if (isset($_SESSION['user_pseudo'])){
+						$this->ajouterNouvelleBouteilleCellier();
+                    }
+                    else{
+                        header("Location:index.php?requete=login");
+                    }
 					break;
 				case 'ajouterBouteilleCellier':
-					$this->ajouterBouteilleCellier();
+                    if (isset($_SESSION['user_pseudo'])){
+                        $this->ajouterBouteilleCellier();
+					}
+					else{
+						header("Location:index.php?requete=login");
+					}
 					break;
 				case 'boireBouteilleCellier':
-					$this->boireBouteilleCellier();
+                    if (isset($_SESSION['user_pseudo'])){
+                        $this->boireBouteilleCellier();
+					}
+					else{
+						header("Location:index.php?requete=login");
+					}
 					break;
 				case 'inscription':
 					$this->formInscription();
@@ -48,25 +73,37 @@ class Controler
 				case 'ajoutUsager':
 					$this->ajoutUsager();
 					break;
-
                 case 'login':
-					$this->formlogin();
-
+                        $this->formlogin();
                     break;
                 case 'logedin':
-           	 		$this->connexion();
+//					if (isset($_SESSION['user_pseudo'])){
+						$this->connexion();
+//                    }
+//                    else{
+//                        header("Location:index.php?requete=login");
+//                    }
                     break;
-
 				case 'accueil':
 					if (isset($_SESSION['user_pseudo'])){
 //					var_dump($_SESSION['user_pseudo']);
                         $this->accueil();
 					}
 					else{
-                        header("Location:index.php?action=login");
-
+                        header("Location:index.php?requete=login");
                     }
+					break;
+				case 'logout':
+                    $_SESSION = array();
 
+                    // Delete la session en lui assignant un tableau vide et le cookie de session en créant
+                    // un nouveau cookie avec la date d'expiration dans le passé
+                    if(isset($_COOKIE[session_name()]))
+                    {
+                        setcookie(session_name(), '', time() - 3600);
+                    }
+                    session_destroy();
+                    header('location:index.php?requete=login');
 					break;
 				default:
 					$this->formlogin();
@@ -76,22 +113,24 @@ class Controler
 
 		private function accueil()
 		{
-			$bte = new Bouteille();
-            $data = $bte->getListeBouteilleCellier();
+//			$bte = new Bouteille();
+//            $data = $bte->getListeBouteilleCellier();
+			$cellier = new Cellier();
+			$data = $cellier->getUsagerCellier($_SESSION['user_id']);
 			include("vues/entete.php");
+//			include("vues/listeBouteille.php");
 			include("vues/cellier.php");
 			include("vues/pied.php");
-                  
+
 		}
-		
-		private function listeBouteille()
-		{
-			$bte = new Bouteille();
-            $cellier = $bte->getListeBouteilleCellier();
-            
-            echo json_encode($cellier);
-                  
-		}
+    	private function afficheBouteilleCellier($idCellier){
+            $bte = new Bouteille();
+            $data = $bte->getListeBouteilleCellier($idCellier);
+            include("vues/entete.php");
+			include("vues/listeBouteille.php");
+            include("vues/pied.php");
+
+    	}
 		
 		private function getBouteilleSAQ()
 		{
@@ -175,18 +214,12 @@ class Controler
 		}
 
 		private function connexion(){
-
             $body = json_decode(file_get_contents('php://input'));
-
             if(!empty($body)){
                 $usager = new Usager();
-                //var_dump($_POST['data']);
-
-                //var_dump($data);
                 $resultat = $usager->login($body);
                 echo json_encode($resultat);
             }
-
 		}
 }
 ?>
