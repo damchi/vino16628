@@ -19,6 +19,7 @@ class Modele {
 
 	function __construct ()	{
 		$this->_db = MonSQL::getInstance();
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 	}
 }
 ?>

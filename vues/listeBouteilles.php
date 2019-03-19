@@ -40,7 +40,7 @@
     
         <!-- Bouton -->
         <div class="options carte-pied">
-            <button>Modifier</button>
+            <button><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Modifier</a></button>
             <button class='btnAjouter'>Ajouter</button>
             <button class='btnBoire'>Boire</button>
         </div>

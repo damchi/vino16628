@@ -15,7 +15,6 @@
 
 class Controler 
 {
-
 		/**
 		 * Traite la requête
 		 * @return void
@@ -49,6 +48,14 @@ class Controler
                     }
                     else{
                         header("Location:index.php?requete=login");
+                    }
+					break;
+				case 'modifierBouteille':
+					if (isset($_SESSION['user_pseudo'])){
+						$this->modifierBouteille();
+                    }
+                    else{
+                        header("Location: index.php?requete=login");
                     }
 					break;
 				case 'ajouterBouteilleCellier':
@@ -142,8 +149,6 @@ class Controler
 
 		private function accueil()
 		{
-//			$bte = new Bouteille();
-//            $data = $bte->getListeBouteilleCellier();
 			$cellier = new Cellier();
 			$data = $cellier->getUsagerCellier($_SESSION['user_id']);
 			include("vues/entete.php");
@@ -151,12 +156,11 @@ class Controler
 			include("vues/pied.php");
 
 		}
+    
     	private function afficheBouteillesCellier($idCellier){
-            $bte = new Bouteille();
-            
+            $bte = new Bouteille();  
             $data['idCellier'] = $idCellier;
             $data['listeBouteilles'] = $bte->getListeBouteillesCellier($idCellier);
-            
             include("vues/entete.php");
 			include("vues/listeBouteilles.php");
             include("vues/pied.php");
@@ -173,35 +177,67 @@ class Controler
 		private function autocompleteBouteille()
 		{
 			$bte = new Bouteille();
-			//var_dump(file_get_contents('php://input'));
 			$body = json_decode(file_get_contents('php://input'));
-			//var_dump($body);
-            $listeBouteille = $bte->autocomplete($body->nom);
-            
+            $listeBouteille = $bte->autocomplete($body->nom);            
             echo json_encode($listeBouteille);
                   
 		}
+    
 		private function nouvelleBouteilleCellier()
 		{
-			switch($_SERVER['REQUEST_METHOD']){
-                case 'GET':
-                    $bte = new Bouteille();
-                    
-                    $data['idCellier'] = $_GET['idCellier'];
-                    $data['types'] = $bte->getTypes();
-                    
-                    include("vues/entete.php");
-                    include("vues/formBouteille.php");
-                    include("vues/pied.php");
-                    
-                    break;
-                    
-                case 'POST':
-                    $bte = new Bouteille();
-                    $bte->ajouterBouteilleCellier($_POST);
-                    $this->afficheBouteillesCellier($_POST['id_cellier']);
-                    break;
-			}
+            $bte = new Bouteille();
+            
+            if ($bte->estProprietaireCellier($_SESSION['user_pseudo'], $_GET['idCellier'])) {
+                switch($_SERVER['REQUEST_METHOD']){
+                    case 'GET':
+                        $data['bouteille'] = [];                    
+                        $data['idCellier'] = $_GET['idCellier'];
+                        $data['types'] = $bte->getTypes();
+                        include("vues/entete.php");
+                        include("vues/formBouteille.php");
+                        include("vues/pied.php");
+                        break;
+
+                    case 'POST':
+                        $bouteille = [];
+                        
+                        foreach ($_POST as $cle => $valeur) {
+                            $bouteille[$cle] = !empty($valeur) ? $valeur : null;
+                        }
+        
+                        $bte->ajouterBouteilleCellier($bouteille);
+                        header("Location: index.php?requete=listeBouteilleCellier&idCellier=" . $bouteille['id_cellier']);
+                        break;
+                }
+            }
+        }
+		
+		private function modifierBouteille()
+		{
+            $bte = new Bouteille();
+            
+            if ($bte->estProprietaireBouteille($_SESSION['user_pseudo'], $_GET['idBouteille'])) {
+                switch($_SERVER['REQUEST_METHOD']){
+                    case 'GET':
+                        $data['bouteille'] = $bte->getBouteille($_GET['idBouteille']);  
+                        $data['types'] = $bte->getTypes();                    
+                        include("vues/entete.php");
+                        include("vues/formBouteille.php");
+                        include("vues/pied.php");
+                        break;
+
+                    case 'POST':
+                        $bouteille = [];
+                        
+                        foreach ($_POST as $cle => $valeur) {
+                            $bouteille[$cle] = !empty($valeur) ? $valeur : null;
+                        }
+        
+                        $bte->modifierBouteille($bouteille);
+                        header("Location: index.php?requete=listeBouteilleCellier&idCellier=" . $bouteille['id_cellier']);
+                        break;
+                }
+            }    
         }
 		
 		private function boireBouteilleCellier()
