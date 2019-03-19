@@ -89,7 +89,14 @@ class Controler
                     if (isset($_POST['btnLogin'])){
                         if (trim($_POST['identifiant']) != "" || trim($_POST['password'])){
                             $this->connexion($_POST['identifiant'],$_POST['password']);
-                            $this->accueil();
+                            if (isset($_SESSION['user_pseudo'])){
+
+                                $this->accueil();
+                            }
+                            else{
+                                $this->formlogin();
+                            }
+
                         }
                     }
                     else{

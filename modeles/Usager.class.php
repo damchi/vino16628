@@ -87,6 +87,7 @@ class Usager extends Modele
 //        var_dump($identifiant);
 //        var_dump($password);
 
+            $error ='';
                 $identifiantEscape = $this->_db->real_escape_string($identifiant);
 //                $identifiant = $this->_db->real_escape_string($data->identifiant);
 
@@ -100,12 +101,13 @@ class Usager extends Modele
 //                var_dump($row_data);
                 if (password_verify($password, $row_data["mdp"])) {
 //                if (password_verify($data->mdp, $row_data["mdp"])) {
-                    $_SESSION['user_pseudo']= $row_data["pseudo"];
-                    $_SESSION['user_id']= $row_data["id_usager"];
+                    $_SESSION['user_pseudo'] = $row_data["pseudo"];
+                    $_SESSION['user_id'] = $row_data["id_usager"];
 
                     return true;
                 }
             }
+
     }
 
 
