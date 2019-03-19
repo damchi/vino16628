@@ -8,6 +8,8 @@
 @import url("components/pied.css");
 @import url("components/carte.css");
 @import url("components/typographie.css");
+@import url("components/formBouteille.css");
+@import url("components/formLogin.css");
 
 body{
 	margin:20px;

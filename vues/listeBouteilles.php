@@ -1,6 +1,6 @@
 <div class="listeBouteille">
     
-    <div>
+    <div class="btnAjouterBouteille">
         <button>
             <a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>">Ajouter une bouteille</a>
         </button>
