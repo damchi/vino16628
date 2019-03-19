@@ -4,11 +4,10 @@
     color: #eee;
     padding: 20px;
     font-size: 4rem;
-    position: absolute;
     width: 100%;
-    bottom: 0;
     left: 0;
     margin-top: 50px;
+    margin-left: -20px;
 }
 
 .pied>p>a{
