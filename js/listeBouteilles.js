@@ -9,11 +9,11 @@ window.addEventListener('load', () => {
         Le bouton boire diminue la quantité d'une bouteille dans le cellier.
     */
     
-    document.querySelectorAll(".bouteille .btnBoire").forEach(element => {
+    document.querySelectorAll(".btnBoire").forEach(element => {
         element.addEventListener("click", function(evt) {
             console.log(evt);
-            let id = evt.target.parentElement.parentElement.dataset.id;
-            requeteModifierQuantite('boireBouteilleCellier', id);
+            let idBouteille = evt.target.closest('.bouteille').dataset.id;
+            modifierQuantite('boireBouteilleCellier', idBouteille);
         });
     });
 
@@ -21,23 +21,19 @@ window.addEventListener('load', () => {
         Le bouton ajouter augmente la quantité d'une bouteille dans le cellier.
     */
     
-    document.querySelectorAll(".bouteille .btnAjouter").forEach(element => {
+    document.querySelectorAll(".btnAjouter").forEach(element => {
         element.addEventListener("click", function(evt) {
             console.log(evt);            
-            let id = evt.target.parentElement.parentElement.dataset.id;
-            requeteModifierQuantite('ajouterBouteilleCellier', id);
+            let idBouteille = evt.target.closest('.bouteille').dataset.id;
+            modifierQuantite('ajouterBouteilleCellier', idBouteille);
         });
     });
 
     /*
-        Fait la requête Ajax pour modifier la quantite d'une bouteille donnée.
+        Fait la requête Ajax pour modifier la quantite d'une bouteille donnée et modifie la quantité dans le DOM avec la nouvelle valeur.
     */
         
-    function requeteModifierQuantite(nomRequete, idBouteille) {
-        let spanQuantite = document.querySelector(
-            ".bouteille[data-id='" + idBouteille + "'] .quantite"
-        );
-        
+    function modifierQuantite(nomRequete, idBouteille) {
         let requete = new Request(
             BaseURL + "index.php?requete=" + nomRequete,
             {method: 'POST', body: '{"id": ' + idBouteille + '}'}
@@ -55,6 +51,11 @@ window.addEventListener('load', () => {
         })
         .then(response => {
             console.log(response);
+            
+            let spanQuantite = document.querySelector(
+                ".bouteille[data-id='" + idBouteille + "'] .quantite"
+            );
+
             spanQuantite.innerHTML = response.quantite;
         })
         .catch(error => {
