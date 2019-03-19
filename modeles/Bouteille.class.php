@@ -12,79 +12,36 @@
  */
 class Bouteille extends Modele {    
 	/**
-	 * Retourne la liste des bouteilles d'un cellier donné.
+	 * Cette méthode ajoute une ou des bouteilles au cellier
 	 * 
-	 * @param int idCellier
+	 * @param Array $data Tableau des attributs de la bouteille.
 	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-	 * 
-	 * @return Tableau des bouteilles avec tous leurs attributs
+	 * @return Boolean Succès ou échec de l'ajout.
 	 */
+	public function ajouterBouteilleCellier($data) {
+        $sql = "
+            INSERT INTO vino__bouteille (id_cellier, nom, image, code_saq,
+            pays, description, url_saq, url_img, format, date_achat,
+            garde_jusqua, notes, prix, quantite, millesime, type)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ";        
 
-	public function getListeBouteillesCellier($idCellier) {
-		$liste = Array();
+        $stmt = $this->_db->prepare($sql);
+
+        $stmt->bind_param(
+            "isssssssssssdiii", $data['id_cellier'], $data['nom'],
+            $data['image'], $data['code_saq'], $data['pays'],
+            $data['description'], $data['url_saq'], $data['url_img'],
+            $data['format'], $data['date_achat'], $data['garde_jusqua'],
+            $data['notes'], $data['prix'], $data['quantite'],
+            $data['millesime'], $data['type']
+        );
         
-		$sql = "
-            SELECT b.*, t.type FROM vino__bouteille b
-			INNER JOIN vino__type t ON t.id_type = b.type
-            WHERE id_cellier = " . (int) $idCellier . "
-        ";
-
-        if (!($res = $this->_db->query($sql))) {
-			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
-		}
-        
-        while ($row = $res->fetch_assoc()) {
-            $liste[] = $row;
-        }
-
-        return $liste;
-	}
-	
-	/**
-	 * Retourne les attributs d'une bouteille SAQ donnée.
-	 * 
-	 * @param int idBouteilleSaq
-	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-	 * 
-	 * @return Tableau associatif des attributs
-	 */
-    
-	public function getBouteilleSaq($idBouteilleSaq = 0) {
-		$sql = "
-            SELECT * FROM vino__bouteille__saq
-            WHERE id_bouteille_saq = " . (int) $idBouteilleSaq . "
-        ";
-
-        if (!($res = $this->_db->query($sql))) {
+        if (!$stmt->execute()) {
 			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
 		}
 		
-        return $res->fetch_assoc();
-	}
-	
-	/**
-	 * Retourne la liste des types de bouteilles.
-	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-	 * 
-	 * @return Tableau des types de bouteilles
-	 */
-    
-	public function getTypes() {
-		$types = Array();
-		$sql = "SELECT * from vino__type";
-
-        if (!($res = $this->_db->query($sql))) {
-			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
-		}
-		
-        while ($row = $res->fetch_assoc()) {
-            $types[] = $row;
-        }
-
-        return $types;
+        return $this->_db->insert_id;
 	}
 	
 	/**
@@ -96,8 +53,7 @@ class Bouteille extends Modele {
 	 * @throws Exception Erreur de requête sur la base de données 
 	 * 
 	 * @return array id et nom de la bouteille trouvée dans le catalogue
-	 */
-       
+	 */   
 	public function autocomplete($nom, $nb_resultat = 10) {		
 		$rows = Array();
 		$nom = $this->_db->real_escape_string($nom);
@@ -135,39 +91,78 @@ class Bouteille extends Modele {
 		return $rows;
 	}
 	
-	
 	/**
-	 * Cette méthode ajoute une ou des bouteilles au cellier
+	 * Retourne les attributs d'une bouteille SAQ donnée.
 	 * 
-	 * @param Array $data Tableau des données représentants la bouteille.
+	 * @param int idBouteilleSaq
 	 * 
-	 * @return Boolean Succès ou échec de l'ajout.
-	 */
-	public function ajouterBouteilleCellier($data) {
-        $sql = "
-            INSERT INTO vino__bouteille (id_cellier, nom, image, code_saq,
-            pays, description, url_saq, url_img, format, date_achat,
-            garde_jusqua, notes, prix, quantite, millesime, type)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ";        
+	 * @throws Exception Erreur de requête sur la base de données 
+	 * 
+	 * @return Tableau associatif des attributs
+	 */    
+	public function getBouteilleSaq($idBouteilleSaq = 0) {
+		$sql = "
+            SELECT * FROM vino__bouteille__saq
+            WHERE id_bouteille_saq = " . (int) $idBouteilleSaq . "
+        ";
 
-        $stmt = $this->_db->prepare($sql);
-
-        $stmt->bind_param(
-            "isssssssssssdiii", $data->id_cellier, $data->nom, $data->image,
-            $data->code_saq, $data->pays, $data->description, $data->url_saq,
-            $data->url_img, $data->format, $data->date_achat,
-            $data->garde_jusqua, $data->notes, $data->prix, $data->quantite,
-            $data->millesime, $data->type
-        );
-        
-        if (!$stmt->execute()) {
+        if (!($res = $this->_db->query($sql))) {
 			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
 		}
 		
-        return $this->_db->insert_id;
+        return $res->fetch_assoc();
 	}
 	
+	/**
+	 * Retourne la liste des bouteilles d'un cellier donné.
+	 * 
+	 * @param int idCellier
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+	 * 
+	 * @return Tableau des bouteilles avec tous leurs attributs
+	 */
+	public function getListeBouteillesCellier($idCellier) {
+		$liste = Array();
+        
+		$sql = "
+            SELECT b.*, t.type FROM vino__bouteille b
+			INNER JOIN vino__type t ON t.id_type = b.type
+            WHERE id_cellier = " . (int) $idCellier . "
+        ";
+
+        if (!($res = $this->_db->query($sql))) {
+			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+		}
+        
+        while ($row = $res->fetch_assoc()) {
+            $liste[] = $row;
+        }
+
+        return $liste;
+	}
+	
+	/**
+	 * Retourne la liste des types de bouteilles.
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+	 * 
+	 * @return Tableau des types de bouteilles
+	 */   
+	public function getTypes() {
+		$types = Array();
+		$sql = "SELECT * from vino__type";
+
+        if (!($res = $this->_db->query($sql))) {
+			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+		}
+		
+        while ($row = $res->fetch_assoc()) {
+            $types[] = $row;
+        }
+
+        return $types;
+	}	
 	
 	/**
 	 * Cette méthode change la quantité d'une bouteille en particulier dans le cellier
@@ -197,8 +192,3 @@ class Bouteille extends Modele {
         return $res->fetch_assoc();
 	}
 }
-
-
-
-
-?>
