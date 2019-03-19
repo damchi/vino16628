@@ -1,0 +1,5 @@
+.entete{
+    grid-area: entete;
+    border:2px black solid;
+    margin-bottom: 50px;
+}
