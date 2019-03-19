@@ -8,6 +8,8 @@ $codeSaq = isset($data['bouteille']['code_saq']) ? $data['bouteille']['code_saq'
 $dateAchat = isset($data['bouteille']['date_achat']) ? $data['bouteille']['date_achat'] : '';
 $format = isset($data['bouteille']['format']) ? $data['bouteille']['format'] : '';
 $gardeJusqua = isset($data['bouteille']['garde_jusqua']) ? $data['bouteille']['garde_jusqua'] : '';
+$idBouteille = isset($data['bouteille']['id_bouteille']) ? $data['bouteille']['id_bouteille'] : '';
+$idCellier = isset($data['bouteille']['id_cellier']) ? $data['bouteille']['id_cellier'] : $data['idCellier'];
 $millesime = isset($data['bouteille']['millesime']) ? $data['bouteille']['millesime'] : '';
 $nom = isset($data['bouteille']['nom']) ? $data['bouteille']['nom'] : '';
 $notes = isset($data['bouteille']['notes']) ? $data['bouteille']['notes'] : '';
@@ -30,8 +32,8 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
                 <!--Form with header-->
 
                 <form class="border border-secondary border-0" method="post">
-                    <input type="hidden" name="id_cellier" value="<?= $data['idCellier'] ?>">
-                    <input type="hidden" name="code_saq" value="<?= $codeSaq ?>">
+                    <input type="hidden" name="id_bouteille" value="<?= $idBouteille ?>">
+                    <input type="hidden" name="id_cellier" value="<?= $idCellier ?>">
                     <input type="hidden" name="url_img" value="<?= $urlImg ?>">
                     <input type="hidden" name="url_saq" value="<?= $urlSaq ?>">
 
@@ -56,17 +58,14 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
                                     <input type="text" class="form-control" id="" name="nom" placeholder="Nom" required value="<?= $nom ?>">
                                 </div>
                             </div>
-<!--
-                            (Pas besoin de modifier le code SAQ, je crois)
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend purple">
                                         <div class="input-group-text"><i class="fas fa-id-card purple text-secondary"></i></i></div>
                                     </div>
-                                    <input type="text" class="form-control" id="" name="code_saq" placeholder="Code SAQ">
+                                    <input type="text" class="form-control" id="" name="code_saq" placeholder="Code SAQ" value="<?= $codeSaq ?>">
                                 </div>
                             </div>
--->
                             <!-- Pays -->
                             <div class="form-group">
                                 <div class="input-group mb-2">
@@ -162,7 +161,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
                             </div>
                             <!-- Bouton enregistrer -->
                             <div class="text-center">
-                                <button name="ajouterBouteilleCellier" class="btn purple darken-3 text-white btn-block rounded-0 py-2">Enregistrer</button>
+                                <button type="submit" class="btn purple darken-3 text-white btn-block rounded-0 py-2">Enregistrer</button>
                             </div>
                         </div>
                     </div>
