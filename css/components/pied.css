@@ -1,5 +1,16 @@
 .pied{
-    background-color: whitesmoke;
-    border: 2px solid darkblue;
+    background-color: #701139;
+    text-align: center;
+    color: #eee;
+    padding: 20px;
+    font-size: 4rem;
+    width: 100%;
+    left: 0;
     margin-top: 50px;
+    margin-left: -20px;
+}
+
+.pied>p>a{
+    text-decoration: none;
+    color: #eee;
 }

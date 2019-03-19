@@ -198,7 +198,7 @@ class Controler
                     
                 case 'POST':
                     $bte = new Bouteille();
-                    $bte->ajouterBouteilleCellier((Object) $_POST);
+                    $bte->ajouterBouteilleCellier($_POST);
                     $this->afficheBouteillesCellier($_POST['id_cellier']);
                     break;
 			}
