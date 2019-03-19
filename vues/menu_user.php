@@ -20,6 +20,9 @@
             <li>
                 <a href="?requete=ajouterNouvelleBouteilleCellier">Ajouter une bouteille au cellier</a>
             </li>
+            <li>
+                <a href="?requete=logout">Se deconnecter</a>
+            </li>
         </ul>
     </nav>
 </header>
