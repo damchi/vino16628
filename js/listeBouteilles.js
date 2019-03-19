@@ -12,7 +12,7 @@ window.addEventListener('load', () => {
     document.querySelectorAll(".bouteille .btnBoire").forEach(element => {
         element.addEventListener("click", function(evt) {
             console.log(evt);
-            let id = evt.target.parentElement.parentElement.parentElement.dataset.id;
+            let id = evt.target.parentElement.parentElement.dataset.id;
             requeteModifierQuantite('boireBouteilleCellier', id);
         });
     });
@@ -24,7 +24,7 @@ window.addEventListener('load', () => {
     document.querySelectorAll(".bouteille .btnAjouter").forEach(element => {
         element.addEventListener("click", function(evt) {
             console.log(evt);            
-            let id = evt.target.parentElement.parentElement.parentElement.dataset.id;
+            let id = evt.target.parentElement.parentElement.dataset.id;
             requeteModifierQuantite('ajouterBouteilleCellier', id);
         });
     });

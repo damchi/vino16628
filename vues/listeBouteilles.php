@@ -11,9 +11,9 @@
     ?>
 
     <!-- Carte -->
-    <div class="carte">
+    <div class="carte bouteille" data-id="<?php echo $bouteille['id_bouteille'] ?>">
             
-            <!-- Titre -->
+        <!-- Titre -->
         <div class="carte-titre">
             <h4><?php echo $bouteille['nom'] ?></h4>
         </div>
@@ -23,7 +23,7 @@
             <h5><i class="fas fa-glass-cheers"></i> Vins</h5>
             
             <!-- Texte -->
-            <p class="carte-texte"><span>Quantité : <?php echo $bouteille['quantite'] ?></span></p>
+            <p class="carte-texte">Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span></p>
             <p class="carte-texte">Pays : <?php echo $bouteille['pays'] ?></p>
             <p class="carte-texte">Type : <?php echo $bouteille['type'] ?></p>
             <p class="carte-texte">Millesime : <?php echo $bouteille['millesime'] ?></p>
@@ -39,7 +39,7 @@
         </div>
     
         <!-- Bouton -->
-        <div class="options carte-pied" data-id="<?php echo $bouteille['id_bouteille'] ?>">
+        <div class="options carte-pied">
             <button>Modifier</button>
             <button class='btnAjouter'>Ajouter</button>
             <button class='btnBoire'>Boire</button>
