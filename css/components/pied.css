@@ -8,6 +8,8 @@
     left: 0;
     margin-top: 50px;
     margin-left: -20px;
+    position : fixed;
+    bottom: 0;
 }
 
 .pied>p>a{
