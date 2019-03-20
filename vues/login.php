@@ -21,7 +21,16 @@
 <!--        <button name="btnLogin">Se connecter</button>-->
 <!--    </div>-->
 <!--</div>-->
+    <div id="errorLogin">
+        <?php
+        if (isset($dataMessage)){
+            echo "<p id='message'>". $dataMessage."</p>";
+        }
+        ?>
+
+    </div>
 </form>
+
 
 
 <div>
