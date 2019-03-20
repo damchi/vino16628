@@ -116,8 +116,6 @@ class Usager extends Modele
      * @param chaine $pseudo pseudo de l'usager
 	 * @param int $idBouteille id de la bouteille
 	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-     *
 	 * @return Boolean true si l'usager est le propriétaire, false sinon
 	 */
 	public function estProprietaireBouteille($pseudo, $idBouteille) {
@@ -142,8 +140,6 @@ class Usager extends Modele
      * @param chaine $pseudo pseudo de l'usager
 	 * @param int $idCellier id du cellier
 	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-     *
 	 * @return Boolean true si l'usager est le propriétaire, false sinon
 	 */
 	public function estProprietaireCellier($pseudo, $idCellier) {
