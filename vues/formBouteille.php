@@ -21,7 +21,7 @@ $urlImg = isset($data['bouteille']['url_img']) ? $data['bouteille']['url_img'] :
 $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] : '';
 ?>
 
-<div class="container ajouter formBouteille">
+<div class="container formBouteille">
 
     <!-- Recherche-->
     <div id="recherche_bouteille" class="row d-flex justify-content-start purple darken-3 text-white text-center py-2 m-0">
@@ -54,7 +54,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
         <!-- Code SAQ -->
         <div class="group">
-                <label class="icon_form"><i class="fas fa-id-card purple text-secondary"></i></i></label>
+                <label class="icon_form"><i class="fas fa-id-card purple text-secondary"></i></label>
                 <input type="text" class="input" id="" name="code_saq" placeholder="Code SAQ" value="<?= $codeSaq ?>">
         </div>
 
@@ -120,13 +120,13 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <!-- Garder jusqu'à... -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-calendar-alt"></i></label>
-            <input type="text" class="input" id="garde_jusqua" name="garde_jusqua" placeholder="Garder jusqu'à ..." value="<?= $gardeJusqua ?>"
+            <input type="text" class="input" id="garde_jusqua" name="garde_jusqua" placeholder="Garder jusqu'à ..." value="<?= $gardeJusqua ?>">
         </div>
 
         <!-- Notes -->
         <div class="group">
             <label class="icon_form"><i class="fa fa-comment"></i></label>
-            <input type="text" class="input" placeholder="Notes" id="notes" name="notes"><?= $notes ?></input>
+            <input type="text" class="input" placeholder="Notes" id="notes" name="notes"><?= $notes ?>
         </div>
 
         <!-- Bouton enregistrer -->
