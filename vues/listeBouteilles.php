@@ -1,21 +1,9 @@
-<<<<<<< HEAD
-<div class="listeBouteille">
-    
-    <div class="btnAjouterBouteille">
-        <button>
-            <a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>">Ajouter une bouteille</a>
-        </button>
-    </div>
-
-    <div class="cartes">
-
-=======
-<div>
+<div >
     <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>">Ajouter une bouteille</a></button>
 </div>
 
 <div class="listeBouteille">    
->>>>>>> 6b341cc8f737566519fbe522b002d4ac8a2adf60
+
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
@@ -61,8 +49,6 @@
     <?php
     }
     ?>
-<<<<<<< HEAD
-    </div>
-=======
+
 </div>
->>>>>>> 6b341cc8f737566519fbe522b002d4ac8a2adf60
+

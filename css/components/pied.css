@@ -3,12 +3,11 @@
     background-color: #701139;
     text-align: center;
     color: #eee;
-    padding: 20px;
+    padding: 5px;
     font-size: 1.4rem;
     width: 100%;
     left: 0;
-    margin-top: 50px;
-    margin-left: -20px;
+    margin 50px -20px 0;
     position : fixed;
     bottom: 0;
 }

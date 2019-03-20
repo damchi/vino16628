@@ -29,7 +29,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <ul class="listeAutoComplete"></ul>
     </div>
 
-    <!--Form with header-->
+    <!--Formulaire-->
 
     <form class="form" method="post">
         <input type="hidden" name="id_bouteille" value="<?= $idBouteille ?>">
