@@ -28,7 +28,8 @@
             <div id="errorPrenom"></div>
             <p>Mail : <input type="email" id="emailInscription" name="mail" ></p>
             <div id="errorMail"></div>
-            <p>Mot de passe : <input type="password" name="password"></p>
+            <p>Mot de passe : <input type="password" id="passInscription" name="password"></p>
+            <div id="errorPass"></div>
             <p>Nom usager : <input  type="text" id="pseudoInscription" name="pseudo"></p>
             <div id="errorPseudo"></div>
         </div>

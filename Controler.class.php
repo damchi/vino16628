@@ -76,6 +76,9 @@ class Controler
                              $this->ajoutUsager($_POST["nom"], $_POST["prenom"], $_POST['mail'], $_POST['password'], $_POST['pseudo']);
                              $this->formlogin();
                          }
+                         else{
+                             $this->formInscription();
+                         }
                     }
                     else{
                         header("Location:index.php?requete=login");

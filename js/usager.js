@@ -4,9 +4,10 @@
         obj.estValide = (unObjet)=>{
             if (unObjet.value ==""){
                 unObjet.style.borderColor ="red";
+                return false
             }
             else{
-                unObjet.style.borderColor="transparent";
+                unObjet.style.borderColor="black";
             }
         };
         obj.estMail = (unMail)=>{
@@ -14,7 +15,7 @@
             let outputMail = "";
 
             if (regexMail.test(unMail.value)){
-                unMail.style.borderColor="transparent";
+                unMail.style.borderColor="black";
             }
             else{
                 unMail.style.borderColor="red";
@@ -30,7 +31,7 @@
             let outputNom = "";
 
             if (regexNom.test(unNom.value)){
-                unNom.style.borderColor="transparent";
+                unNom.style.borderColor="";
             }
             else{
                 unNom.style.borderColor="red";
@@ -46,7 +47,7 @@
             let outputPrenom = "";
 
             if (regexPrenom.test(unPrenom.value)){
-                unPrenom.style.borderColor="transparent";
+                unPrenom.style.borderColor="black";
             }
             else{
                 unPrenom.style.borderColor="red";
@@ -62,7 +63,7 @@
             let outputPseudo = "";
 
             if (regexPseudo.test(unPseudo.value)){
-                unPseudo.style.borderColor="transparent";
+                unPseudo.style.borderColor="black";
             }
             else{
                 unPseudo.style.borderColor="red";
@@ -73,7 +74,22 @@
             }
         };
 
+        obj.estPass = (unPass)=>{
+            let outputPass= "";
 
+            if (unPass.value ==""){
+                unPass.style.borderColor="red";
+                outputPass +=" le mot de pass n'est pas valide";
+                let errorPass = document.getElementById('errorPass');
+                errorPass.innerHTML = outputPass;
+                errorPass.style.color ='red';
+            }
+            else{
+                unPass.style.borderColor="black";
+            }
+        };
+
+        console.log(obj);
         return obj;
     })();
 
@@ -83,20 +99,43 @@ window.addEventListener('load',()=>{
     let emailInscription = document.getElementById('emailInscription');
     let nomInscription = document.getElementById('nomInscription');
     let prenomInscription = document.getElementById('prenomInscription');
+    let passInscription = document.getElementById('passInscription');
+
+    let btnLogin = document.getElementById('btnLogin');
+    let idLogin = document.getElementById('identifiantLogin');
+    let passwordLogin = document.getElementById('passwordLogin');
+
+
 
     if (ajouterUsager) {
-        ajouterUsager.addEventListener('click',()=>{
-            validationFormulaire.estValide(emailInscription);
+        ajouterUsager.addEventListener('click',(event)=>{
+            if (validationFormulaire.estValide(emailInscription) == false ||
+                validationFormulaire.estValide(nomInscription) == false ||
+                validationFormulaire.estValide(prenomInscription) == false ||
+                validationFormulaire.estValide(pseudoInscription) == false ||
+                validationFormulaire.estPass(passInscription) == false ){
+                event.preventDefault();
+            }
+            // validationFormulaire.estValide(emailInscription);
             validationFormulaire.estMail(emailInscription);
 
-            validationFormulaire.estValide(nomInscription);
+            // validationFormulaire.estValide(nomInscription);
             validationFormulaire.estNom(nomInscription);
 
-            validationFormulaire.estValide(prenomInscription);
+            // validationFormulaire.estValide(prenomInscription);
             validationFormulaire.estPrenom(prenomInscription);
 
-            validationFormulaire.estValide(pseudoInscription);
+            // validationFormulaire.estValide(pseudoInscription);
             validationFormulaire.estPseudo(pseudoInscription);
+            validationFormulaire.estPass(passInscription);
+        });
+    }
+
+    if (btnLogin){
+        btnLogin.addEventListener('click',()=>{
+            validationFormulaire.estValide(idLogin);
+            validationFormulaire.estValide(passwordLogin);
+
         });
 
     }
