@@ -29,10 +29,26 @@ class Cellier extends Modele
         return $cellier;
     }
 
+    /**
+     * @param $data
+     * @return mixed
+     */
     public function ajoutCellierUsager($data){
         $stmt = $this->_db->prepare("INSERT INTO " . self::TABLE. "(nom,id_usager_cellier) VALUES (?,?)");
         $stmt->bind_param('si',$data->nomCellier,$data->id);
         $stmt->execute();
         return $this->_db->insert_id;
     }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function supprimeCellierUsager($data){
+//        var_dump($data);
+        $stmt = $this->_db->prepare("DELETE FROM " . self::TABLE. " WHERE id_cellier = ? ");
+        $stmt->bind_param('i',$data->idCellier);
+       return $stmt->execute();
+    }
+
 }

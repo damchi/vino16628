@@ -58,6 +58,14 @@ class Controler
                         header("Location: index.php?requete=login");
                     }
 					break;
+				case 'supprimerBouteille':
+					if (isset($_SESSION['user_pseudo'])){
+						$this->supprimerBouteille();
+                    }
+                    else{
+                        header("Location: index.php?requete=login");
+                    }
+					break;
 				case 'ajouterBouteilleCellier':
                     if (isset($_SESSION['user_pseudo'])){
                         $this->ajouterBouteilleCellier();
@@ -140,6 +148,22 @@ class Controler
                 case 'ajoutCellier':
                     if (isset($_SESSION['user_pseudo'])) {
                         $this->ajoutCellier();
+                    }
+                    else{
+                        header("Location:index.php?requete=login");
+                    }
+                    break;
+                case 'verifierBouteille':
+                    if (isset($_SESSION['user_pseudo'])) {
+                        $this->verifCellier();
+                    }
+                    else{
+                        header("Location:index.php?requete=login");
+                    }
+                    break;
+                case 'supprimerCellier':
+                    if (isset($_SESSION['user_pseudo'])) {
+                        $this->supprimeCellier();
                     }
                     else{
                         header("Location:index.php?requete=login");
@@ -246,6 +270,22 @@ class Controler
             }    
         }
 		
+		private function supprimerBouteille()
+		{
+            $body = json_decode(file_get_contents('php://input'));
+            $usr = new Usager();
+            
+            if ($usr->estProprietaireBouteille($_SESSION['user_pseudo'], $body->id)) {
+                $bte = new Bouteille();
+                $res = $bte->supprimerBouteille($body->id);
+            }
+            else {
+                $res = false;
+            }
+                
+            echo json_encode($res);
+        }
+		
 		private function boireBouteilleCellier()
 		{
 			$body = json_decode(file_get_contents('php://input'));
@@ -314,6 +354,22 @@ class Controler
             if(!empty($body)){
                 $cellier = new Cellier();
                 $resultat = $cellier->ajoutCellierUsager($body);
+                echo json_encode($resultat);
+            }
+        }
+		private function verifCellier(){
+            $body = json_decode(file_get_contents('php://input'));
+            if(!empty($body)){
+                $bouteille = new Bouteille();
+                $resultat = $bouteille->countBouteilleCellier($body);
+                echo json_encode($resultat);
+            }
+        }
+		private function supprimeCellier(){
+            $body = json_decode(file_get_contents('php://input'));
+            if(!empty($body)){
+                $cellier = new Cellier();
+                $resultat = $cellier->supprimeCellierUsager($body);
                 echo json_encode($resultat);
             }
         }

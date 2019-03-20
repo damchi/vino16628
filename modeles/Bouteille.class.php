@@ -10,7 +10,8 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  * 
  */
-class Bouteille extends Modele {    
+class Bouteille extends Modele {
+    const TABLE = 'vino__bouteille';
 	/**
 	 * Ajoute une bouteille à un cellier.
 	 * 
@@ -48,8 +49,6 @@ class Bouteille extends Modele {
 	 * @param string $nom La chaine de caractère à rechercher
 	 * @param integer $nb_resultat Le nombre de résultat maximal à retourner.
 	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-	 * 
 	 * @return array id et nom de la bouteille trouvée dans le catalogue
 	 */   
 	public function autocomplete($nom, $nb_resultat = 10) {		
@@ -80,8 +79,6 @@ class Bouteille extends Modele {
 	 * 
 	 * @param int idBouteille
 	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-	 * 
 	 * @return Tableau associatif des attributs ou null si la bouteille n'existe pas
 	 */    
 	public function getBouteille($idBouteille) {
@@ -100,8 +97,6 @@ class Bouteille extends Modele {
 	 * 
 	 * @param int idBouteilleSaq
 	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-	 * 
 	 * @return Tableau associatif des attributs ou null si la bouteille n'existe pas
 	 */    
 	public function getBouteilleSaq($idBouteilleSaq) {
@@ -119,8 +114,6 @@ class Bouteille extends Modele {
 	 * Retourne la liste des bouteilles d'un cellier donné.
 	 * 
 	 * @param int idCellier
-	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
 	 * 
 	 * @return Tableau des bouteilles avec tous leurs attributs
 	 */
@@ -143,8 +136,6 @@ class Bouteille extends Modele {
 	
 	/**
 	 * Retourne la liste des types de bouteilles.
-	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
 	 * 
 	 * @return Tableau des types de bouteilles
 	 */   
@@ -200,8 +191,6 @@ class Bouteille extends Modele {
 	 * @param int $id id de la bouteille
 	 * @param int $nombre Nombre de bouteille a ajouter ou retirer
 	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-     *
 	 * @return Boolean Succès ou échec de l'ajout.
 	 */
 	public function modifierQuantiteBouteilleCellier($id, $nombre) {
@@ -222,4 +211,60 @@ class Bouteille extends Modele {
 		
         return $res->fetch_assoc();
 	}
+    
+	/**
+	 * Supprime une bouteille.
+	 * 
+	 * @param int idBouteille
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données
+     *
+	 * @return Boolean true si l'usager est le propriétaire, false sinon
+	 */
+	public function estProprietaireCellier($pseudo, $idBouteille) {
+        return true;
+    }
+
+    /**
+     * @param $data
+     * @return stdClass
+     */
+    public function  countBouteilleCellier($data){
+        $retour = new stdClass();
+        $retour -> succes = false;
+        $retour -> nbBouteille = 0;
+//        $retour -> raison = '';
+
+
+        $stmt = $this->_db->prepare("SELECT count(*) as total FROM " .self::TABLE ." WHERE id_cellier = ?");
+        $stmt->bind_param('i',$data->idCellier);
+        $stmt->execute();
+
+        $stmt_result = $stmt->get_result()->fetch_assoc();
+//        var_dump($stmt_result['total']);
+
+        if ($stmt_result['total'] > 0) {
+//            var_dump($stmt_result);
+            $retour -> succes = true;
+            $retour->nbBouteille = $stmt_result['total'];
+        }
+        else{
+            $retour -> succes = false;
+        }
+        return $retour;
+
+    }
+
+    /**
+     * @param $idBouteille
+     * @return mixed
+     */
+	public function supprimerBouteille($idBouteille) {
+		$sql = "
+            DELETE FROM vino__bouteille
+            WHERE id_bouteille = " . (int) $idBouteille . "
+        ";
+
+        return $this->_db->query($sql);
+	}	
 }
