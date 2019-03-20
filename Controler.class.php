@@ -58,6 +58,14 @@ class Controler
                         header("Location: index.php?requete=login");
                     }
 					break;
+				case 'supprimerBouteille':
+					if (isset($_SESSION['user_pseudo'])){
+						$this->supprimerBouteille();
+                    }
+                    else{
+                        header("Location: index.php?requete=login");
+                    }
+					break;
 				case 'ajouterBouteilleCellier':
                     if (isset($_SESSION['user_pseudo'])){
                         $this->ajouterBouteilleCellier();
@@ -206,8 +214,9 @@ class Controler
 		private function nouvelleBouteilleCellier()
 		{
             $bte = new Bouteille();
+            $usr = new Usager();
             
-            if ($bte->estProprietaireCellier($_SESSION['user_pseudo'], $_GET['idCellier'])) {
+            if ($usr->estProprietaireCellier($_SESSION['user_pseudo'], $_GET['idCellier'])) {
                 switch($_SERVER['REQUEST_METHOD']){
                     case 'GET':
                         $data['bouteille'] = [];                    
@@ -235,8 +244,9 @@ class Controler
 		private function modifierBouteille()
 		{
             $bte = new Bouteille();
+            $usr = new Usager();
             
-            if ($bte->estProprietaireBouteille($_SESSION['user_pseudo'], $_GET['idBouteille'])) {
+            if ($usr->estProprietaireBouteille($_SESSION['user_pseudo'], $_GET['idBouteille'])) {
                 switch($_SERVER['REQUEST_METHOD']){
                     case 'GET':
                         $data['bouteille'] = $bte->getBouteille($_GET['idBouteille']);  
@@ -258,6 +268,22 @@ class Controler
                         break;
                 }
             }    
+        }
+		
+		private function supprimerBouteille()
+		{
+            $body = json_decode(file_get_contents('php://input'));
+            $usr = new Usager();
+            
+            if ($usr->estProprietaireBouteille($_SESSION['user_pseudo'], $body->id)) {
+                $bte = new Bouteille();
+                $res = $bte->supprimerBouteille($body->id);
+            }
+            else {
+                $res = false;
+            }
+                
+            echo json_encode($res);
         }
 		
 		private function boireBouteilleCellier()
