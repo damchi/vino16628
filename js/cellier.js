@@ -24,40 +24,51 @@ window.addEventListener('load', () => {
     let btnAjoutCellier = document.querySelector("[name='ajouterCellier']");
 
         if (btnAjoutCellier){
-            btnAjoutCellier.addEventListener('click',()=> {
-                var param ={
-                    "nomCellier":document.querySelector("[name='nomCellier']").value,
-                    "id": document.querySelector("[name='idUsagerCellier']").value,
-                };
-                let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: JSON.stringify(param)});
+            btnAjoutCellier.addEventListener('click',(evt)=> {
+                if (document.querySelector("[name='nomCellier']").value == ""){
+                    document.querySelector("[name='nomCellier']").style.borderColor='red';
+                    document.getElementById("errorCellier").style.color='red';
+                    document.getElementById("errorCellier").innerHTML='Le champs ne peut pas être vide';
+                    evt.preventDefault()
+                }
+                else{
+                    var param ={
+                        "nomCellier":document.querySelector("[name='nomCellier']").value,
+                        "id": document.querySelector("[name='idUsagerCellier']").value,
+                    };
 
-                fetch(requete)
-                    .then(response => {
-                        if (response.status === 200) {
-                            // console.log(response.json());
-                            return response.json();
-                        }
-                        else {
-                            throw new Error('Erreur');
-                        }
-                    })
-                    .then(response => {
-                        console.log(param.nomCellier);
-                        console.log(param.id);
-                        console.log(response);
+                    let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: JSON.stringify(param)});
 
-                        let output = "<div> Nom du cellier :";
-                        output += "<a href='index.php?requete=listeBouteilleCellier&idCellier="+ response + "'>" + param.nomCellier + "</a>";
-                        output += "</div>";
+                    fetch(requete)
+                        .then(response => {
+                            if (response.status === 200) {
+                                // console.log(response.json());
+                                return response.json();
+                            }
+                            else {
+                                throw new Error('Erreur');
+                            }
+                        })
+                        .then(response => {
+                            console.log(param.nomCellier);
+                            console.log(param.id);
+                            console.log(response);
 
-                        let insert = document.getElementById('insertChild');
-                        insert.innerHTML= output;
-                        formCellier.style.display='none';
+                            let output = "";
+                            output += "<a href='index.php?requete=listeBouteilleCellier&idCellier="+ response + "'>" + param.nomCellier + "</a>";
+                            // output += "<button class='modifierCellier'>  Modifier </button>\n"
+                            // output += "<button class='supprimerCellier'>  Supprimer</button>";
+                            let insert = document.getElementById('insertChild');
+                            insert.setAttribute('data-id',response);
+                            insert.innerHTML= output;
+                            formCellier.style.display='none';
 
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                }
+
             });
         }
 
@@ -68,7 +79,7 @@ window.addEventListener('load', () => {
     document.querySelectorAll(".supprimerCellier").forEach(element => {
             element.addEventListener('click',(evt)=>{
                 let idCellier = evt.target.closest('.cellierId').dataset.id;
-                // console.log(idCellier);
+                console.log(idCellier);
 
                 var param ={
                     "idCellier": idCellier,
@@ -110,7 +121,6 @@ window.addEventListener('load', () => {
                             }
                         }
                         else {
-                            console.log('rrrr');
                             let requeteDelete = new Request(BaseURL + "index.php?requete=supprimerCellier",{method:'POST', body: JSON.stringify(param)});
                             fetch(requeteDelete)
                                 .then(response => {
