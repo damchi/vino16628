@@ -28,7 +28,7 @@
 //         var_dump($_SESSION['user_pseudo']);
          ?>
          <li>
-             <a href="?requete=accueil">Mon cellier<span class="sr-only">(current)</span></a>
+             <a href="?requete=accueil">Mes celliers<span class="sr-only">(current)</span></a>
          </li>
 <!--                 <li>-->
 <!--                     <a href="?requete=ajouterNouvelleBouteilleCellier">Ajouter une bouteille au cellier</a>-->

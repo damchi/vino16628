@@ -43,37 +43,6 @@ class Bouteille extends Modele {
 	}
 	
 	/**
-	 * Modifie les attributs d'une bouteille.
-	 * 
-	 * @param Array $data Tableau des attributs de la bouteille.
-	 * 
-	 * @return Boolean Succès ou échec de l'ajout.
-	 */
-	public function modifierBouteille($data) {
-        $sql = "
-            UPDATE vino__bouteille
-            SET id_cellier = ?, nom = ?, image = ?, code_saq = ?, pays = ?,
-                description = ?, url_saq = ?, url_img = ?, format = ?,
-                date_achat = ?, garde_jusqua = ?, notes = ?, prix = ?,
-                quantite = ?, millesime = ?, type = ?
-            WHERE id_bouteille = ?
-        ";        
-
-        $stmt = $this->_db->prepare($sql);
-
-        $res = $stmt->bind_param(
-            "isssssssssssdiiii", $data['id_cellier'], $data['nom'],
-            $data['image'], $data['code_saq'], $data['pays'],
-            $data['description'], $data['url_saq'], $data['url_img'],
-            $data['format'], $data['date_achat'], $data['garde_jusqua'],
-            $data['notes'], $data['prix'], $data['quantite'],
-            $data['millesime'], $data['type'], $data['id_bouteille']
-        );
-
-        return $stmt->execute();
-	}
-	
-	/**
 	 * Cette méthode permet de retourner les résultats de recherche pour la fonction d'autocomplete de l'ajout des bouteilles dans le cellier
 	 * 
 	 * @param string $nom La chaine de caractère à rechercher
@@ -195,6 +164,37 @@ class Bouteille extends Modele {
 	}	
 	
 	/**
+	 * Modifie les attributs d'une bouteille.
+	 * 
+	 * @param Array $data Tableau des attributs de la bouteille.
+	 * 
+	 * @return Boolean Succès ou échec de l'ajout.
+	 */
+	public function modifierBouteille($data) {
+        $sql = "
+            UPDATE vino__bouteille
+            SET id_cellier = ?, nom = ?, image = ?, code_saq = ?, pays = ?,
+                description = ?, url_saq = ?, url_img = ?, format = ?,
+                date_achat = ?, garde_jusqua = ?, notes = ?, prix = ?,
+                quantite = ?, millesime = ?, type = ?
+            WHERE id_bouteille = ?
+        ";        
+
+        $stmt = $this->_db->prepare($sql);
+
+        $res = $stmt->bind_param(
+            "isssssssssssdiiii", $data['id_cellier'], $data['nom'],
+            $data['image'], $data['code_saq'], $data['pays'],
+            $data['description'], $data['url_saq'], $data['url_img'],
+            $data['format'], $data['date_achat'], $data['garde_jusqua'],
+            $data['notes'], $data['prix'], $data['quantite'],
+            $data['millesime'], $data['type'], $data['id_bouteille']
+        );
+
+        return $stmt->execute();
+	}
+	
+	/**
 	 * Cette méthode change la quantité d'une bouteille en particulier dans le cellier
 	 * 
 	 * @param int $id id de la bouteille
@@ -222,32 +222,4 @@ class Bouteille extends Modele {
 		
         return $res->fetch_assoc();
 	}
-    
-	/**
-	 * Vérifie si un usager est le propriétaire d'une bouteille.
-	 * 
-     * @param chaine $pseudo pseudo de l'usager
-	 * @param int $idBouteille id de la bouteille
-	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-     *
-	 * @return Boolean true si l'usager est le propriétaire, false sinon
-	 */
-	public function estProprietaireBouteille($pseudo, $idBouteille) {
-        return true;
-    }
-    
-	/**
-	 * Vérifie si un usager est le propriétaire d'un cellier.
-	 * 
-     * @param chaine $pseudo pseudo de l'usager
-	 * @param int $idCellier id du cellier
-	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-     *
-	 * @return Boolean true si l'usager est le propriétaire, false sinon
-	 */
-	public function estProprietaireCellier($pseudo, $idBouteille) {
-        return true;
-    }
 }

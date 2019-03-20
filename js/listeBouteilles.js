@@ -60,7 +60,7 @@ window.addEventListener('load', () => {
         
             - Le bouton boire diminue la quantié de la bouteille dans le cellier;
             - Le bouton ajouter diminue la quantité de la bouteille dans le cellier;
-            - Le bouton supprimer n'est visible que si la quantité est supérieure à zéro.
+            - Bouton supprimer visible et cadre rouge si la quantité est zéro.
     */
             
     document.querySelectorAll('.bouteille').forEach(divBouteille => {
