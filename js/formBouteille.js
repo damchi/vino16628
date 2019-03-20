@@ -75,7 +75,7 @@ window.addEventListener('load', function() {
                     console.log(response);
 
                     response.forEach(function(element){
-                        liste.innerHTML += "<li data-id='"+ element.id +"'>"+element.nom+"</li>";
+                        liste.innerHTML += "<li data-id='"+ element.id_bouteille_saq +"'>"+element.nom+"</li>";
                     })
                 })
                 .catch(error => {
