@@ -13,10 +13,10 @@ window.addEventListener('load', function() {
     
     let inputRecherche = document.querySelector("[name='recherche']");
     let liste = document.querySelector('.listeAutoComplete');
-    let form = document.querySelector(".ajouter form");
+    let form = document.querySelector(".formBouteille form");
 
     if (form) {
-        var img = form.querySelector(".ajouter form img");
+        var img = form.querySelector(".formBouteille form img");
         
         var champs = {
             "id_cellier": form.querySelector("[name='id_cellier']"),
@@ -33,7 +33,7 @@ window.addEventListener('load', function() {
             "notes": form.querySelector("[name='date_achat']"),
             "quantite": form.querySelector("[name='quantite']"),
             "millesime": form.querySelector("[name='millesime']")
-        };        
+        };
     }
 
     /*
