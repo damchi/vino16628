@@ -10,7 +10,8 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  * 
  */
-class Bouteille extends Modele {    
+class Bouteille extends Modele {
+    const TABLE = 'vino__bouteille';
 	/**
 	 * Ajoute une bouteille à un cellier.
 	 * 
@@ -216,8 +217,48 @@ class Bouteille extends Modele {
 	 * 
 	 * @param int idBouteille
 	 * 
-	 * @return Boolean false en cas d'échec, true sinon
-	 */    
+	 * @throws Exception Erreur de requête sur la base de données
+     *
+	 * @return Boolean true si l'usager est le propriétaire, false sinon
+	 */
+	public function estProprietaireCellier($pseudo, $idBouteille) {
+        return true;
+    }
+
+    /**
+     * @param $data
+     * @return stdClass
+     */
+    public function  countBouteilleCellier($data){
+        $retour = new stdClass();
+        $retour -> succes = false;
+        $retour -> nbBouteille = 0;
+//        $retour -> raison = '';
+
+
+        $stmt = $this->_db->prepare("SELECT count(*) as total FROM " .self::TABLE ." WHERE id_cellier = ?");
+        $stmt->bind_param('i',$data->idCellier);
+        $stmt->execute();
+
+        $stmt_result = $stmt->get_result()->fetch_assoc();
+//        var_dump($stmt_result['total']);
+
+        if ($stmt_result['total'] > 0) {
+//            var_dump($stmt_result);
+            $retour -> succes = true;
+            $retour->nbBouteille = $stmt_result['total'];
+        }
+        else{
+            $retour -> succes = false;
+        }
+        return $retour;
+
+    }
+
+    /**
+     * @param $idBouteille
+     * @return mixed
+     */
 	public function supprimerBouteille($idBouteille) {
 		$sql = "
             DELETE FROM vino__bouteille
