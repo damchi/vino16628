@@ -190,8 +190,9 @@ class Controler
 		private function nouvelleBouteilleCellier()
 		{
             $bte = new Bouteille();
+            $usr = new Usager();
             
-            if ($bte->estProprietaireCellier($_SESSION['user_pseudo'], $_GET['idCellier'])) {
+            if ($usr->estProprietaireCellier($_SESSION['user_pseudo'], $_GET['idCellier'])) {
                 switch($_SERVER['REQUEST_METHOD']){
                     case 'GET':
                         $data['bouteille'] = [];                    
@@ -219,8 +220,9 @@ class Controler
 		private function modifierBouteille()
 		{
             $bte = new Bouteille();
+            $usr = new Usager();
             
-            if ($bte->estProprietaireBouteille($_SESSION['user_pseudo'], $_GET['idBouteille'])) {
+            if ($usr->estProprietaireBouteille($_SESSION['user_pseudo'], $_GET['idBouteille'])) {
                 switch($_SERVER['REQUEST_METHOD']){
                     case 'GET':
                         $data['bouteille'] = $bte->getBouteille($_GET['idBouteille']);  
