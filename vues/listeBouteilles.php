@@ -39,8 +39,8 @@
         <div class="options carte-pied">
             <button class='btnAjouter'>Ajouter</button>
             <button class='btnBoire'>Boire</button>
-            <button><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Modifier</a></button>
-            <button><a href="index.php?requete=supprimerBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Supprimer</a></button>
+            <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Modifier</a></button>
+            <button class='btnSupprimer'><a href="index.php?requete=supprimerBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Supprimer</a></button>
         </div>
     </div>   
     <!-- Carte -->

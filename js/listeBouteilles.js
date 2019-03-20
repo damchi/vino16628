@@ -6,29 +6,26 @@
 
 window.addEventListener('load', () => {
     /*
-        Le bouton boire diminue la quantité d'une bouteille dans le cellier.
+        Rend le bouton supprimer visible seulement si la quantité de la bouteille est zéro.
     */
     
-    document.querySelectorAll(".btnBoire").forEach(element => {
-        element.addEventListener("click", function(evt) {
-            console.log(evt);
-            let idBouteille = evt.target.closest('.bouteille').dataset.id;
-            modifierQuantite('boireBouteilleCellier', idBouteille);
-        });
-    });
-
+    function ajusterVisibiliteBtnSupprimer(divBouteille) {
+        console.log(divBouteille);
+        let btnSupprimer = divBouteille.querySelector('.btnSupprimer');
+        let quantite = divBouteille.querySelector('.quantite').innerHTML;        
+        btnSupprimer.style.display = (quantite > 0) ? 'none' : 'inline';
+    }
+    
     /*
-        Le bouton ajouter augmente la quantité d'une bouteille dans le cellier.
+        Met à jour la quantité d'une bouteille donnée dans le DOM et ajuste la visibilité du bouton supprimer en conséquence.
     */
     
-    document.querySelectorAll(".btnAjouter").forEach(element => {
-        element.addEventListener("click", function(evt) {
-            console.log(evt);            
-            let idBouteille = evt.target.closest('.bouteille').dataset.id;
-            modifierQuantite('ajouterBouteilleCellier', idBouteille);
-        });
-    });
-
+    function ajusterQuantiteDom(idBouteille, quantite) {
+        let divBouteille = document.querySelector(".bouteille[data-id='" + idBouteille + "']");
+        divBouteille.querySelector(".quantite").innerHTML = quantite;
+        ajusterVisibiliteBtnSupprimer(divBouteille);
+    }
+    
     /*
         Fait la requête Ajax pour modifier la quantite d'une bouteille donnée et modifie la quantité dans le DOM avec la nouvelle valeur.
     */
@@ -51,15 +48,32 @@ window.addEventListener('load', () => {
         })
         .then(response => {
             console.log(response);
-            
-            let spanQuantite = document.querySelector(
-                ".bouteille[data-id='" + idBouteille + "'] .quantite"
-            );
-
-            spanQuantite.innerHTML = response.quantite;
+            ajusterQuantiteDom(idBouteille, response.quantite);
         })
         .catch(error => {
             console.error(error);
         });
     }
+    
+    /*
+        Pour chaque div bouteille :
+        
+            - Le bouton boire diminue la quantié de la bouteille dans le cellier;
+            - Le bouton ajouter diminue la quantité de la bouteille dans le cellier;
+            - Le bouton supprimer n'est visible que si la quantité est supérieure à zéro.
+    */
+            
+    document.querySelectorAll('.bouteille').forEach(divBouteille => {
+        let idBouteille = divBouteille.dataset.id;
+        
+        divBouteille.querySelector(".btnBoire").addEventListener('click', evt => {
+            modifierQuantite('boireBouteilleCellier', idBouteille);
+        });
+        
+        divBouteille.querySelector(".btnAjouter").addEventListener('click', evt => {
+            modifierQuantite('ajouterBouteilleCellier', idBouteille);
+        });
+        
+        ajusterVisibiliteBtnSupprimer(divBouteille);
+    });
 });
