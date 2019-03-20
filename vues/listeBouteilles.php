@@ -3,9 +3,7 @@
 </div>
 
 <div class="listeBouteille">    
-    <?php
-    foreach ($data['listeBouteilles'] as $cle => $bouteille) {
-    ?>
+    <?php foreach ($data['listeBouteilles'] as $cle => $bouteille) { ?>
 
     <!-- Carte -->
     <div class="carte bouteille" data-id="<?php echo $bouteille['id_bouteille'] ?>">
@@ -40,12 +38,9 @@
             <button class='btnAjouter'>Ajouter</button>
             <button class='btnBoire'>Boire</button>
             <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Modifier</a></button>
-            <button class='btnSupprimer'><a href="index.php?requete=supprimerBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Supprimer</a></button>
+            <button class='btnSupprimer'>Supprimer</button>
         </div>
-    </div>   
-    <!-- Carte -->
+    </div>
     
-    <?php
-    }
-    ?>
+    <?php } ?>
 </div>

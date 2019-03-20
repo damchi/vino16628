@@ -27,6 +27,15 @@ window.addEventListener('load', () => {
     }
     
     /*
+        Retire une bouteille du DOM.
+    */
+    
+    function retirerBouteilleDom(idBouteille) {
+        let divBouteille = document.querySelector(".bouteille[data-id='" + idBouteille + "']");
+        divBouteille.remove();
+    }
+    
+    /*
         Fait la requête Ajax pour modifier la quantite d'une bouteille donnée et modifie la quantité dans le DOM avec la nouvelle valeur.
     */
         
@@ -56,10 +65,40 @@ window.addEventListener('load', () => {
     }
     
     /*
+        Fait la requête Ajax pour supprimer une bouteille donnée et l'enlève du DOM.
+    */
+        
+    function supprimerBouteille(idBouteille) {
+        let requete = new Request(
+            BaseURL + "index.php?requete=supprimerBouteille",
+            {method: 'POST', body: '{"id": ' + idBouteille + '}'}
+        );
+
+        console.log(requete);
+
+        fetch(requete).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            else {
+                throw new Error('Erreur');
+            }
+        })
+        .then(response => {
+            console.log(response);
+            retirerBouteilleDom(idBouteille);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
+    
+    /*
         Pour chaque div bouteille :
         
             - Le bouton boire diminue la quantié de la bouteille dans le cellier;
             - Le bouton ajouter diminue la quantité de la bouteille dans le cellier;
+            - Le bouton supprimer supprime la bouteille;
             - Bouton supprimer visible et cadre rouge si la quantité est zéro.
     */
             
@@ -72,6 +111,10 @@ window.addEventListener('load', () => {
         
         divBouteille.querySelector(".btnAjouter").addEventListener('click', evt => {
             modifierQuantite('ajouterBouteilleCellier', idBouteille);
+        });
+        
+        divBouteille.querySelector(".btnSupprimer").addEventListener('click', evt => {
+            supprimerBouteille(idBouteille);
         });
         
         ajusterDivBouteilleSelonQuantite(divBouteille);
