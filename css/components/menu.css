@@ -1,5 +1,6 @@
 .entete{
     font-size:1.4rem;
+    grid-area: entete;
 }
 
 .enteteImage{

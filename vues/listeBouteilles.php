@@ -6,13 +6,15 @@
         </button>
     </div>
 
+    <div class="cartes">
+
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
 
     <!-- Carte -->
     <div class="carte bouteille" data-id="<?php echo $bouteille['id_bouteille'] ?>">
-            
+
         <!-- Titre -->
         <div class="carte-titre">
             <h4><?php echo $bouteille['nom'] ?></h4>
@@ -21,7 +23,7 @@
         <div class="carte-description">
             <!-- Icone -->
             <h5><i class="fas fa-glass-cheers"></i> Vins</h5>
-            
+
             <!-- Texte -->
             <p class="carte-texte">Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span></p>
             <p class="carte-texte">Pays : <?php echo $bouteille['pays'] ?></p>
@@ -29,7 +31,7 @@
             <p class="carte-texte">Millesime : <?php echo $bouteille['millesime'] ?></p>
             <p class="carte-texte"><a href="<?php echo $bouteille['url_saq'] ?>">Voir SAQ</a></p>
         </div>
-    
+
         <!-- Carte image -->
         <div class="carte-image">
             <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
@@ -37,16 +39,17 @@
                 <div class="mask rgba-white-slight"></div>
             </a>
         </div>
-    
+
         <!-- Bouton -->
         <div class="options carte-pied">
             <button><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Modifier</a></button>
             <button class='btnAjouter'>Ajouter</button>
             <button class='btnBoire'>Boire</button>
         </div>
-    </div>   
+    </div>
     <!-- Carte -->
     
     <?php
     }
     ?>
+    </div>

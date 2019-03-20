@@ -1,4 +1,5 @@
 .pied{
+    grid-area: pied;
     background-color: #701139;
     text-align: center;
     color: #eee;
