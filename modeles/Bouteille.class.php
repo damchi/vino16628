@@ -16,8 +16,6 @@ class Bouteille extends Modele {
 	 * 
 	 * @param Array $data Tableau des attributs de la bouteille.
 	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-     *
 	 * @return int Id de la nouvelle bouteille
 	 */
 	public function ajouterBouteilleCellier($data) {
@@ -49,8 +47,6 @@ class Bouteille extends Modele {
 	 * 
 	 * @param Array $data Tableau des attributs de la bouteille.
 	 * 
-	 * @throws Exception Erreur de requête sur la base de données 
-     *
 	 * @return Boolean Succès ou échec de l'ajout.
 	 */
 	public function modifierBouteille($data) {
@@ -88,39 +84,25 @@ class Bouteille extends Modele {
 	 * @return array id et nom de la bouteille trouvée dans le catalogue
 	 */   
 	public function autocomplete($nom, $nb_resultat = 10) {		
-		$rows = Array();
-		$nom = $this->_db->real_escape_string($nom);
-		$nom = preg_replace("/\*/","%" , $nom);
-        $nom = '%'.$nom.'%';
-		 
-		//echo $nom;
-		$requete = "
+		$sql = "
             SELECT id_bouteille_saq, nom FROM vino__bouteille__saq
             WHERE LOWER(nom) LIKE LOWER(?) LIMIT 0, ?
         ";
         
-        $stmt = $this->_db->prepare($requete);
+		$nom = $this->_db->real_escape_string($nom);
+		$nom = preg_replace("/\*/","%" , $nom);
+        $nom = '%'.$nom.'%';
+		 
+        $stmt = $this->_db->prepare($sql);
         $stmt->bind_param("si", $nom, $nb_resultat);
         $stmt->execute();
+		$res = $stmt->get_result();
+		$rows = Array();
         
-		if($res = $stmt->get_result())
-		{
-			if($res->num_rows)
-			{
-				while($row = $res->fetch_assoc())
-				{
-					$row['id'] = $row['id_bouteille_saq'];
-                    unset($row['id_bouteille_saq']);
-					$rows[] = $row;					
-				}
-			}
-		}
-		else 
-		{
-			throw new Exception("Erreur de requête sur la base de données", 1);			 
-		}
-		
-		//var_dump($rows);
+        while ($row = $res->fetch_assoc()) {
+            $rows[] = $row;					
+        }
+        
 		return $rows;
 	}
 	
@@ -139,9 +121,7 @@ class Bouteille extends Modele {
             WHERE id_bouteille = " . (int) $idBouteille . "
         ";
 
-        if (!($res = $this->_db->query($sql))) {
-			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
-		}
+        $res = $this->_db->query($sql);
 		
         return $res->fetch_assoc();
 	}
@@ -161,9 +141,7 @@ class Bouteille extends Modele {
             WHERE id_bouteille_saq = " . (int) $idBouteilleSaq . "
         ";
 
-        if (!($res = $this->_db->query($sql))) {
-			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
-		}
+        $res = $this->_db->query($sql);
 		
         return $res->fetch_assoc();
 	}
@@ -233,15 +211,14 @@ class Bouteille extends Modele {
             WHERE id_bouteille = " . (int) $id . "
         ";
         
-        if (!($res = $this->_db->query($requete))) {
-			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
-		}
+        $this->_db->query($requete);
 		
-		$sql = "SELECT quantite from vino__bouteille WHERE id_bouteille = " . (int) $id;
-
-        if (!($res = $this->_db->query($sql))) {
-			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
-		}
+		$sql = "
+            SELECT quantite from vino__bouteille
+            WHERE id_bouteille = " . (int) $id . "
+        ";
+        
+        $res = $this->_db->query($sql);
 		
         return $res->fetch_assoc();
 	}
