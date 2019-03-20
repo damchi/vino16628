@@ -6,13 +6,13 @@
 
 window.addEventListener('load', () => {
     /*
-        Rend le bouton supprimer visible seulement si la quantité de la bouteille est zéro.
+        Encadre la div bouteille en rouge et rend le bouton supprimer si la quantité de la bouteille est zéro.
     */
     
-    function ajusterVisibiliteBtnSupprimer(divBouteille) {
-        console.log(divBouteille);
+    function ajusterDivBouteilleSelonQuantite(divBouteille) {
         let btnSupprimer = divBouteille.querySelector('.btnSupprimer');
-        let quantite = divBouteille.querySelector('.quantite').innerHTML;        
+        let quantite = divBouteille.querySelector('.quantite').innerHTML;
+        divBouteille.style.border = (quantite > 0) ? "1px solid black" : "2px solid red";
         btnSupprimer.style.display = (quantite > 0) ? 'none' : 'inline';
     }
     
@@ -23,7 +23,7 @@ window.addEventListener('load', () => {
     function ajusterQuantiteDom(idBouteille, quantite) {
         let divBouteille = document.querySelector(".bouteille[data-id='" + idBouteille + "']");
         divBouteille.querySelector(".quantite").innerHTML = quantite;
-        ajusterVisibiliteBtnSupprimer(divBouteille);
+        ajusterDivBouteilleSelonQuantite(divBouteille);
     }
     
     /*
@@ -74,6 +74,6 @@ window.addEventListener('load', () => {
             modifierQuantite('ajouterBouteilleCellier', idBouteille);
         });
         
-        ajusterVisibiliteBtnSupprimer(divBouteille);
+        ajusterDivBouteilleSelonQuantite(divBouteille);
     });
 });
