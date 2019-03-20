@@ -21,7 +21,7 @@ $urlImg = isset($data['bouteille']['url_img']) ? $data['bouteille']['url_img'] :
 $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] : '';
 ?>
 
-<div class="container ajouter formBouteille">
+<div class="container formBouteille">
 
     <!-- Recherche-->
     <div id="recherche_bouteille" class="row d-flex justify-content-start purple darken-3 text-white text-center py-2 m-0">
