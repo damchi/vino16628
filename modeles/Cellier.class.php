@@ -35,4 +35,12 @@ class Cellier extends Modele
         $stmt->execute();
         return $this->_db->insert_id;
     }
+
+    public function supprimeCellierUsager($data){
+//        var_dump($data);
+        $stmt = $this->_db->prepare("DELETE FROM " . self::TABLE. " WHERE id_cellier = ? ");
+        $stmt->bind_param('i',$data->idCellier);
+       return $stmt->execute();
+    }
+
 }

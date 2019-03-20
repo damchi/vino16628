@@ -145,6 +145,22 @@ class Controler
                         header("Location:index.php?requete=login");
                     }
                     break;
+                case 'verifierBouteille':
+                    if (isset($_SESSION['user_pseudo'])) {
+                        $this->verifCellier();
+                    }
+                    else{
+                        header("Location:index.php?requete=login");
+                    }
+                    break;
+                case 'supprimerCellier':
+                    if (isset($_SESSION['user_pseudo'])) {
+                        $this->supprimeCellier();
+                    }
+                    else{
+                        header("Location:index.php?requete=login");
+                    }
+                    break;
 				default:
 					$this->formlogin();
 					break;
@@ -312,6 +328,22 @@ class Controler
             if(!empty($body)){
                 $cellier = new Cellier();
                 $resultat = $cellier->ajoutCellierUsager($body);
+                echo json_encode($resultat);
+            }
+        }
+		private function verifCellier(){
+            $body = json_decode(file_get_contents('php://input'));
+            if(!empty($body)){
+                $bouteille = new Bouteille();
+                $resultat = $bouteille->countBouteilleCellier($body);
+                echo json_encode($resultat);
+            }
+        }
+		private function supprimeCellier(){
+            $body = json_decode(file_get_contents('php://input'));
+            if(!empty($body)){
+                $cellier = new Cellier();
+                $resultat = $cellier->supprimeCellierUsager($body);
                 echo json_encode($resultat);
             }
         }

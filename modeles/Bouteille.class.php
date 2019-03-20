@@ -10,7 +10,8 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  * 
  */
-class Bouteille extends Modele {    
+class Bouteille extends Modele {
+    const TABLE = 'vino__bouteille';
 	/**
 	 * Ajoute une bouteille à un cellier.
 	 * 
@@ -249,5 +250,31 @@ class Bouteille extends Modele {
 	 */
 	public function estProprietaireCellier($pseudo, $idBouteille) {
         return true;
+    }
+
+    public function  countBouteilleCellier($data){
+        $retour = new stdClass();
+        $retour -> succes = false;
+        $retour -> nbBouteille = 0;
+//        $retour -> raison = '';
+
+
+        $stmt = $this->_db->prepare("SELECT count(*) as total FROM " .self::TABLE ." WHERE id_cellier = ?");
+        $stmt->bind_param('i',$data->idCellier);
+        $stmt->execute();
+
+        $stmt_result = $stmt->get_result()->fetch_assoc();
+//        var_dump($stmt_result['total']);
+
+        if ($stmt_result['total'] > 0) {
+//            var_dump($stmt_result);
+            $retour -> succes = true;
+            $retour->nbBouteille = $stmt_result['total'];
+        }
+        else{
+            $retour -> succes = false;
+        }
+        return $retour;
+
     }
 }

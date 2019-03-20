@@ -60,4 +60,78 @@ window.addEventListener('load', () => {
                     });
             });
         }
+
+    // let btnModifierCellier = document.querySelector("[name='modifierCellier']");
+    //     if (btnModifierCellier) {
+    //     }
+
+    document.querySelectorAll(".supprimerCellier").forEach(element => {
+            element.addEventListener('click',(evt)=>{
+                let idCellier = evt.target.closest('.cellierId').dataset.id;
+                // console.log(idCellier);
+
+                var param ={
+                    "idCellier": idCellier,
+                };
+                let requete = new Request(BaseURL + "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
+                fetch(requete)
+                    .then(response => {
+                        if (response.status === 200) {
+                            // console.log(response.json());
+                            return response.json();
+                        }
+                        else {
+                            throw new Error('Erreur');
+                        }
+                    })
+                    .then(response =>{
+                            console.log(response);
+                        // console.log(response.nbBouteille);
+                        if (response.succes == true ){
+
+                            let result = confirm('Le cellier contient '+ response.nbBouteille +' bouteille voulez vous le supprimer ?');
+                            if (result == true){
+                                console.log('aaaaa');
+                                let requeteDelete = new Request(BaseURL + "index.php?requete=supprimerCellier",{method:'POST', body: JSON.stringify(param)});
+                                fetch(requeteDelete)
+                                    .then(response => {
+                                        console.log(response);
+                                        if (response.status === 200) {
+                                            // console.log(response.json());
+                                            return response.json();
+                                        }
+                                        else {
+                                            throw new Error('Erreur');
+                                        }
+                                    })
+                                    .then(response=>{
+                                        location.reload();
+                                    })
+                            }
+                        }
+                        else {
+                            console.log('rrrr');
+                            let requeteDelete = new Request(BaseURL + "index.php?requete=supprimerCellier",{method:'POST', body: JSON.stringify(param)});
+                            fetch(requeteDelete)
+                                .then(response => {
+                                    console.log(response);
+                                    if (response.status === 200) {
+                                        // console.log(response.json());
+                                        return response.json();
+                                    }
+                                    else {
+                                        throw new Error('Erreur');
+                                    }
+                                })
+                                .then(response=>{
+                                    location.reload();
+                                })
+
+                        }
+                    })
+            });
+        });
+
+
+    // });
 });
