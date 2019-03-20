@@ -12,11 +12,13 @@
  */
 class Bouteille extends Modele {    
 	/**
-	 * Cette méthode ajoute une ou des bouteilles au cellier
+	 * Ajoute une bouteille à un cellier.
 	 * 
 	 * @param Array $data Tableau des attributs de la bouteille.
 	 * 
-	 * @return Boolean Succès ou échec de l'ajout.
+	 * @throws Exception Erreur de requête sur la base de données 
+     *
+	 * @return int Id de la nouvelle bouteille
 	 */
 	public function ajouterBouteilleCellier($data) {
         $sql = "
@@ -37,11 +39,42 @@ class Bouteille extends Modele {
             $data['millesime'], $data['type']
         );
         
-        if (!$stmt->execute()) {
-			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
-		}
+        $stmt->execute();
 		
         return $this->_db->insert_id;
+	}
+	
+	/**
+	 * Modifie les attributs d'une bouteille.
+	 * 
+	 * @param Array $data Tableau des attributs de la bouteille.
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+     *
+	 * @return Boolean Succès ou échec de l'ajout.
+	 */
+	public function modifierBouteille($data) {
+        $sql = "
+            UPDATE vino__bouteille
+            SET id_cellier = ?, nom = ?, image = ?, code_saq = ?, pays = ?,
+                description = ?, url_saq = ?, url_img = ?, format = ?,
+                date_achat = ?, garde_jusqua = ?, notes = ?, prix = ?,
+                quantite = ?, millesime = ?, type = ?
+            WHERE id_bouteille = ?
+        ";        
+
+        $stmt = $this->_db->prepare($sql);
+
+        $res = $stmt->bind_param(
+            "isssssssssssdiiii", $data['id_cellier'], $data['nom'],
+            $data['image'], $data['code_saq'], $data['pays'],
+            $data['description'], $data['url_saq'], $data['url_img'],
+            $data['format'], $data['date_achat'], $data['garde_jusqua'],
+            $data['notes'], $data['prix'], $data['quantite'],
+            $data['millesime'], $data['type'], $data['id_bouteille']
+        );
+
+        return $stmt->execute();
 	}
 	
 	/**
@@ -92,15 +125,37 @@ class Bouteille extends Modele {
 	}
 	
 	/**
+	 * Retourne les attributs d'une bouteille donnée.
+	 * 
+	 * @param int idBouteille
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+	 * 
+	 * @return Tableau associatif des attributs ou null si la bouteille n'existe pas
+	 */    
+	public function getBouteille($idBouteille) {
+		$sql = "
+            SELECT * FROM vino__bouteille
+            WHERE id_bouteille = " . (int) $idBouteille . "
+        ";
+
+        if (!($res = $this->_db->query($sql))) {
+			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+		}
+		
+        return $res->fetch_assoc();
+	}
+	
+	/**
 	 * Retourne les attributs d'une bouteille SAQ donnée.
 	 * 
 	 * @param int idBouteilleSaq
 	 * 
 	 * @throws Exception Erreur de requête sur la base de données 
 	 * 
-	 * @return Tableau associatif des attributs
+	 * @return Tableau associatif des attributs ou null si la bouteille n'existe pas
 	 */    
-	public function getBouteilleSaq($idBouteilleSaq = 0) {
+	public function getBouteilleSaq($idBouteilleSaq) {
 		$sql = "
             SELECT * FROM vino__bouteille__saq
             WHERE id_bouteille_saq = " . (int) $idBouteilleSaq . "
@@ -123,18 +178,15 @@ class Bouteille extends Modele {
 	 * @return Tableau des bouteilles avec tous leurs attributs
 	 */
 	public function getListeBouteillesCellier($idCellier) {
-		$liste = Array();
-        
 		$sql = "
             SELECT b.*, t.type FROM vino__bouteille b
 			INNER JOIN vino__type t ON t.id_type = b.type
             WHERE id_cellier = " . (int) $idCellier . "
         ";
 
-        if (!($res = $this->_db->query($sql))) {
-			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
-		}
-        
+        $res = $this->_db->query($sql);
+		$liste = Array();
+                
         while ($row = $res->fetch_assoc()) {
             $liste[] = $row;
         }
@@ -170,6 +222,8 @@ class Bouteille extends Modele {
 	 * @param int $id id de la bouteille
 	 * @param int $nombre Nombre de bouteille a ajouter ou retirer
 	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+     *
 	 * @return Boolean Succès ou échec de l'ajout.
 	 */
 	public function modifierQuantiteBouteilleCellier($id, $nombre) {
@@ -191,4 +245,32 @@ class Bouteille extends Modele {
 		
         return $res->fetch_assoc();
 	}
+    
+	/**
+	 * Vérifie si un usager est le propriétaire d'une bouteille.
+	 * 
+     * @param chaine $pseudo pseudo de l'usager
+	 * @param int $idBouteille id de la bouteille
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+     *
+	 * @return Boolean true si l'usager est le propriétaire, false sinon
+	 */
+	public function estProprietaireBouteille($pseudo, $idBouteille) {
+        return true;
+    }
+    
+	/**
+	 * Vérifie si un usager est le propriétaire d'un cellier.
+	 * 
+     * @param chaine $pseudo pseudo de l'usager
+	 * @param int $idCellier id du cellier
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+     *
+	 * @return Boolean true si l'usager est le propriétaire, false sinon
+	 */
+	public function estProprietaireCellier($pseudo, $idBouteille) {
+        return true;
+    }
 }
