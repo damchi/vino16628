@@ -83,6 +83,9 @@ class Controler
                              $this->ajoutUsager($_POST["nom"], $_POST["prenom"], $_POST['mail'], $_POST['password'], $_POST['pseudo']);
                              $this->formlogin();
                          }
+                         else{
+                             $this->formInscription();
+                         }
                     }
                     else{
                         header("Location:index.php?requete=login");
@@ -101,7 +104,8 @@ class Controler
                                 $this->accueil();
                             }
                             else{
-                                $this->formlogin();
+                                $errorMessage = 'Identifiant ou mot de passe incorrect';
+                                $this->formlogin($errorMessage);
                             }
 
                         }
@@ -186,8 +190,9 @@ class Controler
 		private function nouvelleBouteilleCellier()
 		{
             $bte = new Bouteille();
+            $usr = new Usager();
             
-            if ($bte->estProprietaireCellier($_SESSION['user_pseudo'], $_GET['idCellier'])) {
+            if ($usr->estProprietaireCellier($_SESSION['user_pseudo'], $_GET['idCellier'])) {
                 switch($_SERVER['REQUEST_METHOD']){
                     case 'GET':
                         $data['bouteille'] = [];                    
@@ -215,8 +220,9 @@ class Controler
 		private function modifierBouteille()
 		{
             $bte = new Bouteille();
+            $usr = new Usager();
             
-            if ($bte->estProprietaireBouteille($_SESSION['user_pseudo'], $_GET['idBouteille'])) {
+            if ($usr->estProprietaireBouteille($_SESSION['user_pseudo'], $_GET['idBouteille'])) {
                 switch($_SERVER['REQUEST_METHOD']){
                     case 'GET':
                         $data['bouteille'] = $bte->getBouteille($_GET['idBouteille']);  
@@ -284,7 +290,8 @@ class Controler
 
 		}
 
-		private function formlogin(){
+		private function formlogin($errorMessage =""){
+		    $dataMessage = $errorMessage;
             include ('vues/entete.php');
             include ('vues/login.php');
             include ('vues/pied.php');

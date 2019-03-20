@@ -40,7 +40,7 @@ window.addEventListener('load', function() {
         On cache par défaut l'image de la bouteille dans le formulaire parce qu'il n'y en a pas encore et qu'on ne veut pas avoir le petit icône.
     */
     
-    if (img) {
+    if (img && !img.src) {
         img.style.display = "none";
     }
     
@@ -75,7 +75,7 @@ window.addEventListener('load', function() {
                     console.log(response);
 
                     response.forEach(function(element){
-                        liste.innerHTML += "<li data-id='"+ element.id +"'>"+element.nom+"</li>";
+                        liste.innerHTML += "<li data-id='"+ element.id_bouteille_saq +"'>"+element.nom+"</li>";
                     })
                 })
                 .catch(error => {

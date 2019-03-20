@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="listeBouteille">
     
     <div class="btnAjouterBouteille">
@@ -8,6 +9,13 @@
 
     <div class="cartes">
 
+=======
+<div>
+    <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>">Ajouter une bouteille</a></button>
+</div>
+
+<div class="listeBouteille">    
+>>>>>>> 6b341cc8f737566519fbe522b002d4ac8a2adf60
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
@@ -42,9 +50,10 @@
 
         <!-- Bouton -->
         <div class="options carte-pied">
-            <button><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Modifier</a></button>
             <button class='btnAjouter'>Ajouter</button>
             <button class='btnBoire'>Boire</button>
+            <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Modifier</a></button>
+            <button class='btnSupprimer'><a href="index.php?requete=supprimerBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>">Supprimer</a></button>
         </div>
     </div>
     <!-- Carte -->
@@ -52,4 +61,8 @@
     <?php
     }
     ?>
+<<<<<<< HEAD
     </div>
+=======
+</div>
+>>>>>>> 6b341cc8f737566519fbe522b002d4ac8a2adf60

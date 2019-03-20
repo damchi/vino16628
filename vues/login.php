@@ -9,9 +9,9 @@
 ?>
 
 <form method="POST" action="index.php?requete=logedin">
-    <p>Nom utilisateur ou email : <input type="text" name="identifiant"></p>
-    <p>Mot de passe : <input type="password" name="password"></p>
-    <input type="submit" name="btnLogin" value="Se connecter">
+    <p>Nom utilisateur ou email : <input type="text" id="identifiantLogin" name="identifiant"></p>
+    <p>Mot de passe : <input type="password" id="passwordLogin" name="password"></p>
+    <input type="submit" id="btnLogin" name="btnLogin" value="Se connecter">
 
     <!--    <div class="" vertical layout>-->
 <!--        <div >-->
@@ -21,7 +21,16 @@
 <!--        <button name="btnLogin">Se connecter</button>-->
 <!--    </div>-->
 <!--</div>-->
+    <div id="errorLogin">
+        <?php
+        if (isset($dataMessage)){
+            echo "<p id='message'>". $dataMessage."</p>";
+        }
+        ?>
+
+    </div>
 </form>
+
 
 
 <div>
