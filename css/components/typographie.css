@@ -2,15 +2,19 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Montserrat:400,700");
 
 /* --- Fonts --- */
-*{
-    font-size: 10px;
-}
 
 body {
     font-family: "Open Sans", "Helvetica", "sans-serif";
     padding-bottom: 200px;
     color:#333;
-    font-size: 1.6rem;
+    font-size: 10px;
+}
+vin_text{
+    color:#701139;
+}
+
+vin_fond{
+    color: #701139;
 }
 
 h1, h2, h3 {
