@@ -1,14 +1,14 @@
 .carte{
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-areas:   "carteTitre carteTitre"
+    grid-template-areas:    "carteTitre carteTitre"
                             "carteImage carteDescription"
                             "cartePied cartePied"
                             ;
     grid-gap: 20px;
-    line-height:.5rem;
+    line-height: .5rem;
     padding: 20px;
-/*    border-bottom: 1px solid #701139;*/
+    padding-bottom: 0;
 }
 
 @media only screen and (min-width: 600px){
@@ -31,7 +31,6 @@
 
 .carte-description{
     grid-area: carteDescription;
-/*    margin-top: -20px;*/
 }
 
 .carte-texte{
@@ -40,7 +39,8 @@
 }
 
 .carte-titre{
-    margin-top:-1.33em;
+    margin-top: -1.33em;
+    margin-bottom: -1.33em;
     grid-area: carteTitre;
 }
 
