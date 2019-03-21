@@ -14,17 +14,17 @@
 button, input[type=submit]{
     color: white;
     text-align: center;
-    padding: 15px 15px;
+    padding: 10px;
     border-radius: 8px;
     font-weight: bold;
     background: #701139;
     transition: background 0.3s ease;
-    min-width: 60px;
+    min-width: 50px;
     text-align: center;
 }
 
 button:hover {
-    opacity: 1;;
+    opacity: 1;
     text-decoration: none;
     color: white;
 }
@@ -36,8 +36,8 @@ button a{
 }
 
 .boutonSolo {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 @media only screen and (max-width: 599px){

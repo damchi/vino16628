@@ -1,7 +1,7 @@
 
 .boutonHaut {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .listeBouteille{
@@ -12,8 +12,8 @@
     .listeBouteille{
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        grid-gap: 20px;
-        margin: 20px;
+        grid-gap: 10px;
+        margin: 10px;
     }
 }
 
