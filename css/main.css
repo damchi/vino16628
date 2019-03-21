@@ -8,7 +8,7 @@
 @import url("components/pied.css");
 @import url("components/carte.css");
 @import url("components/typographie.css");
-@import url("components/formBouteille.css");
+/*@import url("components/formBouteille.css");*/
 @import url("components/form.css");
 @import url("components/formLogin.css");
 
@@ -23,4 +23,8 @@ body{
 main{
     flex-grow: 1;
     width: 100%;
+}
+
+.ml {
+    margin-left: 20px;
 }

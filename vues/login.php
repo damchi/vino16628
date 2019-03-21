@@ -7,39 +7,30 @@
  */
 
 ?>
-<div class="formLogin">
-    <form class="form" method="POST" action="index.php?requete=logedin">
-        <div class="group">
-            <label class="icon_form"><i class="fas fa-user"></i></label>
-            <input type="text" id="identifiantLogin" name="identifiant" placeholder="Nom utilisateur ou email">
-        </div>
-        <div class="group">
-            <label class="icon_form"><i class="fas fa-lock"></i></label>
-            <input type="password" id="passwordLogin" name="password" placeholder="mot de passe">
-        </div>
-        <div class="group">
-            <input type="submit" id="btnLogin" name="btnLogin" value="Se connecter">
-        </div>
-        <!--    <div class="" vertical layout>-->
-    <!--        <div >-->
-    <!--            <p>Nom utilisateur ou email<input type="text" name="identifiant"></p>-->
-    <!--            <p>Mot de passe : <input type="password" name="mdp"></p>-->
-    <!--        </div>-->
-    <!--        <button name="btnLogin">Se connecter</button>-->
-    <!--    </div>-->
-    <!--</div>-->
-        <div id="errorLogin">
-            <?php
-            if (isset($dataMessage)){
-                echo "<p id='message'>". $dataMessage."</p>";
-            }
-            ?>
+<form class="form" method="POST" action="index.php?requete=logedin">
+    <div class="group">
+        <label class="icon_form"><i class="fas fa-user"></i></label>
+        <input type="text" id="identifiantLogin" name="identifiant" placeholder="Nom utilisateur ou email">
+    </div>
+    <div class="group">
+        <label class="icon_form"><i class="fas fa-lock"></i></label>
+        <input type="password" id="passwordLogin" name="password" placeholder="mot de passe">
+    </div>
+    <div class="group">
+        <input type="submit" id="btnLogin" name="btnLogin" value="Se connecter">
+    </div>
+</form>
 
-        </div>
-    </form>
+<div id="errorLogin">
+    <?php
+    if (isset($dataMessage)){
+        echo "<div id='message'>". $dataMessage."</div>";
+    }
+    ?>
+</div>
 
+<div class="boutonSolo">
     <button>
         <a href="index.php?requete=inscription">Pas encore inscrit ? </a>
     </button>
-
 </div>
