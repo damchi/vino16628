@@ -1,15 +1,10 @@
 .pied{
-    grid-area: pied;
     background-color: #701139;
     text-align: center;
     color: #eee;
     padding: 5px;
     font-size: 0.6rem;
     width: 100%;
-    left: 0;
-    margin-top: 25px;
-    bottom: 0;
-    position: fixed;
 }
 
 .pied>p>a{
