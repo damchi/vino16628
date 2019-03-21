@@ -11,7 +11,7 @@
     color: #701139;
 }
 
-button{
+button, input[type=submit]{
     color: white;
     padding: 10px 15px;
     border-radius: 10px;

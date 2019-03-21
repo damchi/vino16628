@@ -20,17 +20,18 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <form method="post" action="index.php?requete=ajoutUsager">
+    <form class="form" method="post" action="index.php?requete=ajoutUsager">
         <div>
-            <p>Nom : <input type="text" id="nomInscription" name="nom"></p>
-            <div id="errorNom"></div>
-            <p>Prénom : <input type="text" id="prenomInscription" name="prenom"></p>
+
+            <label></label><input type="text" id="prenomInscription" name="prenom" aria-placeholder=""></p>
             <div id="errorPrenom"></div>
-            <p>Mail : <input type="email" id="emailInscription" name="mail" ></p>
+            <label></label><input type="text" id="nomInscription" name="nom" aria-placeholder="Nom"></p>
+            <div id="errorNom"></div>
+            <label></label><input type="email" id="emailInscription" name="mail" placeholder="Mail"></p>
             <div id="errorMail"></div>
-            <p>Mot de passe : <input type="password" id="passInscription" name="password"></p>
+            <label></label><input type="password" id="passInscription" name="password" placeholder="Mot de passe"></p>
             <div id="errorPass"></div>
-            <p>Nom usager : <input  type="text" id="pseudoInscription" name="pseudo"></p>
+            <label></label><input  type="text" id="pseudoInscription" name="pseudo" placeholder="Nom usager"></p>
             <div id="errorPseudo"></div>
         </div>
         <input type="submit" id="ajouterUsager" name="ajouterUsager" value="S'inscrire">

@@ -1,6 +1,5 @@
 .entete{
     grid-area: entete;
-    border: 2px black solid;
     font-size: 1.2rem;
     width: 100%;
 }
