@@ -23,7 +23,7 @@
 
         <form class="form" method="post" action="index.php?requete=ajoutUsager">
             <div>
-
+                
                 <label class="icon_form"><i class="fas fa-user"></i></label><input type="text" id="prenomInscription" name="prenom" placeholder="Prenom"></p>
                 <div id="errorPrenom"></div>
                 <label class="icon_form"><i class="fas fa-user"></i></label><input type="text" id="nomInscription" name="nom" placeholder="Nom"></p>
