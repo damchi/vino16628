@@ -24,8 +24,8 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 <div class="container formBouteille">
 
     <!-- Recherche-->
-    <div id="recherche_bouteille" class="row d-flex justify-content-start purple darken-3 text-white text-center py-2 m-0">
-        <label for="recherche" class="d-flex align-self-end"> Recherche</label>&nbsp; <input type="text" name="recherche">
+    <div id="recherche_bouteille ml">
+        <label class="icon_form ml"><i class="fas fa-search"></i></label>&nbsp; <input type="text" name="recherche" placeholder="Recherche">
         <ul class="listeAutoComplete"></ul>
     </div>
 
@@ -37,24 +37,24 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <input type="hidden" name="url_img" value="<?= $urlImg ?>">
         <input type="hidden" name="url_saq" value="<?= $urlSaq ?>">
 
-        <div data-id="" class="group ">
-            <h3><i class="fas fa-wine-bottle"></i>&nbsp; Ajouter Bouteille</h3>
+        <div class="group ml">
+            <h3 class="vin_text"><i class="fas fa-wine-bottle"></i>&nbsp; Ajouter Bouteille</h3>
         </div>
 
         <!-- Image de la bouteille -->
-        <div class="group">
+        <div class="group ml">
             <img src="<?= $urlImg ?>" class="image" alt="bouteille">
         </div>
 
         <!-- Nom -->
         <div class="group">
-            <label class="icon_form"><i class="fas fa-id-card purple text-secondary"></i></label>
+            <label class="icon_form"><i class="fas fa-ribbon"></i></label>
             <input type="text" class="input" id="" name="nom" placeholder="Nom" required value="<?= $nom ?>">
         </div>
 
         <!-- Code SAQ -->
         <div class="group">
-                <label class="icon_form"><i class="fas fa-id-card purple text-secondary"></i></label>
+                <label class="icon_form"><i class="fas fa-code"></i></label>
                 <input type="text" class="input" id="" name="code_saq" placeholder="Code SAQ" value="<?= $codeSaq ?>">
         </div>
 

@@ -23,3 +23,7 @@ header{
 footer{
 	grid-area: pied;
 }
+
+.ml{
+	margin-left: 20px;
+}
