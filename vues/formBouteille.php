@@ -24,9 +24,11 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 <div class="container formBouteille">
 
     <!-- Recherche-->
-    <div id="recherche_bouteille" class="group boutonHaut">
-        <label class="icon_form"><i class="fas fa-search"></i></label>
-        <input type="text" name="recherche" placeholder="Recherche SAQ">
+    <div class="form">
+        <div id="recherche_bouteille" class="group">
+            <label class="icon_form"><i class="fas fa-search"></i></label>
+            <input type="text" name="recherche" placeholder="Recherche SAQ">
+        </div>
     </div>
     
     <ul class="listeAutoComplete"></ul>
@@ -38,10 +40,6 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <input type="hidden" name="id_cellier" value="<?= $idCellier ?>">
         <input type="hidden" name="url_img" value="<?= $urlImg ?>">
         <input type="hidden" name="url_saq" value="<?= $urlSaq ?>">
-
-        <div class="group ml">
-            <h3 class="vin_text"><i class="fas fa-wine-bottle"></i>&nbsp; Ajouter Bouteille</h3>
-        </div>
 
         <!-- Image de la bouteille -->
         <div class="group ml">
