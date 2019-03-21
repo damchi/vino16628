@@ -1,15 +1,11 @@
 .carte{
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr 2fr;
     grid-template-areas:    "carteTitre carteTitre"
                             "carteImage carteDescription"
                             "cartePied cartePied"
                             ;
     grid-gap: 20px;
-/*
-    font-size: 1.2rem;
-    line-height: .5rem;
-*/
     padding: 20px;
     border-bottom: 1px solid #701139;
 }
@@ -26,20 +22,21 @@
 
 .carte-image{
     grid-area: carteImage;
-    max-height: 150px;
+/*    max-height: 150px;*/
 }
 
 .carte-image>img{
-    max-height: 100px;
+    max-height: 150px;
 }
 
 .carte-description{
     grid-area: carteDescription;
+/*    min-width: 300px;*/
 }
 
 .carte-texte{
     color: black;
-    line-height:.40;
+/*    line-height:.40;*/
 }
 
 .carte-titre{

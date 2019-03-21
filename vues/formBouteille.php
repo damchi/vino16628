@@ -43,7 +43,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
         <!-- Image de la bouteille -->
         <div class="group ml">
-            <img src="<?= $urlImg ?>" class="image" alt="bouteille">
+            <img src="<?= $urlImg ?>" class="image" alt="bouteille" style="display: <?= $urlImg ? 'inline' : 'none' ?>">
         </div>
 
         <!-- Nom -->

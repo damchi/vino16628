@@ -17,11 +17,11 @@
 
         <div class="carte-description">
             <!-- Texte -->
-            <p class="carte-texte">Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span></p>
-            <p class="carte-texte">Pays : <?php echo $bouteille['pays'] ?></p>
-            <p class="carte-texte">Type : <?php echo $bouteille['type'] ?></p>
-            <p class="carte-texte">Millesime : <?php echo $bouteille['millesime'] ?></p>
-            <p class="carte-texte"><a href="<?php echo $bouteille['url_saq'] ?>">Voir SAQ</a></p>
+            <div class="carte-texte">Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span></div>
+            <div class="carte-texte">Pays : <?php echo $bouteille['pays'] ?></div>
+            <div class="carte-texte">Type : <?php echo $bouteille['type'] ?></div>
+            <div class="carte-texte">Millesime : <?php echo $bouteille['millesime'] ?></div>
+            <div class="carte-texte"><a href="<?php echo $bouteille['url_saq'] ?>">Voir SAQ</a></div>
         </div>
 
         <!-- Carte image -->
