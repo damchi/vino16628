@@ -23,11 +23,9 @@
     <script src="./js/cellier.js"></script>
     <script src="./js/listeBouteilles.js"></script>
     <script src="./js/formBouteille.js"></script>
-
-    
-    
-    <?php include("menu_user.php"); ?>
 </head>
 
 <body>
+    <?php include("menu_user.php"); ?>
+    
     <main>
