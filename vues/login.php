@@ -18,8 +18,7 @@
         <input type="password" id="passwordLogin" name="password" placeholder="mot de passe">
     </div>
     <div class="group">
-        <label class="icon_form"></label>
-        <input type="submit" class="bt" id="btnLogin" name="btnLogin" value="Se connecter">
+        <input type="submit" class="btn" id="btnLogin" name="btnLogin" value="Se connecter">
     </div>
     <!--    <div class="" vertical layout>-->
 <!--        <div >-->
