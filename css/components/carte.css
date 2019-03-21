@@ -1,22 +1,26 @@
 .carte{
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr;
     grid-template-areas:   "carteTitre carteTitre"
-                            "carteDescription carteImage"
+                            "carteImage carteDescription"
                             "cartePied cartePied"
                             ;
     grid-gap: 20px;
-    border: 1px solid #701139;
-    box-shadow: 5px 10px 5px #888888;
     line-height:.5rem;
-    margin:20px;
     padding: 20px;
+/*    border-bottom: 1px solid #701139;*/
+}
+
+@media only screen and (min-width: 600px){
+    .carte{
+        border: 1px solid #701139;
+    }
 }
 
 .carte-image{
-    box-shadow: 5px 10px 5px #701139;
+/*    box-shadow: 5px 10px 5px #701139;*/
     grid-area: carteImage;
-    margin-top: -20px;
+/*    margin-top: -20px;*/
 
     max-height: 150px;
 }
@@ -26,10 +30,8 @@
 }
 
 .carte-description{
-    border: 2px solid black;
     grid-area: carteDescription;
-    padding-left: 20px;
-    margin-top: -20px;
+/*    margin-top: -20px;*/
 }
 
 .carte-texte{
@@ -38,7 +40,7 @@
 }
 
 .carte-titre{
-    margin-top:-20px;
+    margin-top:-1.33em;
     grid-area: carteTitre;
 }
 
@@ -46,4 +48,8 @@
     grid-area: cartePied;
     clear: both;
     text-align: center;
+    border-top: 1px solid #701139;
+    border-bottom: 1px solid #701139;
+    margin: 0 -20px;
+    padding: 10px;
 }

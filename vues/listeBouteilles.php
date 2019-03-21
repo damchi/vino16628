@@ -19,7 +19,7 @@
 
         <div class="carte-description">
             <!-- Icone -->
-            <h5><i class="fas fa-glass-cheers"></i> Vins</h5>
+<!--            <h5><i class="fas fa-glass-cheers"></i> Vins</h5>-->
 
             <!-- Texte -->
             <p class="carte-texte">Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span></p>
