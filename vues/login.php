@@ -29,8 +29,8 @@
     ?>
 </div>
 
-<div class="boutonSolo">
-    <button>
+<div class="form">
+    <button class="group">
         <a href="index.php?requete=inscription">Pas encore inscrit ? </a>
     </button>
 </div>
