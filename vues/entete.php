@@ -27,5 +27,7 @@
     
     
     <?php include("menu_user.php"); ?>
+</head>
 
-<main>
+<body>
+    <main>
