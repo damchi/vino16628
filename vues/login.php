@@ -7,7 +7,7 @@
  */
 
 ?>
-<div class="formlogin">
+<div class="formLogin">
     <form class="form" method="POST" action="index.php?requete=logedin">
         <div class="group">
             <label class="icon_form"><i class="fas fa-user"></i></label>
@@ -18,7 +18,7 @@
             <input type="password" id="passwordLogin" name="password" placeholder="mot de passe">
         </div>
         <div class="group">
-            <input type="submit" class="btn" id="btnLogin" name="btnLogin" value="Se connecter">
+            <input type="submit" id="btnLogin" name="btnLogin" value="Se connecter">
         </div>
         <!--    <div class="" vertical layout>-->
     <!--        <div >-->
@@ -38,8 +38,8 @@
         </div>
     </form>
 
-    <div>
-    <a href="index.php?requete=inscription">Pas encore inscrit ? </a>
-    </div>
+    <button>
+        <a href="index.php?requete=inscription">Pas encore inscrit ? </a>
+    </button>
 
 </div>

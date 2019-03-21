@@ -4,7 +4,7 @@
     width: 35px;
     background-color: #701139;
     padding: 8px 0px 8px 15px;
-    margin-left: 15px;
+
     -webkit-border-radius: 4px 0px 0px 4px;
     -moz-border-radius: 4px 0px 0px 4px;
     border-radius: 4px 0px 0px 4px;
@@ -37,11 +37,8 @@ input[type=password]{
 
 .form{
     grid-area: form;
-    padding:20px;
     margin: 0;
-    font-size: 1.2rem;
     max-width: 600px;
-    background-color: whitesmoke;
 }
 
 .group{
