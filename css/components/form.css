@@ -1,6 +1,7 @@
-form{
+form, .form{
     max-width: 600px;
-    padding: 20px;
+    padding: 10px;
+    margin: auto;
 }
 
 .group{
@@ -9,13 +10,13 @@ form{
 }
 
 .group:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .icon_form{
     display: inline-block;
     background-color: #701139;
-    padding: 15px;
+    padding: 10px;
     width: 25px;
     border-radius: 8px 0px 0px 8px;
     color: white;
@@ -26,7 +27,7 @@ form{
 
 input, select, textarea{
     flex-grow: 1;
-    padding: 15px;
+    padding: 10px;
     border-radius: 0px 8px 8px 0px;
     background-color: #fff;
     box-shadow: 1px 2px 5px rgba(0,0,0,.09);

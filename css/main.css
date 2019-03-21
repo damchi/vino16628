@@ -10,7 +10,7 @@
 @import url("components/typographie.css");
 /*@import url("components/formBouteille.css");*/
 @import url("components/form.css");
-@import url("components/formLogin.css");
+/*@import url("components/formLogin.css");*/
 
 body{
     display: flex;
@@ -26,5 +26,5 @@ main{
 }
 
 .ml {
-    margin-left: 20px;
+    margin-left: 10px;
 }
