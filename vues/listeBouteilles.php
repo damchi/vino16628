@@ -1,5 +1,5 @@
 <!-- Bouton Ajouter une bouteille -->
-<div class="boutonHaut">
+<div class="boutonSolo boutonHaut">
     <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
 </div>
 
