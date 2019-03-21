@@ -13,11 +13,14 @@
 
 button, input[type=submit]{
     color: white;
-    padding: 10px 15px;
-    border-radius: 10px;
+    text-align: center;
+    padding: 15px 15px;
+    border-radius: 8px;
     font-weight: bold;
     background: #701139;
     transition: background 0.3s ease;
+    min-width: 60px;
+    text-align: center;
 }
 
 button:hover {
@@ -30,4 +33,15 @@ button a{
     text-decoration: none;
     background: #701139;
     color:white;
+}
+
+.boutonSolo {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+@media only screen and (max-width: 599px){
+    .boutonSolo button{
+        width: 100%;
+    }
 }
