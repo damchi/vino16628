@@ -19,7 +19,7 @@
     </div>
     <div class="group">
         <label class="icon_form"></label>
-        <input type="submit" id="btnLogin" name="btnLogin" value="Se connecter">
+        <input type="submit" class="bt" id="btnLogin" name="btnLogin" value="Se connecter">
     </div>
     <!--    <div class="" vertical layout>-->
 <!--        <div >-->
