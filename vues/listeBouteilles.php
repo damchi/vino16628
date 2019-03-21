@@ -1,4 +1,4 @@
-<div >
+<div class="options carte-pied">
     <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>">Ajouter une bouteille</a></button>
 </div>
 
