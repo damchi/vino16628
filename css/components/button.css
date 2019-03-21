@@ -1,17 +1,17 @@
-.btn-medium {
+.bouton-medium {
     color: white;
     padding: 10px 15px;
     border-radius: 50px;
     font-weight: lighter;
     opacity: 0.6;
 }
-.btn-medium:hover {
+.bouton-medium:hover {
     opacity: 1;
     text-decoration: none;
-    color: #999999;
+    color: #701139;
 }
 
-#btn{
+button{
     color: white;
     padding: 10px 15px;
     border-radius: 10px;
@@ -20,9 +20,14 @@
     transition: background 0.3s ease;
 }
 
-#btn:hover {
+button:hover {
     opacity: 1;;
     text-decoration: none;
     color: white;
 }
 
+button a{
+    text-decoration: none;
+    background: #701139;
+    color:white;
+}
