@@ -26,7 +26,22 @@
 
         <!-- Carte image -->
         <div class="carte-image">
-            <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
+            <?php
+
+            if ($bouteille['url_img'] == null){
+                ?>
+                <img src="./images/bouteille_vin.png" alt="Image de la bouteille">
+
+                <?php
+            }
+            else{
+                ?>
+                <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
+
+                <?php
+
+            }
+            ?>
         </div>
 
         <!-- Bouton -->
