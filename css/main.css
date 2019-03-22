@@ -12,6 +12,10 @@
 @import url("components/form.css");
 /*@import url("components/formLogin.css");*/
 
+*{
+    box-sizing: border-box;    
+}
+
 body{
     display: flex;
     flex-direction: column;
