@@ -24,7 +24,7 @@
 
          <div class="cellierId" data-id="<?= $cellier['id_cellier'] ?>">
              <a href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?> </a>
-             <button class="modifierCellier">  Modifier </button>
+             <button class="modifierCellier" id="modifCellier">  Modifier </button>
              <button class="supprimerCellier">  Supprimer</button>
          </div>
     <?php

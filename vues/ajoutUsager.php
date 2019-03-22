@@ -38,4 +38,13 @@
             <input type="submit" id="ajouterUsager" name="ajouterUsager" value="S'inscrire">
         </div>
     </form>
+    <div id="errorLogin">
+        <?php
+//        var_dump($dataMessage);
+        if (isset($dataMessage)){
+            echo "<div id='message'>". $dataMessage."</div>";
+        }
+        ?>
+    </div>
+
 </div>
