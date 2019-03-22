@@ -7,18 +7,18 @@
  */
 ?>
 <div class="ListeCelliers" >
-    <button name="afficheFormCellier">Ajouter un cellier</button>
+    <button name="afficheFormCellier"><i class="fas fa-plus">Ajouter un cellier</i></button>
 
     <!--<div id="divCellier">
         <input type="text" required name="nomCellier" placeholder="Nouveau Cellier">
         <i class="fas fa-plus"></i>
         <div id="errorCellier"></div>
         <input type="hidden" name="idUsagerCellier" value="<?= $_SESSION['user_id']?>">-->
-    </div>
+<!--    </div>-->
+
     <?php
     foreach ($data as $cle => $cellier) {
     ?>
-
         <div class="listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
             <a href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>' class="nomCellier">  <?= $cellier['nom']; ?> </a>
             <i class="btnCellier far fa-edit"></i>
