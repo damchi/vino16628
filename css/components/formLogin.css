@@ -1,0 +1,11 @@
+.formLogin{
+    padding: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+    .formLogin{
+        margin: auto;
+        max-width: 600px;
+        padding: 10px;
+    }
+}

@@ -6,33 +6,36 @@
  * Time: 10:28
  */
 ?>
-<div class="ajouter">
-<!---->
-<!--    <div class="" vertical layout>-->
-<!--            <div >-->
-<!--                <p>Nom : <input type="text" name="nom"></p>-->
-<!--                <p>Prénom : <input type="text" name="prenom"></p>-->
-<!--                <p>Mail : <input type="email" name="mail" ></p>-->
-<!--                <p>Mot de passe : <input type="password" name="mdp"></p>-->
-<!--                <p>Nom usager : <input  type="text" name="pseudo"></p>-->
-<!--            </div>-->
-<!--            <button name="ajouterUsager">S'inscrire</button>-->
-<!--        </div>-->
-<!--    </div>-->
 
-    <form method="post" action="index.php?requete=ajoutUsager">
-        <div>
-            <p>Nom : <input type="text" id="nomInscription" name="nom"></p>
-            <div id="errorNom"></div>
-            <p>Prénom : <input type="text" id="prenomInscription" name="prenom"></p>
-            <div id="errorPrenom"></div>
-            <p>Mail : <input type="email" id="emailInscription" name="mail" ></p>
-            <div id="errorMail"></div>
-            <p>Mot de passe : <input type="password" id="passInscription" name="password"></p>
-            <div id="errorPass"></div>
-            <p>Nom usager : <input  type="text" id="pseudoInscription" name="pseudo"></p>
-            <div id="errorPseudo"></div>
+<div class ="formLogin">
+    <form class="form" method="post" action="index.php?requete=ajoutUsager">
+        <div class="group">
+            <label class="icon_form"><i class="fas fa-user"></i></label>
+            <input type="text" id="prenomInscription" name="prenom" placeholder="Prenom">
         </div>
-        <input type="submit" id="ajouterUsager" name="ajouterUsager" value="S'inscrire">
+        <div id="errorPrenom"></div>
+        <div class="group">
+            <label class="icon_form"><i class="fas fa-user"></i></label>
+            <input type="text" id="nomInscription" name="nom" placeholder="Nom">
+        </div>
+        <div id="errorNom"></div>
+        <div class="group">
+            <label class="icon_form"><i class="far fa-envelope"></i></label>
+            <input type="email" id="emailInscription" name="mail" placeholder="Mail">
+        </div>
+        <div id="errorMail"></div>
+        <div class="group">
+            <label class="icon_form"><i class="fas fa-lock"></i></label>
+            <input type="password" id="passInscription" name="password" placeholder="Mot de passe">
+        </div>
+        <div id="errorPass"></div>
+        <div class="group">
+            <label class="icon_form"><i class="fas fa-signature"></i></label>
+            <input  type="text" id="pseudoInscription" name="pseudo" placeholder="Nom usager">
+        </div>
+        <div id="errorPseudo"></div>
+        <div class="group">
+            <input type="submit" id="ajouterUsager" name="ajouterUsager" value="S'inscrire">
+        </div>
     </form>
 </div>

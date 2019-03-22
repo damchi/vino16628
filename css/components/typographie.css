@@ -20,17 +20,16 @@ h1, h2, h3 {
     font-family: "Montserrat", "sans-serif";
 }
 
-@media (max-width:499px){
-
-
+@media (max-width:600px){
+    body{
+        font-size:1rem;
+    }
 }
 
-@media(min-width:500px) and(max-width:1000px){
 
-
-}
-
-@media(min-width:1001px){
-
+@media(min-width:601px){
+    body{
+        font-size:1rem;
+    }
 
 }

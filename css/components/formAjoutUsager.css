@@ -1,0 +1,11 @@
+.formAjoutUsager{
+    padding: 20px;
+}
+
+@media only screen and (min-width: 600px) {
+    .formAjoutUsager{
+        margin: auto;
+        max-width: 600px;
+        padding: 20px;
+    }
+}

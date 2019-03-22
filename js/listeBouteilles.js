@@ -12,7 +12,7 @@ window.addEventListener('load', () => {
     function ajusterDivBouteilleSelonQuantite(divBouteille) {
         let btnSupprimer = divBouteille.querySelector('.btnSupprimer');
         let quantite = divBouteille.querySelector('.quantite').innerHTML;
-        divBouteille.style.border = (quantite > 0) ? "1px solid black" : "2px solid red";
+        divBouteille.querySelector('.carte-image').style.border = (quantite > 0) ? "" : "2px solid red";
         btnSupprimer.style.display = (quantite > 0) ? 'none' : 'inline';
     }
     

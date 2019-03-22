@@ -1,7 +1,6 @@
 /* --- Components design --- */
 @import url("normalize.css");
 @import url("base_h5bp.css");
-@import url("components/entete.css");
 @import url("components/menu.css");
 @import url("components/celliers.css");
 @import url("components/cellier.css");
@@ -9,29 +8,28 @@
 @import url("components/pied.css");
 @import url("components/carte.css");
 @import url("components/typographie.css");
-@import url("components/formBouteille.css");
+/*@import url("components/formBouteille.css");*/
 @import url("components/form.css");
+/*@import url("components/formLogin.css");*/
+
+*{
+    box-sizing: border-box;    
+}
 
 body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-	margin: 0 20px;
 	color: darkgray;
-}
-
-header{
-	grid-area: entete;
+    width: 100%;
+    margin: 0;
 }
 
 main{
     flex-grow: 1;
+    width: 100%;
 }
 
-footer{
-	grid-area: pied;
-}
-
-.ml{
-	margin-left: 20px;
+.ml {
+    margin-left: 10px;
 }
