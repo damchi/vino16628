@@ -79,7 +79,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <!-- Type -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-id-card"></i></label>
-            <select class="select_form" name="type">
+            <select class="select_form" name="type" required>
                 <option selected disabled>Type</option>
                 <?php
                 foreach ($data['types'] as $t) {
