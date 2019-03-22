@@ -10,3 +10,16 @@
 
 const BaseURL = document.baseURI;
 
+window.addEventListener('load', () => {
+    let burger = document.querySelector('.icon');
+
+    burger.addEventListener('click', () => {
+          var x = document.getElementById("topnav");
+
+          if (x.className === "topnav") {
+              x.className += " responsive";
+          } else {
+                x.className = "topnav";
+          }
+    });    
+});

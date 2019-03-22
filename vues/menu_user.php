@@ -20,27 +20,14 @@
     <?php
     }
     else{
-//         var_dump($_SESSION['user_pseudo']);
     ?>
         <a href="?requete=accueil">Mes celliers<span class="sr-only">(current)</span></a>
-<!--                 <li>-->
-<!--                     <a href="?requete=ajouterNouvelleBouteilleCellier">Ajouter une bouteille au cellier</a>-->
-<!--                 </li>-->
         <a href="?requete=logout"> <i class="fas fa-sign-out-alt"></i> &nbsp; Déconnexion </a>
     <?php
     }
     ?>
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <a href="javascript:void(0);" class="icon">
         <i class="fas fa-bars"></i>
+        </a>
     </nav>
 </header>
-<script type="text/javascript">
-    function myFunction() {
-  var x = document.getElementById("topnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-</script>

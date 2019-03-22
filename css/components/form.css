@@ -32,5 +32,6 @@ input, select, textarea{
     background-color: #fff;
     box-shadow: 1px 2px 5px rgba(0,0,0,.09);
     border: solid 1px #cbc9c9;
+    outline: none;
 }
 

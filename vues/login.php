@@ -8,6 +8,7 @@
 
 ?>
 <form class="form" method="POST" action="index.php?requete=logedin">
+    
     <div class="group">
         <label class="icon_form"><i class="fas fa-user"></i></label>
         <input type="text" id="identifiantLogin" name="identifiant" placeholder="Nom utilisateur ou email">
