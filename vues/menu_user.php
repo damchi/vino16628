@@ -16,7 +16,7 @@
     <?php
     if(!isset($_SESSION['user_pseudo'])){
     ?>
-        <a href="?requete=login">Acceuil<span class="sr-only">(current)</span></a>
+        <a href="?requete=login">Accueil<span class="sr-only">(current)</span></a>
     <?php
     }
     else{
@@ -26,7 +26,7 @@
 <!--                 <li>-->
 <!--                     <a href="?requete=ajouterNouvelleBouteilleCellier">Ajouter une bouteille au cellier</a>-->
 <!--                 </li>-->
-        <a href="?requete=logout">Se deconnecter</a>
+        <a href="?requete=logout">Se déconnecter</a>
     <?php
     }
     ?>
