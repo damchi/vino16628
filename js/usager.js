@@ -69,7 +69,7 @@
         };
 
         obj.estPseudo = (unPseudo)=>{
-            let regexPseudo = /^\w+$$/i;
+            let regexPseudo = /^[a-z0-9]+$/i;
             let outputPseudo = "";
             let errorPseudo = document.getElementById('errorPseudo');
 
@@ -84,6 +84,7 @@
                 outputPseudo +=" le pseudo n'est pas valide";
                 errorPseudo.innerHTML = outputPseudo;
                 errorPseudo.style.color ='red';
+                return false;
             }
         };
 
@@ -126,7 +127,7 @@ window.addEventListener('load',()=>{
                 validationFormulaire.estValide(nomInscription) == false ||
                 validationFormulaire.estValide(prenomInscription) == false ||
                 validationFormulaire.estValide(pseudoInscription) == false ||
-                validationFormulaire.estPass(passInscription) == false ){
+                validationFormulaire.estPass(passInscription) == false || validationFormulaire.estPseudo(pseudoInscription) == false){
                 event.preventDefault();
             }
             // validationFormulaire.estValide(emailInscription);
@@ -139,7 +140,7 @@ window.addEventListener('load',()=>{
             validationFormulaire.estPrenom(prenomInscription);
 
             // validationFormulaire.estValide(pseudoInscription);
-            validationFormulaire.estPseudo(pseudoInscription);
+            // validationFormulaire.estPseudo(pseudoInscription);
             validationFormulaire.estPass(passInscription);
         });
     }

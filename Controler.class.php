@@ -86,14 +86,15 @@ class Controler
                 if (isset($_POST['ajouterUsager'])){
                      if (trim($_POST['nom']) != "" || trim($_POST['prenom'])||trim($_POST['mail']) != "" || trim($_POST['password']) != "" || trim($_POST['pseudo']) != "") {
                          $this->ajoutUsager($_POST["nom"], $_POST["prenom"], $_POST['mail'], $_POST['password'], $_POST['pseudo']);
-                         $this->formlogin();
+
+//                         $this->formlogin();
                      }
                      else{
                          $this->formInscription();
                      }
                 }
                 else{
-                    header("Location:index.php?requete=login");
+                    header("Location:index.php?requete=inscription");
                 }
 //					$this->ajoutUsager();
                 break;
@@ -112,7 +113,6 @@ class Controler
                             $errorMessage = 'Identifiant ou mot de passe incorrect';
                             $this->formlogin($errorMessage);
                         }
-
                     }
                 }
                 else{
@@ -167,7 +167,12 @@ class Controler
                 }
                 break;
             default:
-                $this->formlogin();
+                if (isset($_SESSION['user_pseudo'])) {
+                    $this->accueil();
+                }
+                else{
+                    $this->formlogin();
+                }
                 break;
         }
     }
@@ -311,7 +316,8 @@ class Controler
         }
     }
 
-    private function formInscription(){
+    private function formInscription($errorMessage=""){
+        $dataMessage = $errorMessage;
         include ('vues/entete.php');
         include ('vues/ajoutUsager.php');
         include ('vues/pied.php');
@@ -331,7 +337,15 @@ class Controler
 //            }
 
         $usager = new Usager();
-        $usager->ajoutNouveauUsager($nom,$prenom,$mail,$password,$pseudo);
+        if ($usager->ajoutNouveauUsager($nom,$prenom,$mail,$password,$pseudo) == true){
+            $this->formlogin();
+        }
+        else{
+            $errorMessage =" l'identifiant ou pseudi existe déjà";
+
+            $this->formInscription($errorMessage);
+        }
+//        var_dump($usager->ajoutNouveauUsager($nom,$prenom,$mail,$password,$pseudo));
 
 
 
@@ -374,12 +388,23 @@ class Controler
         }
     }
     private function supprimeCellier(){
-        $body = json_decode(file_get_contents('php://input'));
-        if(!empty($body)){
-            $cellier = new Cellier();
-            $resultat = $cellier->supprimeCellierUsager($body);
-            echo json_encode($resultat);
-        }
+        $usr = new Usager();
+
+
+//        if ($usr->estProprietaireCellier($_SESSION['user_pseudo'], $idCellier)) {
+            $body = json_decode(file_get_contents('php://input'));
+            if (!empty($body)) {
+                if ($usr->estProprietaireCellier($_SESSION['user_pseudo'], $body->idCellier)) {
+
+                    $cellier = new Cellier();
+                    $resultat = $cellier->supprimeCellierUsager($body);
+                    echo json_encode($resultat);
+                }
+            }
+//        }
+//        else{
+//            $this->formlogin();
+//        }
     }
 }
 ?>

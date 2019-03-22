@@ -212,18 +212,18 @@ class Bouteille extends Modele {
         return $res->fetch_assoc();
 	}
     
-	/**
-	 * Supprime une bouteille.
-	 * 
-	 * @param int idBouteille
-	 * 
-	 * @throws Exception Erreur de requête sur la base de données
-     *
-	 * @return Boolean true si l'usager est le propriétaire, false sinon
-	 */
-	public function estProprietaireCellier($pseudo, $idBouteille) {
-        return true;
-    }
+//	/**
+//	 * Supprime une bouteille.
+//	 *
+//	 * @param int idBouteille
+//	 *
+//	 * @throws Exception Erreur de requête sur la base de données
+//     *
+//	 * @return Boolean true si l'usager est le propriétaire, false sinon
+//	 */
+//	public function estProprietaireCellier($pseudo, $idBouteille) {
+//        return true;
+//    }
 
     /**
      * @param $data
