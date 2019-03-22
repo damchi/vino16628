@@ -19,11 +19,12 @@
     foreach ($data as $cle => $cellier) {
     ?>
 
-        <div class="listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
-            <a href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>' class="nomCellier">  <?= $cellier['nom']; ?> </a>
-            <i class="btnCellier far fa-edit"></i>
-            <i class="fas fa-trash-alt btnCellier"></i>
-        </div>
+         <div class="cellierId" data-id="<?= $cellier['id_cellier'] ?>">
+             <a href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?> </a>
+             <button class="modifierCellier" id="modifCellier">  Modifier </button>
+             <button class="supprimerCellier">  Supprimer</button>
+         </div>
+
     <?php
     }
     ?>

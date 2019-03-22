@@ -59,6 +59,8 @@ class Usager extends Modele
      * @return mixed
      */
     public function ajoutNouveauUsager($nom,$prenom,$mail,$password,$pseudo){
+        $retour = new stdClass();
+//        $retour -> succes = false;
 //        if ($this->existUsager($data->mail,$data->pseudo) == false){
         if ($this->existUsager($mail,$pseudo) == false){
                 //            $mdp = password_hash($data->mdp, PASSWORD_DEFAULT);
@@ -68,8 +70,18 @@ class Usager extends Modele
 //            $stmt->bind_param("ssssis", $data->nom, $data->prenom, $data->mail,$mdp,$admin,$data->pseudo);
                 $stmt->bind_param("ssssis", $nom, $prenom, $mail,$mdp,$admin,$pseudo);
 //                $stmt->execute();
+            $retour -> succes = true;
+//            var_dump('insert');
+//            var_dump($retour -> succes );
+            $stmt->execute();
+
         }
-        return $stmt->execute();
+        else{
+//            var_dump('eeee');
+            $retour -> succes = false;
+        }
+        return $retour-> succes;
+
     }
 
 
@@ -87,7 +99,7 @@ class Usager extends Modele
 //        var_dump($identifiant);
 //        var_dump($password);
 
-            $error ='';
+//            $error ='';
                 $identifiantEscape = $this->_db->real_escape_string($identifiant);
 //                $identifiant = $this->_db->real_escape_string($data->identifiant);
 
