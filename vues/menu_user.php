@@ -26,7 +26,7 @@
 <!--                 <li>-->
 <!--                     <a href="?requete=ajouterNouvelleBouteilleCellier">Ajouter une bouteille au cellier</a>-->
 <!--                 </li>-->
-        <a href="?requete=logout">Se déconnecter</a>
+        <a href="?requete=logout"> <i class="fas fa-sign-out-alt"></i> &nbsp; Déconnexion </a>
     <?php
     }
     ?>
