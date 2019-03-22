@@ -121,7 +121,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <!-- Notes -->
         <div class="group">
             <label class="icon_form"><i class="fa fa-comment"></i></label>
-            <input type="text" class="input" placeholder="Notes" id="notes" name="notes"><?= $notes ?>
+            <input type="text" class="input" placeholder="Notes" id="notes" name="notes" value="<?= $notes ?>">
         </div>
 
         <!-- Bouton enregistrer -->
