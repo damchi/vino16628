@@ -20,8 +20,6 @@ class Bouteille extends Modele {
 	 * @return int Id de la nouvelle bouteille
 	 */
 	public function ajouterBouteilleCellier($data) {
-        var_dump($data);
-        die;
         $sql = "
             INSERT INTO vino__bouteille (id_cellier, nom, image, code_saq,
             pays, description, url_saq, url_img, format, date_achat,
