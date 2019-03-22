@@ -6,7 +6,7 @@
 
 window.addEventListener('load', () => {
     /*
-        Encadre la div bouteille en rouge et rend le bouton supprimer si la quantité de la bouteille est zéro.
+        Encadre l'image de la bouteille en rouge et rend le bouton supprimer si la quantité de la bouteille est zéro.
     */
     
     function ajusterDivBouteilleSelonQuantite(divBouteille) {
