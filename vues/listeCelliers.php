@@ -7,26 +7,23 @@
  */
 ?>
 <div class="ListeCelliers" >
-
-    
     <button name="afficheFormCellier">Ajouter un cellier</button>
 
-    <div id="formCellier">
-        <p> Nom du cellier : <input type="text" required name="nomCellier"></p>
+    <div id="divCellier">
+        <input type="text" required name="nomCellier" placeholder="Nouveau Cellier">
         <div id="errorCellier"></div>
-        <input type="hidden" name="idUsagerCellier" value="<?= $_SESSION['user_id']?>">
         <button name="ajouterCellier">Enregistrer</button>
+        <input type="hidden" name="idUsagerCellier" value="<?= $_SESSION['user_id']?>">
     </div>
-
     <?php
     foreach ($data as $cle => $cellier) {
     ?>
 
-         <div class="cellierId" data-id="<?= $cellier['id_cellier'] ?>">
-             <a href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?> </a>
-             <button class="btnCellier">Modifier</button>
-             <button class="btnCellier">Supprimer</button>
-         </div>
+        <div class="listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
+            <a href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>' class="nomCellier">  <?= $cellier['nom']; ?> </a>
+            <i class="btnCellier far fa-edit"></i>
+            <i class="fas fa-trash-alt btnCellier"></i>
+        </div>
     <?php
     }
     ?>

@@ -8,7 +8,9 @@
 ?>
 <header class="entete">
     <div class="enteteImage">
-        <img src="images/bottle-50573_1280.jpg" alt="enteteImage">
+        <img src="images/logo.png" id="logo" alt="Logo Vino"
+        title="Logo Vino">
+        <!--<img src="images/bottle-50573_1280.jpg" alt="enteteImage">-->
     </div>
     <nav class="topnav" id="topnav">
     <?php
