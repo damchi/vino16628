@@ -11,7 +11,7 @@
 const BaseURL = document.baseURI;
 
 window.addEventListener('load', () => {
-    let burger = document.querySelector('.icon');
+    let burger = document.querySelector('.burger');
 
     burger.addEventListener('click', () => {
           var x = document.getElementById("topnav");

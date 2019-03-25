@@ -138,16 +138,7 @@ class Controler
                 }
                 break;
             case 'logout':
-                $_SESSION = array();
-
-                // Delete la session en lui assignant un tableau vide et le cookie de session en créant
-                // un nouveau cookie avec la date d'expiration dans le passé
-                if(isset($_COOKIE[session_name()]))
-                {
-                    setcookie(session_name(), '', time() - 3600);
-                }
-                session_destroy();
-                header('location:index.php?requete=login');
+                $this->fermerSession();
                 break;
             case 'ajoutCellier':
                 if (isset($_SESSION['user_pseudo'])) {
@@ -173,6 +164,22 @@ class Controler
                     header("Location:index.php?requete=login");
                 }
                 break;
+            case 'adminAccueil':
+                if (isset($_SESSION['admin'])) {
+                    $this->adminAccueil();
+                }
+                else{
+                    $this->fermerSession();
+                }
+                break;
+            case 'gererBouteilles':
+                if (isset($_SESSION['admin'])) {
+                    $this->gererBouteilles();
+                }
+                else{
+                    $this->fermerSession();
+                }
+                break;
             default:
                 if (isset($_SESSION['user_pseudo'])) {
                     $this->accueil();
@@ -193,6 +200,7 @@ class Controler
         include("vues/pied.php");
 
     }
+    
     private function adminAccueil()
     {
 
@@ -387,6 +395,20 @@ class Controler
 
     }
 
+    private function fermerSession() {
+        $_SESSION = array();
+
+        // Delete la session en lui assignant un tableau vide et le cookie de session en créant
+        // un nouveau cookie avec la date d'expiration dans le passé
+        if(isset($_COOKIE[session_name()]))
+        {
+            setcookie(session_name(), '', time() - 3600);
+        }
+        
+        session_destroy();
+        header('location:index.php?requete=login');
+    }
+    
     private function ajoutCellier(){
         $body = json_decode(file_get_contents('php://input'));
         if(!empty($body)){
@@ -423,6 +445,12 @@ class Controler
 //        else{
 //            $this->formlogin();
 //        }
+    }
+    
+    private function gererBouteilles(){
+        include("vues/entete.php");
+        include("vues/gererBouteilles.php");
+        include("vues/pied.php");        
     }
 }
 ?>

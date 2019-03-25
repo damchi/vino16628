@@ -27,7 +27,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
     <div class="form">
         <div id="recherche_bouteille" class="group">
             <label class="icon_form"><i class="fas fa-search"></i></label>
-            <input type="text" name="recherche" placeholder="Recherche SAQ">
+            <input type="text" name="recherche" placeholder="Recherche SAQ" autocomplete="off">
         </div>
     </div>
     
