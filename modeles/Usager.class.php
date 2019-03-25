@@ -86,39 +86,39 @@ class Usager extends Modele
 
 
     /**
-     * @param $data
-     * @return bool
-     */
-//    public function login($data){
-    /**
      * @param $identifiant
      * @param $password
-     * @return bool
+     * @return stdClass
      */
     public function login($identifiant,$password){
-//        var_dump($identifiant);
-//        var_dump($password);
+        $retour = new stdClass();
+        $retour -> admin = false;
+        $retour -> succes = false;
 
-//            $error ='';
-                $identifiantEscape = $this->_db->real_escape_string($identifiant);
-//                $identifiant = $this->_db->real_escape_string($data->identifiant);
 
-            $stmt = "SELECT * FROM " . self::TABLE. " WHERE mail = '".$identifiantEscape ."' OR pseudo ='" . $identifiantEscape ."'";
-//            var_dump($stmt);
-            $stmt_result = $this->_db->query($stmt);
-//            var_dump($stmt_result->num_rows);
+        $identifiantEscape = $this->_db->real_escape_string($identifiant);
 
-            if ($stmt_result->num_rows == 1) {
-                $row_data = $stmt_result->fetch_assoc();
-//                var_dump($row_data);
-                if (password_verify($password, $row_data["mdp"])) {
-//                if (password_verify($data->mdp, $row_data["mdp"])) {
-                    $_SESSION['user_pseudo'] = $row_data["pseudo"];
-                    $_SESSION['user_id'] = $row_data["id_usager"];
+        $stmt = "SELECT * FROM " . self::TABLE. " WHERE mail = '".$identifiantEscape ."' OR pseudo ='" . $identifiantEscape ."'";
+        $stmt_result = $this->_db->query($stmt);
 
-                    return true;
+        if ($stmt_result->num_rows == 1) {
+            $row_data = $stmt_result->fetch_assoc();
+            if (password_verify($password, $row_data["mdp"])) {
+                $_SESSION['user_pseudo'] = $row_data["pseudo"];
+                $_SESSION['user_id'] = $row_data["id_usager"];
+                $retour -> succes = true;
+//                var_dump($row_data["admin"]);
+                if ($row_data["admin"] == 1){
+                    $_SESSION['admin'] = $row_data["admin"];
+                    $retour -> admin = true;
+                }
+                else{
+                    $retour -> admin = false;
                 }
             }
+        }
+
+        return $retour;
 
     }
 
