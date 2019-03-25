@@ -1,4 +1,3 @@
-/* --- Components design --- */
 @import url("normalize.css");
 @import url("base_h5bp.css");
 @import url("components/menu.css");
@@ -8,9 +7,7 @@
 @import url("components/pied.css");
 @import url("components/carte.css");
 @import url("components/typographie.css");
-/*@import url("components/formBouteille.css");*/
 @import url("components/form.css");
-/*@import url("components/formLogin.css");*/
 
 *{
     box-sizing: border-box;    
