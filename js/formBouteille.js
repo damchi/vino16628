@@ -16,7 +16,7 @@ window.addEventListener('load', function() {
     let form = document.querySelector(".formBouteille form");
 
     if (form) {
-        var img = form.querySelector(".formBouteille form img");
+        var img = form.querySelector("img");
         
         var champs = {
             "id_cellier": form.querySelector("[name='id_cellier']"),
