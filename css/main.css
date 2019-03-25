@@ -17,7 +17,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-	color: darkgray;
+	color: #2d2c2c;
     width: 100%;
     margin: 0;
 }

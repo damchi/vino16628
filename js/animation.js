@@ -15,7 +15,9 @@ function animationLogin() {
 	  var elementACacher = this.previousElementSibling;
 	  console.log(elementACacher);
 	}
-	elementAMontrer.style.maxHeight = elementAMontrer.scrollHeight + "px";
-	elementACacher.style.maxHeight = 0;
+	//elementAMontrer.style.maxHeight = elementAMontrer.scrollHeight + "px";
+	//elementACacher.style.maxHeight = 0;
+	elementACacher.style.display = "none";
+	elementAMontrer.style.display = "block";
   }
 ))}
