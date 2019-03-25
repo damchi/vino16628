@@ -103,11 +103,20 @@ class Controler
                 break;
             case 'logedin':
                 if (isset($_POST['btnLogin'])){
-                    if (trim($_POST['identifiant']) != "" || trim($_POST['password'])){
-                        $this->connexion($_POST['identifiant'],$_POST['password']);
-                        if (isset($_SESSION['user_pseudo'])){
+                    if (trim($_POST['identifiant']) != "" || trim($_POST['password'])) {
+                        $connexion = $this->connexion($_POST['identifiant'], $_POST['password']);
 
-                            $this->accueil();
+                        if ($connexion->succes === true) {
+                            if (isset($_SESSION['user_pseudo'])) {
+                                if ($connexion->admin == false){
+                                    $this->accueil();
+                                }
+                                else{
+                                    $this->adminAccueil();
+                                }
+                            } else {
+                                header("Location:index.php?requete=login");
+                            }
                         }
                         else{
                             $errorMessage = 'Identifiant ou mot de passe incorrect';
@@ -118,8 +127,6 @@ class Controler
                 else{
                     header("Location:index.php?requete=login");
                 }
-
-//
                 break;
             case 'accueil':
                 if (isset($_SESSION['user_pseudo'])){
@@ -183,6 +190,14 @@ class Controler
         $data = $cellier->getUsagerCellier($_SESSION['user_id']);
         include("vues/entete.php");
         include("vues/listeCelliers.php");
+        include("vues/pied.php");
+
+    }
+    private function adminAccueil()
+    {
+
+        include("vues/entete.php");
+        include("vues/admin.php");
         include("vues/pied.php");
 
     }
@@ -367,7 +382,9 @@ class Controler
 //            }
 
         $usager = new Usager();
-        $usager->login($identifiant,$mdp);
+        return $usager->login($identifiant,$mdp);
+//        var_dump($usager->login($identifiant,$mdp)->succes);
+
     }
 
     private function ajoutCellier(){
@@ -387,6 +404,7 @@ class Controler
             echo json_encode($resultat);
         }
     }
+
     private function supprimeCellier(){
         $usr = new Usager();
 
