@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-areas:    "carteTitre carteTitre"
-                            "carteImage carteDescription"
+                            "carteImage carteInformation"
                             "cartePied cartePied"
                             ;
     grid-gap: 10px;
@@ -20,23 +20,60 @@
     }
 }
 
-.carte-image{
-    grid-area: carteImage;
-/*    max-height: 150px;*/
-}
+/*Element de la carte*/
 
 .carte-image>img{
     max-height: 150px;
+    grid-area: carteImage;
 }
 
-.carte-description{
-    grid-area: carteDescription;
+.carte-information{
+    grid-area: carteInformation;
 /*    min-width: 300px;*/
 }
 
 .carte-texte{
     color: black;
 /*    line-height:.40;*/
+}
+
+
+.carte-code_saq{
+    grid-area: code_saq;
+}
+
+
+.carte-quantite{
+    grid-area: quantite;
+}
+
+.carte-format{
+    grid-area: format;
+}
+
+
+.carte-pays{
+    grid-area: pays;
+}
+
+.carte-millesime{
+   grid-area: millesime
+}
+
+.carte-type{
+grid-area: type;
+}
+
+.carte-date_achat{
+    grid-area: date_achat;
+}
+
+.carte-garde_jusqua{
+    grid-area: garde_jusqua;
+}
+
+.carte-notes{
+    grid-area: notes;
 }
 
 .carte-titre{
