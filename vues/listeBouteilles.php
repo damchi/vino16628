@@ -3,6 +3,55 @@
     <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
 </div>
 
+
+<div class="listeBouteilletab">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>SAQ</th>
+                <th>Type</th>
+                <th>Pays</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Format</th>
+                <th>Date d'achat</th>
+                <th>Garder Jusqu'à</th>
+                <th>Notes</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($data['listeBouteilles'] as $cle => $bouteille) {
+        ?>
+        <tr>
+            <td><?php echo $bouteille['nom'] ?></td>
+            <td><a href="<?php echo $bouteille['url_saq']?>">Saq</a></td>
+            <td><?php echo $bouteille['type'] ?></td>
+            <td><?php echo $bouteille['pays'] ?></td>
+            <td><?php echo $bouteille['prix'] ?></td>
+            <td><?php echo $bouteille['quantite'] ?></td>
+            <td><?php echo $bouteille['format'] ?></td>
+            <td><?php echo $bouteille['date_achat'] ?></td>
+            <td><?php echo $bouteille['garde_jusqua'] ?></td>
+            <td><?php echo $bouteille['notes'] ?></td>
+            <td>
+                <button class='btnAjouter'><i class="fas fa-plus"></i></button>
+                <button class='btnBoire'><i class="fas fa-minus"></i></button>
+                <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>"><i class="fas fa-edit"></i></a></button>
+                <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button>
+            </td>
+        </tr>
+
+		<?php
+	    }
+	    ?>
+        </tbody>
+    </table>
+</div>
+
 <div class="listeBouteille">    
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
