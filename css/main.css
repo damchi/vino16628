@@ -8,6 +8,7 @@
 @import url("components/carte.css");
 @import url("components/typographie.css");
 @import url("components/form.css");
+@import url("components/table.css");
 
 *{
     box-sizing: border-box;    
@@ -17,7 +18,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-	color: darkgray;
+	color: #2d2c2c;
     width: 100%;
     margin: 0;
 }

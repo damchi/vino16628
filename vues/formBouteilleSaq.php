@@ -1,43 +1,21 @@
 <!--
-        @abbr: Nouvelle interface du formulaire Ajout de bouteille
-        Modifier par Max Germain
-        date: 13-03-2019
+    Formulaire de modification d'une bouteille du catalogue SAQ
 -->
 <?php
 $codeSaq = isset($data['bouteille']['code_saq']) ? $data['bouteille']['code_saq'] : '';
-$dateAchat = isset($data['bouteille']['date_achat']) ? $data['bouteille']['date_achat'] : '';
 $format = isset($data['bouteille']['format']) ? $data['bouteille']['format'] : '';
-$gardeJusqua = isset($data['bouteille']['garde_jusqua']) ? $data['bouteille']['garde_jusqua'] : '';
-$idBouteille = isset($data['bouteille']['id_bouteille']) ? $data['bouteille']['id_bouteille'] : '';
-$idCellier = isset($data['bouteille']['id_cellier']) ? $data['bouteille']['id_cellier'] : $data['idCellier'];
-$millesime = isset($data['bouteille']['millesime']) ? $data['bouteille']['millesime'] : '';
+$idBouteilleSaq = isset($data['bouteille']['id_bouteille_saq']) ? $data['bouteille']['id_bouteille_saq'] : '';
 $nom = isset($data['bouteille']['nom']) ? $data['bouteille']['nom'] : '';
-$notes = isset($data['bouteille']['notes']) ? $data['bouteille']['notes'] : '';
 $pays = isset($data['bouteille']['pays']) ? $data['bouteille']['pays'] : '';
-$prix = isset($data['bouteille']['prix']) ? $data['bouteille']['prix'] : '';
-$quantite = isset($data['bouteille']['quantite']) ? $data['bouteille']['quantite'] : 1;
+$prixSaq= isset($data['bouteille']['prix_saq']) ? $data['bouteille']['prix_saq'] : '';
 $type = isset($data['bouteille']['type']) ? $data['bouteille']['type'] : '';
 $urlImg = isset($data['bouteille']['url_img']) ? $data['bouteille']['url_img'] : '';
 $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] : '';
 ?>
 
 <div class="container formBouteille">
-
-    <!-- Recherche-->
-    <div class="form">
-        <div id="recherche_bouteille" class="group">
-            <label class="icon_form"><i class="fas fa-search"></i></label>
-            <input type="text" name="recherche" placeholder="Recherche SAQ" autocomplete="off">
-        </div>
-    </div>
-    
-    <ul class="listeAutoComplete"></ul>
-
-    <!--Formulaire-->
-
     <form class="form" method="post">
-        <input type="hidden" name="id_bouteille" value="<?= $idBouteille ?>">
-        <input type="hidden" name="id_cellier" value="<?= $idCellier ?>">
+        <input type="hidden" name="id_bouteille_saq" value="<?= $idBouteilleSaq ?>">
         <input type="hidden" name="url_img" value="<?= $urlImg ?>">
         <input type="hidden" name="url_saq" value="<?= $urlSaq ?>">
 
@@ -67,7 +45,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <!-- Prix -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-dollar-sign"></i></label>
-            <input type="number" step="0.01" class="input" id="prix" name="prix" placeholder="Prix" value="<?= $prix ?>">
+            <input type="number" step="0.01" class="input" id="prix_saq" name="prix_saq" placeholder="Prix SAQ" value="<?= $prixSaq ?>">
         </div>
 
         <!-- Format -->
@@ -94,41 +72,10 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
             </select>
         </div>
 
-        <!-- Millésime -->
-        <div class="group">
-            <label class="icon_form" ><i class="fas fa-wine-bottle"></i></label>
-            <input type="number" class="input" id="millsime" name="millesime" placeholder="Millésime" value="<?= $millesime ?>">
-        </div>
-
-        <!-- Quantité -->
-        <div class="group">
-            <label class="icon_form"><i class="fas fa-cash-register"></i></label>
-            <input type="number" class="input" id="quantite" name="quantite" placeholder="Quantité+" required value="<?= $quantite ?>">
-        </div>
-
-        <!-- Date d'achat -->
-        <div class="group">
-            <label class="icon_form"><i class="fas fa-calendar-alt"></i></label>
-            <input type="text" class="input" id="date_achat" name="date_achat" placeholder="Date d'achat (aaaa-mm-jj)" value="<?= $dateAchat ?>" pattern="\d\d\d\d-\d\d-\d\d">
-        </div>
-
-        <!-- Garder jusqu'à... -->
-        <div class="group">
-            <label class="icon_form"><i class="fas fa-calendar-alt"></i></label>
-            <input type="text" class="input" id="garde_jusqua" name="garde_jusqua" placeholder="Garder jusqu'à ..." value="<?= $gardeJusqua ?>">
-        </div>
-
-        <!-- Notes -->
-        <div class="group">
-            <label class="icon_form"><i class="fa fa-comment"></i></label>
-            <input type="text" class="input" placeholder="Notes" id="notes" name="notes" value="<?= $notes ?>">
-        </div>
-
         <!-- Bouton enregistrer -->
         <div class="group">
             <input type="submit" value="Enregistrer">
         </div>
     </form>
-
 </div>
 
