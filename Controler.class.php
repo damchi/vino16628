@@ -336,7 +336,7 @@ class Controler
                 }
 
                 $bte->modifierBouteilleSaq($bouteille);
-                header("Location: index.php?requete=listeBouteillesSaq");
+                header("Location: index.php?requete=gererBouteillesSaq");
                 break;
         }
     }
