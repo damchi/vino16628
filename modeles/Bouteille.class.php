@@ -176,7 +176,7 @@ class Bouteille extends Modele {
 	}	
 	
 	/**
-	 * Modifie les attributs d'une bouteille.
+	 * Modifie les attributs d'une bouteille d'un cellier.
 	 * 
 	 * @param Array $data Tableau des attributs de la bouteille.
 	 * 
@@ -201,6 +201,34 @@ class Bouteille extends Modele {
             $data['format'], $data['date_achat'], $data['garde_jusqua'],
             $data['notes'], $data['prix'], $data['quantite'],
             $data['millesime'], $data['type'], $data['id_bouteille']
+        );
+
+        return $stmt->execute();
+	}
+	
+	/**
+	 * Modifie les attributs d'une bouteille dans le catalogue de la SAQ.
+	 * 
+	 * @param Array $data Tableau des attributs de la bouteille.
+	 * 
+	 * @return Boolean Succès ou échec de l'ajout.
+	 */
+	public function modifierBouteilleSaq($data) {
+        $sql = "
+            UPDATE vino__bouteille__saq
+            SET nom = ?, image = ?, code_saq = ?, pays = ?,
+                description = ?, prix_saq = ?, url_saq = ?, url_img = ?,
+                format = ?, type = ?
+            WHERE id_bouteille_saq = ?
+        ";        
+
+        $stmt = $this->_db->prepare($sql);
+
+        $res = $stmt->bind_param(
+            "sssssdsssii", $data['nom'], $data['image'], $data['code_saq'],
+            $data['pays'], $data['description'], $data['prix_saq'],
+            $data['url_saq'], $data['url_img'], $data['format'], $data['type'],
+            $data['id_bouteille_saq']
         );
 
         return $stmt->execute();
@@ -233,19 +261,6 @@ class Bouteille extends Modele {
         return $res->fetch_assoc();
 	}
     
-//	/**
-//	 * Supprime une bouteille.
-//	 *
-//	 * @param int idBouteille
-//	 *
-//	 * @throws Exception Erreur de requête sur la base de données
-//     *
-//	 * @return Boolean true si l'usager est le propriétaire, false sinon
-//	 */
-//	public function estProprietaireCellier($pseudo, $idBouteille) {
-//        return true;
-//    }
-
     /**
      * @param $data
      * @return stdClass
@@ -276,14 +291,33 @@ class Bouteille extends Modele {
 
     }
 
-    /**
-     * @param $idBouteille
-     * @return mixed
-     */
+	/**
+	 * Supprime une bouteille d'un cellier.
+	 *
+	 * @param int idBouteille
+	 *
+	 * @return Boolean true en cas de succès, false sinon
+	 */
 	public function supprimerBouteille($idBouteille) {
 		$sql = "
             DELETE FROM vino__bouteille
             WHERE id_bouteille = " . (int) $idBouteille . "
+        ";
+
+        return $this->_db->query($sql);
+	}	
+
+	/**
+	 * Supprime une bouteille du catalogue de la SAQ.
+	 *
+	 * @param int idBouteilleSaq
+	 *
+	 * @return Boolean true en cas de succès, false sinon
+	 */
+	public function supprimerBouteilleSaq($idBouteilleSaq) {
+		$sql = "
+            DELETE FROM vino__bouteille__saq
+            WHERE id_bouteille_saq = " . (int) $idBouteilleSaq . "
         ";
 
         return $this->_db->query($sql);

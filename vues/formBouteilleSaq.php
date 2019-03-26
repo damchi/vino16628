@@ -7,7 +7,7 @@ $format = isset($data['bouteille']['format']) ? $data['bouteille']['format'] : '
 $idBouteilleSaq = isset($data['bouteille']['id_bouteille_saq']) ? $data['bouteille']['id_bouteille_saq'] : '';
 $nom = isset($data['bouteille']['nom']) ? $data['bouteille']['nom'] : '';
 $pays = isset($data['bouteille']['pays']) ? $data['bouteille']['pays'] : '';
-$prix = isset($data['bouteille']['prix']) ? $data['bouteille']['prix'] : '';
+$prixSaq= isset($data['bouteille']['prix_saq']) ? $data['bouteille']['prix_saq'] : '';
 $type = isset($data['bouteille']['type']) ? $data['bouteille']['type'] : '';
 $urlImg = isset($data['bouteille']['url_img']) ? $data['bouteille']['url_img'] : '';
 $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] : '';
@@ -15,7 +15,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
 <div class="container formBouteille">
     <form class="form" method="post">
-        <input type="hidden" name="id_bouteille" value="<?= $idBouteilleSaq ?>">
+        <input type="hidden" name="id_bouteille_saq" value="<?= $idBouteilleSaq ?>">
         <input type="hidden" name="url_img" value="<?= $urlImg ?>">
         <input type="hidden" name="url_saq" value="<?= $urlSaq ?>">
 
@@ -45,7 +45,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <!-- Prix -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-dollar-sign"></i></label>
-            <input type="number" step="0.01" class="input" id="prix" name="prix" placeholder="Prix" value="<?= $prix ?>">
+            <input type="number" step="0.01" class="input" id="prix_saq" name="prix_saq" placeholder="Prix SAQ" value="<?= $prixSaq ?>">
         </div>
 
         <!-- Format -->
