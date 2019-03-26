@@ -39,6 +39,9 @@ class Controler
             case 'autocompleteBouteille':
                 $this->autocompleteBouteille();
                 break;
+//            case 'autocompleteBouteilleListe':
+//                $this->autocompleteBouteilleListe();
+//                break;
             case 'nouvelleBouteilleCellier':
                 if (isset($_SESSION['user_pseudo'])){
                     $this->nouvelleBouteilleCellier();
@@ -173,6 +176,14 @@ class Controler
                     header("Location:index.php?requete=login");
                 }
                 break;
+            case 'filtre':
+                if (isset($_SESSION['user_pseudo'])) {
+                    $this->filtreBouteille();
+                }
+                else{
+                    header("Location:index.php?requete=login");
+                }
+                break;
             default:
                 if (isset($_SESSION['user_pseudo'])) {
                     $this->accueil();
@@ -208,7 +219,11 @@ class Controler
         if ($usr->estProprietaireCellier($_SESSION['user_pseudo'], $_GET['idCellier'])) {
             $bte = new Bouteille();  
             $data['idCellier'] = $_GET['idCellier'];
+            $_SESSION['idCellier']= $_GET['idCellier'];
             $data['listeBouteilles'] = $bte->getListeBouteillesCellier($_GET['idCellier']);
+            $data['millesime'] = $bte->getMillesimeCellier($_GET['idCellier']);
+            $data['pays'] = $bte->getPaysCellier($_GET['idCellier']);
+            $data['type'] = $bte->getTypeCellier($_GET['idCellier']);
             include("vues/entete.php");
             include("vues/listeBouteilles.php");
             include("vues/pied.php");
@@ -231,6 +246,15 @@ class Controler
         echo json_encode($listeBouteille);
 
     }
+
+//    private function autocompleteBouteilleListe()
+//    {
+//        $bte = new Bouteille();
+//        $body = json_decode(file_get_contents('php://input'));
+//        $listeBouteille = $bte->chercheBouteille($_SESSION['idCellier'], $body->nom);
+//        echo json_encode($listeBouteille);
+//
+//    }
 
     private function nouvelleBouteilleCellier()
     {
@@ -423,6 +447,22 @@ class Controler
 //        else{
 //            $this->formlogin();
 //        }
+    }
+
+    private function filtreBouteille(){
+
+        $usr = new Usager();
+        $body = json_decode(file_get_contents('php://input'));
+        if (!empty($body)) {
+            if ($usr->estProprietaireCellier($_SESSION['user_pseudo'], $_SESSION['idCellier'])) {
+
+                $bte = new Bouteille();
+                $resultat = $bte->getBouteilleFiltre($body);
+                echo json_encode($resultat);
+
+
+            }
+        }
     }
 }
 ?>
