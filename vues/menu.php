@@ -1,14 +1,16 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Max Germain
+ * User: Max Germain / Julien Granero
  * Date: 2019-03-16
  * Time: 03:39
  */
 ?>
 <header class="entete">
     <div class="enteteImage">
-        <img src="images/logo.png" id="logo" alt="Logo Vino" title="Logo Vino">
+        <a href="">
+            <img src="images/logo.png" id="logo" alt="Logo Vino" title="Logo Vino">
+        </a>
     </div>
     
     <nav class="topnav" id="topnav">
