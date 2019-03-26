@@ -23,7 +23,7 @@
             /* Menu administrateur */
             ?>
             <a href="?requete=adminAccueil"><i class="fas fa-tachometer-alt"></i><span>Tableau de bord</span></a>
-            <a href="?requete=gererBouteilles"><i class="fas fa-wine-bottle"></i><span>Gérer les bouteilles</span></a>
+            <a href="?requete=gererBouteillesSaq"><i class="fas fa-wine-bottle"></i><span>Gérer les bouteilles</span></a>
             <a href="?requete=logout"><i class="fas fa-sign-out-alt"></i><span>Déconnexion</span></a>
             <?php
         }

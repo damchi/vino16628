@@ -8,6 +8,7 @@
 @import url("components/carte.css");
 @import url("components/typographie.css");
 @import url("components/form.css");
+@import url("components/table.css");
 
 *{
     box-sizing: border-box;    

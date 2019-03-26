@@ -135,6 +135,27 @@ class Bouteille extends Modele {
 	}
 	
 	/**
+	 * Retourne le catalogue de bouteilles SAQ.
+	 * 
+	 * @return Tableau des bouteilles avec tous leurs attributs
+	 */
+	public function getListeBouteillesSaq() {
+		$sql = "
+            SELECT b.*, t.type FROM vino__bouteille__saq b
+			INNER JOIN vino__type t ON t.id_type = b.type
+        ";
+
+        $res = $this->_db->query($sql);
+		$liste = Array();
+                
+        while ($row = $res->fetch_assoc()) {
+            $liste[] = $row;
+        }
+
+        return $liste;
+	}
+	
+	/**
 	 * Retourne la liste des types de bouteilles.
 	 * 
 	 * @return Tableau des types de bouteilles

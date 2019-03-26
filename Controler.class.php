@@ -55,12 +55,28 @@ class Controler
                     header("Location: index.php?requete=login");
                 }
                 break;
+            case 'modifierBouteilleSaq':
+                if (isset($_SESSION['admin'])){
+                    $this->modifierBouteilleSaq();
+                }
+                else{
+                    $this->fermerSession();
+                }
+                break;
             case 'supprimerBouteille':
                 if (isset($_SESSION['user_pseudo'])){
                     $this->supprimerBouteille();
                 }
                 else{
                     header("Location: index.php?requete=login");
+                }
+                break;
+            case 'supprimerBouteilleSaq':
+                if (isset($_SESSION['admin'])){
+                    $this->supprimerBouteilleSaq();
+                }
+                else{
+                    $this->fermerSession();
                 }
                 break;
             case 'ajouterBouteilleCellier':
@@ -172,9 +188,9 @@ class Controler
                     $this->fermerSession();
                 }
                 break;
-            case 'gererBouteilles':
+            case 'gererBouteillesSaq':
                 if (isset($_SESSION['admin'])) {
-                    $this->gererBouteilles();
+                    $this->gererBouteillesSaq();
                 }
                 else{
                     $this->fermerSession();
@@ -299,6 +315,32 @@ class Controler
         }    
     }
 
+    private function modifierBouteilleSaq()
+    {
+        $bte = new Bouteille();
+
+        switch($_SERVER['REQUEST_METHOD']){
+            case 'GET':
+                $data['bouteille'] = $bte->getBouteilleSaq($_GET['idBouteilleSaq']);
+                $data['types'] = $bte->getTypes();
+                include("vues/entete.php");
+                include("vues/formBouteilleSaq.php");
+                include("vues/pied.php");
+                break;
+
+            case 'POST':
+                $bouteille = [];
+
+                foreach ($_POST as $cle => $valeur) {
+                    $bouteille[$cle] = !empty($valeur) ? $valeur : null;
+                }
+
+                $bte->modifierBouteilleSaq($bouteille);
+                header("Location: index.php?requete=listeBouteillesSaq");
+                break;
+        }
+    }
+
     private function supprimerBouteille()
     {
         $body = json_decode(file_get_contents('php://input'));
@@ -312,6 +354,14 @@ class Controler
             $res = false;
         }
 
+        echo json_encode($res);
+    }
+
+    private function supprimerBouteilleSaq()
+    {
+        $body = json_decode(file_get_contents('php://input'));
+        $bte = new Bouteille();
+        $res = $bte->supprimerBouteilleSaq($body->id);
         echo json_encode($res);
     }
 
@@ -447,9 +497,12 @@ class Controler
 //        }
     }
     
-    private function gererBouteilles(){
+    private function gererBouteillesSaq(){
+        $bte = new Bouteille();
+        $data['bouteilles'] = $bte->getListeBouteillesSaq();
+        
         include("vues/entete.php");
-        include("vues/gererBouteilles.php");
+        include("vues/gererBouteillesSaq.php");
         include("vues/pied.php");        
     }
 }
