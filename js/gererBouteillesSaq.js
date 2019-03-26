@@ -17,66 +17,62 @@ window.addEventListener('load', () => {
     }
     
     /**
-     *  Après avoir demandé une confirmation à l'usager, fait la requête Ajax pour supprimer une bouteille SAQ donnée et l'enlève du DOM.
+     *  ait la requête Ajax pour supprimer une bouteille SAQ donnée et l'enlève du DOM.
      *  @param {int} idBouteilleSaq
      */
     function supprimerBouteilleSaq(idBouteilleSaq) {
         /*
-            On demande à l'administrateur de confirmer la suppression.
+            Requête Ajax de suppression
         */
-        
-        let div = divBouteilleSaq(idBouteilleSaq);
-        let nomBouteille = div.querySelector(".nom").innerHTML;
-        let codeSaq = div.querySelector(".codeSaq").innerHTML;
-        
-        let texteConfirm = (
-            "Suppression de la bouteille \"" + nomBouteille + "\" " + 
-            "(code SAQ " + codeSaq + ")"
+
+        let requete = new Request(
+            BaseURL + "index.php?requete=supprimerBouteilleSaq",
+            {method: 'POST', body: '{"id": ' + idBouteilleSaq + '}'}
         );
-        
-        if (confirm(texteConfirm)) {
+
+        console.log(requete);
+
+        fetch(requete).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            else {
+                throw new Error('Erreur');
+            }
+        })
+        .then(response => {
             /*
-                Requête Ajax de suppression
+                On enlève la div du DOM au retour de la requête Ajax.
             */
-            
-            let requete = new Request(
-                BaseURL + "index.php?requete=supprimerBouteilleSaq",
-                {method: 'POST', body: '{"id": ' + idBouteilleSaq + '}'}
-            );
 
-            console.log(requete);
-
-            fetch(requete).then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                }
-                else {
-                    throw new Error('Erreur');
-                }
-            })
-            .then(response => {
-                /*
-                    On enlève la div du DOM au retour de la requête Ajax.
-                */
-                
-                console.log(response);
-                divBouteilleSaq(idBouteilleSaq).remove();
-            })
-            .catch(error => {
-                console.error(error);
-            });            
-        }
+            console.log(response);
+            divBouteilleSaq(idBouteilleSaq).remove();
+        })
+        .catch(error => {
+            console.error(error);
+        });            
     }
     
     /*
-        Pour chaque div bouteilleSaq, on met un event listener au bouton supprimer.
+        Event listener pour le bouton supprimer de chaque div bouteilleSaq. Demande une confirmation à l'administrateur avant de faire la suppression.
     */
     
     document.querySelectorAll('.bouteilleSaq').forEach(divBouteilleSaq => {
         let idBouteilleSaq = divBouteilleSaq.dataset.id;
         
         divBouteilleSaq.querySelector(".btnSupprimer").addEventListener('click', evt => {
-            supprimerBouteilleSaq(idBouteilleSaq);
+            let div = divBouteilleSaq(idBouteilleSaq);
+            let nomBouteille = div.querySelector(".nom").innerHTML;
+            let codeSaq = div.querySelector(".codeSaq").innerHTML;
+
+            let texteConfirm = (
+                "Suppression de la bouteille \"" + nomBouteille + "\" " + 
+                "(code SAQ " + codeSaq + ")"
+            );
+
+            if (confirm(texteConfirm)) {
+                supprimerBouteilleSaq(idBouteilleSaq);
+            }
         });
     });
 });
