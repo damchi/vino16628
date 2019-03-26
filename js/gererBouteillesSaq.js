@@ -61,9 +61,8 @@ window.addEventListener('load', () => {
         let idBouteilleSaq = divBouteilleSaq.dataset.id;
         
         divBouteilleSaq.querySelector(".btnSupprimer").addEventListener('click', evt => {
-            let div = divBouteilleSaq(idBouteilleSaq);
-            let nomBouteille = div.querySelector(".nom").innerHTML;
-            let codeSaq = div.querySelector(".codeSaq").innerHTML;
+            let nomBouteille = divBouteilleSaq.querySelector(".nom").innerHTML;
+            let codeSaq = divBouteilleSaq.querySelector(".codeSaq").innerHTML;
 
             let texteConfirm = (
                 "Suppression de la bouteille \"" + nomBouteille + "\" " + 
