@@ -32,3 +32,17 @@ main{
 .ml {
     margin-left: 10px;
 }
+
+@media screen and (min-width: 600px) {
+    body {
+        background-image: url("../images/barril.jpg");
+    }
+
+    main {
+        max-width: 1000px;
+        background-color: rgba(255,255,255,0.7);
+        border-radius: 10px;
+        margin-top: 50px; 
+    }
+
+}

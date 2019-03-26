@@ -8,12 +8,16 @@
 
 .blocPrincipal {
   text-align: center;
-  width: 600px;
+  max-width: 350px;
   margin: auto;
+  margin-top: 0px;
 }
 
 .btnToggle {
-  padding: 6px;
+  padding: 25px;
+  cursor: pointer;
+  margin: 0px;
+  font-size: 1em;
 }
 
 .sectionMobile {
@@ -31,12 +35,14 @@
   border-bottom: 1px solid #701139;
 }
 
-
-
 @media only screen and (min-width: 600px) {
     .formLogin{
-        margin: auto;
-        max-width: 600px;
-        padding: 10px;
+      padding: 10px;
+    }
+
+    .blocPrincipal {
+      background-color: rgba(255,255,255,0.7);
+      border-radius: 10px;
+      margin-top: 50px;
     }
 }
