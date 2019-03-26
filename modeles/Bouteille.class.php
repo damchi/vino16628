@@ -305,7 +305,139 @@ class Bouteille extends Modele {
         ";
 
         return $this->_db->query($sql);
-	}	
+	}
+
+    /**
+     * @param $idCellier
+     * @param $nom
+     * @param int $nb_resultat
+     * @return array
+     */
+	public function chercheBouteille($idCellier,$nom, $nb_resultat = 10){
+//	    var_dump($idCellier);
+        $sql = " SELECT distinct nom FROM " . self::TABLE . "
+            WHERE id_cellier = $idCellier AND LOWER(nom) LIKE LOWER(?) LIMIT 0, ?
+        ";
+
+        $nom = $this->_db->real_escape_string($nom);
+        $nom = preg_replace("/\*/","%" , $nom);
+        $nom = '%'.$nom.'%';
+
+        $stmt = $this->_db->prepare($sql);
+        $stmt->bind_param("si", $nom, $nb_resultat);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $rows = Array();
+
+        while ($row = $res->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    /**
+     * rempli select millisime dans le filtre
+     * @param $idCellier
+     * @return array
+     * @throws Exception
+     */
+    public function getMillesimeCellier($idCellier){
+        $millesime = Array();
+        $sql = " SELECT distinct millesime  FROM " . self::TABLE . "
+            WHERE id_cellier = " . $idCellier;
+
+        if (!($res = $this->_db->query($sql))) {
+            throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+        }
+        while ($row = $res->fetch_assoc()) {
+            $millesime[] = $row;
+        }
+        return $millesime;
+    }
+
+    /**
+     * rempli le select Cellier dans le filtre
+     * @param $idCellier
+     * @return array
+     * @throws Exception
+     */
+    public function getPaysCellier($idCellier){
+        $pays = Array();
+
+        $sql = " SELECT distinct pays  FROM " . self::TABLE . "
+            WHERE id_cellier =".$idCellier;
+
+        if (!($res = $this->_db->query($sql))) {
+            throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+        }
+        while ($row = $res->fetch_assoc()) {
+            $pays[] = $row;
+        }
+        return $pays;
+    }
+
+    /**
+     * rempli le select type dans le filtre
+     * @param $idCellier
+     * @return array
+     * @throws Exception
+     */
+    public function getTypeCellier($idCellier){
+        $type = Array();
+
+        $sql = " SELECT distinct vino__type.type , vino__type.id_type FROM " . self::TABLE . "
+            JOIN vino__type on vino__bouteille.type = vino__type.id_type  
+            WHERE vino__bouteille.id_cellier =".$idCellier;
+        if (!($res = $this->_db->query($sql))) {
+            throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+        }
+        while ($row = $res->fetch_assoc()) {
+            $type[] = $row;
+        }
+        return $type;
+
+    }
+
+    /**
+     * @param $data
+     * @return array
+     * @throws Exception
+     * filtre les bouteilles dans le celliers via les selects
+     */
+    public function getBouteilleFiltre($data){
+        $bouteilles = array();
+        $id = $this->_db->real_escape_string($data->id);
+        $pays = $this->_db->real_escape_string($data->pays);
+        $millesime = $this->_db->real_escape_string($data->millesime);
+        $type = $this->_db->real_escape_string($data->type);
+//        var_dump(trim($pays));
+
+        $sql = " SELECT *  FROM " . self::TABLE . "
+            WHERE  id_cellier = ".$id;
+
+        if (trim($pays) != ""){
+            $sql .= " AND  pays = '".$pays ."'";
+        }
+
+        if (trim($millesime) != ""){
+            $sql .= " AND  millesime = ".$millesime ;
+        }
+        if (trim($type) != ""){
+            $sql .= " AND type = ".$type;
+        }
+
+//        var_dump($sql);
+
+        if (!($res = $this->_db->query($sql))) {
+            throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+        }
+        while ($row = $res->fetch_assoc()) {
+            $bouteilles[] = $row;
+        }
+        return $bouteilles;
+    }
+
+
 
 	/**
 	 * Supprime une bouteille du catalogue de la SAQ.
