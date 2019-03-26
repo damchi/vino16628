@@ -7,9 +7,11 @@
  */
 
 window.addEventListener("load", function () {
-		animationLogin();
-		var sectionVisible = document.querySelector(".sectionMobileVisible");
-		sectionVisible.style.maxHeight = sectionVisible.scrollHeight + "px"
+	// Lance l'animation dès le chargement de la page	
+	animationLogin();
+	// Met automatiquement la hauteur de la première section
+	var sectionVisible = document.querySelector(".sectionMobileVisible");
+	sectionVisible.style.maxHeight = sectionVisible.scrollHeight + "px"
 })
 
 function animationLogin() {

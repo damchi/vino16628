@@ -40,9 +40,15 @@ main{
 
     main {
         max-width: 1000px;
+        margin: auto;
+        margin-top: 50px; 
+    }
+
+    .conteneur {
         background-color: rgba(255,255,255,0.7);
         border-radius: 10px;
-        margin-top: 50px; 
+        min-height: 600px;
+        padding-top: 10px;
     }
 
 }

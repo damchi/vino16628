@@ -4,9 +4,10 @@
    margin: 14px;
 }
 
-.entete {
+header {
     background-color: #701139;
     width: 100%;
+    padding-left: 10%;
 }
 
 .topnav {
