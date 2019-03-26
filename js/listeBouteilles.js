@@ -128,8 +128,9 @@ window.addEventListener('load', () => {
    let millesime ;
    let pays ;
    let type ;
-
+console.log(selectRecherche)
     if(selectRecherche){
+        console.log("ffff")
         let reset = document.getElementById("reset");
         selectRecherche.addEventListener('change',(evt)=>{
             reset.style.display ='grid';

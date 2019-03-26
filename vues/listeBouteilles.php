@@ -54,7 +54,7 @@
 
 
 
-<div class="listeBouteilletab">
+<!--<div class="listeBouteilletab">
 
     <table>
         <thead>
@@ -74,33 +74,33 @@
         </thead>
         <tbody>
         <?php
-        foreach ($data['listeBouteilles'] as $cle => $bouteille) {
-        ?>
+/*        foreach ($data['listeBouteilles'] as $cle => $bouteille) {
+        */?>
         <tr>
-            <td><?php echo $bouteille['nom'] ?></td>
-            <td><a href="<?php echo $bouteille['url_saq']?>">Saq</a></td>
-            <td><?php echo $bouteille['type'] ?></td>
-            <td><?php echo $bouteille['pays'] ?></td>
-            <td><?php echo $bouteille['prix'] ?></td>
-            <td><?php echo $bouteille['quantite'] ?></td>
-            <td><?php echo $bouteille['format'] ?></td>
-            <td><?php echo $bouteille['date_achat'] ?></td>
-            <td><?php echo $bouteille['garde_jusqua'] ?></td>
-            <td><?php echo $bouteille['notes'] ?></td>
+            <td><?php /*echo $bouteille['nom'] */?></td>
+            <td><a href="<?php /*echo $bouteille['url_saq']*/?>">Saq</a></td>
+            <td><?php /*echo $bouteille['type'] */?></td>
+            <td><?php /*echo $bouteille['pays'] */?></td>
+            <td><?php /*echo $bouteille['prix'] */?></td>
+            <td><?php /*echo $bouteille['quantite'] */?></td>
+            <td><?php /*echo $bouteille['format'] */?></td>
+            <td><?php /*echo $bouteille['date_achat'] */?></td>
+            <td><?php /*echo $bouteille['garde_jusqua'] */?></td>
+            <td><?php /*echo $bouteille['notes'] */?></td>
             <td>
                 <button class='btnAjouter'><i class="fas fa-plus"></i></button>
                 <button class='btnBoire'><i class="fas fa-minus"></i></button>
-                <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>"><i class="fas fa-edit"></i></a></button>
+                <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?/*= $bouteille['id_bouteille'] */?>"><i class="fas fa-edit"></i></a></button>
                 <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button>
             </td>
         </tr>
 
 		<?php
-	    }
-	    ?>
+/*	    }
+	    */?>
         </tbody>
     </table>
-</div>
+</div>-->
 
 <div class="listeBouteille">    
     <?php
@@ -114,13 +114,13 @@
             <h4><?php echo $bouteille['nom'] ?></h4>
         </div>
 
-        <div class="carte-description">
+        <div class="carte-information">
             <!-- Texte -->
-            <div class="carte-texte">Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span></div>
-            <div class="carte-texte">Pays : <?php echo $bouteille['pays'] ?></div>
-            <div class="carte-texte">Type : <?php echo $bouteille['type'] ?></div>
-            <div class="carte-texte">Millesime : <?php echo $bouteille['millesime'] ?></div>
-            <div class="carte-texte"><a href="<?php echo $bouteille['url_saq'] ?>">Voir SAQ</a></div>
+            <div class="carte-quantite">Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span></div>
+            <div class="carte-pays">Pays : <?php echo $bouteille['pays'] ?></div>
+            <div class="carte-type">Type : <?php echo $bouteille['type'] ?></div>
+            <div class="carte-millesime">Millesime : <?php echo $bouteille['millesime'] ?></div>
+            <div class="carte-code_saq"><?php echo $bouteille['code_saq'] ?></div>
         </div>
 
         <!-- Carte image -->
