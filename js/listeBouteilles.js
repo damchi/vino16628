@@ -119,4 +119,84 @@ window.addEventListener('load', () => {
         
         ajusterDivBouteilleSelonQuantite(divBouteille);
     });
+
+
+
+    /**************FONCTION DE FILTRE******************/
+   let selectRecherche = document.querySelector('.recherche');
+   let idCellier = document.querySelector("[name = 'idCellier']").value;
+   let millesime ;
+   let pays ;
+   let type ;
+
+    if(selectRecherche){
+        let reset = document.getElementById("reset");
+        selectRecherche.addEventListener('change',(evt)=>{
+            reset.style.display ='grid';
+            reset.addEventListener('click',()=>{
+                location.reload();
+            });
+            millesime = document.querySelector("[name = 'millesime']").value;
+            pays = document.querySelector("[name = 'pays']").value;
+            type = document.querySelector("[name = 'type']").value;
+
+            // console.log(select);
+            console.log(millesime);
+            console.log(pays);
+            console.log(type);
+
+            var param ={
+                "millesime" : millesime,
+                "pays": pays,
+                "type" : type,
+                "id" : idCellier
+            }
+
+            console.log(param);
+
+            let requete = new Request(BaseURL + "index.php?requete=filtre",{method:'POST', body: JSON.stringify(param)});
+
+            fetch(requete)
+                .then(response => {
+                    if (response.status === 200) {
+                        // console.log(response.json());
+                        return response.json();
+                    }
+                    else {
+                        throw new Error('Erreur');
+                    }
+                })
+                .then(response=>{
+                    console.log(response);
+                    if (response.length == 0){
+                        let output = " Désolé aucun vin ne correspond à vos critères dans votre cellier";
+                        let errorFiltre = document.getElementById('errorFiltre');
+                        errorFiltre.innerHTML = output;
+                    }
+                    let divBouteille = document.querySelectorAll(".bouteille");
+
+                    // console.log(response.id_bouteille);
+                    let idResponse = [];
+                    let idDiv = [];
+
+                    for ( var i =0; i<response.length; i++){
+                        idResponse.push(response[i].id_bouteille)
+
+                    }
+
+                    divBouteille.forEach((bouteille)=>{
+                        bouteille.style.display = 'grid';
+                        // idDiv.push(bouteille.dataset.id)
+                        console.log();
+                        if (idResponse.includes(bouteille.dataset.id) == false){
+                            bouteille.style.display = 'none';
+                        }
+                    });
+
+                });
+
+        });
+    }
+
+
 });

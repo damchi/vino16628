@@ -176,7 +176,7 @@ class Bouteille extends Modele {
 	}	
 	
 	/**
-	 * Modifie les attributs d'une bouteille.
+	 * Modifie les attributs d'une bouteille d'un cellier.
 	 * 
 	 * @param Array $data Tableau des attributs de la bouteille.
 	 * 
@@ -201,6 +201,34 @@ class Bouteille extends Modele {
             $data['format'], $data['date_achat'], $data['garde_jusqua'],
             $data['notes'], $data['prix'], $data['quantite'],
             $data['millesime'], $data['type'], $data['id_bouteille']
+        );
+
+        return $stmt->execute();
+	}
+	
+	/**
+	 * Modifie les attributs d'une bouteille dans le catalogue de la SAQ.
+	 * 
+	 * @param Array $data Tableau des attributs de la bouteille.
+	 * 
+	 * @return Boolean Succès ou échec de l'ajout.
+	 */
+	public function modifierBouteilleSaq($data) {
+        $sql = "
+            UPDATE vino__bouteille__saq
+            SET nom = ?, image = ?, code_saq = ?, pays = ?,
+                description = ?, prix_saq = ?, url_saq = ?, url_img = ?,
+                format = ?, type = ?
+            WHERE id_bouteille_saq = ?
+        ";        
+
+        $stmt = $this->_db->prepare($sql);
+
+        $res = $stmt->bind_param(
+            "sssssdsssii", $data['nom'], $data['image'], $data['code_saq'],
+            $data['pays'], $data['description'], $data['prix_saq'],
+            $data['url_saq'], $data['url_img'], $data['format'], $data['type'],
+            $data['id_bouteille_saq']
         );
 
         return $stmt->execute();
@@ -233,19 +261,6 @@ class Bouteille extends Modele {
         return $res->fetch_assoc();
 	}
     
-//	/**
-//	 * Supprime une bouteille.
-//	 *
-//	 * @param int idBouteille
-//	 *
-//	 * @throws Exception Erreur de requête sur la base de données
-//     *
-//	 * @return Boolean true si l'usager est le propriétaire, false sinon
-//	 */
-//	public function estProprietaireCellier($pseudo, $idBouteille) {
-//        return true;
-//    }
-
     /**
      * @param $data
      * @return stdClass
@@ -276,14 +291,165 @@ class Bouteille extends Modele {
 
     }
 
-    /**
-     * @param $idBouteille
-     * @return mixed
-     */
+	/**
+	 * Supprime une bouteille d'un cellier.
+	 *
+	 * @param int idBouteille
+	 *
+	 * @return Boolean true en cas de succès, false sinon
+	 */
 	public function supprimerBouteille($idBouteille) {
 		$sql = "
             DELETE FROM vino__bouteille
             WHERE id_bouteille = " . (int) $idBouteille . "
+        ";
+
+        return $this->_db->query($sql);
+	}
+
+    /**
+     * @param $idCellier
+     * @param $nom
+     * @param int $nb_resultat
+     * @return array
+     */
+	public function chercheBouteille($idCellier,$nom, $nb_resultat = 10){
+//	    var_dump($idCellier);
+        $sql = " SELECT distinct nom FROM " . self::TABLE . "
+            WHERE id_cellier = $idCellier AND LOWER(nom) LIKE LOWER(?) LIMIT 0, ?
+        ";
+
+        $nom = $this->_db->real_escape_string($nom);
+        $nom = preg_replace("/\*/","%" , $nom);
+        $nom = '%'.$nom.'%';
+
+        $stmt = $this->_db->prepare($sql);
+        $stmt->bind_param("si", $nom, $nb_resultat);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $rows = Array();
+
+        while ($row = $res->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    /**
+     * rempli select millisime dans le filtre
+     * @param $idCellier
+     * @return array
+     * @throws Exception
+     */
+    public function getMillesimeCellier($idCellier){
+        $millesime = Array();
+        $sql = " SELECT distinct millesime  FROM " . self::TABLE . "
+            WHERE id_cellier = " . $idCellier;
+
+        if (!($res = $this->_db->query($sql))) {
+            throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+        }
+        while ($row = $res->fetch_assoc()) {
+            $millesime[] = $row;
+        }
+        return $millesime;
+    }
+
+    /**
+     * rempli le select Cellier dans le filtre
+     * @param $idCellier
+     * @return array
+     * @throws Exception
+     */
+    public function getPaysCellier($idCellier){
+        $pays = Array();
+
+        $sql = " SELECT distinct pays  FROM " . self::TABLE . "
+            WHERE id_cellier =".$idCellier;
+
+        if (!($res = $this->_db->query($sql))) {
+            throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+        }
+        while ($row = $res->fetch_assoc()) {
+            $pays[] = $row;
+        }
+        return $pays;
+    }
+
+    /**
+     * rempli le select type dans le filtre
+     * @param $idCellier
+     * @return array
+     * @throws Exception
+     */
+    public function getTypeCellier($idCellier){
+        $type = Array();
+
+        $sql = " SELECT distinct vino__type.type , vino__type.id_type FROM " . self::TABLE . "
+            JOIN vino__type on vino__bouteille.type = vino__type.id_type  
+            WHERE vino__bouteille.id_cellier =".$idCellier;
+        if (!($res = $this->_db->query($sql))) {
+            throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+        }
+        while ($row = $res->fetch_assoc()) {
+            $type[] = $row;
+        }
+        return $type;
+
+    }
+
+    /**
+     * @param $data
+     * @return array
+     * @throws Exception
+     * filtre les bouteilles dans le celliers via les selects
+     */
+    public function getBouteilleFiltre($data){
+        $bouteilles = array();
+        $id = $this->_db->real_escape_string($data->id);
+        $pays = $this->_db->real_escape_string($data->pays);
+        $millesime = $this->_db->real_escape_string($data->millesime);
+        $type = $this->_db->real_escape_string($data->type);
+//        var_dump(trim($pays));
+
+        $sql = " SELECT *  FROM " . self::TABLE . "
+            WHERE  id_cellier = ".$id;
+
+        if (trim($pays) != ""){
+            $sql .= " AND  pays = '".$pays ."'";
+        }
+
+        if (trim($millesime) != ""){
+            $sql .= " AND  millesime = ".$millesime ;
+        }
+        if (trim($type) != ""){
+            $sql .= " AND type = ".$type;
+        }
+
+//        var_dump($sql);
+
+        if (!($res = $this->_db->query($sql))) {
+            throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+        }
+        while ($row = $res->fetch_assoc()) {
+            $bouteilles[] = $row;
+        }
+        return $bouteilles;
+    }
+
+
+
+	/**
+	 * Supprime une bouteille du catalogue de la SAQ.
+	 *
+	 * @param int idBouteilleSaq
+	 *
+	 * @return Boolean true en cas de succès, false sinon
+	 */
+	public function supprimerBouteilleSaq($idBouteilleSaq) {
+		$sql = "
+            DELETE FROM vino__bouteille__saq
+            WHERE id_bouteille_saq = " . (int) $idBouteilleSaq . "
         ";
 
         return $this->_db->query($sql);
