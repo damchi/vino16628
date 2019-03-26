@@ -1,22 +1,37 @@
-.mouvante {
-  background-color: darkgrey;
+/**
+ * @file Style de la page login.php
+ * @author Julien Granero
+ * @update 2019-03-25
+ * @license Creative Commons BY-NC 3.0 (Licence Creative Commons Attribution - Pas d’utilisation commerciale 3.0 non transposé)
+ * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
+ */
+
+.blocPrincipal {
+  text-align: center;
+  width: 600px;
+  margin: auto;
+}
+
+.btnToggle {
   padding: 6px;
 }
 
 .sectionMobile {
-  /*padding: 0 18px;*/
-  display: none;
-  /*max-height: 0;*/
+  padding: 0 18px;
+  max-height: 0;
   overflow: hidden;
-  transition: max-height 1s ease-out;
+  transition: max-height 0.6s ease-out;
 }
 
 .sectionMobileVisible{
-  /*padding: 0 18px;*/
-  /*max-height: 50px;*/
+  padding: 0 18px;
+  max-height: 50px;
   overflow: hidden;
-  transition: max-height 1s ease-out;
+  transition: max-height 0.6s ease-out;
+  border-bottom: 1px solid #701139;
 }
+
+
 
 @media only screen and (min-width: 600px) {
     .formLogin{

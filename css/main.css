@@ -9,6 +9,7 @@
 @import url("components/typographie.css");
 @import url("components/form.css");
 @import url("components/table.css");
+@import url("components/formLogin.css");
 
 *{
     box-sizing: border-box;    
