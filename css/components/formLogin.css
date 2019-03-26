@@ -1,5 +1,21 @@
-.formLogin{
-    padding: 10px;
+.mouvante {
+  background-color: darkgrey;
+  padding: 6px;
+}
+
+.sectionMobile {
+  /*padding: 0 18px;*/
+  display: none;
+  /*max-height: 0;*/
+  overflow: hidden;
+  transition: max-height 1s ease-out;
+}
+
+.sectionMobileVisible{
+  /*padding: 0 18px;*/
+  /*max-height: 50px;*/
+  overflow: hidden;
+  transition: max-height 1s ease-out;
 }
 
 @media only screen and (min-width: 600px) {
