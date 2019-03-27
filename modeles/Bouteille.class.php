@@ -12,6 +12,7 @@
  */
 class Bouteille extends Modele {
     const TABLE = 'vino__bouteille';
+    
 	/**
 	 * Ajoute une bouteille à un cellier.
 	 * 
@@ -20,25 +21,27 @@ class Bouteille extends Modele {
 	 * @return int Id de la nouvelle bouteille
 	 */
 	public function ajouterBouteilleCellier($data) {
+        $idCellier = (int) $data['id_cellier'];
+        $nom = $this->_db->escape_string($data['nom']);
+        $codeSaq = $this->_db->escape_string($data['code_saq']);
+        $pays = $this->_db->escape_string($data['pays']);
+        $urlSaq = $this->_db->escape_string($data['url_saq']);
+        $urlImg = $this->_db->escape_string($data['url_img']);
+        $format = $this->_db->escape_string($data['format']);
+        $dateAchat = $this->_db->escape_string($data['date_achat']);
+        $gardeJusqua = $this->_db->escape_string($data['garde_jusqua']);
+        $notes = $this->_db->escape_string($data['notes']);
+        $prix = (float) $data['prix'];
+        $quantite = (int) $data['quantite'];
+        $millesime = (int) $data['millesime'];
+        $type = (int) $data['type'];
+        
         $sql = "
-            INSERT INTO vino__bouteille (id_cellier, nom, image, code_saq,
-            pays, description, url_saq, url_img, format, date_achat,
-            garde_jusqua, notes, prix, quantite, millesime, type)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO vino__bouteille (id_cellier, nom, code_saq, pays, url_saq, url_img, format, date_achat, garde_jusqua, notes, prix, quantite, millesime, type)
+            VALUES ($idCellier, '$nom', '$codeSaq', '$pays', $urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)
         ";        
 
-        $stmt = $this->_db->prepare($sql);
-
-        $stmt->bind_param(
-            "isssssssssssdiii", $data['id_cellier'], $data['nom'],
-            $data['image'], $data['code_saq'], $data['pays'],
-            $data['description'], $data['url_saq'], $data['url_img'],
-            $data['format'], $data['date_achat'], $data['garde_jusqua'],
-            $data['notes'], $data['prix'], $data['quantite'],
-            $data['millesime'], $data['type']
-        );
-        
-        $stmt->execute();
+        $this->_db->query($sql);
 		
         return $this->_db->insert_id;
 	}
@@ -51,20 +54,17 @@ class Bouteille extends Modele {
 	 * 
 	 * @return array id et nom de la bouteille trouvée dans le catalogue
 	 */   
-	public function autocomplete($nom, $nb_resultat = 10) {		
+	public function autocomplete($nom, $nbResultats = 10) {		
+		$nom = $this->_db->escape_string($nom);
+		$nom = preg_replace("/\*/","%" , $nom);
+        $nbResultats = (int) $nbResultats;
+		 
 		$sql = "
             SELECT id_bouteille_saq, nom FROM vino__bouteille__saq
-            WHERE LOWER(nom) LIKE LOWER(?) LIMIT 0, ?
+            WHERE LOWER(nom) LIKE LOWER('%$nom%') LIMIT 0, $nbResultats
         ";
-        
-		$nom = $this->_db->real_escape_string($nom);
-		$nom = preg_replace("/\*/","%" , $nom);
-        $nom = '%'.$nom.'%';
-		 
-        $stmt = $this->_db->prepare($sql);
-        $stmt->bind_param("si", $nom, $nb_resultat);
-        $stmt->execute();
-		$res = $stmt->get_result();
+
+        $res = $this->_db->query($sql);
 		$rows = Array();
         
         while ($row = $res->fetch_assoc()) {
@@ -82,9 +82,11 @@ class Bouteille extends Modele {
 	 * @return Tableau associatif des attributs ou null si la bouteille n'existe pas
 	 */    
 	public function getBouteille($idBouteille) {
+        $idBouteille = (int) $idBouteille;
+        
 		$sql = "
             SELECT * FROM vino__bouteille
-            WHERE id_bouteille = " . (int) $idBouteille . "
+            WHERE id_bouteille = $idBouteille
         ";
 
         $res = $this->_db->query($sql);
@@ -100,9 +102,11 @@ class Bouteille extends Modele {
 	 * @return Tableau associatif des attributs ou null si la bouteille n'existe pas
 	 */    
 	public function getBouteilleSaq($idBouteilleSaq) {
+        $idBouteilleSaq = (int) $idBouteilleSaq;
+        
 		$sql = "
             SELECT * FROM vino__bouteille__saq
-            WHERE id_bouteille_saq = " . (int) $idBouteilleSaq . "
+            WHERE id_bouteille_saq = $idBouteilleSaq
         ";
 
         $res = $this->_db->query($sql);
@@ -118,10 +122,12 @@ class Bouteille extends Modele {
 	 * @return Tableau des bouteilles avec tous leurs attributs
 	 */
 	public function getListeBouteillesCellier($idCellier) {
+        $idCellier = (int) $idCellier;
+        
 		$sql = "
             SELECT b.*, t.type FROM vino__bouteille b
 			INNER JOIN vino__type t ON t.id_type = b.type
-            WHERE id_cellier = " . (int) $idCellier . "
+            WHERE id_cellier = $idCellier
         ";
 
         $res = $this->_db->query($sql);
@@ -161,12 +167,9 @@ class Bouteille extends Modele {
 	 * @return Tableau des types de bouteilles
 	 */   
 	public function getTypes() {
-		$types = Array();
 		$sql = "SELECT * from vino__type";
-
-        if (!($res = $this->_db->query($sql))) {
-			throw new Exception($this->_err['requete'] . $this->_db->error, 1);
-		}
+        $res = $this->_db->query($sql);
+		$types = Array();
 		
         while ($row = $res->fetch_assoc()) {
             $types[] = $row;
@@ -179,31 +182,35 @@ class Bouteille extends Modele {
 	 * Modifie les attributs d'une bouteille d'un cellier.
 	 * 
 	 * @param Array $data Tableau des attributs de la bouteille.
-	 * 
-	 * @return Boolean Succès ou échec de l'ajout.
+     *
+     * @return int 1 si modifiée, 0 si inexistante
 	 */
 	public function modifierBouteille($data) {
+        $idBouteille = (int) $data['id_bouteille'];
+        $idCellier = (int) $data['id_cellier'];
+        $nom = $this->_db->escape_string($data['nom']);
+        $codeSaq = $this->_db->escape_string($data['code_saq']);
+        $pays = $this->_db->escape_string($data['pays']);
+        $urlSaq = $this->_db->escape_string($data['url_saq']);
+        $urlImg = $this->_db->escape_string($data['url_img']);
+        $format = $this->_db->escape_string($data['format']);
+        $dateAchat = $this->_db->escape_string($data['date_achat']);
+        $gardeJusqua = $this->_db->escape_string($data['garde_jusqua']);
+        $notes = $this->_db->escape_string($data['notes']);
+        $prix = (float) $data['prix'];
+        $quantite = (int) $data['quantite'];
+        $millesime = (int) $data['millesime'];
+        $type = (int) $data['type'];
+        
         $sql = "
             UPDATE vino__bouteille
-            SET id_cellier = ?, nom = ?, image = ?, code_saq = ?, pays = ?,
-                description = ?, url_saq = ?, url_img = ?, format = ?,
-                date_achat = ?, garde_jusqua = ?, notes = ?, prix = ?,
-                quantite = ?, millesime = ?, type = ?
-            WHERE id_bouteille = ?
+            SET id_cellier = $idCellier, nom = '$nom', code_saq = '$codeSaq', pays = '$pays', url_saq = '$urlSaq', url_img = '$urlImg', format = '$format', date_achat = '$dateAchat', garde_jusqua = '$gardeJusqua', notes = '$notes', prix = $prix, quantite = $quantite, millesime = $millesime, type = $type
+            WHERE id_bouteille = $idBouteille
         ";        
 
-        $stmt = $this->_db->prepare($sql);
-
-        $res = $stmt->bind_param(
-            "isssssssssssdiiii", $data['id_cellier'], $data['nom'],
-            $data['image'], $data['code_saq'], $data['pays'],
-            $data['description'], $data['url_saq'], $data['url_img'],
-            $data['format'], $data['date_achat'], $data['garde_jusqua'],
-            $data['notes'], $data['prix'], $data['quantite'],
-            $data['millesime'], $data['type'], $data['id_bouteille']
-        );
-
-        return $stmt->execute();
+        $this->_db->query($sql);
+        
+        return $this->_db->affected_rows;
 	}
 	
 	/**
@@ -211,49 +218,53 @@ class Bouteille extends Modele {
 	 * 
 	 * @param Array $data Tableau des attributs de la bouteille.
 	 * 
-	 * @return Boolean Succès ou échec de l'ajout.
+     * @return int 1 si modifiée, 0 si inexistante
 	 */
 	public function modifierBouteilleSaq($data) {
+        $idBouteilleSaq = (int) $data['id_bouteille_saq'];
+        $nom = $this->_db->escape_string($data['nom']);
+        $codeSaq = $this->_db->escape_string($data['code_saq']);
+        $pays = $this->_db->escape_string($data['pays']);
+        $prixSaq = (float) $data['prix_saq'];
+        $urlSaq = $this->_db->escape_string($data['url_saq']);
+        $urlImg = $this->_db->escape_string($data['url_img']);
+        $format = $this->_db->escape_string($data['format']);
+        $type = (int) $data['type'];
+        
         $sql = "
             UPDATE vino__bouteille__saq
-            SET nom = ?, image = ?, code_saq = ?, pays = ?,
-                description = ?, prix_saq = ?, url_saq = ?, url_img = ?,
-                format = ?, type = ?
-            WHERE id_bouteille_saq = ?
+            SET nom = '$nom', code_saq = '$codeSaq', pays = '$pays', prix_saq = $prixSaq, url_saq = '$urlSaq', url_img = '$urlImg', format = '$format', type = $type
+            WHERE id_bouteille_saq = $idBouteilleSaq
         ";        
 
-        $stmt = $this->_db->prepare($sql);
-
-        $res = $stmt->bind_param(
-            "sssssdsssii", $data['nom'], $data['image'], $data['code_saq'],
-            $data['pays'], $data['description'], $data['prix_saq'],
-            $data['url_saq'], $data['url_img'], $data['format'], $data['type'],
-            $data['id_bouteille_saq']
-        );
-
-        return $stmt->execute();
+        $this->_db->query($sql);
+        
+        return $this->_db->affected_rows;
 	}
 	
 	/**
 	 * Cette méthode change la quantité d'une bouteille en particulier dans le cellier
 	 * 
-	 * @param int $id id de la bouteille
-	 * @param int $nombre Nombre de bouteille a ajouter ou retirer
+	 * @param int $idBouteille
+	 * @param int $nombre Nombre de bouteilles à ajouter ou retirer
 	 * 
-	 * @return Boolean Succès ou échec de l'ajout.
+	 * @return int Nouveau nombre de bouteilles après l'opération
 	 */
-	public function modifierQuantiteBouteilleCellier($id, $nombre) {
-		$requete = "
+	public function modifierQuantiteBouteilleCellier($idBouteille, $nombre) {
+        $idBouteille = (int) $idBouteille;
+        $nombre = (int) $nombre;
+        
+		$sql = "
             UPDATE vino__bouteille
-            SET quantite = GREATEST(quantite + ". (int) $nombre .", 0)
-            WHERE id_bouteille = " . (int) $id . "
+            SET quantite = GREATEST(quantite + $nombre, 0)
+            WHERE id_bouteille = $idBouteille
         ";
         
-        $this->_db->query($requete);
+        $this->_db->query($sql);
 		
 		$sql = "
             SELECT quantite from vino__bouteille
-            WHERE id_bouteille = " . (int) $id . "
+            WHERE id_bouteille = $idBouteille
         ";
         
         $res = $this->_db->query($sql);
@@ -261,51 +272,99 @@ class Bouteille extends Modele {
         return $res->fetch_assoc();
 	}
     
-    /**
-     * @param $data
-     * @return stdClass
-     */
-    public function  countBouteilleCellier($data){
-        $retour = new stdClass();
-        $retour -> succes = false;
-        $retour -> nbBouteille = 0;
-//        $retour -> raison = '';
-
-
-        $stmt = $this->_db->prepare("SELECT count(*) as total FROM " .self::TABLE ." WHERE id_cellier = ?");
-        $stmt->bind_param('i',$data->idCellier);
-        $stmt->execute();
-
-        $stmt_result = $stmt->get_result()->fetch_assoc();
-//        var_dump($stmt_result['total']);
-
-        if ($stmt_result['total'] > 0) {
-//            var_dump($stmt_result);
-            $retour -> succes = true;
-            $retour->nbBouteille = $stmt_result['total'];
-        }
-        else{
-            $retour -> succes = false;
-        }
-        return $retour;
-
-    }
-
 	/**
 	 * Supprime une bouteille d'un cellier.
 	 *
 	 * @param int idBouteille
 	 *
-	 * @return Boolean true en cas de succès, false sinon
+     * @return int 1 si supprimée, 0 si inexistante
 	 */
 	public function supprimerBouteille($idBouteille) {
+        $idBouteille = (int) $idBouteille;
+        
 		$sql = "
             DELETE FROM vino__bouteille
-            WHERE id_bouteille = " . (int) $idBouteille . "
+            WHERE id_bouteille = $idBouteille
         ";
 
-        return $this->_db->query($sql);
+        $this->_db->query($sql);
+        
+        return $this->_db->affected_rows;
 	}
+
+	/**
+	 * Supprime une bouteille du catalogue de la SAQ.
+	 *
+	 * @param int idBouteilleSaq
+	 *
+     * @return int 1 si supprimée, 0 si inexistante
+	 */
+	public function supprimerBouteilleSaq($idBouteilleSaq) {
+        $idBouteilleSaq = (int) $idBouteilleSaq;
+        
+		$sql = "
+            DELETE FROM vino__bouteille__saq
+            WHERE id_bouteille_saq = $idBouteilleSaq
+        ";
+
+        $this->_db->query($sql);
+        
+        return $this->_db->affected_rows;
+	}
+    
+    /**
+     * Donne le nombre de bouteilles dans un cellier donné.
+     * @param int $idCellier
+     * @return stdClass
+     */
+    public function countBouteilleCellier($idCellier) {
+        $idCellier = (int) $idCellier;
+        
+        $sql = "
+            SELECT COUNT(*) AS total
+            FROM vino__bouteille WHERE id_cellier = $idCellier
+        ";
+        
+        $res = $this->_db->query($sql);
+        $row = $res->fetch_assoc();        
+        $retour = new stdClass();
+
+        if ($row['total'] > 0) {
+            $retour->succes = true;
+            $retour->nbBouteille = $row['total'];
+        }
+        else{
+            $retour->succes = false;
+            $retour->nbBouteille = 0;
+        }
+        
+        return $retour;
+    }
+
+//    /**
+//     * @param $idCellier
+//     * @param $nom
+//     * @param int $nb_resultat
+//     * @return array
+//     */
+//	public function chercheBouteille($idCellier, $nom, $nbResultats = 10) {
+//        $idCellier = (int) $idCellier;
+//        $nom = $this->_db->escape_string($nom);
+//        $nom = preg_replace("/\*/", "%", $nom);
+//        $nbResultats = (int) $nbResultats;
+//
+//        $sql = "
+//            SELECT DISTINCT nom FROM " . self::TABLE . "
+//            WHERE id_cellier = $idCellier AND LOWER(nom) LIKE LOWER('%$nom%')
+//            LIMIT 0, $nbResultats
+//        ";
+//        $res = $this->_db->query($sql);
+//        $rows = Array();
+//        while ($row = $res->fetch_assoc()) {
+//            $rows[] = $row;
+//        }
+//        return $rows;
+//    }
 
     /**
      * rempli select millisime dans le filtre
@@ -409,6 +468,7 @@ class Bouteille extends Modele {
         return $bouteilles;
     }
 
+
     /**
      * @param $idCellier
      * @param $nom
@@ -442,19 +502,4 @@ class Bouteille extends Modele {
         return $bouteilles;
     }
 
-	/**
-	 * Supprime une bouteille du catalogue de la SAQ.
-	 *
-	 * @param int idBouteilleSaq
-	 *
-	 * @return Boolean true en cas de succès, false sinon
-	 */
-	public function supprimerBouteilleSaq($idBouteilleSaq) {
-		$sql = "
-            DELETE FROM vino__bouteille__saq
-            WHERE id_bouteille_saq = " . (int) $idBouteilleSaq . "
-        ";
-
-        return $this->_db->query($sql);
-	}	
 }

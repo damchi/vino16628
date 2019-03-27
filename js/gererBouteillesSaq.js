@@ -5,71 +5,73 @@
  */
 
 window.addEventListener('load', () => {
-    /*
-        Retourne la div correspondant à une bouteille SAQ spécifiée par son id.
-    */
-    
+    /**
+     *  Retourne la div correspondant à une bouteille SAQ spécifiée par son id.
+     *  @param {int} idBouteilleSaq l'id
+     *  @returns {element} La div
+     */
     function divBouteilleSaq(idBouteilleSaq) {
         return document.querySelector(
             ".bouteilleSaq[data-id='" + idBouteilleSaq + "']"
         );
     }
     
-    /*
-        Fait la requête Ajax pour supprimer une bouteille SAQ donnée et l'enlève du DOM.
-    */
-        
+    /**
+     *  ait la requête Ajax pour supprimer une bouteille SAQ donnée et l'enlève du DOM.
+     *  @param {int} idBouteilleSaq
+     */
     function supprimerBouteilleSaq(idBouteilleSaq) {
         /*
-            On demande à l'administrateur de confirmer la suppression.
+            Requête Ajax de suppression
         */
 
-        let div = divBouteilleSaq(idBouteilleSaq);
-        let nomBouteille = div.querySelector(".nom").innerHTML;
-        let codeSaq = div.querySelector(".codeSaq").innerHTML;
-        
-        let texteConfirm = (
-            "Suppression de la bouteille \"" + nomBouteille + "\" " + 
-            "(code SAQ " + codeSaq + ")"
+        let requete = new Request(
+            BaseURL + "index.php?requete=supprimerBouteilleSaq",
+            {method: 'POST', body: '{"id": ' + idBouteilleSaq + '}'}
         );
-        
-        if (confirm(texteConfirm)) {
-            /* Requête Ajax supprimerBouteilleSaq avec id comme seul paramètre */
-            let requete = new Request(
-                BaseURL + "index.php?requete=supprimerBouteilleSaq",
-                {method: 'POST', body: '{"id": ' + idBouteilleSaq + '}'}
-            );
 
-            console.log(requete);
+        console.log(requete);
 
-            fetch(requete).then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                }
-                else {
-                    throw new Error('Erreur');
-                }
-            })
-            .then(response => {
-                /* Suppression de la div de la bouteille dans le DOM */
-                console.log(response);
-                divBouteilleSaq(idBouteilleSaq).remove();
-            })
-            .catch(error => {
-                console.error(error);
-            });            
-        }
+        fetch(requete).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            else {
+                throw new Error('Erreur');
+            }
+        })
+        .then(response => {
+            /*
+                On enlève la div du DOM au retour de la requête Ajax.
+            */
+
+            console.log(response);
+            divBouteilleSaq(idBouteilleSaq).remove();
+        })
+        .catch(error => {
+            console.error(error);
+        });            
     }
     
     /*
-        Pour chaque div bouteilleSaq, le bouton supprimer supprime la bouteille.
+        Event listener pour le bouton supprimer de chaque div bouteilleSaq. Demande une confirmation à l'administrateur avant de faire la suppression.
     */
-            
+    
     document.querySelectorAll('.bouteilleSaq').forEach(divBouteilleSaq => {
         let idBouteilleSaq = divBouteilleSaq.dataset.id;
         
         divBouteilleSaq.querySelector(".btnSupprimer").addEventListener('click', evt => {
-            supprimerBouteilleSaq(idBouteilleSaq);
+            let nomBouteille = divBouteilleSaq.querySelector(".nom").innerHTML;
+            let codeSaq = divBouteilleSaq.querySelector(".codeSaq").innerHTML;
+
+            let texteConfirm = (
+                "Suppression de la bouteille \"" + nomBouteille + "\" " + 
+                "(code SAQ " + codeSaq + ")"
+            );
+
+            if (confirm(texteConfirm)) {
+                supprimerBouteilleSaq(idBouteilleSaq);
+            }
         });
     });
 });

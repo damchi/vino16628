@@ -120,13 +120,18 @@ window.addEventListener('load', () => {
         ajusterDivBouteilleSelonQuantite(divBouteille);
     });
 
-
-
     /**************FONCTION DE FILTRE******************/
     /*
     * div d'affichage du message d'erreur en cas de non resultat
     * */
     let errorFiltre = document.getElementById('errorFiltre');
+
+    /**
+     * div du change text recherche
+     * @type {HTMLElement | null}
+     */
+    let rechercheCellier = document.querySelector("[name ='rechercheInfo']");
+
     /**
      * @param response retour du fecth
      * traite le resultat de la recherche et du filtre
@@ -171,9 +176,13 @@ window.addEventListener('load', () => {
             bouteille.style.display = 'grid';
             reset.style.display='none';
             errorFiltre.style.display='none';
+
+            document.querySelector("[name = 'millesime']").value = "";
+            document.querySelector("[name = 'pays']").value ="";
+            document.querySelector("[name = 'type']").value ="";
+            document.querySelector("[name ='rechercheInfo']").value = "";
         });
     }
-
 
     /**
      *
@@ -183,16 +192,9 @@ window.addEventListener('load', () => {
     let selectRecherche = document.querySelector('.recherche');
 
     /**
-     * div du change text recherche
-     * @type {HTMLElement | null}
-     */
-    let rechercheCellier = document.querySelector("[name ='rechercheInfo']");
-
-    /**
      * Liste des vignettes de bouteilles
      * */
     let divBouteille = document.querySelectorAll(".bouteille");
-
 
     let reset = document.getElementById("reset");
 
@@ -203,61 +205,55 @@ window.addEventListener('load', () => {
     }
 
 
-    function rechercheSelect(){
-        /**
-         * affichage du bouton remise a zéro quand le select sont touchés
-         * */
-        reset.style.display ='grid';
-
-        let millesime = document.querySelector("[name = 'millesime']").value;
-        let pays = document.querySelector("[name = 'pays']").value;
-        let type = document.querySelector("[name = 'type']").value;
-        let idCellier = document.querySelector("[name = 'idCellier']").value;
-
-        // console.log(select);
-        // console.log(millesime);
-        // console.log(pays);
-        // console.log(type);
-
-        var param ={
-            "millesime" : millesime,
-            "pays": pays,
-            "type" : type,
-            "id" : idCellier
-        };
-
-        // console.log(param);
-
-        let requete = new Request(BaseURL + "index.php?requete=filtre",{method:'POST', body: JSON.stringify(param)});
-
-        fetch(requete)
-            .then(response => {
-                if (response.status === 200) {
-                    // console.log(response.json());
-                    return response.json();
-                }
-                else {
-                    throw new Error('Erreur');
-                }
-            })
-            .then(response=>{
-                console.log(response);
-                resultatRecherche(response);
-            });
-
-    }
-
     if(selectRecherche){
         /**
          * Pour chaque select de filtre les bouteilles choisis sont affihés
          */
         selectRecherche.addEventListener('change',()=>{
-            rechercheSelect();
+            /**
+             * affichage du bouton remise a zéro quand le select sont touchés
+             * */
+            reset.style.display ='grid';
+
+
+            let idCellier = document.querySelector("[name = 'idCellier']").value;
+            let millesime = document.querySelector("[name = 'millesime']").value;
+            let pays = document.querySelector("[name = 'pays']").value;
+            let type = document.querySelector("[name = 'type']").value;
+
+
+            // console.log(select);
+            // console.log(millesime);
+            // console.log(pays);
+            // console.log(type);
+
+            var param ={
+                "millesime" : millesime,
+                "pays": pays,
+                "type" : type,
+                "id" : idCellier
+            };
+
+            // console.log(param);
+
+            let requete = new Request(BaseURL + "index.php?requete=filtre",{method:'POST', body: JSON.stringify(param)});
+
+            fetch(requete)
+                .then(response => {
+                    if (response.status === 200) {
+                        // console.log(response.json());
+                        return response.json();
+                    }
+                    else {
+                        throw new Error('Erreur');
+                    }
+                })
+                .then(response=>{
+                    console.log(response);
+                    resultatRecherche(response);
+                });
         });
     }
-
-
-
     console.log(rechercheCellier);
     if (rechercheCellier){
         let liste = document.querySelector('.listeAutoComplete');
