@@ -4,9 +4,9 @@
     margin-bottom: 10px;
 }
 
-.afficheListe {
-
- }
+.afficheListe{
+    display: none;
+}
 
 .listeBouteille{
     display: grid;
@@ -18,6 +18,9 @@
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: 10px;
         margin: 10px;
+    }
+    .afficheListe{
+        display: block;
     }
 }
 
