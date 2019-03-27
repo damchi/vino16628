@@ -38,9 +38,9 @@ class Bouteille extends Modele {
         
         $sql = "
             INSERT INTO vino__bouteille (id_cellier, nom, code_saq, pays, url_saq, url_img, format, date_achat, garde_jusqua, notes, prix, quantite, millesime, type)
-            VALUES ($idCellier, '$nom', '$codeSaq', '$pays', $urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)
+            VALUES ($idCellier, '$nom', '$codeSaq', '$pays', '$urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)
         ";        
-
+        var_dump($sql);
         $this->_db->query($sql);
 		
         return $this->_db->insert_id;
