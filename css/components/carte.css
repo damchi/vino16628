@@ -18,17 +18,41 @@
     .carte{
         border: 1px solid #701139;
     }
+    .carte{
+        display: flex;
+    }
+    .carte-titre{
+         width: 200px;
+        margin-right: 10px;
+     }
+    .carte-image{
+        width:100px;
+        margin-right: 10px;
+    }
+    .carte-information{
+        width:200px;
+        margin-right: 10px;
+    }
 }
 
 /*Element de la carte*/
 
 .carte-image>img{
+    order: 1;
     max-height: 150px;
     grid-area: carteImage;
 }
 
 .carte-information{
+    order:3;
     grid-area: carteInformation;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-areas:    "quantite"
+                            "pays"
+                            "type"
+                            "millesime"
+                            "code_saq";
 /*    min-width: 300px;*/
 }
 
@@ -80,9 +104,11 @@ grid-area: type;
     margin-top: -1.33em;
     margin-bottom: -1.33em;
     grid-area: carteTitre;
+    order:2;
 }
 
 .carte-pied{
+    order: 4;
     grid-area: cartePied;
     clear: both;
     text-align: center;
