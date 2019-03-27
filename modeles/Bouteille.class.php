@@ -308,34 +308,6 @@ class Bouteille extends Modele {
 	}
 
     /**
-     * @param $idCellier
-     * @param $nom
-     * @param int $nb_resultat
-     * @return array
-     */
-	public function chercheBouteille($idCellier,$nom, $nb_resultat = 10){
-//	    var_dump($idCellier);
-        $sql = " SELECT distinct nom FROM " . self::TABLE . "
-            WHERE id_cellier = $idCellier AND LOWER(nom) LIKE LOWER(?) LIMIT 0, ?
-        ";
-
-        $nom = $this->_db->real_escape_string($nom);
-        $nom = preg_replace("/\*/","%" , $nom);
-        $nom = '%'.$nom.'%';
-
-        $stmt = $this->_db->prepare($sql);
-        $stmt->bind_param("si", $nom, $nb_resultat);
-        $stmt->execute();
-        $res = $stmt->get_result();
-        $rows = Array();
-
-        while ($row = $res->fetch_assoc()) {
-            $rows[] = $row;
-        }
-        return $rows;
-    }
-
-    /**
      * rempli select millisime dans le filtre
      * @param $idCellier
      * @return array
@@ -437,7 +409,38 @@ class Bouteille extends Modele {
         return $bouteilles;
     }
 
+    /**
+     * @param $idCellier
+     * @param $nom
+     * @param int $nb_resultat
+     * @return array
+     */
+    public function chercheBouteille($idCellier,$nom, $nb_resultat = 10){
+//	    var_dump($idCellier);
+//	    var_dump($nom);
+        $bouteilles = array();
 
+        $nom = $this->_db->real_escape_string($nom);
+//        $nom = preg_replace("/\*/","%" , $nom);
+//        $nom = '%'.$nom.'%';
+
+//	    var_dump($idCellier);
+
+//        $sql = " SELECT *  FROM " . self::TABLE . "
+//            WHERE  id_cellier = ".$id;
+        $sql = " SELECT * FROM " . self::TABLE . "
+            WHERE id_cellier = $idCellier AND ( LOWER(nom) LIKE '%".$nom. "%' OR lower(notes) LIKE '%".$nom. "%'OR lower(pays) LIKE '%".$nom. "%' OR lower(description) LIKE '%".$nom. "%' OR lower(millesime) LIKE '%".$nom. "%' OR lower(format) LIKE '%".$nom. "%')LIMIT 0," .$nb_resultat;
+
+//        var_dump($sql);
+
+        if (!($res = $this->_db->query($sql))) {
+            throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+        }
+        while ($row = $res->fetch_assoc()) {
+            $bouteilles[] = $row;
+        }
+        return $bouteilles;
+    }
 
 	/**
 	 * Supprime une bouteille du catalogue de la SAQ.
