@@ -107,7 +107,7 @@
     </table>
 </div>-->
 
-<div class="listeBouteille">
+<div id="listeBouteille" class="listeBouteilleParVignette">
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
@@ -172,3 +172,19 @@
 </div>
 
 <!--</div>-->
+<script>
+    window.addEventListener('load', function(){
+        var afficherListe = document.querySelector('.afficherListeBouteille');
+        var afficherVignette = document.querySelector('.afficherVignetteBouteille');
+        var liste = document.getElementById('listeBouteille');
+
+        afficherListe.addEventListener('click', function(){
+            alert('Liste');
+            liste.classList.remove('listeBouteilleParListe')
+            liste.classList.add('listeBouteilleParListe')
+        });
+        afficherVignette.addEventListener('click', function(){
+            alert('Vignette');
+        });
+    })
+</script>
