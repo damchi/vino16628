@@ -14,7 +14,7 @@
     border-top: 1px solid #701139;    
 }
 
-@media only screen and (min-width: 600px){
+/*@media only screen and (min-width: 960px){
     .carte{
         border: 1px solid #701139;
     }
@@ -33,7 +33,7 @@
         width:200px;
         margin-right: 10px;
     }
-}
+}*/
 
 /*Element de la carte*/
 
@@ -55,6 +55,12 @@
                             "code_saq";
 /*    min-width: 300px;*/
 }
+
+.carte-information_2{
+    order: 4;
+    display: none;
+}
+
 
 .carte-texte{
     color: black;
@@ -108,7 +114,7 @@ grid-area: type;
 }
 
 .carte-pied{
-    order: 4;
+    order: 5;
     grid-area: cartePied;
     clear: both;
     text-align: center;

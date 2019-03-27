@@ -5,8 +5,9 @@
         <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
     </div>
 
-    <div class="afficherListe">
-        <button class="afficheListe"><i class="fas fa-th"></i></button>
+    <div class="afficheListe">
+        <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
+        <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
     </div>
 
     <!-- Recherche-->
@@ -106,7 +107,7 @@
     </table>
 </div>-->
 
-<div class="listeBouteilletab">
+<div class="listeBouteille">
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
@@ -125,6 +126,14 @@
             <div class="carte-type">Type : <?php echo $bouteille['type'] ?></div>
             <div class="carte-millesime">Millesime : <?php echo $bouteille['millesime'] ?></div>
             <div class="carte-code_saq">Code saq : <a href="<?php echo $bouteille['url_saq'] ?>"><?php echo $bouteille['code_saq'] ?></a></div>
+        </div>
+
+        <div class="carte-information_2">
+            <!-- Texte -->
+            <div class="carte-format"> Format : <?php echo $bouteille['format'] ?></span></div>
+            <div class="carte-pays">Date achat : <?php echo $bouteille['date_achat'] ?></div>
+            <div class="carte-type">garde jusqu'à : <?php echo $bouteille['garde_jusqua'] ?></div>
+            <div class="carte-millesime">Notes : <?php echo $bouteille['notes'] ?></div>
         </div>
 
         <!-- Carte image -->
