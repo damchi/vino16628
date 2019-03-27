@@ -479,7 +479,7 @@ class Controler
         $body = json_decode(file_get_contents('php://input'));
         if (!empty($body)) {
             $bouteille = new Bouteille();
-            $resultat = $bouteille->countBouteilleCellier($body);
+            $resultat = $bouteille->countBouteilleCellier($body->idCellier);
             echo json_encode($resultat);
         }
     }
