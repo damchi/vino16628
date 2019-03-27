@@ -5,6 +5,10 @@
         <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
     </div>
 
+    <div class="afficherListe">
+        <button class="afficheListe"><i class="fas fa-th"></i></button>
+    </div>
+
     <!-- Recherche-->
 <!---->
 <!--    <div id="recherche_bouteille_cellier">-->
@@ -102,7 +106,7 @@
     </table>
 </div>-->
 
-<div class="listeBouteille">    
+<div class="listeBouteilletab">
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
@@ -120,7 +124,7 @@
             <div class="carte-pays">Pays : <?php echo $bouteille['pays'] ?></div>
             <div class="carte-type">Type : <?php echo $bouteille['type'] ?></div>
             <div class="carte-millesime">Millesime : <?php echo $bouteille['millesime'] ?></div>
-            <div class="carte-code_saq"><?php echo $bouteille['code_saq'] ?></div>
+            <div class="carte-code_saq">Code saq : <a href="<?php echo $bouteille['url_saq'] ?>"><?php echo $bouteille['code_saq'] ?></a></div>
         </div>
 
         <!-- Carte image -->
