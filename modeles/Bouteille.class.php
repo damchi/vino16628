@@ -280,9 +280,11 @@ class Bouteille extends Modele {
      * @return int 1 si supprimée, 0 si inexistante
 	 */
 	public function supprimerBouteille($idBouteille) {
+        $idBouteille = (int) $idBouteille;
+        
 		$sql = "
             DELETE FROM vino__bouteille
-            WHERE id_bouteille = " . (int) $idBouteille . "
+            WHERE id_bouteille = $idBouteille
         ";
 
         $this->_db->query($sql);
