@@ -11,18 +11,19 @@
     </div>
 
     <!-- Recherche-->
-<!---->
-<!--    <div id="recherche_bouteille_cellier">-->
-<!--        <label class="icon_form"><i class="fas fa-search"></i></label>-->
-<!--        <input type="text" name="rechercheInfo" placeholder="Recherche">-->
-<!--    </div>-->
-<!--    <ul class="listeAutoComplete"></ul>-->
-<!---->
+
+    <div id="recherche_bouteille_cellier">
+        <label class="icon_form"><i class="fas fa-search"></i></label>
+        <input type="text" name="rechercheInfo" placeholder="Recherche">
+    </div>
+    <ul class="listeAutoComplete"></ul>
+
 
 
 
 </div>
 <div class="recherche">
+
     <input type="hidden" name="idCellier" value="<?= $_SESSION['idCellier']?>">
     <p>Filtrer par </p>
 
@@ -55,9 +56,9 @@
 
     </select>
     <button id="reset"> Remettre à zéro</button>
+
+    <div id="errorFiltre"></div>
 </div>
-
-
 
 <!--<div class="listeBouteilletab">
 
@@ -125,7 +126,14 @@
             <div class="carte-pays">Pays : <?php echo $bouteille['pays'] ?></div>
             <div class="carte-type">Type : <?php echo $bouteille['type'] ?></div>
             <div class="carte-millesime">Millesime : <?php echo $bouteille['millesime'] ?></div>
-            <div class="carte-code_saq">Code saq : <a href="<?php echo $bouteille['url_saq'] ?>"><?php echo $bouteille['code_saq'] ?></a></div>
+            <?php
+            if ($bouteille['code_saq'] != null ) {
+                ; ?>
+                <div class="carte-code_saq">Code saq : <a
+                            href="<?php echo $bouteille['url_saq'] ?>"><?php echo $bouteille['code_saq'] ?></a></div>
+                <?php
+            }
+            ?>
         </div>
 
         <div class="carte-information_2">
@@ -168,7 +176,7 @@
     <?php
     }
     ?>
-    <div id="errorFiltre"></div>
+
 </div>
 
 <!--</div>-->
