@@ -1,7 +1,19 @@
-<!-- Bouton Ajouter une bouteille -->
-<div class="boutonSolo boutonHaut">
-    <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
-</div>
+
+<div class="boutons_listeBouteilles">
+    <!-- Bouton Ajouter une bouteille -->
+    <div class="boutonSolo boutonHaut">
+        <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
+    </div>
+
+    <!-- Bouton d'affichage des bouteilles -->
+    <div class="boutonAfficher">
+        <button><a href="#tableau_bouteille"><i class="fas fa-list"></i></a></button>
+        <button><a href="#vignette_bouteille"><i class="fas fa-th"></i></a></button>
+    </div>
+</div>  
+
+
+
 
 
 <div class="listeBouteilletab">
