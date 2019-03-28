@@ -300,13 +300,19 @@ window.addEventListener('load', () => {
     /* Afficher la liste des bouteille par liste*/
     document.querySelector('.afficherListeBouteille').addEventListener('click', function(){
         var cartes = document.querySelectorAll('.carte');
-        var infos = document.querySelectorAll('.carte-information_2');
+        var infos = document.querySelectorAll('.carte-information');
+        var infos_2 = document.querySelectorAll('.carte-information_2');
+        var images = document.querySelectorAll('.carte-image img');
 
         document.getElementById('listeBouteille').classList.remove('listeBouteilleParVignette');
 
         for( var i = 0; i<cartes.length; ++i){
             cartes[i].setAttribute('style',"display:flex;");
-            infos[i].setAttribute('style',"display:block;")
+            infos[i].setAttribute('style',"display:block;");
+            infos[i].setAttribute('style',"font-size:.9rem;");
+            infos_2[i].setAttribute('style',"display:block; font-size:.9rem;");
+            images[i].setAttribute('style',"max-width:75px;");
+            images[i].setAttribute('style',"max-height:75px;");
         }
     });
 
