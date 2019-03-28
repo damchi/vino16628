@@ -1,7 +1,11 @@
 
-.boutonHaut {
+#recherche_bouteille_cellier, .boutonHaut, .afficheListe {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.afficheListe{
+    display: none;
 }
 
 .listeBouteille{
@@ -9,12 +13,35 @@
 }
 
 @media only screen and (min-width: 600px){
-    .listeBouteille{
+    .listeBouteilleParVignette{
+        display: grid;
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: 10px;
         margin: 10px;
     }
+
+    #listeBouteille, .hautDePage, .recherche{
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .afficheListe{
+        display: inline;
+    }
+
+    /* Alignement des bouton du haut de la page listeBoiuteile.php */
+    .hautDePage{
+        justify-content: space-between;
+    }
+    /*.listeBouteille{
+        display: grid;
+        grid-area: listeBouteille;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 10px;
+        margin: 10px;
+    }*/
+
 }
 
 #formCellier{
@@ -22,5 +49,9 @@
 }
 
 #modifCellier{
+    display: none;
+}
+
+#reset{
     display: none;
 }

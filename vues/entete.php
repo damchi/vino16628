@@ -20,6 +20,7 @@
     <!--<script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
     <script src="./js/main.js"></script>
     <script src="./js/usager.js"></script>
+    <script src="./js/animation.js"></script>
     <script src="./js/cellier.js"></script>
     <script src="./js/listeBouteilles.js"></script>
     <script src="./js/formBouteille.js"></script>
