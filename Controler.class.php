@@ -520,14 +520,10 @@ class Controler
 
     private function gererBouteillesSaq()
     {
-        $bte = new Bouteille();
-        $data['bouteilles'] = $bte->getListeBouteillesSaq();
-
         include("vues/entete.php");
         include("vues/gererBouteillesSaq.php");
         include("vues/pied.php");
     }
-
 }
 ?>
 

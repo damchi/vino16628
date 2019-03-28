@@ -137,10 +137,15 @@ window.addEventListener('load', () => {
      * traite le resultat de la recherche et du filtre
      */
     function resultatRecherche(response){
-        if (response.length == 0){
+        console.log(response.length);
+        if (response.length === 0){
+            console.log('ee');
             let output = " Désolé aucun vin ne correspond à vos critères dans votre cellier";
             errorFiltre.innerHTML = output;
             errorFiltre.style.color='red';
+            if (errorFiltre.style.display='none'){
+                errorFiltre.style.display='block'
+            }
         }
         else {
             // console.log(response.id_bouteille);
@@ -296,4 +301,45 @@ window.addEventListener('load', () => {
             }
         });
     }
+
+    /* Afficher la liste des bouteille par liste*/
+    let listBouteille = document.querySelector('.afficherListeBouteille');
+    if(listBouteille){
+        listBouteille.addEventListener('click', function(){
+            var cartes = document.querySelectorAll('.carte');
+            var infos = document.querySelectorAll('.carte-information');
+            var infos_2 = document.querySelectorAll('.carte-information_2');
+            var images = document.querySelectorAll('.carte-image img');
+
+            document.getElementById('listeBouteille').classList.remove('listeBouteilleParVignette');
+
+            for( var i = 0; i<cartes.length; ++i){
+                cartes[i].setAttribute('style',"display:flex;");
+                infos[i].setAttribute('style',"display:block;");
+                infos[i].setAttribute('style',"font-size:.9rem;");
+                infos_2[i].setAttribute('style',"display:block; font-size:.9rem;");
+                images[i].setAttribute('style',"max-width:75px;");
+                images[i].setAttribute('style',"max-height:75px;");
+            }
+        });
+    }
+
+
+    /* Afficher la liste des bouteille par vignette*/
+    let listVignette = document.querySelector('.afficherVignetteBouteille');
+    if(listVignette){
+        listVignette.addEventListener('click', function(){
+            var cartes = document.querySelectorAll('.carte');
+            var infoSupplémentaires = document.querySelectorAll('.carte-information_2');
+
+            document.getElementById('listeBouteille').classList.add('listeBouteilleParVignette');
+
+            for( var i = 0; i<cartes.length; ++i){
+                cartes[i].setAttribute('style',"display:grid;");
+                infoSupplémentaires[i].setAttribute("style","display:none")
+            }
+        });
+    }
+
+
 });
