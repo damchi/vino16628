@@ -1,16 +1,11 @@
 
-<div class="group">
+<div class="group hautDePage">
     <!-- Bouton Ajouter une bouteille -->
     <div class="boutonSolo boutonHaut">
         <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
     </div>
 
-    <div class="afficheListe">
-        <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
-        <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
-    </div>
-
-    <!-- Recherche-->
+    <!-- Recherche Bouteille-->
 
     <div id="recherche_bouteille_cellier">
         <label class="icon_form"><i class="fas fa-search"></i></label>
@@ -18,10 +13,14 @@
     </div>
     <ul class="listeAutoComplete"></ul>
 
-
-
+    <!--Bouton choisir affichage-->
+    <div class="afficheListe">
+        <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
+        <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
+    </div>
 
 </div>
+
 <div class="recherche">
 
     <input type="hidden" name="idCellier" value="<?= $_SESSION['idCellier']?>">
@@ -31,7 +30,10 @@
         <option value="">Pays</option>
         <?php
         foreach ( $data['pays'] as  $pays){
-            echo '<option value="'.$pays['pays'].' ">'.$pays['pays'].'</option>';
+            if ($pays['pays'] != ""){
+                echo '<option value="'.$pays['pays'].' ">'.$pays['pays'].'</option>';
+            }
+
         }
         ?>
 
@@ -40,7 +42,9 @@
         <option value="">Millésimes</option>
         <?php
         foreach ( $data['millesime'] as  $millesime){
-            echo '<option value="'.$millesime['millesime'].'">'.$millesime['millesime'].'</option>';
+            if ($millesime['millesime'] != ""){
+                echo '<option value="'.$millesime['millesime'].'">'.$millesime['millesime'].'</option>';
+            }
         }
         ?>
 
@@ -108,7 +112,7 @@
     </table>
 </div>-->
 
-<div class="listeBouteille">
+<div id="listeBouteille" class="listeBouteilleParVignette">
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
@@ -134,6 +138,13 @@
                 <?php
             }
             ?>
+
+<!--            <!-- Your share button code -->
+<!--            <div class="fb-share-button"-->
+<!--                 data-href="https://www.your-domain.com/your-page.html"-->
+<!--                 data-layout="button_count">-->
+<!--            </div>-->
+
         </div>
 
         <div class="carte-information_2">
@@ -159,7 +170,6 @@
                 <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
 
                 <?php
-
             }
             ?>
         </div>
