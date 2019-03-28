@@ -1,17 +1,11 @@
 
-<div class="group">
+<div class="group hautDePage">
     <!-- Bouton Ajouter une bouteille -->
     <div class="boutonSolo boutonHaut">
         <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
     </div>
 
-    <!--Bouton choisir affichage-->
-    <div class="afficheListe">
-        <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
-        <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
-    </div>
-
-    <!-- Recherche-->
+    <!-- Recherche Bouteille-->
 
     <div id="recherche_bouteille_cellier">
         <label class="icon_form"><i class="fas fa-search"></i></label>
@@ -19,10 +13,14 @@
     </div>
     <ul class="listeAutoComplete"></ul>
 
-
-
+    <!--Bouton choisir affichage-->
+    <div class="afficheListe">
+        <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
+        <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
+    </div>
 
 </div>
+
 <div class="recherche">
 
     <input type="hidden" name="idCellier" value="<?= $_SESSION['idCellier']?>">

@@ -20,8 +20,19 @@
         grid-gap: 10px;
         margin: 10px;
     }
+
+    #listeBouteille, .hautDePage, .recherche{
+        max-width: 1000px;
+        margin: auto;
+    }
+
     .afficheListe{
         display: inline;
+    }
+
+    /* Alignement des bouton du haut de la page listeBoiuteile.php */
+    .hautDePage{
+        justify-content: space-between;
     }
     /*.listeBouteille{
         display: grid;
