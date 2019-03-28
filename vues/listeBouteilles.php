@@ -31,7 +31,10 @@
         <option value="">Pays</option>
         <?php
         foreach ( $data['pays'] as  $pays){
-            echo '<option value="'.$pays['pays'].' ">'.$pays['pays'].'</option>';
+            if ($pays['pays'] != ""){
+                echo '<option value="'.$pays['pays'].' ">'.$pays['pays'].'</option>';
+            }
+
         }
         ?>
 
@@ -40,7 +43,9 @@
         <option value="">Millésimes</option>
         <?php
         foreach ( $data['millesime'] as  $millesime){
-            echo '<option value="'.$millesime['millesime'].'">'.$millesime['millesime'].'</option>';
+            if ($millesime['millesime'] != ""){
+                echo '<option value="'.$millesime['millesime'].'">'.$millesime['millesime'].'</option>';
+            }
         }
         ?>
 
@@ -134,6 +139,13 @@
                 <?php
             }
             ?>
+
+<!--            <!-- Your share button code -->
+<!--            <div class="fb-share-button"-->
+<!--                 data-href="https://www.your-domain.com/your-page.html"-->
+<!--                 data-layout="button_count">-->
+<!--            </div>-->
+
         </div>
 
         <div class="carte-information_2">
