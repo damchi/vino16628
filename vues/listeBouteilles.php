@@ -5,6 +5,7 @@
         <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
     </div>
 
+    <!--Bouton choisir affichage-->
     <div class="afficheListe">
         <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
         <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
@@ -108,7 +109,7 @@
     </table>
 </div>-->
 
-<div class="listeBouteille">
+<div id="listeBouteille" class="listeBouteilleParVignette">
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
@@ -159,7 +160,6 @@
                 <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
 
                 <?php
-
             }
             ?>
         </div>

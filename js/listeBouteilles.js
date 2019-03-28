@@ -296,4 +296,31 @@ window.addEventListener('load', () => {
             }
         });
     }
+
+    /* Afficher la liste des bouteille par liste*/
+    document.querySelector('.afficherListeBouteille').addEventListener('click', function(){
+        var cartes = document.querySelectorAll('.carte');
+        var infos = document.querySelectorAll('.carte-information_2');
+
+        document.getElementById('listeBouteille').classList.remove('listeBouteilleParVignette');
+
+        for( var i = 0; i<cartes.length; ++i){
+            cartes[i].setAttribute('style',"display:flex;");
+            infos[i].setAttribute('style',"display:block;")
+        }
+    });
+
+    /* Afficher la liste des bouteille par vignette*/
+    document.querySelector('.afficherVignetteBouteille').addEventListener('click', function(){
+        var cartes = document.querySelectorAll('.carte');
+        var infoSupplémentaires = document.querySelectorAll('.carte-information_2');
+
+        document.getElementById('listeBouteille').classList.add('listeBouteilleParVignette');
+
+        for( var i = 0; i<cartes.length; ++i){
+            cartes[i].setAttribute('style',"display:grid;");
+            infoSupplémentaires[i].setAttribute("style","display:none")
+        }
+    });
+
 });
