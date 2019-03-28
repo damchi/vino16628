@@ -186,6 +186,13 @@ class Controler
                     $this->fermerSession();
                 }
                 break;
+            case 'reinitialiserCatalogue':
+                if (isset($_SESSION['admin'])) {
+                    $this->reinitialiserCatalogue();
+                } else {
+                    $this->fermerSession();
+                }
+                break;
             default:
                 if (isset($_SESSION['user_pseudo'])) {
                     $this->accueil();
@@ -195,7 +202,6 @@ class Controler
                 break;
         }
     }
-
 
     private function accueil()
     {
@@ -523,6 +529,14 @@ class Controler
         include("vues/entete.php");
         include("vues/gererBouteillesSaq.php");
         include("vues/pied.php");
+    }
+    
+    private function reinitialiserCatalogue()
+    {
+        $saq = new SAQ();
+        $saq->supprimeTousProduits();
+        $res = $saq->getProduits(20, 0);
+        echo json_encode($res);
     }
 }
 ?>

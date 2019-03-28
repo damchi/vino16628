@@ -56,12 +56,8 @@ class SAQ extends Modele {
 		$elements = $doc -> getElementsByTagName("div");
 		$i = 0;
 		foreach ($elements as $key => $noeud) {
-			//if ("resultats_product" == str$noeud -> getAttribute('class')) {
 			if (strpos($noeud -> getAttribute('class'), "resultats_product") !== false) {
-
-				//echo $this->get_inner_html($noeud);
 				$info = self::recupereInfo($noeud);
-				//var_dump($info);
 				$retour = $this -> ajouteProduit($info);
 				if ($retour -> succes == false) {
 					echo "erreur : " . $retour -> raison . "<br>";
@@ -77,6 +73,12 @@ class SAQ extends Modele {
 
 		return $i;
 	}
+
+    public function supprimeTousProduits() {
+        $sql = "DELETE FROM vino__bouteille__saq";
+        $res = $this->_db->query($sql);
+        return $res;
+    }
 
 	private function get_inner_html($node) {
 		$innerHTML = '';
@@ -103,13 +105,8 @@ class SAQ extends Modele {
 				$info -> desc -> texte = $node -> textContent;
 				$res = preg_match_all("/\r\n\s*(.*)\r\n/", $info -> desc -> texte, $aDesc);
                 
-//                echo "<pre>";
-//                var_dump($aDesc[1]);
-//                echo "</pre>";
-//                
 				if (isset($aDesc[1][2])) {
 					preg_match("/\d{8}/", $aDesc[1][2], $aRes);
-					//var_dump($aRes);
 					$info -> desc -> code_SAQ = utf8_decode(trim($aRes[0]));
 				}
                 
@@ -124,34 +121,19 @@ class SAQ extends Modele {
 				}
                 
 				$info -> desc -> texte = utf8_decode(trim($info -> desc -> texte));
-//                
-//                echo "<pre>";
-//                var_dump($info);
-//                echo "</pre>";
 			}
 		}
         
 		$p = $noeud -> getElementsByTagName("td");
         
-//        echo "<pre>";
 		foreach ($p as $node) {
-//            var_dump($node -> textContent);
 			if ($node -> getAttribute('class') == 'price') {
 				$info -> prix = trim($node -> textContent);
-//                echo "PRIX (1)\n";
-//                var_dump($info -> prix);
 				preg_match("/ \r\n(.*)$/", $info -> prix, $aRes);
-//                echo "aRes[1]\n";
-//                var_dump($aRes[1]);
 				$info -> prix = utf8_decode(trim($aRes[1]));
-//                echo "PRIX (2)\n";
-//                var_dump($info -> prix);
                 $info -> prix = preg_replace("/,/", ".", $info -> prix); // Pour avoir un float
-//                echo "PRIX (3)\n";
-//                var_dump($info -> prix);
 			}
 		}
-//        echo "</pre>";
 
 		return $info;
 	}
@@ -161,14 +143,8 @@ class SAQ extends Modele {
 		$retour -> succes = false;
 		$retour -> raison = '';
 
-//        echo "<pre>";
-//        echo "BTE\n";
-//        var_dump($bte);
-//        echo "</pre>";
-//
 		// Récupère le type
         $sql = "select id_type from vino__type where type = '" . $bte -> desc -> type . "'";
-        echo $sql . "\n";            
 		$rows = $this -> _db -> query($sql);
 		
 		if ($rows -> num_rows == 1) {
@@ -177,7 +153,6 @@ class SAQ extends Modele {
 
             $sql = "select id_bouteille_saq from vino__bouteille__saq where code_saq = '" . $bte -> desc -> code_SAQ . "'";
 
-            echo $sql . "\n";            
 			$rows = $this -> _db -> query($sql);
             
 			if ($rows -> num_rows < 1) {
@@ -196,6 +171,4 @@ class SAQ extends Modele {
 		return $retour;
 
 	}
-
 }
-?>

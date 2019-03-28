@@ -4,14 +4,16 @@
 
 <script src="./js/gererBouteillesSaq.js"></script>
 
-<div class="gererBouteillesSaq">
-    <h1>Gestion du catalogue de bouteilles</h1>
+<div>
+    <div class="boutonSolo">
+        <button id="reinitialiserCatalogue"><i class="fas fa-exclamation"></i>  Réinitialiser le catalogue</button>
+    </div>
 
     <div class="form">
         <div>Recherche dans le catalogue</div>
         
         <div class="group">
-            <label class="icon_form"><i class="fas fa-magic"></i></label>
+            <label class="icon_form"><i class="fas fa-search"></i></label>
             <input name="rechercheCatalogue">
         </div>
     </div>
