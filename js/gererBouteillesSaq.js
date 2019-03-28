@@ -5,6 +5,16 @@
  */
 
 window.addEventListener('load', () => {
+    const inputRecherche = document.querySelector(
+        "[name='rechercheCatalogue']"
+    );
+    
+    const ulBouteillesSaq = document.getElementById("ulBouteillesSaq");
+    
+    const templateLiBouteilleSaq = document.getElementById(
+        "templateLiBouteilleSaq"
+    );
+    
     /**
      *  Retourne la div correspondant à une bouteille SAQ spécifiée par son id.
      *  @param {int} idBouteilleSaq l'id
@@ -52,26 +62,95 @@ window.addEventListener('load', () => {
             console.error(error);
         });            
     }
+
+    /**
+     *  Vide la ul des bouteilles et y ajoute un li pour chacune des bouteilles
+     *  de la liste.
+     *
+     *  @param Array listeBouteillesSaq
+     */
+    function remplirUlBouteillesSaq(listeBouteillesSaq) {
+        ulBouteillesSaq.innerHTML = '';
+        
+        for (bouteille of listeBouteillesSaq) {
+            /*
+                Le li de la bouteille est composé à partir d'un template HTML.
+            */
+            
+            let clone = document.importNode(
+                templateLiBouteilleSaq.content, true
+            );
+            
+            let li = clone.querySelector('li');
+            
+            /*
+                On met l'id de la bouteille dans son attribut data-id et son
+                nom dans le span .nom.
+            */
+            
+            li.dataset.id = bouteille.id_bouteille_saq;
+            li.querySelector('.nom').innerHTML = bouteille.nom;
+            
+            /*
+                On insère le bon id de bouteille dans le lien du bouton
+                modifier.
+            */
+            
+            let aBtnModifier = li.querySelector(".btnModifier a");
+            
+            aBtnModifier.href = aBtnModifier.href.replace(
+                /\(id_bouteille_saq\)/, bouteille.id_bouteille_saq
+            );
+            
+            /*
+                On ajoute l'event listener du bouton supprimer. Il demande une
+                confirmation avant de supprimer la bouteille.
+            */
+            
+            li.querySelector(".btnSupprimer").addEventListener('click', evt => {
+                let li = evt.target.closest('li');
+                let idBouteilleSaq = li.dataset.id;
+                let nom = li.querySelector(".nom").innerHTML;
+                
+                let texteConfirm = (
+                    "Suppression de la bouteille \"" + nom + "\""
+                );
+
+                if (confirm(texteConfirm)) {
+                    supprimerBouteilleSaq(idBouteilleSaq);
+                }                
+            });
+            
+            ulBouteillesSaq.appendChild(li);
+        }
+    }
     
     /*
-        Event listener pour le bouton supprimer de chaque div bouteilleSaq. Demande une confirmation à l'administrateur avant de faire la suppression.
+        L'input recherche est un autocomplete qui remplit la liste.
     */
-    
-    document.querySelectorAll('.bouteilleSaq').forEach(divBouteilleSaq => {
-        let idBouteilleSaq = divBouteilleSaq.dataset.id;
-        
-        divBouteilleSaq.querySelector(".btnSupprimer").addEventListener('click', evt => {
-            let nomBouteille = divBouteilleSaq.querySelector(".nom").innerHTML;
-            let codeSaq = divBouteilleSaq.querySelector(".codeSaq").innerHTML;
 
-            let texteConfirm = (
-                "Suppression de la bouteille \"" + nomBouteille + "\" " + 
-                "(code SAQ " + codeSaq + ")"
-            );
+    inputRecherche.addEventListener("keyup", evt => {
+        let requete = new Request(
+            BaseURL + "index.php?requete=autocompleteBouteille",
+            {method: 'POST', body: '{"nom": "' + inputRecherche.value + '"}'}
+        );
 
-            if (confirm(texteConfirm)) {
-                supprimerBouteilleSaq(idBouteilleSaq);
+        console.log(requete);
+
+        fetch(requete).then(response => {
+            if (response.status === 200) {
+                return response.json();
             }
-        });
+            else {
+                throw new Error('Erreur');
+            }
+        })
+        .then(response => {
+            console.log(response);
+            remplirUlBouteillesSaq(response);
+        })
+        .catch(error => {
+            console.error(error);
+        });        
     });
 });
