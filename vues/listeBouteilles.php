@@ -5,6 +5,7 @@
         <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
     </div>
 
+    <!--Bouton choisir affichage-->
     <div class="afficheListe">
         <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
         <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
@@ -159,7 +160,6 @@
                 <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
 
                 <?php
-
             }
             ?>
         </div>
@@ -180,19 +180,3 @@
 </div>
 
 <!--</div>-->
-<script>
-    window.addEventListener('load', function(){
-        var afficherListe = document.querySelector('.afficherListeBouteille');
-        var afficherVignette = document.querySelector('.afficherVignetteBouteille');
-        var liste = document.getElementById('listeBouteille');
-
-        afficherListe.addEventListener('click', function(){
-            alert('Liste');
-            liste.classList.remove('listeBouteilleParListe')
-            liste.classList.add('listeBouteilleParListe')
-        });
-        afficherVignette.addEventListener('click', function(){
-            alert('Vignette');
-        });
-    })
-</script>

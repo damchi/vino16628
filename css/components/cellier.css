@@ -1,5 +1,5 @@
 
-.boutonHaut, .afficheListe {
+#recherche_bouteille_cellier, .boutonHaut, .afficheListe {
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -23,14 +23,13 @@
     .afficheListe{
         display: inline;
     }
-
-    .listeBouteille{
+    /*.listeBouteille{
         display: grid;
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: 10px;
         margin: 10px;
-    }
+    }*/
 
 }
 
