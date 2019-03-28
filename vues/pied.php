@@ -1,6 +1,6 @@
 
         </main>
-        <footer class="pied">
+        <footer>
             <p>
                 <a href="http://www.cmaisonneuve.qc.ca/"></a>
             </p>

@@ -4,12 +4,13 @@
    margin: 14px;
 }
 
-.entete {
+header {
+    background-color: #701139;
     /*background-color: #701139;*//*Foncé*/
     /*background-color: #97174C;*/
     background-color: #A80549;/*Plus rouge?tre*/
-
     width: 100%;
+    padding-left: 10%;
 }
 
 .topnav {
@@ -30,13 +31,10 @@
   text-decoration: none;
 }
 
-/* Change the color of links on hover */
-/*
+/* Change la couleur du hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  color: #c2c2c2;
 }
-*/
 
 /* Largeur minimale de l'icône de l'item pour présentation verticale (sauf pour le hamburger à droite) */
 @media screen and (max-width: 600px) {
@@ -58,7 +56,7 @@
   color: white;
 }
 
-/* Hide the link that should open and close the topnav on small screens */
+/* Cache le bouton d'affichage du menu sur grand écran */
 .topnav .burger {
   display: none;
 }
@@ -83,14 +81,14 @@
     text-align: left;
   }
 
-  .topnav.responsive a.burger {
+  .burger {
     position: absolute;
     right: 0;
     top: 0;
   }
     
-  .enteteImage {
-    display: none;
+  #logo {
+    height: 40px;
   }
 
   footer {
