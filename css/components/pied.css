@@ -1,13 +1,13 @@
-.pied{
+footer {
     background-color: #701139;
     text-align: center;
+    font-size: 0.8em;
     color: #eee;
     padding: 5px;
-    font-size: 1em;
     width: 100%;
 }
 
-.pied>p>a{
+footer>p>a{
     text-decoration: none;
     color: #eee;
 }
