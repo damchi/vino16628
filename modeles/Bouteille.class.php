@@ -38,9 +38,9 @@ class Bouteille extends Modele {
         
         $sql = "
             INSERT INTO vino__bouteille (id_cellier, nom, code_saq, pays, url_saq, url_img, format, date_achat, garde_jusqua, notes, prix, quantite, millesime, type)
-            VALUES ($idCellier, '$nom', '$codeSaq', '$pays', $urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)
+            VALUES ($idCellier, '$nom', '$codeSaq', '$pays', '$urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)
         ";        
-
+        var_dump($sql);
         $this->_db->query($sql);
 		
         return $this->_db->insert_id;
@@ -341,33 +341,30 @@ class Bouteille extends Modele {
         return $retour;
     }
 
-    /**
-     * @param $idCellier
-     * @param $nom
-     * @param int $nb_resultat
-     * @return array
-     */
-	public function chercheBouteille($idCellier, $nom, $nbResultats = 10) {
-        $idCellier = (int) $idCellier;
-        $nom = $this->_db->escape_string($nom);
-        $nom = preg_replace("/\*/", "%", $nom);
-        $nbResultats = (int) $nbResultats;
-
-        $sql = "
-            SELECT DISTINCT nom FROM " . self::TABLE . "
-            WHERE id_cellier = $idCellier AND LOWER(nom) LIKE LOWER('%$nom%')
-            LIMIT 0, $nbResultats
-        ";
-
-        $res = $this->_db->query($sql);
-        $rows = Array();
-
-        while ($row = $res->fetch_assoc()) {
-            $rows[] = $row;
-        }
-        
-        return $rows;
-    }
+//    /**
+//     * @param $idCellier
+//     * @param $nom
+//     * @param int $nb_resultat
+//     * @return array
+//     */
+//	public function chercheBouteille($idCellier, $nom, $nbResultats = 10) {
+//        $idCellier = (int) $idCellier;
+//        $nom = $this->_db->escape_string($nom);
+//        $nom = preg_replace("/\*/", "%", $nom);
+//        $nbResultats = (int) $nbResultats;
+//
+//        $sql = "
+//            SELECT DISTINCT nom FROM " . self::TABLE . "
+//            WHERE id_cellier = $idCellier AND LOWER(nom) LIKE LOWER('%$nom%')
+//            LIMIT 0, $nbResultats
+//        ";
+//        $res = $this->_db->query($sql);
+//        $rows = Array();
+//        while ($row = $res->fetch_assoc()) {
+//            $rows[] = $row;
+//        }
+//        return $rows;
+//    }
 
     /**
      * rempli select millisime dans le filtre
@@ -470,4 +467,39 @@ class Bouteille extends Modele {
         }
         return $bouteilles;
     }
+
+
+    /**
+     * @param $idCellier
+     * @param $nom
+     * @param int $nb_resultat
+     * @return array
+     */
+    public function chercheBouteille($idCellier,$nom, $nb_resultat = 10){
+//	    var_dump($idCellier);
+//	    var_dump($nom);
+        $bouteilles = array();
+
+        $nom = $this->_db->real_escape_string($nom);
+//        $nom = preg_replace("/\*/","%" , $nom);
+//        $nom = '%'.$nom.'%';
+
+//	    var_dump($idCellier);
+
+//        $sql = " SELECT *  FROM " . self::TABLE . "
+//            WHERE  id_cellier = ".$id;
+        $sql = " SELECT * FROM " . self::TABLE . "
+            WHERE id_cellier = $idCellier AND ( LOWER(nom) LIKE '%".$nom. "%' OR lower(notes) LIKE '%".$nom. "%'OR lower(pays) LIKE '%".$nom. "%' OR lower(description) LIKE '%".$nom. "%' OR lower(millesime) LIKE '%".$nom. "%' OR lower(format) LIKE '%".$nom. "%')LIMIT 0," .$nb_resultat;
+
+//        var_dump($sql);
+
+        if (!($res = $this->_db->query($sql))) {
+            throw new Exception($this->_err['requete'] . $this->_db->error, 1);
+        }
+        while ($row = $res->fetch_assoc()) {
+            $bouteilles[] = $row;
+        }
+        return $bouteilles;
+    }
+
 }

@@ -37,6 +37,9 @@ class Controler
             case 'autocompleteBouteille':
                 $this->autocompleteBouteille();
                 break;
+            case 'autocompleteBouteilleListe':
+                $this->autocompleteBouteilleListe();
+                break;
             case 'nouvelleBouteilleCellier':
                 if (isset($_SESSION['user_pseudo'])) {
                     $this->nouvelleBouteilleCellier();
@@ -244,6 +247,15 @@ class Controler
         $bte = new Bouteille();
         $body = json_decode(file_get_contents('php://input'));
         $listeBouteille = $bte->autocomplete($body->nom);
+        echo json_encode($listeBouteille);
+
+    }
+
+    private function autocompleteBouteilleListe()
+    {
+        $bte = new Bouteille();
+        $body = json_decode(file_get_contents('php://input'));
+        $listeBouteille = $bte->chercheBouteille($_SESSION['idCellier'], $body->nom);
         echo json_encode($listeBouteille);
 
     }

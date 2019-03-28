@@ -14,13 +14,11 @@
     border-top: 1px solid #701139;    
 }
 
-/*@media only screen and (min-width: 960px){
+@media only screen and (min-width: 600px){
     .carte{
         border: 1px solid #701139;
     }
-    .carte{
-        display: flex;
-    }
+
     .carte-titre{
          width: 200px;
         margin-right: 10px;
@@ -33,7 +31,34 @@
         width:200px;
         margin-right: 10px;
     }
-}*/
+    .carte-information_2{
+        width:200px;
+        margin-right: 10px;
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 599px){
+    .carte{
+        border: 1px solid #701139;
+    }
+
+    .carte-titre{
+        max-width: 200px;
+        margin-right: 10px;
+    }
+    .carte-image{
+        width:100px;
+        margin-right: 10px;
+    }
+    .carte-information{
+        width:200px;
+        margin-right: 10px;
+    }
+    .carte-information_2{
+        display: none;
+    }
+}
 
 /*Element de la carte*/
 
@@ -46,13 +71,13 @@
 .carte-information{
     order:3;
     grid-area: carteInformation;
-    display: grid;
+    /*display: grid;
     grid-template-columns: auto;
     grid-template-areas:    "quantite"
                             "pays"
                             "type"
                             "millesime"
-                            "code_saq";
+                            "code_saq";*/
 /*    min-width: 300px;*/
 }
 
