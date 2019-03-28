@@ -24,7 +24,6 @@
     <script src="./js/cellier.js"></script>
     <script src="./js/listeBouteilles.js"></script>
     <script src="./js/formBouteille.js"></script>
-    <script src="./js/gererBouteillesSaq.js"></script>
 </head>
 
 <body>
