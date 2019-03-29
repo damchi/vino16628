@@ -1,117 +1,69 @@
-
-
-<div class="group hautDePage">
-    <!-- Bouton Ajouter une bouteille -->
-    <div class="boutonSolo boutonHaut">
-        <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
-    </div>
+<div class="hautDePage">
 
     <!-- Recherche Bouteille-->
-
-    <div id="recherche_bouteille_cellier">
-        <label class="icon_form"><i class="fas fa-search"></i></label>
-        <input type="text" name="rechercheInfo" placeholder="Recherche">
+    <div>
+        <div id="recherche_bouteille_cellier">
+            <label class="icon_form"><i class="fas fa-search"></i></label>
+            <input type="text" name="rechercheInfo" placeholder="Recherche">
+        </div>
+        <ul class="listeAutoComplete"></ul>
     </div>
-    <ul class="listeAutoComplete"></ul>
-
     <!--Bouton choisir affichage-->
     <div class="afficheListe">
         <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
         <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
     </div>
-
 </div>
 
 <div class="recherche">
-
     <input type="hidden" name="idCellier" value="<?= $_SESSION['idCellier']?>">
-    <p>Filtrer par </p>
+    <button>Filtrer par</button>
+    <div class="filtreRecherche">
+        <select name="pays">
+            <option value="">Pays</option>
+            <?php
+            foreach ( $data['pays'] as  $pays){
+                if ($pays['pays'] != ""){
+                    echo '<option value="'.$pays['pays'].' ">'.$pays['pays'].'</option>';
+                }
 
-    <select name="pays">
-        <option value="">Pays</option>
-        <?php
-        foreach ( $data['pays'] as  $pays){
-            if ($pays['pays'] != ""){
-                echo '<option value="'.$pays['pays'].' ">'.$pays['pays'].'</option>';
             }
+            ?>
 
-        }
-        ?>
-
-    </select>
-    <select name="millesime">
-        <option value="">Millésimes</option>
-        <?php
-        foreach ( $data['millesime'] as  $millesime){
-            if ($millesime['millesime'] != ""){
-                echo '<option value="'.$millesime['millesime'].'">'.$millesime['millesime'].'</option>';
+        </select>
+        <select name="millesime">
+            <option value="">Millésimes</option>
+            <?php
+            foreach ( $data['millesime'] as  $millesime){
+                if ($millesime['millesime'] != ""){
+                    echo '<option value="'.$millesime['millesime'].'">'.$millesime['millesime'].'</option>';
+                }
             }
-        }
-        ?>
+            ?>
 
 
-    </select>
-    <select name="type">
-        <option value="">Type</option>
-        <?php
-        foreach ( $data['type'] as  $type){
-            echo '<option value="'.$type['id_type']. '">'.$type['type'].'</option>';
-        }
-        ?>
+        </select>
+        <select name="type">
+            <option value="">Type</option>
+            <?php
+            foreach ( $data['type'] as  $type){
+                echo '<option value="'.$type['id_type']. '">'.$type['type'].'</option>';
+            }
+            ?>
 
-    </select>
+        </select>
+    </div>
     <button id="reset"> Remettre à zéro</button>
 
     <div id="errorFiltre"></div>
+
 </div>
 
-<!--<div class="listeBouteilletab">
+<!-- Bouton Ajouter une bouteille -->
+<div class="boutonSolo boutonHaut" class="group">
+        <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
+</div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>SAQ</th>
-                <th>Type</th>
-                <th>Pays</th>
-                <th>Prix</th>
-                <th>Quantité</th>
-                <th>Format</th>
-                <th>Date d'achat</th>
-                <th>Garder Jusqu'à</th>
-                <th>Notes</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-/*        foreach ($data['listeBouteilles'] as $cle => $bouteille) {
-        */?>
-        <tr>
-            <td><?php /*echo $bouteille['nom'] */?></td>
-            <td><a href="<?php /*echo $bouteille['url_saq']*/?>">Saq</a></td>
-            <td><?php /*echo $bouteille['type'] */?></td>
-            <td><?php /*echo $bouteille['pays'] */?></td>
-            <td><?php /*echo $bouteille['prix'] */?></td>
-            <td><?php /*echo $bouteille['quantite'] */?></td>
-            <td><?php /*echo $bouteille['format'] */?></td>
-            <td><?php /*echo $bouteille['date_achat'] */?></td>
-            <td><?php /*echo $bouteille['garde_jusqua'] */?></td>
-            <td><?php /*echo $bouteille['notes'] */?></td>
-            <td>
-                <button class='btnAjouter'><i class="fas fa-plus"></i></button>
-                <button class='btnBoire'><i class="fas fa-minus"></i></button>
-                <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?/*= $bouteille['id_bouteille'] */?>"><i class="fas fa-edit"></i></a></button>
-                <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button>
-            </td>
-        </tr>
-
-		<?php
-/*	    }
-	    */?>
-        </tbody>
-    </table>
-</div>-->
 
 <div id="listeBouteille" class="listeBouteilleParVignette">
     <?php

@@ -13,6 +13,16 @@
     margin-bottom: 10px;
 }
 
+.group2{
+    display: flex;
+    width: 100%;
+    margin: auto;
+}
+
+.group2:not(:last-child) {
+    margin-bottom: 10px;
+}
+
 .icon_form{
     display: inline-block;
     background-color: #97174C;

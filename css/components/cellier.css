@@ -1,4 +1,3 @@
-
 #recherche_bouteille_cellier, .boutonHaut, .afficheListe {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -11,6 +10,17 @@
 .listeBouteille{
     display: grid;
 }
+
+/* listeBouteille */
+.hautDePage{
+    display: flex;
+}
+
+.recherche{
+   display: flex; 
+}
+
+
 
 @media only screen and (min-width: 600px){
     .listeBouteilleParVignette{
@@ -41,7 +51,6 @@
         grid-gap: 10px;
         margin: 10px;
     }*/
-
 }
 
 #formCellier{
@@ -55,3 +64,4 @@
 #reset{
     display: none;
 }
+

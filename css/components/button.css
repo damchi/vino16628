@@ -28,7 +28,7 @@ button a{
 }
 
 @media only screen and (max-width: 599px){
-    .boutonSolo button{
+    .boutonSolo button, #recherche_bouteille_cellier input[text]{
         width: 100%;
     }
 }
