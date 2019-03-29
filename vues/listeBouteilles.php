@@ -13,8 +13,6 @@
         <input type="text" name="rechercheInfo" placeholder="Recherche">
     </div>
   
-    <ul class="listeAutoComplete"></ul>
-
     <!--Bouton choisir affichage-->
     <div class="afficheListe">
         <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
@@ -25,6 +23,7 @@
 
 <div class="recherche">
 
+    <ul class="listeAutoComplete"></ul>
     <input type="hidden" name="idCellier" value="<?= $_SESSION['idCellier']?>">
     <p>Filtrer par </p>
 
