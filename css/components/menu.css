@@ -5,10 +5,8 @@
 }
 
 header {
-    background-color: #701139;
-    /*background-color: #701139;*//*Foncé*/
-    /*background-color: #97174C;*/
-    background-color: #A80549;/*Plus rouge?tre*/
+    
+    background-color: #97174C;/*Plus rouge?tre*/
     width: 100%;
     padding-left: 10%;
 }
