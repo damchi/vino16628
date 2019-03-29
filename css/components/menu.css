@@ -1,30 +1,44 @@
 #logo {
-   float: left;
-   height: 70px;
-   margin: 14px;
+  height: 55px;
+  margin: 14px;
+}
+
+#colLogo {
+  padding-left: 15%;
+  flex: 1;
+  width: 25%;
 }
 
 header {
-    background-color: rgba(127, 37, 60, 0.80);
-    /*background-color: #701139;Foncé*/
-    /*background-color: #97174C;*/
-    /*background-color: #A80549;Plus rouge?tre*/
-    width: 100%;
-    padding-left: 10%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  background-color: rgba(127, 37, 60, 0.80);
+  /*background-color: #701139;Foncé*/
+  /*background-color: #97174C;*/
+  /*background-color: #A80549;Plus rouge?tre*/
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.colNav {
+  flex: 2;
+  width: 75%;
+  align-items: center;
 }
 
 .topnav {
-    clear: both;
-    /*background-color: #701139;*/
-    /*background-color: #97174C;*/
-    /*background-color: #A80549;/*Plus rouge?tre*/
-    overflow: hidden;
+  /*background-color: #701139;*/
+  /*background-color: #97174C;*/
+  /*background-color: #A80549;/*Plus rouge?tre*/
+  overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
-  display: block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
@@ -53,12 +67,6 @@ header {
   display: none;
 }
 
-#logo {
-   float: left;
-   height: 70px;
-   margin: 14px;
-}
-
 .topnav a:not(.burger) i {
     margin-right: 10px;
 }
@@ -76,6 +84,10 @@ header {
 
 /* Affichage du header sur mobile */ 
 @media screen and (max-width: 600px) {
+  header {
+    background-color: #7f253c;
+  }
+
   .topnav.responsive { position: relative; }
     
   .topnav.responsive a:not(.burger) {
