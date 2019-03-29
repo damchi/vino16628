@@ -11,6 +11,11 @@
 @import url("components/table.css");
 @import url("components/formLogin.css");
 
+        /*---Index---*/
+/*
+mc = caché sur mobile
+*/
+
 *{
     box-sizing: border-box;    
 }
@@ -50,4 +55,14 @@ main{
         padding-top: 10px;
     }
 
+}
+
+.mc {
+    display: none;
+}
+
+@media screen and (min-width: 600px) {
+    .mc {
+        display: all;
+    }
 }
