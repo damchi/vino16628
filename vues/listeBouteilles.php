@@ -1,5 +1,3 @@
-
-
 <div class="group hautDePage">
     <!-- Bouton Ajouter une bouteille -->
     <div class="boutonSolo boutonHaut">
@@ -64,6 +62,8 @@
 
     <div id="errorFiltre"></div>
 </div>
+
+<button id="fb-share-button">Partager</button>
 
 <!--<div class="listeBouteilletab">
 
@@ -138,14 +138,7 @@
                             href="<?php echo $bouteille['url_saq'] ?>"><?php echo $bouteille['code_saq'] ?></a></div>
                 <?php
             }
-            ?>
-
-<!--            <!-- Your share button code -->
-<!--            <div class="fb-share-button"-->
-<!--                 data-href="https://www.your-domain.com/your-page.html"-->
-<!--                 data-layout="button_count">-->
-<!--            </div>-->
-
+                ?>
         </div>
 
         <div class="carte-information_2">
@@ -178,6 +171,7 @@
         <!-- Bouton -->
         <div class="carte-pied">
             <button class='btnAjouter'><i class="fas fa-plus"></i></button>
+            <button class='btnVoir'><a href="index.php?requete=bouteilleIndividuelle&idBouteille=<?= $bouteille['id_bouteille'] ?>">Voir bouteille</a></button>
             <button class='btnBoire'><i class="fas fa-minus"></i></button>
             <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>"><i class="fas fa-edit"></i></a></button>
             <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button>

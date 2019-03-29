@@ -61,6 +61,13 @@ class Controler
                     $this->fermerSession();
                 }
                 break;
+            case 'bouteilleIndividuelle':
+                if (isset($_SESSION['user_pseudo'])) {
+                    $this->voirBouteille();
+                } else {
+                    header("Location: index.php?requete=login");
+                }
+                break;
             case 'supprimerBouteille':
                 if (isset($_SESSION['user_pseudo'])) {
                     $this->supprimerBouteille();
@@ -316,6 +323,35 @@ class Controler
                     header("Location: index.php?requete=listeBouteilleCellier&idCellier=" . $bouteille['id_cellier']);
                     break;
             }
+        }
+    }
+
+    private function voirBouteille()
+    {
+        $bte = new Bouteille();
+        $usr = new Usager();
+
+        if ($usr->estProprietaireBouteille($_SESSION['user_pseudo'], $_GET['idBouteille'])) {
+//            switch ($_SERVER['REQUEST_METHOD']) {
+//                case 'GET':
+                    $data['bouteille'] = $bte->getBouteille($_GET['idBouteille']);
+                    $data['types'] = $bte->getTypes();
+                    include("vues/entete.php");
+                    include("vues/bouteilleIndividuelle.php");
+                    include("vues/pied.php");
+//                    break;
+
+//                case 'POST':
+//                    $bouteille = [];
+//
+//                    foreach ($_POST as $cle => $valeur) {
+//                        $bouteille[$cle] = !empty($valeur) ? $valeur : null;
+//                    }
+//
+//                    $bte->modifierBouteille($bouteille);
+//                    header("Location: index.php?requete=listeBouteilleCellier&idCellier=" . $bouteille['id_cellier']);
+//                    break;
+//            }
         }
     }
 
