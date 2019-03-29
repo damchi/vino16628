@@ -1,6 +1,6 @@
 
 
-<div class="group hautDePage">
+<div class="hautDePage">
     <!-- Bouton Ajouter une bouteille -->
     <div class="boutonSolo boutonHaut">
         <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
@@ -8,10 +8,11 @@
 
     <!-- Recherche Bouteille-->
 
-    <div id="recherche_bouteille_cellier">
+    <div id="recherche_bouteille_cellier" class="group">
         <label class="icon_form"><i class="fas fa-search"></i></label>
         <input type="text" name="rechercheInfo" placeholder="Recherche">
     </div>
+  
     <ul class="listeAutoComplete"></ul>
 
     <!--Bouton choisir affichage-->
