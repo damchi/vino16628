@@ -1,12 +1,12 @@
 .form{
-    max-width: 600px;
-    padding: 10px;
-    margin: auto;
+    margin-bottom: 25px;
 }
 
 .group{
     display: flex;
     width: 100%;
+    max-width: 325px;
+    margin: auto;
 }
 
 .group:not(:last-child) {
