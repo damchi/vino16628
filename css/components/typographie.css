@@ -1,6 +1,6 @@
 /* --- Google Fonts --- */
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Montserrat:400,700");
-@import url("https://fonts.googleapis.com/css?family=Alegreya|Lato|Libre+Franklin|Raleway|Roboto+Slab");
+@import url("https://fonts.googleapis.com/css?family=Alegreya|Lato|Libre+Franklin|Raleway|Roboto");
 
 /* --- Couleur de référence pour le site Vino --- */
     /*background-color: #701139;*/ /*Foncé*/
@@ -23,8 +23,12 @@ body {
     color: #97174C;
 }
 
-h1, h2, h3 {
-    font-family: 'Libre Franklin', serif;
+.titreNav {
+    font-weight: 500;
+}
+
+h1, h2, h3, .titreNav {
+    font-family: 'Roboto', serif;
 }
 
 @media (max-width:600px){
