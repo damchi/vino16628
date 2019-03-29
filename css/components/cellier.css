@@ -32,6 +32,7 @@
 
     /* Alignement des bouton du haut de la page listeBoiuteile.php */
     .hautDePage{
+        display: flex;
         justify-content: space-between;
     }
     /*.listeBouteille{
