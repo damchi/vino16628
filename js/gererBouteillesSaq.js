@@ -5,29 +5,109 @@
  */
 
 window.addEventListener('load', () => {
-    const inputRecherche = document.querySelector(
-        "[name='rechercheCatalogue']"
-    );
+    /*
+        Éléments de la page
+    */
     
-    const ulBouteillesSaq = document.getElementById("ulBouteillesSaq");
+    const boutonReinitialiser =
+        document.getElementById('reinitialiserCatalogue');
     
-    const templateLiBouteilleSaq = document.getElementById(
-        "templateLiBouteilleSaq"
-    );
+    const inputRecherche =
+        document.querySelector('[name="rechercheCatalogue"]');
     
-    /**
-     *  Retourne la div correspondant à une bouteille SAQ spécifiée par son id.
-     *  @param {int} idBouteilleSaq l'id
-     *  @returns {element} La div
-     */
-    function divBouteilleSaq(idBouteilleSaq) {
-        return document.querySelector(
-            ".bouteilleSaq[data-id='" + idBouteilleSaq + "']"
+    const ulBouteillesSaq =
+          document.getElementById('ulBouteillesSaq');
+    
+    const templateLiBouteilleSaq =
+        document.getElementById('templateLiBouteilleSaq');
+        
+    /*
+        Le bouton "réinitialiser le catalogue" demande une confirmation avant
+        d'effacer le catalogue existant et d'importer la liste des bouteilles
+        depuis le site de la SAQ. On vide ensuite l'input de recherche et on
+        recharge les résultats.
+    */
+    
+    boutonReinitialiser.addEventListener('click', () => {
+        let texteConfirmation =
+            "Le catalogue actuel sera supprimé et la liste des bouteilles " +
+            "sera importée depuis le site de la SAQ. " +
+            "Êtes-vous sûr de vouloir continuer?";
+
+        if (confirm(texteConfirmation)) {
+            reinitialiserCatalogue();
+        }   
+    });
+    
+    /*
+        L'input recherche est un autocomplete qui remplit la liste au fur et à
+        mesure qu'on tape des lettres.
+    */
+
+    inputRecherche.addEventListener('keyup', () => {
+        chargerResultatRecherche();
+    });
+    
+    /*
+        On remplit la liste avec la recherche vide lors de l'initialisation de
+        la page.
+    */
+    
+    chargerResultatRecherche();
+    
+    function chargerResultatRecherche() {
+        let requete = new Request(
+            BaseURL + "index.php?requete=autocompleteBouteille",
+            {method: 'POST', body: '{"nom": "' + inputRecherche.value + '"}'}
         );
+
+        console.log(requete);
+
+        fetch(requete).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            else {
+                throw new Error('Erreur');
+            }
+        })
+        .then(response => {
+            console.log(response);
+            remplirUlBouteillesSaq(response);
+        })
+        .catch(error => {
+            console.error(error);
+        });        
     }
     
+    function reinitialiserCatalogue() {
+        let requete = new Request(
+            BaseURL + "index.php?requete=reinitialiserCatalogue",
+            {method: 'POST', body: '{}'}
+        );
+
+        console.log(requete);
+
+        fetch(requete).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            else {
+                throw new Error('Erreur');
+            }
+        })
+        .then(response => {
+            console.log(response);
+            inputRecherche.value = '';
+            chargerResultatRecherche();
+        })
+        .catch(error => {
+            console.error(error);
+        });        
+    }
+
     /**
-     *  ait la requête Ajax pour supprimer une bouteille SAQ donnée et l'enlève du DOM.
+     *  Fait la requête Ajax pour supprimer une bouteille SAQ donnée et l'enlève du DOM.
      *  @param {int} idBouteilleSaq
      */
     function supprimerBouteilleSaq(idBouteilleSaq) {
@@ -96,9 +176,9 @@ window.addEventListener('load', () => {
                 modifier.
             */
             
-            let aBtnModifier = li.querySelector(".btnModifier a");
+            let lienModifier = li.querySelector(".btnModifier a");
             
-            aBtnModifier.href = aBtnModifier.href.replace(
+            lienModifier.href = lienModifier.href.replace(
                 /\(id_bouteille_saq\)/, bouteille.id_bouteille_saq
             );
             
@@ -106,17 +186,19 @@ window.addEventListener('load', () => {
                 On ajoute l'event listener du bouton supprimer. Il demande une
                 confirmation avant de supprimer la bouteille.
             */
+
+            let boutonSupprimer = li.querySelector(".btnSupprimer");
             
-            li.querySelector(".btnSupprimer").addEventListener('click', evt => {
+            boutonSupprimer.addEventListener('click', evt => {
                 let li = evt.target.closest('li');
                 let idBouteilleSaq = li.dataset.id;
                 let nom = li.querySelector(".nom").innerHTML;
                 
-                let texteConfirm = (
+                let texteConfirmation = (
                     "Suppression de la bouteille \"" + nom + "\""
                 );
 
-                if (confirm(texteConfirm)) {
+                if (confirm(texteConfirmation)) {
                     supprimerBouteilleSaq(idBouteilleSaq);
                 }                
             });
@@ -124,33 +206,15 @@ window.addEventListener('load', () => {
             ulBouteillesSaq.appendChild(li);
         }
     }
-    
-    /*
-        L'input recherche est un autocomplete qui remplit la liste.
-    */
 
-    inputRecherche.addEventListener("keyup", evt => {
-        let requete = new Request(
-            BaseURL + "index.php?requete=autocompleteBouteille",
-            {method: 'POST', body: '{"nom": "' + inputRecherche.value + '"}'}
+    /**
+     *  Retourne la div correspondant à une bouteille SAQ spécifiée par son id.
+     *  @param {int} idBouteilleSaq l'id
+     *  @returns {element} La div
+     */
+    function divBouteilleSaq(idBouteilleSaq) {
+        return document.querySelector(
+            ".bouteilleSaq[data-id='" + idBouteilleSaq + "']"
         );
-
-        console.log(requete);
-
-        fetch(requete).then(response => {
-            if (response.status === 200) {
-                return response.json();
-            }
-            else {
-                throw new Error('Erreur');
-            }
-        })
-        .then(response => {
-            console.log(response);
-            remplirUlBouteillesSaq(response);
-        })
-        .catch(error => {
-            console.error(error);
-        });        
-    });
+    }
 });
