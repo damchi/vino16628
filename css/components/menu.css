@@ -28,6 +28,8 @@ header {
   flex: 2;
   width: 75%;
   align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .topnav {
