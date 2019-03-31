@@ -4,8 +4,8 @@
 
 <script src="./js/gererBouteillesSaq.js"></script>
 
-<div>
-    <div class="boutonSolo">
+<div class="gererBouteilles">
+    <div class="hautDePage">
         <button id="reinitialiserCatalogue"><i class="fas fa-exclamation"></i>  Réinitialiser le catalogue</button>
     </div>
 
@@ -18,16 +18,18 @@
         </div>
     </div>
     
-    <ul id="ulBouteillesSaq"></ul>
+    <div id="listeBouteilles" class="listeBouteilleParVignette"></div>
 </div>
 
-<template id="templateLiBouteilleSaq">
-    <li class="bouteilleSaq" data-id="(id_bouteille_saq)">
-        <span class="nom"></span>
+<template id="templateBouteille">
+    <div class="carte bouteille" data-id="(id_bouteille_saq)">
+        <div class="carte-titre">
+            <h4 class="nom"></h4>
+        </div>
 
-        <div class="boutons">
+        <div class="carte-pied">
             <button class='btnModifier'><a href="index.php?requete=modifierBouteilleSaq&idBouteilleSaq=(id_bouteille_saq)"><i class="fas fa-edit"></i></a></button>
             <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button>                
         </div>
-    </li>
+    </div>
 </template>

@@ -15,11 +15,11 @@ window.addEventListener('load', () => {
     const inputRecherche =
         document.querySelector('[name="rechercheCatalogue"]');
     
-    const ulBouteillesSaq =
-          document.getElementById('ulBouteillesSaq');
+    const divListeBouteilles =
+          document.getElementById('listeBouteilles');
     
-    const templateLiBouteilleSaq =
-        document.getElementById('templateLiBouteilleSaq');
+    const templateBouteille =
+        document.getElementById('templateBouteille');
         
     /*
         Le bouton "réinitialiser le catalogue" demande une confirmation avant
@@ -73,7 +73,7 @@ window.addEventListener('load', () => {
         })
         .then(response => {
             console.log(response);
-            remplirUlBouteillesSaq(response);
+            remplirDivListeBouteilles(response);
         })
         .catch(error => {
             console.error(error);
@@ -108,16 +108,16 @@ window.addEventListener('load', () => {
 
     /**
      *  Fait la requête Ajax pour supprimer une bouteille SAQ donnée et l'enlève du DOM.
-     *  @param {int} idBouteilleSaq
+     *  @param {int} idBouteille
      */
-    function supprimerBouteilleSaq(idBouteilleSaq) {
+    function supprimerBouteille(idBouteille) {
         /*
             Requête Ajax de suppression
         */
 
         let requete = new Request(
             BaseURL + "index.php?requete=supprimerBouteilleSaq",
-            {method: 'POST', body: '{"id": ' + idBouteilleSaq + '}'}
+            {method: 'POST', body: '{"id": ' + idBouteille + '}'}
         );
 
         console.log(requete);
@@ -136,7 +136,12 @@ window.addEventListener('load', () => {
             */
 
             console.log(response);
-            divBouteilleSaq(idBouteilleSaq).remove();
+          
+            let divBouteille = divListeBouteilles.querySelector(
+                ".bouteille[data-id='" + idBouteille + "']"
+            );
+
+            divBouteille.remove();
         })
         .catch(error => {
             console.error(error);
@@ -147,36 +152,36 @@ window.addEventListener('load', () => {
      *  Vide la ul des bouteilles et y ajoute un li pour chacune des bouteilles
      *  de la liste.
      *
-     *  @param Array listeBouteillesSaq
+     *  @param Array listeBouteilles
      */
-    function remplirUlBouteillesSaq(listeBouteillesSaq) {
-        ulBouteillesSaq.innerHTML = '';
+    function remplirDivListeBouteilles(listeBouteilles) {
+        divListeBouteilles.innerHTML = '';
         
-        for (bouteille of listeBouteillesSaq) {
+        for (bouteille of listeBouteilles) {
             /*
                 Le li de la bouteille est composé à partir d'un template HTML.
             */
             
             let clone = document.importNode(
-                templateLiBouteilleSaq.content, true
+                templateBouteille.content, true
             );
             
-            let li = clone.querySelector('li');
+            let divBouteille = clone.querySelector('.bouteille');
             
             /*
                 On met l'id de la bouteille dans son attribut data-id et son
                 nom dans le span .nom.
             */
             
-            li.dataset.id = bouteille.id_bouteille_saq;
-            li.querySelector('.nom').innerHTML = bouteille.nom;
+            divBouteille.dataset.id = bouteille.id_bouteille_saq;
+            divBouteille.querySelector('.nom').innerHTML = bouteille.nom;
             
             /*
                 On insère le bon id de bouteille dans le lien du bouton
                 modifier.
             */
             
-            let lienModifier = li.querySelector(".btnModifier a");
+            let lienModifier = divBouteille.querySelector(".btnModifier a");
             
             lienModifier.href = lienModifier.href.replace(
                 /\(id_bouteille_saq\)/, bouteille.id_bouteille_saq
@@ -187,34 +192,34 @@ window.addEventListener('load', () => {
                 confirmation avant de supprimer la bouteille.
             */
 
-            let boutonSupprimer = li.querySelector(".btnSupprimer");
+            let boutonSupprimer = divBouteille.querySelector(".btnSupprimer");
             
             boutonSupprimer.addEventListener('click', evt => {
-                let li = evt.target.closest('li');
-                let idBouteilleSaq = li.dataset.id;
-                let nom = li.querySelector(".nom").innerHTML;
+                let divBouteille = evt.target.closest('.bouteille');
+                let idBouteille = divBouteille.dataset.id;
+                let nom = divBouteille.querySelector(".nom").innerHTML;
                 
                 let texteConfirmation = (
                     "Suppression de la bouteille \"" + nom + "\""
                 );
 
                 if (confirm(texteConfirmation)) {
-                    supprimerBouteilleSaq(idBouteilleSaq);
+                    supprimerBouteille(idBouteille);
                 }                
             });
             
-            ulBouteillesSaq.appendChild(li);
+            divListeBouteilles.appendChild(divBouteille);
         }
     }
 
     /**
      *  Retourne la div correspondant à une bouteille SAQ spécifiée par son id.
-     *  @param {int} idBouteilleSaq l'id
+     *  @param {int} idBouteille l'id
      *  @returns {element} La div
      */
-    function divBouteilleSaq(idBouteilleSaq) {
+    function divBouteille(idBouteille) {
         return document.querySelector(
-            ".bouteilleSaq[data-id='" + idBouteilleSaq + "']"
+            ".bouteilleSaq[data-id='" + idBouteille + "']"
         );
     }
 });
