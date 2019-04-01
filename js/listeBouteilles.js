@@ -310,11 +310,11 @@ window.addEventListener('load', () => {
             if(bouteille.classList.contains('listeBouteilleParListe')){
                 bouteille.classList.remove('listeBouteilleParListe');
                 bouteille.classList.add('listeBouteilleParVignette')
-                listeBouteille.innerHTML = '<i class="fas fa-th"></i>';
+                listeBouteille.innerHTML = '<i class="fas fa-list"></i>';
             }else{
                 bouteille.classList.remove('listeBouteilleParVignette');
                 bouteille.classList.add('listeBouteilleParListe');
-                listeBouteille.innerHTML = '<i class="fas fa-list"></i>';
+                listeBouteille.innerHTML = '<i class="fas fa-th"></i>';
             }
         });
     }

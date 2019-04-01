@@ -1,13 +1,42 @@
-/*  #recherche_bouteille_cellier, .boutonHaut, .afficheListe {
-    margin-top: 10px;
-    margin-bottom: 10px;
+#recherche_bouteille_cellier, .boutonHaut, #afficheListe{
+    margin: 10px 0;
 }
-*/
-/* .afficheListe{
+
+#afficheListe{
+    display:none;
+}
+
+#formCellier{
     display: none;
 }
-*/
+
+#modifCellier{
+    display: none;
+}
+
+#reset{
+    display: none;
+}
+
 @media only screen and (min-width: 600px){
+    #recherche_bouteille_cellier{
+        width: 30%;
+        flex: 1;
+    }
+    .hautDePage{
+        display: flex;
+        flex-direction: row;
+    }
+
+     .hautDePage .boutonHaut{
+        flex: 1;
+    } 
+
+    #afficheListe{
+        display:block;
+        flex:1;
+    }
+
 /*  .listeBouteilleParVignette{
         display: grid;
         grid-area: listeBouteille;
@@ -41,15 +70,5 @@
 */
 }
 
-#formCellier{
-    display: none;
-}
 
-#modifCellier{
-    display: none;
-}
-
-#reset{
-    display: none;
-}
 
