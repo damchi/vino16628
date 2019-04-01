@@ -1,18 +1,8 @@
-.carte{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-areas:    "carteTitre carteTitre"
-                            "carteImage carteInformation"
-                            "cartePied cartePied"
-                            ;
-    grid-gap: 10px;
-    padding: 10px;
-    border-bottom: 1px solid #97174C;
-    background-color: white;
-}
+* Général*/
 
-.carte:first-of-type {
-    border-top: 1px solid #97174C;    
+
+.carte{
+    background-color: white;
 }
 
 a:link{

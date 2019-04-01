@@ -6,21 +6,11 @@
     display: flex;
     flex-wrap: nowrap;
     width: 100%;
-    max-width: 325px;
-    margin: auto;
+    margin: 10px;
+    padding: 10px;
 }
 
 .group:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-.group2{
-    display: flex;
-    width: 100%;
-    margin: auto;
-}
-
-.group2:not(:last-child) {
     margin-bottom: 10px;
 }
 
@@ -44,5 +34,7 @@ input, select, textarea{
     box-shadow: 1px 2px 5px rgba(0,0,0,.09);
     border: solid 1px #cbc9c9;
     outline: none;
+    margin-right: 10px;
 }
+
 

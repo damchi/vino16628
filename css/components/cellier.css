@@ -1,24 +1,24 @@
-#recherche_bouteille_cellier, .boutonHaut, .afficheListe {
+/*  #recherche_bouteille_cellier, .boutonHaut, .afficheListe {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
-.afficheListe{
+*/
+/* .afficheListe{
     display: none;
 }
 
 .listeBouteille{
     display: grid;
-}
+} */
 
 /* listeBouteille */
-.hautDePage{
+/* .hautDePage{
     display: flex;
 }
 
 .recherche{
    display: flex; 
-}
+} */
 
 
 

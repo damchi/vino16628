@@ -1,6 +1,11 @@
 
-
 <div class="hautDePage">
+    <!--Bouton choisir affichage-->
+    <div id="afficheListe">
+        <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
+        <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
+    </div>
+
     <!-- Bouton Ajouter une bouteille -->
     <div class="boutonSolo boutonHaut">
         <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
@@ -10,12 +15,6 @@
     <div id="recherche_bouteille_cellier" class="group">
         <label class="icon_form"><i class="fas fa-search"></i></label>
         <input type="text" name="rechercheInfo" placeholder="Recherche">
-    </div>
-  
-    <!--Bouton choisir affichage-->
-    <div class="afficheListe">
-        <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
-        <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
     </div>
 </div>
 
@@ -59,20 +58,16 @@
             ?>
 
         </select>
+        
+        <button id="reset"> Remettre à zéro</button>
+
+        <div id="errorFiltre"></div>
     </div>
-    <button id="reset"> Remettre à zéro</button>
-
-    <div id="errorFiltre"></div>
+    
 
 </div>
 
-<!-- Bouton Ajouter une bouteille -->
-<div class="boutonSolo boutonHaut" class="group">
-        <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
-</div>
-
-
-<div id="listeBouteille" class="listeBouteilleParVignette">
+<div id="listeBouteille" class="listeBouteilleParListe">
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
