@@ -7,7 +7,7 @@
     </div>
  
     <!-- Recherche Bouteille-->
-    <div id="recherche_bouteille_cellier">
+    <div id="recherche_bouteille_cellier" class="group">
         <label class="icon_form"><i class="fas fa-search"></i></label>
         <input type="text" name="rechercheInfo" placeholder="Recherche">
     </div>
