@@ -1,147 +1,217 @@
+* Général*/
+
+
 .carte{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-areas:    "carteTitre carteTitre"
-                            "carteImage carteInformation"
-                            "cartePied cartePied"
-                            ;
-    grid-gap: 10px;
-    padding: 10px;
-    border-bottom: 1px solid #97174C;
     background-color: white;
 }
 
-.carte:first-of-type {
-    border-top: 1px solid #97174C;    
+a:link{
+    text-decoration: none;
+    background-color: transparent;
+    color: white;
 }
 
-@media only screen and (min-width: 600px){
-    .carte{
-        border: 1px solid #97174C;
-    }
 
-    .carte-titre{
-         width: 200px;
-        margin-right: 10px;
-     }
-    .carte-image{
-        width:100px;
-        margin-right: 10px;
-    }
-    .carte-information{
-        width:200px;
-        margin-right: 10px;
-    }
-    .carte-information_2{
-        width:200px;
-        margin-right: 10px;
-        display: none;
-    }
+/*  .listeBouteilleParListe */
+.listeBouteilleParListe{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #97174C;
+    margin:10px;
 }
 
-@media only screen and (max-width: 599px){
-    .carte{
-        border: 1px solid #97174C;
-    }
-
-    .carte-titre{
-        max-width: 200px;
-        margin-right: 10px;
-    }
-    .carte-image img{
-        width:100px;
-        margin-right: 10px;
-    }
-    .carte-information{
-        width:200px;
-        margin-right: 10px;
-    }
-    .carte-information_2{
-        display: none;
-    }
+.listeBouteilleParListe .carte{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #97174C;
+    margin:10px;
 }
+
+.listeBouteilleParListe .carte-entete{
+    order: 2;
+    align-self: center;
+    flex:1;
+    margin-right: 10px;
+}
+
+.listeBouteilleParListe .carte-description{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    order: 2;
+    flex:3;
+    align-self: center;
+}
+
+.listeBouteilleParListe .carte-pied{
+    display:flex;
+    flex-wrap: wrap;
+    order: 5;
+    flex:1;
+    padding:10px;
+}
+
+.listeBouteilleParListe .carte-image{
+    order: 1;
+    width: 100px ;
+    align-self: center;
+}
+
+.listeBouteilleParListe .carte-image>img{
+    width: 75px ;
+}
+
+.listeBouteilleParListe .carte-information{
+    order:3;
+    align-self: center;
+
+}
+
+.listeBouteilleParListe .carte-information_2{
+    display: none;
+    order:4;
+    align-self: center;
+    width: 175px;
+}
+
+.listeBouteilleParListe .carte-pied button{
+    color: #97174C;
+    background-color: white;
+    border: 1px #7f0055 solid;
+    margin: 5px;
+    width: 25%;
+    align-self: center;
+}
+
+.listeBouteilleParListe .carte-pied button:hover{
+    color: white;
+    background-color: #97174C;
+}
+
+
+/*  .listeBouteilleParVignmtte */
+
+.listeBouteilleParVignette{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #97174C;
+}
+
+.listeBouteilleParVignette .card{
+    width: 599px;
+}
+
+.listeBouteilleParVignette .carte-entete{
+    font-size: 1.5rem;
+    margin:10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.listeBouteilleParVignette .carte-description{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.listeBouteilleParVignette .carte-pied{
+    display:flex;
+    flex-direction: row;
+    order: 5;
+    justify-content: space-around;
+    margin: 5px;
+    padding: 10px;
+}
+
+/* Partie Description de la carte*/
+.listeBouteilleParVignette .carte-pied button{
+    color: #97174C;;
+    background-color: white;
+    align-self: center;
+}
+
+.listeBouteilleParVignette .carte-pied button:hover{
+    color: white;
+    background-color: #97174C;;
+}
+
+
+.listeBouteilleParVignette .carte-titre{
+    order: 2;
+    align-self: center;
+}
+
+.listeBouteilleParVignette .carte-image{
+    order: 1;
+    width: 100px ;
+    align-self: center;
+}
+
+.listeBouteilleParVignette .carte-image>img{
+    width: 90px ;
+}
+
+.listeBouteilleParVignette .carte-information{
+    order:3;
+    align-self: center;
+    flex:auto;
+}
+
+.listeBouteilleParVignette .carte-information_2{
+    order:4;
+    align-self: center;
+    flex:auto;
+}
+
+
+/*.carte:first-of-type {
+    border-top: 1px solid #97174C;
+}*/
 
 /*Element de la carte*/
 
-.carte-image>img{
-    order: 1;
-    max-height: 150px;
-    grid-area: carteImage;
+/* Carfte form liste*/
+
+@media only screen and (max-width: 412px){
+    .listeBouteilleParListe .carte-image{
+     display:none
+    }
 }
+@media only screen and (min-width: 600px){
+    .listeBouteilleParListe{
+        justify-content: center;
+        margin: 10px;
+    }
+    .listeBouteilleParListe .carte{
+        align-self: center;
+        padding: 10px;
+    }
+    .listeBouteilleParListe .carte-entete{
+        width: 150px;
+    }
 
-.carte-information{
-    order:3;
-    grid-area: carteInformation;
-    /*display: grid;
-    grid-template-columns: auto;
-    grid-template-areas:    "quantite"
-                            "pays"
-                            "type"
-                            "millesime"
-                            "code_saq";*/
-/*    min-width: 300px;*/
-}
+    .listeBouteilleParListe .description{
+        justify-content: space-between;
+        padding: 10px;
+    }
 
-.carte-information_2{
-    order: 4;
-    display: none;
-}
+    .listeBouteilleParListe .carte-information_2{
+        width: 250px;
+        padding: 10px;
+        display: block;
+    }
 
-
-.carte-texte{
-    color: black;
-/*    line-height:.40;*/
-}
-
-
-.carte-code_saq{
-    grid-area: code_saq;
-}
-
-
-.carte-quantite{
-    grid-area: quantite;
-}
-
-.carte-format{
-    grid-area: format;
-}
-
-
-.carte-pays{
-    grid-area: pays;
-}
-
-.carte-millesime{
-   grid-area: millesime
-}
-
-.carte-type{
-grid-area: type;
-}
-
-.carte-date_achat{
-    grid-area: date_achat;
-}
-
-.carte-garde_jusqua{
-    grid-area: garde_jusqua;
-}
-
-.carte-notes{
-    grid-area: notes;
-}
-
-.carte-titre{
-    margin-top: -1.33em;
-    margin-bottom: -1.33em;
-    grid-area: carteTitre;
-    order:2;
-}
-
-.carte-pied{
-    order: 5;
-    grid-area: cartePied;
-    clear: both;
-    text-align: center;
+    .listeBouteilleParListe .carte-pied{
+        width: 250px;
+        padding: 10px;
+    }
+    .listeBouteilleParVignette{
+        justify-content: center;
+    }
+    .listeBouteilleParVignette .carte{
+        margin: 10px;
+        width: 500px;
+        flex-wrap: wrap;
+    }
 }
