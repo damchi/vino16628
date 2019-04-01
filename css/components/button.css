@@ -45,7 +45,5 @@ button a{
     .recherche button, .recherche select{
         width: 90vw;
         align-self: center;
-        margin: 5px;
-
     }
 }

@@ -28,9 +28,9 @@
         flex-direction: row;
     }
 
-    .hautDePage .boutonSolo{
+     .hautDePage .boutonHaut{
         flex: 1;
-    }
+    } 
 
     #afficheListe{
         display:block;
