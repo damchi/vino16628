@@ -193,6 +193,13 @@ class Controler
                     $this->fermerSession();
                 }
                 break;
+            case 'reinitialiserCatalogue':
+                if (isset($_SESSION['admin'])) {
+                    $this->reinitialiserCatalogue();
+                } else {
+                    $this->fermerSession();
+                }
+                break;
             default:
                 if (isset($_SESSION['user_pseudo'])) {
                     $this->accueil();
@@ -202,7 +209,6 @@ class Controler
                 break;
         }
     }
-
 
     private function accueil()
     {
@@ -332,26 +338,12 @@ class Controler
         $usr = new Usager();
 
         if ($usr->estProprietaireBouteille($_SESSION['user_pseudo'], $_GET['idBouteille'])) {
-//            switch ($_SERVER['REQUEST_METHOD']) {
-//                case 'GET':
-                    $data['bouteille'] = $bte->getBouteille($_GET['idBouteille']);
-                    $data['types'] = $bte->getTypes();
-                    include("vues/entete.php");
-                    include("vues/bouteilleIndividuelle.php");
-                    include("vues/pied.php");
-//                    break;
 
-//                case 'POST':
-//                    $bouteille = [];
-//
-//                    foreach ($_POST as $cle => $valeur) {
-//                        $bouteille[$cle] = !empty($valeur) ? $valeur : null;
-//                    }
-//
-//                    $bte->modifierBouteille($bouteille);
-//                    header("Location: index.php?requete=listeBouteilleCellier&idCellier=" . $bouteille['id_cellier']);
-//                    break;
-//            }
+            $data['bouteille'] = $bte->getBouteille($_GET['idBouteille']);
+            $data['types'] = $bte->getTypes();
+            include("vues/entete.php");
+            include("vues/bouteilleIndividuelle.php");
+            include("vues/pied.php");
         }
     }
 
@@ -559,6 +551,14 @@ class Controler
         include("vues/entete.php");
         include("vues/gererBouteillesSaq.php");
         include("vues/pied.php");
+    }
+    
+    private function reinitialiserCatalogue()
+    {
+        $saq = new SAQ();
+        $saq->supprimeTousProduits();
+        $res = $saq->getProduits(20, 0);
+        echo json_encode($res);
     }
 }
 ?>

@@ -4,6 +4,7 @@
 
 .group{
     display: flex;
+    flex-wrap: nowrap;
     width: 100%;
     max-width: 325px;
     margin: auto;

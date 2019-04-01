@@ -5,39 +5,119 @@
  */
 
 window.addEventListener('load', () => {
-    const inputRecherche = document.querySelector(
-        "[name='rechercheCatalogue']"
-    );
+    /*
+        Éléments de la page
+    */
     
-    const ulBouteillesSaq = document.getElementById("ulBouteillesSaq");
+    const boutonReinitialiser =
+        document.getElementById('reinitialiserCatalogue');
     
-    const templateLiBouteilleSaq = document.getElementById(
-        "templateLiBouteilleSaq"
-    );
+    const inputRecherche =
+        document.querySelector('[name="rechercheCatalogue"]');
     
-    /**
-     *  Retourne la div correspondant à une bouteille SAQ spécifiée par son id.
-     *  @param {int} idBouteilleSaq l'id
-     *  @returns {element} La div
-     */
-    function divBouteilleSaq(idBouteilleSaq) {
-        return document.querySelector(
-            ".bouteilleSaq[data-id='" + idBouteilleSaq + "']"
+    const divListeBouteilles =
+          document.getElementById('listeBouteilles');
+    
+    const templateBouteille =
+        document.getElementById('templateBouteille');
+        
+    /*
+        Le bouton "réinitialiser le catalogue" demande une confirmation avant
+        d'effacer le catalogue existant et d'importer la liste des bouteilles
+        depuis le site de la SAQ. On vide ensuite l'input de recherche et on
+        recharge les résultats.
+    */
+    
+    boutonReinitialiser.addEventListener('click', () => {
+        let texteConfirmation =
+            "Le catalogue actuel sera supprimé et la liste des bouteilles " +
+            "sera importée depuis le site de la SAQ. " +
+            "Êtes-vous sûr de vouloir continuer?";
+
+        if (confirm(texteConfirmation)) {
+            reinitialiserCatalogue();
+        }   
+    });
+    
+    /*
+        L'input recherche est un autocomplete qui remplit la liste au fur et à
+        mesure qu'on tape des lettres.
+    */
+
+    inputRecherche.addEventListener('keyup', () => {
+        chargerResultatRecherche();
+    });
+    
+    /*
+        On remplit la liste avec la recherche vide lors de l'initialisation de
+        la page.
+    */
+    
+    chargerResultatRecherche();
+    
+    function chargerResultatRecherche() {
+        let requete = new Request(
+            BaseURL + "index.php?requete=autocompleteBouteille",
+            {method: 'POST', body: '{"nom": "' + inputRecherche.value + '"}'}
         );
+
+        console.log(requete);
+
+        fetch(requete).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            else {
+                throw new Error('Erreur');
+            }
+        })
+        .then(response => {
+            console.log(response);
+            remplirDivListeBouteilles(response);
+        })
+        .catch(error => {
+            console.error(error);
+        });        
     }
     
+    function reinitialiserCatalogue() {
+        let requete = new Request(
+            BaseURL + "index.php?requete=reinitialiserCatalogue",
+            {method: 'POST', body: '{}'}
+        );
+
+        console.log(requete);
+
+        fetch(requete).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            else {
+                throw new Error('Erreur');
+            }
+        })
+        .then(response => {
+            console.log(response);
+            inputRecherche.value = '';
+            chargerResultatRecherche();
+        })
+        .catch(error => {
+            console.error(error);
+        });        
+    }
+
     /**
-     *  ait la requête Ajax pour supprimer une bouteille SAQ donnée et l'enlève du DOM.
-     *  @param {int} idBouteilleSaq
+     *  Fait la requête Ajax pour supprimer une bouteille SAQ donnée et l'enlève du DOM.
+     *  @param {int} idBouteille
      */
-    function supprimerBouteilleSaq(idBouteilleSaq) {
+    function supprimerBouteille(idBouteille) {
         /*
             Requête Ajax de suppression
         */
 
         let requete = new Request(
             BaseURL + "index.php?requete=supprimerBouteilleSaq",
-            {method: 'POST', body: '{"id": ' + idBouteilleSaq + '}'}
+            {method: 'POST', body: '{"id": ' + idBouteille + '}'}
         );
 
         console.log(requete);
@@ -56,7 +136,12 @@ window.addEventListener('load', () => {
             */
 
             console.log(response);
-            divBouteilleSaq(idBouteilleSaq).remove();
+          
+            let divBouteille = divListeBouteilles.querySelector(
+                ".bouteille[data-id='" + idBouteille + "']"
+            );
+
+            divBouteille.remove();
         })
         .catch(error => {
             console.error(error);
@@ -67,38 +152,38 @@ window.addEventListener('load', () => {
      *  Vide la ul des bouteilles et y ajoute un li pour chacune des bouteilles
      *  de la liste.
      *
-     *  @param Array listeBouteillesSaq
+     *  @param Array listeBouteilles
      */
-    function remplirUlBouteillesSaq(listeBouteillesSaq) {
-        ulBouteillesSaq.innerHTML = '';
+    function remplirDivListeBouteilles(listeBouteilles) {
+        divListeBouteilles.innerHTML = '';
         
-        for (bouteille of listeBouteillesSaq) {
+        for (bouteille of listeBouteilles) {
             /*
                 Le li de la bouteille est composé à partir d'un template HTML.
             */
             
             let clone = document.importNode(
-                templateLiBouteilleSaq.content, true
+                templateBouteille.content, true
             );
             
-            let li = clone.querySelector('li');
+            let divBouteille = clone.querySelector('.bouteille');
             
             /*
                 On met l'id de la bouteille dans son attribut data-id et son
                 nom dans le span .nom.
             */
             
-            li.dataset.id = bouteille.id_bouteille_saq;
-            li.querySelector('.nom').innerHTML = bouteille.nom;
+            divBouteille.dataset.id = bouteille.id_bouteille_saq;
+            divBouteille.querySelector('.nom').innerHTML = bouteille.nom;
             
             /*
                 On insère le bon id de bouteille dans le lien du bouton
                 modifier.
             */
             
-            let aBtnModifier = li.querySelector(".btnModifier a");
+            let lienModifier = divBouteille.querySelector(".btnModifier a");
             
-            aBtnModifier.href = aBtnModifier.href.replace(
+            lienModifier.href = lienModifier.href.replace(
                 /\(id_bouteille_saq\)/, bouteille.id_bouteille_saq
             );
             
@@ -106,51 +191,35 @@ window.addEventListener('load', () => {
                 On ajoute l'event listener du bouton supprimer. Il demande une
                 confirmation avant de supprimer la bouteille.
             */
+
+            let boutonSupprimer = divBouteille.querySelector(".btnSupprimer");
             
-            li.querySelector(".btnSupprimer").addEventListener('click', evt => {
-                let li = evt.target.closest('li');
-                let idBouteilleSaq = li.dataset.id;
-                let nom = li.querySelector(".nom").innerHTML;
+            boutonSupprimer.addEventListener('click', evt => {
+                let divBouteille = evt.target.closest('.bouteille');
+                let idBouteille = divBouteille.dataset.id;
+                let nom = divBouteille.querySelector(".nom").innerHTML;
                 
-                let texteConfirm = (
+                let texteConfirmation = (
                     "Suppression de la bouteille \"" + nom + "\""
                 );
 
-                if (confirm(texteConfirm)) {
-                    supprimerBouteilleSaq(idBouteilleSaq);
+                if (confirm(texteConfirmation)) {
+                    supprimerBouteille(idBouteille);
                 }                
             });
             
-            ulBouteillesSaq.appendChild(li);
+            divListeBouteilles.appendChild(divBouteille);
         }
     }
-    
-    /*
-        L'input recherche est un autocomplete qui remplit la liste.
-    */
 
-    inputRecherche.addEventListener("keyup", evt => {
-        let requete = new Request(
-            BaseURL + "index.php?requete=autocompleteBouteille",
-            {method: 'POST', body: '{"nom": "' + inputRecherche.value + '"}'}
+    /**
+     *  Retourne la div correspondant à une bouteille SAQ spécifiée par son id.
+     *  @param {int} idBouteille l'id
+     *  @returns {element} La div
+     */
+    function divBouteille(idBouteille) {
+        return document.querySelector(
+            ".bouteilleSaq[data-id='" + idBouteille + "']"
         );
-
-        console.log(requete);
-
-        fetch(requete).then(response => {
-            if (response.status === 200) {
-                return response.json();
-            }
-            else {
-                throw new Error('Erreur');
-            }
-        })
-        .then(response => {
-            console.log(response);
-            remplirUlBouteillesSaq(response);
-        })
-        .catch(error => {
-            console.error(error);
-        });        
-    });
+    }
 });
