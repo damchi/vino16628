@@ -1,4 +1,4 @@
-* Général*/
+/* Général*/
 
 
 .carte{
@@ -175,7 +175,7 @@ a:link{
 
 @media only screen and (max-width: 412px){
     .listeBouteilleParListe .carte-image{
-     display:none
+        display:none
     }
 }
 @media only screen and (min-width: 600px){
