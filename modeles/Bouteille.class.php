@@ -12,7 +12,7 @@
  */
 class Bouteille extends Modele {
     const TABLE = 'vino__bouteille';
-    
+
 	/**
 	 * Ajoute une bouteille à un cellier.
 	 * 
@@ -35,7 +35,7 @@ class Bouteille extends Modele {
         $quantite = (int) $data['quantite'];
         $millesime = (int) $data['millesime'];
         $type = (int) $data['type'];
-        $image = $this->_db->escape_string($_FILES['image']['name']);
+//        $image = $this->_db->escape_string($_FILES['image']['name']);
 //echo "<pre>";
 //var_dump($_FILES);
 
@@ -58,13 +58,25 @@ class Bouteille extends Modele {
 
             // Verify MYME type of the file
             if(in_array($filetype, $allowed)){
-                // Check whether file exists before uploading it
-                if(file_exists("./images/" . $filename)){
-                    echo $filename . " is already exists.";
-                } else{
-                    move_uploaded_file($_FILES["image"]["tmp_name"], "./images/" . $filename);
-                    echo "Your file was uploaded successfully.";
+
+
+                $key = '';
+                $keys = array_merge(range(0, 9), range('a', 'z'));
+
+                for ($i = 0; $i < 10; $i++) {
+                    $key .= $keys[array_rand($keys)];
                 }
+                $filename = $key.$filename;
+                $image = $this->_db->escape_string($filename);
+
+
+                // Check whether file exists before uploading it
+//                if(file_exists("./images/" . $filename)){
+//                    echo $filename . " is already exists.";
+//                } else{
+                    move_uploaded_file($_FILES["image"]["tmp_name"], "./images/" .$filename);
+//                    echo "Your file was uploaded successfully.";
+//                }
             } else{
                 echo "Error: There was a problem uploading your file. Please try again.";
             }
