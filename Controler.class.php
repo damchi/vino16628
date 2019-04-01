@@ -294,6 +294,8 @@ class Controler
 
                     foreach ($_POST as $cle => $valeur) {
                         $bouteille[$cle] = !empty($valeur) ? $valeur : null;
+//                        echo "<pre>";
+//                        var_dump($bouteille);
                     }
 
                     $bte->ajouterBouteilleCellier($bouteille);
@@ -324,7 +326,6 @@ class Controler
                     foreach ($_POST as $cle => $valeur) {
                         $bouteille[$cle] = !empty($valeur) ? $valeur : null;
                     }
-
                     $bte->modifierBouteille($bouteille);
                     header("Location: index.php?requete=listeBouteilleCellier&idCellier=" . $bouteille['id_cellier']);
                     break;

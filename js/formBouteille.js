@@ -14,6 +14,7 @@ window.addEventListener('load', function() {
     let inputRecherche = document.querySelector("[name='recherche']");
     let liste = document.querySelector('.listeAutoComplete');
     let form = document.querySelector(".formBouteille form");
+    let submitForm = document.querySelector("[name='submitForm']");
 
     if (form) {
         var img = form.querySelector("img");
@@ -129,5 +130,37 @@ window.addEventListener('load', function() {
             }
         });        
     }
+
+    /** VALIDTION DU FORMULAIRE **/
+
+    let validationFormulaire = (()=>{
+        let obj ={};
+        obj.estValide = (unObjet)=>{
+            if (unObjet.value ==""){
+                return true
+            }
+        };
+        return obj;
+    })();
+
+
+    if (submitForm){
+
+        submitForm.addEventListener('click',(event)=>{
+        // console.log(champs.nom)
+            if (validationFormulaire.estValide(champs.nom ) == true ||
+                validationFormulaire.estValide(champs.pays ) == true ||
+                validationFormulaire.estValide(champs.date_achat ) == true ||
+                validationFormulaire.estValide(champs.prix) == true ||
+                validationFormulaire.estValide(champs.format ) == true ||
+                validationFormulaire.estValide(champs.type  ) == true ){
+                event.preventDefault();
+            }
+        });
+
+
+    }
+
+
 });
 

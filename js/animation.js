@@ -11,7 +11,10 @@ window.addEventListener("load", function () {
 	animationLogin();
 	// Met automatiquement la hauteur de la première section
 	var sectionVisible = document.querySelector(".sectionMobileVisible");
-	sectionVisible.style.maxHeight = sectionVisible.scrollHeight + "px"
+	if (sectionVisible){
+        sectionVisible.style.maxHeight = sectionVisible.scrollHeight + "px"
+
+    }
 })
 
 function animationLogin() {

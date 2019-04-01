@@ -35,15 +35,25 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
     <!--Formulaire-->
 
-    <form class="form" method="post">
+<!--    <form class="form" method="post"  >-->
+    <form class="form" method="post"  enctype="multipart/form-data">
         <input type="hidden" name="id_bouteille" value="<?= $idBouteille ?>">
         <input type="hidden" name="id_cellier" value="<?= $idCellier ?>">
         <input type="hidden" name="url_img" value="<?= $urlImg ?>">
         <input type="hidden" name="url_saq" value="<?= $urlSaq ?>">
 
         <!-- Image de la bouteille -->
-        <div class="group ml">
+        <div class="group">
+<!--        <div class="group ml">-->
             <img src="<?= $urlImg ?>" class="image" alt="bouteille" style="display: <?= $urlImg ? 'inline' : 'none' ?>">
+            <?php
+            if ($urlImg === ""){
+                ?>
+                <label class="icon_form"><i class=""></i></label>
+                <input type="file" class="input" name="image">
+            <?php
+            }
+            ?>
         </div>
 
         <!-- Nom -->
@@ -80,7 +90,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <div class="group">
             <label class="icon_form"><i class="fas fa-id-card"></i></label>
             <select class="select_form" name="type" required>
-                <option selected disabled>Type</option>
+                <option value="" selected disabled>Type</option>
                 <?php
                 foreach ($data['types'] as $t) {
                     $value = $t['id_type'];
@@ -109,7 +119,8 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <!-- Date d'achat -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-calendar-alt"></i></label>
-            <input type="text" class="input" id="date_achat" name="date_achat" placeholder="Date d'achat (aaaa-mm-jj)" value="<?= $dateAchat ?>" pattern="\d\d\d\d-\d\d-\d\d">
+            <input type="date" class="input" id="date_achat" name="date_achat"  value="<?= $dateAchat ?>">
+<!--            <input type="text" class="input" id="date_achat" name="date_achat" placeholder="Date d'achat (aaaa-mm-jj)" value="--><?//= $dateAchat ?><!--" pattern="\d\d\d\d-\d\d-\d\d">-->
         </div>
 
         <!-- Garder jusqu'à... -->
@@ -126,7 +137,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
         <!-- Bouton enregistrer -->
         <div class="group">
-            <input type="submit" value="Enregistrer">
+            <input type="submit" value="Enregistrer" name="submitForm">
         </div>
     </form>
 

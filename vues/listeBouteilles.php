@@ -155,18 +155,29 @@
         <div class="carte-image">
             <?php
 
-            if ($bouteille['url_img'] == null){
+
+
+            if ($bouteille['url_img'] == null && $bouteille['image'] == null  ){
                 ?>
                 <img src="./images/bouteille_vin.png" alt="Image de la bouteille">
 
                 <?php
             }
             else{
-                ?>
-                <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
+                if (isset($bouteille['image'])){
+                    echo '<img src="./images/'. $bouteille['image'] .'" alt="Image de la bouteille">';
+                }
+                else {
 
-                <?php
+
+                    ?>
+                    <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
+
+                    <?php
+                }
             }
+
+
             ?>
         </div>
 
