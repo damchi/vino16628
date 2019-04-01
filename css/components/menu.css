@@ -1,6 +1,6 @@
 #logo {
-  height: 55px;
-  margin: 14px;
+  height: 65px;
+  margin: 10px;
 }
 
 #colLogo {
@@ -22,6 +22,7 @@ header {
   width: 100%;
   align-items: center;
   justify-content: center;
+  border-bottom: 2px solid #f9f9f9;
 }
 
 .colNav {

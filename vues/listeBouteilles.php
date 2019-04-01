@@ -1,4 +1,3 @@
-
 <div class="hautDePage">
     <!--Bouton choisir affichage-->
     <div id="afficheListe">
@@ -47,6 +46,16 @@
             }
             ?>
 
+            </select>
+            <select name="millesime">
+                <option value="">Millésimes</option>
+                <?php
+                foreach ( $data['millesime'] as  $millesime){
+                    if ($millesime['millesime'] != ""){
+                        echo '<option value="'.$millesime['millesime'].'">'.$millesime['millesime'].'</option>';
+                    }
+                }
+                ?>
 
         </select>
         <select name="type">
@@ -133,19 +142,7 @@
 
         </div>
 
-        <!-- Bouton -->
-        <div class="carte-pied">
-            <button class='btnAjouter'><i class="fas fa-plus"></i></button>
-            <button class='btnBoire'><i class="fas fa-minus"></i></button>
-            <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>"><i class="fas fa-edit"></i></a></button>
-            <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button>
         </div>
     </div>
-    
-    <?php
-    }
-    ?>
-
 </div>
-
-<!--</div>-->
+        <!--</div>-->
