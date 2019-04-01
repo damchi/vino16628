@@ -21,7 +21,6 @@
                 </form>
 
             </div>
-
             <?php
             foreach ($data as $cle => $cellier) {
             ?>

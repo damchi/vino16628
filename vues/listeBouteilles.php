@@ -16,7 +16,6 @@
     <!--Bouton choisir affichage-->
     <div class="afficheListe">
         <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
-        <button class="afficherVignetteBouteille"><i class="fas fa-th"></i></button>
     </div>
  
 </div>
@@ -114,7 +113,7 @@
     </table>
 </div>-->
  
-<div id="listeBouteille" class="listeBouteilleParVignette">
+<div id="listeBouteille" class="listeBouteilleParListe">
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
