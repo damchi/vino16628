@@ -25,44 +25,43 @@
  
     <ul class="listeAutoComplete"></ul>
     <input type="hidden" name="idCellier" value="<?= $_SESSION['idCellier']?>">
-    <p>Filtrer par </p>
+    <button>Filtrer par &nbsp; <i class="fas fa-angle-down"></i> </button>
  
-    <select name="pays">
-        <option value="">Pays</option>
-        <?php
-        foreach ( $data['pays'] as  $pays){
-            if ($pays['pays'] != ""){
-                echo '<option value="'.$pays['pays'].' ">'.$pays['pays'].'</option>';
-            }
- 
-        }
-        ?>
- 
-    </select>
-    <select name="millesime">
-        <option value="">Millésimes</option>
-        <?php
-        foreach ( $data['millesime'] as  $millesime){
-            if ($millesime['millesime'] != ""){
-                echo '<option value="'.$millesime['millesime'].'">'.$millesime['millesime'].'</option>';
-            }
-        }
-        ?>
- 
- 
-    </select>
-    <select name="type">
-        <option value="">Type</option>
-        <?php
-        foreach ( $data['type'] as  $type){
-            echo '<option value="'.$type['id_type']. '">'.$type['type'].'</option>';
-        }
-        ?>
- 
-    </select>
-    <button id="reset"> Remettre à zéro</button>
- 
-    <div id="errorFiltre"></div>
+    <div id="filtreRecherche" class="mc">
+        <select name="pays">
+            <option value="">Pays</option>
+		    <?php
+		    foreach ( $data['pays'] as  $pays){
+			    if ($pays['pays'] != ""){
+				    echo '<option value="'.$pays['pays'].' ">'.$pays['pays'].'</option>';
+			    }
+
+		    }
+		    ?>
+        </select>
+        <select name="millesime">
+            <option value="">Millésimes</option>
+		    <?php
+		    foreach ( $data['millesime'] as  $millesime){
+			    if ($millesime['millesime'] != ""){
+				    echo '<option value="'.$millesime['millesime'].'">'.$millesime['millesime'].'</option>';
+			    }
+		    }
+		    ?>
+        </select>
+        <select name="type">
+            <option value="">Type</option>
+		    <?php
+		    foreach ( $data['type'] as  $type){
+			    echo '<option value="'.$type['id_type']. '">'.$type['type'].'</option>';
+		    }
+		    ?>
+
+        </select>
+        <button id="reset"> Remettre à zéro</button>
+
+        <div id="errorFiltre"></div>
+    </div>
 </div>
  
 <!--<button id="fb-share-button">Partager</button>-->

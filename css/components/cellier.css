@@ -6,24 +6,9 @@
 /* .afficheListe{
     display: none;
 }
-
-.listeBouteille{
-    display: grid;
-} */
-
-/* listeBouteille */
-/* .hautDePage{
-    display: flex;
-}
-
-.recherche{
-   display: flex; 
-} */
-
-
-
+*/
 @media only screen and (min-width: 600px){
-/*    .listeBouteilleParVignette{
+/*  .listeBouteilleParVignette{
         display: grid;
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -45,14 +30,15 @@
         display: flex;
         justify-content: space-between;
     }
-*/
-    /*.listeBouteille{
+
+    .listeBouteille{
         display: grid;
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: 10px;
         margin: 10px;
-    }*/
+    }
+*/
 }
 
 #formCellier{

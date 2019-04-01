@@ -342,19 +342,22 @@ window.addEventListener('load', () => {
     }
 
     /* Afficher la Filtre de recherche*/
-    var filtreRecherche = document.getElementById('filtreRecherche');
-    var recherche = document.querySelector('.recherche button')
-    recherche.addEventListener('click', function () {
-       if (filtreRecherche.style.display === 'none'){
-           recherche.innerHTML = 'Filtrer par &nbsp; <i class="fas fa-angle-up"></i>';
-           filtreRecherche.style.display = 'block';
-
-       }else{
-           recherche.innerHTML = 'Filtrer par &nbsp; <i class="fas fa-angle-down"></i>';
-           filtreRecherche.style.display = 'none';
-
-       }
-    });
+    var recherche = document.querySelector('.recherche button');
+    if(recherche){
+        var filtreRecherche = document.getElementById('filtreRecherche');
+        recherche.addEventListener('click', function () {
+            if (filtreRecherche.style.display === 'none'){
+                recherche.innerHTML = 'Filtrer par &nbsp; <i class="fas fa-angle-up"></i>';
+                filtreRecherche.style.display = 'block';
+     
+            }else{
+                recherche.innerHTML = 'Filtrer par &nbsp; <i class="fas fa-angle-down"></i>';
+                filtreRecherche.style.display = 'none';
+     
+            }
+         });    
+    }
+    
 
 
 });
