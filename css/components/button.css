@@ -27,6 +27,13 @@ button a{
     margin-right: 10px;
 }
 
+ .recherche select, .recherche button{
+    width: 60vw;
+    align-self: center;
+    margin: 5px;
+
+
+
 @media only screen and (max-width: 599px){
     .boutonSolo button{
         width: 100%;

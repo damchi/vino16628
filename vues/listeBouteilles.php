@@ -7,21 +7,19 @@
     </div>
  
     <!-- Recherche Bouteille-->
- 
     <div id="recherche_bouteille_cellier" class="group">
         <label class="icon_form"><i class="fas fa-search"></i></label>
         <input type="text" name="rechercheInfo" placeholder="Recherche">
     </div>
  
     <!--Bouton choisir affichage-->
-    <div class="afficheListe">
+    <div id="afficheListe" class="mc">
         <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
     </div>
  
 </div>
  
 <div class="recherche">
- 
     <ul class="listeAutoComplete"></ul>
     <input type="hidden" name="idCellier" value="<?= $_SESSION['idCellier']?>">
     <button>Filtrer par &nbsp; <i class="fas fa-angle-down"></i> </button>
