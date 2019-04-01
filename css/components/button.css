@@ -18,7 +18,7 @@ button:hover {
 
 button a{
     text-decoration: none;
-    background: #701139;
+    background-color: #97174C;
     color:white;
 }
 
@@ -28,9 +28,18 @@ button a{
 }
 
 @media only screen and (max-width: 599px){
-    .boutonSolo button, #recherche_bouteille_cellier input[text]{
+    .boutonSolo button{
         width: 100%;
     }
-}
 
+    .recherche{
+        text-align: center;
+    }
+    .recherche button, .recherche select{
+        width: 90vw;
+       align-self: center;
+        margin: 5px;
+
+    }
+}
 

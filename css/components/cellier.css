@@ -23,7 +23,7 @@
 
 
 @media only screen and (min-width: 600px){
-    .listeBouteilleParVignette{
+/*    .listeBouteilleParVignette{
         display: grid;
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -39,12 +39,13 @@
     .afficheListe{
         display: inline;
     }
-
+*/
     /* Alignement des bouton du haut de la page listeBoiuteile.php */
-    .hautDePage{
+/*    .hautDePage{
         display: flex;
         justify-content: space-between;
     }
+*/
     /*.listeBouteille{
         display: grid;
         grid-area: listeBouteille;
