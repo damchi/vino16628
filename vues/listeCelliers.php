@@ -65,7 +65,7 @@
             <?php
             }
             ?>
-            <div class="cellierId" id="insertChild" data-id="">
+            <div class="cellierId listeCelliers" id="insertChild" data-id="">
             </div>
         </div>
     </div>

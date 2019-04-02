@@ -510,8 +510,8 @@ class Controler
         if (!empty($_POST['nomCellier']) && !empty($_POST['id'])) {
             $cellier = new Cellier();
 //            $resultat = $cellier->ajoutCellierUsager($body);
-            $cellier->ajoutCellierUsager($_POST['nomCellier'],$_POST['id']);
-//            echo json_encode($resultat);
+            $resultat = $cellier->ajoutCellierUsager($_POST['nomCellier'],$_POST['id']);
+            echo json_encode($resultat);
         }
     }
 

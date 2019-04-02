@@ -70,6 +70,8 @@ window.addEventListener('load', () => {
                                 throw new Error('Erreur');
                             }
                         })
+
+
                         .then(response => {
                             console.log(param.nomCellier);
                             console.log(param.id);
@@ -77,11 +79,17 @@ window.addEventListener('load', () => {
 
                             let output = "";
 
-                            output += "<a href='index.php?requete=listeBouteilleCellier&idCellier="+ response + "'>" + param.nomCellier + "</a>";
+                            if (response.image == null){
+                                output += "<img src=./images/cellier.png>";
+                            }
+                            else{
+                                output += "<img src=./images/"+response.image +">";
+                            }
+                            output += "<a href='index.php?requete=listeBouteilleCellier&idCellier="+ response.id_cellier + "'>" + response.nom + "</a>";
                             // output += "<button class='modifierCellier'>  Modifier </button>\n"
                             // output += "<button class='supprimerCellier'>  Supprimer</button>";
                             let insert = document.getElementById('insertChild');
-                            insert.setAttribute('data-id',response);
+                            insert.setAttribute('data-id',response.id);
                             insert.innerHTML= output;
                             console.log(output);
                             formCellier.style.display='none';

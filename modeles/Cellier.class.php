@@ -109,9 +109,10 @@ class Cellier extends Modele
             } else{
                 echo "Error: There was a problem uploading your file. Please try again.";
             }
-        } else{
-            echo "Error: " . $_FILES["image"]["error"];
         }
+//        else{
+//            echo "Error: " . $_FILES["image"]["error"];
+//        }
 //
 
 
@@ -121,11 +122,21 @@ class Cellier extends Modele
 //            INSERT INTO " .self::TABLE. " (nom,image,id_usager_cellier)
 //            VALUES ('$nom', '$image',$data->id)";
 
-        $sql = " INSERT INTO " .self::TABLE."(nom,image,id_usager_cellier) VALUES ('".$nom."','".$image."',".$id.")";
+        if (isset($image)){
+            $sql = " INSERT INTO " .self::TABLE."(nom,image,id_usager_cellier) VALUES ('".$nom."','".$image."',".$id.")";
+        }
+        else{
+            $sql = " INSERT INTO " .self::TABLE."(nom,id_usager_cellier) VALUES ('".$nom."',".$id.")";
+        }
+
 //        var_dump($sql);
 //        die();
         $this->_db->query($sql);
-        return $this->_db->insert_id;
+
+        $id = $this->_db->insert_id;
+        $result = $this->_db->query("SELECT * FROM ". self::TABLE." WHERE id_cellier = {$id}");
+        $cellier = $result->fetch_object();
+        return $cellier;
 
 
     }
