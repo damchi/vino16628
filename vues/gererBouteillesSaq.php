@@ -9,7 +9,7 @@
         <div class="hautDePage">
             <button id="reinitialiserCatalogue"><i class="fas fa-exclamation"></i>  Réinitialiser le catalogue</button>
         </div>
-
+        
         <div class="form">
             <div>Recherche dans le catalogue</div>
 
