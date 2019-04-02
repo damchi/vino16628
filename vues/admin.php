@@ -16,13 +16,15 @@
                     <?= $data['nbUsagers'] ?>
                 </p>
             </section>
-            <section>
-                <h2>Catalogue SAQ</h2>
-                <p>
-                    <span>Nombre de produits dans le catalogue SAQ : </span>
-                    <?= $data['nbProduitsSaq'] ?>
-                </p>
-            </section>
+            <a href="?requete=gererBouteillesSaq">
+                <section>
+                    <h2>Catalogue SAQ</h2>
+                    <p>
+                        <span>Nombre de produits dans le catalogue SAQ : </span>
+                        <?= $data['nbProduitsSaq'] ?>
+                    </p>
+                </section>
+            </a>
         </div>
     </div>
 </div>
