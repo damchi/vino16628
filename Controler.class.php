@@ -153,6 +153,7 @@ class Controler
                 break;
             case 'ajoutCellier':
                 if (isset($_SESSION['user_pseudo'])) {
+//                    var_dump('rrr');
                     $this->ajoutCellier();
                 } else {
                     header("Location:index.php?requete=login");
@@ -214,6 +215,7 @@ class Controler
     {
         $cellier = new Cellier();
         $data = $cellier->getUsagerCellier($_SESSION['user_id']);
+//        $dataBouteille = $cellier->countBouteille($_SESSION['user_id']);
         include("vues/entete.php");
         include("vues/listeCelliers.php");
         include("vues/pied.php");
@@ -499,6 +501,7 @@ class Controler
         if (!empty($body)) {
             $cellier = new Cellier();
             $resultat = $cellier->ajoutCellierUsager($body);
+
             echo json_encode($resultat);
         }
     }

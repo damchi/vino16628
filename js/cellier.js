@@ -32,15 +32,20 @@ window.addEventListener('load', () => {
                     evt.preventDefault()
                 }
                 else{
+                    var image = document.getElementById("imageCellier");
+                    var file = image.files[0];
+                    console.log(file);
                     var param ={
                         "nomCellier":document.querySelector("[name='nomCellier']").value,
-                        "id": document.querySelector("[name='idUsagerCellier']").value,
+                        "image":file,
+                        "id": document.querySelector("[name='idUsagerCellier']").value
                     };
 
                     let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: JSON.stringify(param)});
-
+                    console.log(requete);
                     fetch(requete)
                         .then(response => {
+                            console.log('ee');
                             if (response.status === 200) {
                                 // console.log(response.json());
                                 return response.json();
@@ -55,12 +60,14 @@ window.addEventListener('load', () => {
                             console.log(response);
 
                             let output = "";
+
                             output += "<a href='index.php?requete=listeBouteilleCellier&idCellier="+ response + "'>" + param.nomCellier + "</a>";
                             // output += "<button class='modifierCellier'>  Modifier </button>\n"
                             // output += "<button class='supprimerCellier'>  Supprimer</button>";
                             let insert = document.getElementById('insertChild');
                             insert.setAttribute('data-id',response);
                             insert.innerHTML= output;
+                            console.log(output);
                             formCellier.style.display='none';
 
                         })

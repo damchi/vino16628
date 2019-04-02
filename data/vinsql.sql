@@ -94,6 +94,7 @@ INSERT INTO `vino__bouteille__saq` (`id_bouteille_saq`, `nom`, `image`, `code_sa
 
 CREATE TABLE `vino__cellier` (
   `id_cellier` int(11) NOT NULL,
+  `image` varchar(200) DEFAULT NULL,
   `nom` varchar(200) NOT NULL,
   `id_usager_cellier` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

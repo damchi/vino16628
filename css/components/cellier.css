@@ -1,29 +1,50 @@
-/*  #recherche_bouteille_cellier, .boutonHaut, .afficheListe {
-    margin-top: 10px;
-    margin-bottom: 10px;
+#recherche_bouteille_cellier, .boutonHaut, #afficheListe{
+    margin: 10px 0;
 }
-*/
-/* .afficheListe{
+
+#recherche_bouteille_cellier .group {
+    padding:0px;
+}
+
+#afficheListe{
+    display:none;
+}
+
+#formCellier{
     display: none;
 }
 
-.listeBouteille{
-    display: grid;
-} */
-
-/* listeBouteille */
-/* .hautDePage{
-    display: flex;
+#modifCellier{
+    display: none;
 }
+
+#reset{
+    display: none;
+}
+
 
 .recherche{
    display: flex;
-} */
-
-
-
+}
 @media only screen and (min-width: 600px){
-/*    .listeBouteilleParVignette{
+    #recherche_bouteille_cellier{
+        width: 30%;
+        flex: 1;
+    }
+    .hautDePage{
+        display: flex;
+        flex-direction: row;
+    }
+     .hautDePage .boutonHaut{
+        flex: 1;
+    } 
+
+    #afficheListe{
+        display:block;
+        flex:1;
+    }
+
+/*  .listeBouteilleParVignette{
         display: grid;
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -45,25 +66,16 @@
         display: flex;
         justify-content: space-between;
     }
-*/
-    /*.listeBouteille{
+
+    .listeBouteille{
         display: grid;
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: 10px;
         margin: 10px;
-    }*/
+    }
+*/
 }
 
-#formCellier{
-    display: none;
-}
 
-#modifCellier{
-    display: none;
-}
-
-#reset{
-    display: none;
-}
 
