@@ -1,4 +1,4 @@
-#recherche_bouteille_cellier, .boutonHaut, #afficheListe{
+#recherche_bouteille_cellier, .boutonHaut, #afficheListe, #errorFiltre, #reset {
     margin: 10px 0;
 }
 
@@ -45,6 +45,7 @@
     }
 
 /*  .listeBouteilleParVignette{
+>>>>>>> ef49de59d26d68ce888b8a3156809f80367024a6
         display: grid;
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -60,12 +61,13 @@
     .afficheListe{
         display: inline;
     }
-*/
+
     /* Alignement des bouton du haut de la page listeBoiuteile.php */
-/*    .hautDePage{
+    .hautDePage{
         display: flex;
         justify-content: space-between;
     }
+
 
     .listeBouteille{
         display: grid;
@@ -74,7 +76,6 @@
         grid-gap: 10px;
         margin: 10px;
     }
-*/
 }
 
 
