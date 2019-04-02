@@ -7,7 +7,7 @@
 
 .carte-notes{
     white-space: nowrap;
-    text-overflow: auto;
+    text-overflow: ellipsis;
 }
 .carte-titre{
     white-space: nowrap;
@@ -109,7 +109,11 @@
     margin:10px;
     font-weight: bold;
     text-align: center;
+    white-space: nowrap;
+    width: inherit;
+    overflow: hidden;
     text-overflow: ellipsis;
+    display: block;
 }
 
 .listeBouteilleParVignette .carte-description{
@@ -164,13 +168,13 @@
 
 .listeBouteilleParVignette .carte-information{
     order:3;
-    align-self: center;
+    /*align-self: center;*/
     flex:auto;
 }
 
 .listeBouteilleParVignette .carte-information_2{
     order:4;
-    align-self: center;
+    /*align-self: center;*/
     flex:auto;
     display: none;
 }
@@ -227,7 +231,6 @@
     }
     .listeBouteilleParVignette .carte-information_2{
         order:4;
-        align-self: center;
         flex:auto;
         display: block;
     }
