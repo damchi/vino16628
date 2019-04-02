@@ -5,8 +5,8 @@
  * Date: 13/03/2019
  * Time: 22:55
  */
-
 ?>
+<script src="./js/login.js"></script>
 <div class="encadré">
     <div class="containeurBlanc">
         <h2 class="btnToggle" id="1">Connectez-vous</h2>
@@ -45,8 +45,9 @@
                 <div class="group">
                     <label class="icon_form"><i class="fas fa-user"></i></label>
                     <input type="text" id="prenomInscription" name="prenom" placeholder="Prenom">
+                    <br><div class="erreur" id="errorPrenom"></div>
                 </div>
-                <div id="errorPrenom"></div>
+
                 <div class="group">
                     <label class="icon_form"><i class="fas fa-user"></i></label>
                     <input type="text" id="nomInscription" name="nom" placeholder="Nom">

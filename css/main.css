@@ -9,7 +9,7 @@
 @import url("components/typographie.css");
 @import url("components/form.css");
 @import url("components/table.css");
-@import url("components/formLogin.css");
+@import url("components/login.css");
 
         /*---Index---*/
 /*
@@ -32,6 +32,11 @@ body{
 main{
     flex-grow: 1;
     width: 100%;
+}
+
+
+.mc {
+    display: none;
 }
 
 .ml {
@@ -76,13 +81,6 @@ main{
       background-color: #f9f9f9;
     }
 
-}
-
-.mc {
-    display: none;
-}
-
-@media screen and (min-width: 600px) {
     .mc {
         display: all;
     }
