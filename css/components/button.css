@@ -18,7 +18,7 @@ button:hover {
 
 button a{
     text-decoration: none;
-    /*background: #701139;*/
+    background-color: #97174C;
     color:white;
 }
 
@@ -31,6 +31,14 @@ button a{
     .boutonSolo button{
         width: 100%;
     }
+
+    .recherche{
+        text-align: center;
+    }
+    .recherche button, .recherche select{
+        width: 90vw;
+        align-self: center;
+        margin: 5px;
+
+    }
 }
-
-
