@@ -11,7 +11,7 @@
 
     <!-- Lien CSS -->
     <link rel="stylesheet" href="./css/main.css" type="text/css" media="screen">
-    <link rel="icon" type="image/png" href="./images/favicon.png"
+    <link rel="icon" type="image/png" href="./images/favicon.png">
     <base href="<?php echo BASEURL; ?>">
 
     <!-- Font Awesome -->
