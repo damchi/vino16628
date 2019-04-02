@@ -21,7 +21,7 @@ class SAQ extends Modele {
 
 	public function __construct() {
 		parent::__construct();
-		if (!($this -> stmt = $this -> _db -> prepare("INSERT INTO vino__bouteille__saq(nom, type, image, code_saq, pays, prix_saq, url_saq, url_img, format) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"))) {
+		if (!($this -> stmt = $this -> _db -> prepare("INSERT INTO vino__bouteille__saq(nom, type, code_saq, pays, prix_saq, url_saq, url_img, format) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"))) {
 			echo "Echec de la préparation : (" . $mysqli -> errno . ") " . $mysqli -> error;
 		}
 	}
@@ -98,7 +98,7 @@ class SAQ extends Modele {
         
 		foreach ($p as $node) {
 			if ($node -> getAttribute('class') == 'nom') {
-				$info -> nom = utf8_decode(trim($node -> textContent));
+				$info -> nom = trim($node -> textContent);
 			}
             else if ($node -> getAttribute('class') == 'desc') {
 				$info -> desc = new stdClass();
@@ -107,20 +107,20 @@ class SAQ extends Modele {
                 
 				if (isset($aDesc[1][2])) {
 					preg_match("/\d{8}/", $aDesc[1][2], $aRes);
-					$info -> desc -> code_SAQ = utf8_decode(trim($aRes[0]));
+					$info -> desc -> code_SAQ = trim($aRes[0]);
 				}
                 
 				if (isset($aDesc[1][1])) {
 					preg_match("/(.*),(.*)/", $aDesc[1][1], $aRes);
-					$info -> desc -> pays = utf8_decode(trim($aRes[1]));
-					$info -> desc -> format = utf8_decode(trim($aRes[2]));
+					$info -> desc -> pays = trim($aRes[1]);
+					$info -> desc -> format = substr(trim($aRes[2]), 2);
 				}
                 
 				if (isset($aDesc[1][0])) {
-					$info -> desc -> type = utf8_decode(trim($aDesc[1][0]));
+					$info -> desc -> type = trim($aDesc[1][0]);
 				}
                 
-				$info -> desc -> texte = utf8_decode(trim($info -> desc -> texte));
+				$info -> desc -> texte = trim($info -> desc -> texte);
 			}
 		}
         
@@ -130,7 +130,7 @@ class SAQ extends Modele {
 			if ($node -> getAttribute('class') == 'price') {
 				$info -> prix = trim($node -> textContent);
 				preg_match("/ \r\n(.*)$/", $info -> prix, $aRes);
-				$info -> prix = utf8_decode(trim($aRes[1]));
+				$info -> prix = trim($aRes[1]);
                 $info -> prix = preg_replace("/,/", ".", $info -> prix); // Pour avoir un float
 			}
 		}
@@ -156,9 +156,8 @@ class SAQ extends Modele {
 			$rows = $this -> _db -> query($sql);
             
 			if ($rows -> num_rows < 1) {
-				$this -> stmt -> bind_param("sisssdsss", $bte -> nom, $type, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);
+				$this -> stmt -> bind_param("sissdsss", $bte -> nom, $type, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);
 				$retour -> succes = $this -> stmt -> execute();
-
 			} else {
 				$retour -> succes = false;
 				$retour -> raison = self::DUPLICATION;
