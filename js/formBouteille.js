@@ -45,11 +45,13 @@ window.addEventListener('load', function() {
             console.log(evt);
             
             let nom = inputRecherche.value;
+            console.log('nom');
+            console.log(nom);
             liste.innerHTML = "";
 
             if(nom){
                 let requete = new Request(
-                    BaseURL+"index.php?requete=autocompleteBouteille",
+                    "index.php?requete=autocompleteBouteille",
                     {method: 'POST', body: '{"nom": "'+nom+'"}'}
                 );
 
@@ -89,7 +91,7 @@ window.addEventListener('load', function() {
                 let idBouteilleSaq = evt.target.dataset.id;
 
                 let requete = new Request(
-                    BaseURL+"index.php?requete=getBouteilleSaq",
+                    "index.php?requete=getBouteilleSaq",
                     {method: 'POST', body: '{"id_bouteille_saq": "'+idBouteilleSaq+'"}'}
                 );
 
