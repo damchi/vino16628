@@ -16,9 +16,6 @@ header {
   display: -webkit-flex;
   display: flex;
   background-color: rgba(127, 37, 60, 0.80);
-  /*background-color: #701139;Foncé*/
-  /*background-color: #97174C;*/
-  /*background-color: #A80549;Plus rouge?tre*/
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -34,13 +31,10 @@ header {
 }
 
 .topnav {
-  /*background-color: #701139;*/
-  /*background-color: #97174C;*/
-  /*background-color: #A80549;/*Plus rouge?tre*/
   overflow: hidden;
 }
 
-/* Style the links inside the navigation bar */
+/* Style des liens de la navigation */
 .topnav a {
   color: #f2f2f2;
   text-align: center;
@@ -57,7 +51,6 @@ header {
   .topnav a:not(.burger) i {
       margin-right: 10px;
   }
-
 
 /* Add an active class to highlight the current page */
 .active {
