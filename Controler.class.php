@@ -503,12 +503,15 @@ class Controler
 
     private function ajoutCellier()
     {
-        $body = json_decode(file_get_contents('php://input'));
-        if (!empty($body)) {
-            $cellier = new Cellier();
-            $resultat = $cellier->ajoutCellierUsager($body);
 
-            echo json_encode($resultat);
+
+//        $body = json_decode(file_get_contents('php://input'));
+//        var_dump(file_get_contents('php://input'));
+        if (!empty($_POST['nomCellier']) && !empty($_POST['id'])) {
+            $cellier = new Cellier();
+//            $resultat = $cellier->ajoutCellierUsager($body);
+            $cellier->ajoutCellierUsager($_POST['nomCellier'],$_POST['id']);
+//            echo json_encode($resultat);
         }
     }
 

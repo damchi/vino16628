@@ -32,21 +32,21 @@ window.addEventListener('load', () => {
                     evt.preventDefault()
                 }
                 else{
-                    var param = new FormData();
-                    var image = document.querySelector('#imageCellier').files[0]
+
+                    var image = document.querySelector('#imageCellier').files[0];
                     var nomCellier = document.querySelector("[name='nomCellier']").value;
                     var id = document.querySelector("[name='idUsagerCellier']").value;
 
-
+                    var param = new FormData()
                     param.append('image',image)
-                    param.append('nomCellier','test' )
+                    param.append('nomCellier',nomCellier )
                     param.append('id', id)
 
 
-                    console.log(image);
-                    console.log(nomCellier);
-                    console.log(id);
-                    console.log(param);
+                    // console.log(image);
+                    // console.log(nomCellier);
+                    // console.log(id);
+                    // console.log(param);
 
                     // var image = document.getElementById("imageCellier");
                     // var file = image.files[0];
@@ -57,7 +57,7 @@ window.addEventListener('load', () => {
                     //     "id": document.querySelector("[name='idUsagerCellier']").value
                     // };
 
-                    let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: JSON.stringify(param)});
+                    let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: param});
                     console.log(requete);
                     fetch(requete)
                         .then(response => {
