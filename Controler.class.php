@@ -28,8 +28,7 @@ class Controler
                 break;
             case 'getBouteilleSaq':
                 if (isset($_SESSION['user_pseudo'])) {
-
-                    $this->getBouteilleSAQ();
+                    $this->getBouteilleSaq();
                 } else {
                     header("Location:index.php?requete=login");
                 }
@@ -255,19 +254,19 @@ class Controler
         }
     }
 
-    private function getBouteilleSAQ()
+    private function getBouteilleSaq()
     {
-        $bte = new Bouteille();
+        $saq = new SAQ();
         $body = json_decode(file_get_contents('php://input'));
-        $bouteilleSaq = $bte->getBouteilleSaq($body->id_bouteille_saq);
+        $bouteilleSaq = $saq->getProduit($body->id_bouteille_saq);
         echo json_encode($bouteilleSaq);
     }
 
     private function autocompleteBouteille()
     {
-        $bte = new Bouteille();
+        $saq = new SAQ();
         $body = json_decode(file_get_contents('php://input'));
-        $listeBouteille = $bte->autocomplete($body->nom);
+        $listeBouteille = $saq->autocomplete($body->nom);
         echo json_encode($listeBouteille);
 
     }
@@ -358,12 +357,12 @@ class Controler
 
     private function modifierBouteilleSaq()
     {
-        $bte = new Bouteille();
+        $saq = new SAQ();
 
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
-                $data['bouteille'] = $bte->getBouteilleSaq($_GET['idBouteilleSaq']);
-                $data['types'] = $bte->getTypes();
+                $data['bouteille'] = $saq->getBouteilleSaq($_GET['idBouteilleSaq']);
+                $data['types'] = $saq->getTypes();
                 include("vues/entete.php");
                 include("vues/formBouteilleSaq.php");
                 include("vues/pied.php");
@@ -376,7 +375,7 @@ class Controler
                     $bouteille[$cle] = !empty($valeur) ? $valeur : null;
                 }
 
-                $bte->modifierBouteilleSaq($bouteille);
+                $saq->modifieProduit($bouteille);
                 header("Location: index.php?requete=gererBouteillesSaq");
                 break;
         }
@@ -400,8 +399,8 @@ class Controler
     private function supprimerBouteilleSaq()
     {
         $body = json_decode(file_get_contents('php://input'));
-        $bte = new Bouteille();
-        $res = $bte->supprimerBouteilleSaq($body->id);
+        $saq = new SAQ();
+        $res = $saq->supprimeProduit($body->id);
         echo json_encode($res);
     }
 

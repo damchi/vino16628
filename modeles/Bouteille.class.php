@@ -99,34 +99,6 @@ class Bouteille extends Modele {
 	}
 	
 	/**
-	 * Cette méthode permet de retourner les résultats de recherche pour la fonction d'autocomplete de l'ajout des bouteilles dans le cellier
-	 * 
-	 * @param string $nom La chaine de caractère à rechercher
-	 * @param integer $nb_resultat Le nombre de résultat maximal à retourner.
-	 * 
-	 * @return array id et nom de la bouteille trouvée dans le catalogue
-	 */   
-	public function autocomplete($nom, $nbResultats = 10) {		
-		$nom = $this->_db->escape_string($nom);
-		$nom = preg_replace("/\*/","%" , $nom);
-        $nbResultats = (int) $nbResultats;
-		 
-		$sql = "
-            SELECT id_bouteille_saq, nom FROM vino__bouteille__saq
-            WHERE LOWER(nom) LIKE LOWER('%$nom%') LIMIT 0, $nbResultats
-        ";
-
-        $res = $this->_db->query($sql);
-		$rows = Array();
-        
-        while ($row = $res->fetch_assoc()) {
-            $rows[] = $row;					
-        }
-        
-		return $rows;
-	}
-	
-	/**
 	 * Retourne les attributs d'une bouteille donnée.
 	 * 
 	 * @param int idBouteille
@@ -139,26 +111,6 @@ class Bouteille extends Modele {
 		$sql = "
             SELECT * FROM vino__bouteille
             WHERE id_bouteille = $idBouteille
-        ";
-
-        $res = $this->_db->query($sql);
-		
-        return $res->fetch_assoc();
-	}
-	
-	/**
-	 * Retourne les attributs d'une bouteille SAQ donnée.
-	 * 
-	 * @param int idBouteilleSaq
-	 * 
-	 * @return Tableau associatif des attributs ou null si la bouteille n'existe pas
-	 */    
-	public function getBouteilleSaq($idBouteilleSaq) {
-        $idBouteilleSaq = (int) $idBouteilleSaq;
-        
-		$sql = "
-            SELECT * FROM vino__bouteille__saq
-            WHERE id_bouteille_saq = $idBouteilleSaq
         ";
 
         $res = $this->_db->query($sql);
@@ -180,27 +132,6 @@ class Bouteille extends Modele {
             SELECT b.*, t.type FROM vino__bouteille b
 			INNER JOIN vino__type t ON t.id_type = b.type
             WHERE id_cellier = $idCellier
-        ";
-
-        $res = $this->_db->query($sql);
-		$liste = Array();
-                
-        while ($row = $res->fetch_assoc()) {
-            $liste[] = $row;
-        }
-
-        return $liste;
-	}
-	
-	/**
-	 * Retourne le catalogue de bouteilles SAQ.
-	 * 
-	 * @return Tableau des bouteilles avec tous leurs attributs
-	 */
-	public function getListeBouteillesSaq() {
-		$sql = "
-            SELECT b.*, t.type FROM vino__bouteille__saq b
-			INNER JOIN vino__type t ON t.id_type = b.type
         ";
 
         $res = $this->_db->query($sql);
@@ -266,35 +197,6 @@ class Bouteille extends Modele {
 	}
 	
 	/**
-	 * Modifie les attributs d'une bouteille dans le catalogue de la SAQ.
-	 * 
-	 * @param Array $data Tableau des attributs de la bouteille.
-	 * 
-     * @return int 1 si modifiée, 0 si inexistante
-	 */
-	public function modifierBouteilleSaq($data) {
-        $idBouteilleSaq = (int) $data['id_bouteille_saq'];
-        $nom = $this->_db->escape_string($data['nom']);
-        $codeSaq = $this->_db->escape_string($data['code_saq']);
-        $pays = $this->_db->escape_string($data['pays']);
-        $prixSaq = (float) $data['prix_saq'];
-        $urlSaq = $this->_db->escape_string($data['url_saq']);
-        $urlImg = $this->_db->escape_string($data['url_img']);
-        $format = $this->_db->escape_string($data['format']);
-        $type = (int) $data['type'];
-        
-        $sql = "
-            UPDATE vino__bouteille__saq
-            SET nom = '$nom', code_saq = '$codeSaq', pays = '$pays', prix_saq = $prixSaq, url_saq = '$urlSaq', url_img = '$urlImg', format = '$format', type = $type
-            WHERE id_bouteille_saq = $idBouteilleSaq
-        ";        
-
-        $this->_db->query($sql);
-        
-        return $this->_db->affected_rows;
-	}
-	
-	/**
 	 * Cette méthode change la quantité d'une bouteille en particulier dans le cellier
 	 * 
 	 * @param int $idBouteille
@@ -344,26 +246,6 @@ class Bouteille extends Modele {
         return $this->_db->affected_rows;
 	}
 
-	/**
-	 * Supprime une bouteille du catalogue de la SAQ.
-	 *
-	 * @param int idBouteilleSaq
-	 *
-     * @return int 1 si supprimée, 0 si inexistante
-	 */
-	public function supprimerBouteilleSaq($idBouteilleSaq) {
-        $idBouteilleSaq = (int) $idBouteilleSaq;
-        
-		$sql = "
-            DELETE FROM vino__bouteille__saq
-            WHERE id_bouteille_saq = $idBouteilleSaq
-        ";
-
-        $this->_db->query($sql);
-        
-        return $this->_db->affected_rows;
-	}
-    
     /**
      * Donne le nombre de bouteilles dans un cellier donné.
      * @param int $idCellier

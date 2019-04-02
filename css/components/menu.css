@@ -63,21 +63,6 @@ header {
   display: none;
 }
 
-.topnav a:not(.burger) i {
-    margin-right: 10px;
-}
-
-/* Add an active class to highlight the current page */
-.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-/* Cache le bouton d'affichage du menu sur grand écran */
-.topnav .burger {
-  display: none;
-}
-
 /* Affichage du header sur mobile */ 
 @media screen and (max-width: 600px) {
   header {
