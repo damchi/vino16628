@@ -5,6 +5,14 @@
     background-color: white;
 }
 
+.carte-notes{
+    white-space: nowrap;
+    text-overflow: auto;
+}
+.carte-titre{
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
 
 /*  .listeBouteilleParListe */
 .listeBouteilleParListe{
@@ -101,14 +109,13 @@
     margin:10px;
     font-weight: bold;
     text-align: center;
-    height: 15%;
+    text-overflow: ellipsis;
 }
 
 .listeBouteilleParVignette .carte-description{
     display: flex;
     flex-direction: row;
     margin: 5px;
-    height: 55%;
     text-align: left;
 }
 
@@ -121,7 +128,6 @@
     padding: 10px;
     background-color: #97174C;
     color: white;
-    height: 25%;
 }
 
 /* Partie Description de la carte*/

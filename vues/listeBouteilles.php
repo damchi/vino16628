@@ -73,7 +73,7 @@
         <div class="carte-entete">
             <!-- Titre -->
             <div class="carte-titre">
-                <h4><?php echo $bouteille['nom'] ?></h4>
+                <?php echo $bouteille['nom'] ?>
             </div>
         </div>
         
@@ -98,9 +98,9 @@
             <div class="carte-information_2">
                 <!-- Texte -->
                 <div class="carte-format"> Format : <?php echo $bouteille['format'] ?></span></div>
-                <div class="carte-pays">Date achat : <?php echo $bouteille['date_achat'] ?></div>
-                <div class="carte-type">garde jusqu'à : <?php echo $bouteille['garde_jusqua'] ?></div>
-                <div class="carte-millesime">Notes : <?php echo $bouteille['notes'] ?></div>
+                <div class="carte-date_achat">Date achat : <?php echo $bouteille['date_achat'] ?></div>
+                <div class="carte-garde_jusqua">garde jusqu'à : <?php echo $bouteille['garde_jusqua'] ?></div>
+                <div class="carte-notes">Notes : <?php echo $bouteille['notes'] ?></div>
             </div>
         
             <!-- Carte image -->
