@@ -3,25 +3,25 @@
 -->
 
 <script src="./js/gererBouteillesSaq.js"></script>
+
 <div class="encadré">
     <div class="containeurBlanc">
-<div class="gererBouteilles">
-    <div class="hautDePage">
-        <button id="reinitialiserCatalogue"><i class="fas fa-exclamation"></i>  Réinitialiser le catalogue</button>
-    </div>
-
-    <div class="form">
-        <div>Recherche dans le catalogue</div>
-        
-        <div class="group">
-            <label class="icon_form"><i class="fas fa-search"></i></label>
-            <input name="rechercheCatalogue">
+        <div class="hautDePage">
+            <button id="reinitialiserCatalogue"><i class="fas fa-exclamation"></i>  Réinitialiser le catalogue</button>
         </div>
-    </div>
-    
-    <div id="listeBouteilles" class="listeBouteilleParVignette"></div>
-</div>
+        
+        <div class="form">
+            <div>Recherche dans le catalogue</div>
 
+            <div class="group">
+                <label class="icon_form"><i class="fas fa-search"></i></label>
+                <input name="rechercheCatalogue">
+            </div>
+        </div>
+
+        <div id="listeBouteilles" class="listeBouteilleParVignette"></div>
+    </div>
+</div>
 
 <template id="templateBouteille">
     <div class="carte bouteille" data-id="(id_bouteille_saq)">
@@ -35,5 +35,3 @@
         </div>
     </div>
 </template>
-</div>
-</div>

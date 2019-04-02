@@ -57,11 +57,9 @@ window.addEventListener('load', () => {
     
     function chargerResultatRecherche() {
         let requete = new Request(
-            BaseURL + "index.php?requete=autocompleteBouteille",
+            "index.php?requete=autocompleteBouteille",
             {method: 'POST', body: '{"nom": "' + inputRecherche.value + '"}'}
         );
-
-        console.log(requete);
 
         fetch(requete).then(response => {
             if (response.status === 200) {
@@ -82,11 +80,9 @@ window.addEventListener('load', () => {
     
     function reinitialiserCatalogue() {
         let requete = new Request(
-            BaseURL + "index.php?requete=reinitialiserCatalogue",
+            "index.php?requete=reinitialiserCatalogue",
             {method: 'POST', body: '{}'}
         );
-
-        console.log(requete);
 
         fetch(requete).then(response => {
             if (response.status === 200) {
@@ -120,8 +116,6 @@ window.addEventListener('load', () => {
             {method: 'POST', body: '{"id": ' + idBouteille + '}'}
         );
 
-        console.log(requete);
-
         fetch(requete).then(response => {
             if (response.status === 200) {
                 return response.json();
@@ -135,8 +129,6 @@ window.addEventListener('load', () => {
                 On enlève la div du DOM au retour de la requête Ajax.
             */
 
-            console.log(response);
-          
             let divBouteille = divListeBouteilles.querySelector(
                 ".bouteille[data-id='" + idBouteille + "']"
             );
@@ -149,8 +141,9 @@ window.addEventListener('load', () => {
     }
 
     /**
-     *  Vide la ul des bouteilles et y ajoute un li pour chacune des bouteilles
-     *  de la liste.
+     *  Vide la div liste bouteilles et y ajoute une div avec les informations
+     *  sur la bouteille pour chacune des bouteilles du tableau passé en
+     *  paramètre.
      *
      *  @param Array listeBouteilles
      */
@@ -159,7 +152,7 @@ window.addEventListener('load', () => {
         
         for (bouteille of listeBouteilles) {
             /*
-                Le li de la bouteille est composé à partir d'un template HTML.
+                La div bouteille est composée à partir d'un template HTML.
             */
             
             let clone = document.importNode(
@@ -169,8 +162,9 @@ window.addEventListener('load', () => {
             let divBouteille = clone.querySelector('.bouteille');
             
             /*
-                On met l'id de la bouteille dans son attribut data-id et son
-                nom dans le span .nom.
+                L'id de la bouteille est stocké dans l'attribut data-id de la
+                div bouteille. Les autres attributs ont chacun leur élément à
+                l'intérieur de la div.
             */
             
             divBouteille.dataset.id = bouteille.id_bouteille_saq;
@@ -178,7 +172,7 @@ window.addEventListener('load', () => {
             
             /*
                 On insère le bon id de bouteille dans le lien du bouton
-                modifier.
+                modifier à la place du texte "(id_bouteille_saq)".
             */
             
             let lienModifier = divBouteille.querySelector(".btnModifier a");
