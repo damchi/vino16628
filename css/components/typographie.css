@@ -40,7 +40,7 @@ h1, h2, h3, .titreNav {
 
 @media(min-width:601px){
     body{
-        font-size:1rem;
+        font-size:.9rem;
     }
 
 }
