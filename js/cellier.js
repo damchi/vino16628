@@ -32,14 +32,30 @@ window.addEventListener('load', () => {
                     evt.preventDefault()
                 }
                 else{
-                    var image = document.getElementById("imageCellier");
-                    var file = image.files[0];
-                    console.log(file);
-                    var param ={
-                        "nomCellier":document.querySelector("[name='nomCellier']").value,
-                        "image":file,
-                        "id": document.querySelector("[name='idUsagerCellier']").value
-                    };
+                    var param = new FormData();
+                    var image = document.querySelector('#imageCellier').files[0]
+                    var nomCellier = document.querySelector("[name='nomCellier']").value;
+                    var id = document.querySelector("[name='idUsagerCellier']").value;
+
+
+                    param.append('image',image)
+                    param.append('nomCellier','test' )
+                    param.append('id', id)
+
+
+                    console.log(image);
+                    console.log(nomCellier);
+                    console.log(id);
+                    console.log(param);
+
+                    // var image = document.getElementById("imageCellier");
+                    // var file = image.files[0];
+                    // console.log(file);
+                    // var param ={
+                    //     "nomCellier":document.querySelector("[name='nomCellier']").value,
+                    //     "image":file,
+                    //     "id": document.querySelector("[name='idUsagerCellier']").value
+                    // };
 
                     let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: JSON.stringify(param)});
                     console.log(requete);

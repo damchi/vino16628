@@ -65,9 +65,9 @@ class Cellier extends Modele
      * @return mixed
      */
     public function ajoutCellierUsager($data){
-
-        $nom = $this->_db->escape_string($data->nomCellier);
-        var_dump($data->image);
+            var_dump($data);
+//        $nom = $this->_db->escape_string($data->nomCellier);
+//        var_dump($data->image);
 
 //        $_FILES["image"] = $data['image'];
 //
