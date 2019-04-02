@@ -101,14 +101,14 @@
     margin:10px;
     font-weight: bold;
     text-align: center;
-    height: 20%;
+    height: 15%;
 }
 
 .listeBouteilleParVignette .carte-description{
     display: flex;
     flex-direction: row;
     margin: 5px;
-    height: 60%;
+    height: 55%;
     text-align: left;
 }
 
@@ -121,7 +121,7 @@
     padding: 10px;
     background-color: #97174C;
     color: white;
-    height: 20%;
+    height: 25%;
 }
 
 /* Partie Description de la carte*/
