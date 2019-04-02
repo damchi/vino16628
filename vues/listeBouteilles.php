@@ -73,7 +73,7 @@
         <div class="carte-entete">
             <!-- Titre -->
             <div class="carte-titre">
-                <h4><?php echo $bouteille['nom'] ?></h4>
+                <?php echo $bouteille['nom'] ?>
             </div>
         </div>
         
