@@ -171,4 +171,26 @@ class SAQ extends Modele {
 		return $retour;
 
 	}
+    
+	/**
+	 * Retourne le nombre de produits dans le catalogue correspondant à
+     * certains critères.
+	 * 
+     * @param Array criteres
+     *        (aucun critère encore programmé)
+     *
+	 * @return int Le nombre de produits
+	 */
+	public function nbProduits($criteres = []) {
+        $sql = "SELECT COUNT(*) AS count FROM vino__bouteille__saq WHERE 1 = 1";
+        
+        if (isset($criteres['...'])) {
+            $sql .= " AND ... ";
+        }
+
+        $res = $this->_db->query($sql);
+        $row = $res->fetch_assoc();
+        
+        return (int) $row['count'];
+    }
 }

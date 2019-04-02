@@ -215,7 +215,13 @@ class Controler
 
     private function adminAccueil()
     {
-
+        $usr = new Usager();
+        $data['nbAdmin'] = $usr->nbUsagers(['admin' => true]);
+        $data['nbUsagers'] = $usr->nbUsagers(['admin' => false]);
+        
+        $saq = new SAQ();
+        $data['nbProduitsSaq'] = $saq->nbProduits();
+        
         include("vues/entete.php");
         include("vues/admin.php");
         include("vues/pied.php");
