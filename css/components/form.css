@@ -1,17 +1,16 @@
 .form{
-    margin-bottom: 25px;
+  margin: auto;
+  margin-bottom: 30px;
+  max-width: 350px;
 }
 
 .group{
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    margin: 10px;
-    padding: 10px;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .group:not(:last-child) {
-    margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .icon_form{
@@ -24,6 +23,13 @@
     text-align: center;
     box-shadow: 1px 2px 5px rgba(0,0,0,.09);
     border: solid 0px #cbc9c9;
+}
+
+.erreur {
+    font-size: 0.8em;
+    position: relative;
+        top: -18px;
+    height: 0px;
 }
 
 input, select, textarea{
