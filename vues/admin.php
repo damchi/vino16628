@@ -1,9 +1,28 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: damien
- * Date: 25/03/2019
- * Time: 08:35
- */
+<!--
+    Tableau de bord de l'administrateur
+-->
 
-echo 'Hello admin';
+<div class="encadré">
+    <div class="containeurBlanc">
+        <div class="tableauBord">
+            <section>
+                <h2>Usagers</h2>
+                <p>
+                    <span>Nombre d'administrateurs : </span>
+                    <?= $data['nbAdmin'] ?>
+                </p>
+                <p>
+                    <span>Nombre d'usagers : </span>
+                    <?= $data['nbUsagers'] ?>
+                </p>
+            </section>
+            <section>
+                <h2>Catalogue SAQ</h2>
+                <p>
+                    <span>Nombre de produits dans le catalogue SAQ : </span>
+                    <?= $data['nbProduitsSaq'] ?>
+                </p>
+            </section>
+        </div>
+    </div>
+</div>

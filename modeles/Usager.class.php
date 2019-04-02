@@ -60,24 +60,18 @@ class Usager extends Modele
      */
     public function ajoutNouveauUsager($nom,$prenom,$mail,$password,$pseudo){
         $retour = new stdClass();
-//        $retour -> succes = false;
-//        if ($this->existUsager($data->mail,$data->pseudo) == false){
+
         if ($this->existUsager($mail,$pseudo) == false){
                 //            $mdp = password_hash($data->mdp, PASSWORD_DEFAULT);
                 $mdp = password_hash($password, PASSWORD_DEFAULT);
                 $admin = '0';
                 $stmt = $this->_db->prepare("INSERT INTO " .self::TABLE . " (nom, prenom, mail, mdp, admin,pseudo) VALUES (?, ?, ?,?,?,?)");
-//            $stmt->bind_param("ssssis", $data->nom, $data->prenom, $data->mail,$mdp,$admin,$data->pseudo);
                 $stmt->bind_param("ssssis", $nom, $prenom, $mail,$mdp,$admin,$pseudo);
-//                $stmt->execute();
             $retour -> succes = true;
-//            var_dump('insert');
-//            var_dump($retour -> succes );
             $stmt->execute();
 
         }
         else{
-//            var_dump('eeee');
             $retour -> succes = false;
         }
         return $retour-> succes;
@@ -107,7 +101,6 @@ class Usager extends Modele
                 $_SESSION['user_pseudo'] = $row_data["pseudo"];
                 $_SESSION['user_id'] = $row_data["id_usager"];
                 $retour -> succes = true;
-//                var_dump($row_data["admin"]);
                 if ($row_data["admin"] == 1){
                     $_SESSION['admin'] = $row_data["admin"];
                     $retour -> admin = true;
@@ -167,5 +160,28 @@ class Usager extends Modele
 		$res = $stmt->get_result();
         
         return (boolean) $res->fetch_assoc();
+    }
+    
+	/**
+	 * Retourne le nombre d'usagers correspondant à certains critères.
+	 * 
+     * @param Array $criteres
+     *        'admin' => (boolean)
+     *
+	 * @param int $idCellier id du cellier
+	 * 
+	 * @return int Le nombre d'usagers
+	 */
+	public function nbUsagers($criteres = []) {
+        $sql = "SELECT COUNT(*) AS count FROM vino__usager WHERE 1 = 1";
+        
+        if (isset($criteres['admin'])) {
+            $sql .= " AND admin = " . ($criteres['admin'] ? 'TRUE' : 'FALSE');
+        }
+
+        $res = $this->_db->query($sql);
+        $row = $res->fetch_assoc();
+        
+        return (int) $row['count'];
     }
 }
