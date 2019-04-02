@@ -38,6 +38,14 @@ main{
     margin-left: 10px;
 }
 
+.encadré {
+  text-align: center;
+  max-width: 100%;
+  margin-top: 0px;
+  padding: 0px;
+  background-color: white;
+}
+
 @media screen and (min-width: 600px) {
     body {
         background-image: url("../images/barril.jpg");
