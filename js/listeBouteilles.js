@@ -302,59 +302,40 @@ window.addEventListener('load', () => {
         });
     }
 
-    /* Afficher la liste des bouteille par liste*/
-    let listBouteille = document.querySelector('.afficherListeBouteille');
-    if(listBouteille){
-        listBouteille.addEventListener('click', function(){
-            var cartes = document.querySelectorAll('.carte');
-            var infos = document.querySelectorAll('.carte-information');
-            var infos_2 = document.querySelectorAll('.carte-information_2');
-            var images = document.querySelectorAll('.carte-image img');
-
-            document.getElementById('listeBouteille').classList.remove('listeBouteilleParVignette');
-
-            for( var i = 0; i<cartes.length; ++i){
-                cartes[i].setAttribute('style',"display:flex;");
-                infos[i].setAttribute('style',"display:block;");
-                infos[i].setAttribute('style',"font-size:.9rem;");
-                infos_2[i].setAttribute('style',"display:block; font-size:.9rem;");
-                images[i].setAttribute('style',"max-width:75px;");
-                images[i].setAttribute('style',"max-height:75px;");
-            }
-        });
-    }
-
-
-    /* Afficher la liste des bouteille par vignette*/
-    let listVignette = document.querySelector('.afficherVignetteBouteille');
-    if(listVignette){
-        listVignette.addEventListener('click', function(){
-            var cartes = document.querySelectorAll('.carte');
-            var infoSupplémentaires = document.querySelectorAll('.carte-information_2');
-
-            document.getElementById('listeBouteille').classList.add('listeBouteilleParVignette');
-
-            for( var i = 0; i<cartes.length; ++i){
-                cartes[i].setAttribute('style',"display:grid;");
-                infoSupplémentaires[i].setAttribute("style","display:none")
+    /* Afficher la liste des bouteille par liste ou par vignette*/
+    let listeBouteille = document.querySelector('.afficherListeBouteille');
+    if(listeBouteille){
+        let bouteille = document.getElementById('listeBouteille');
+        listeBouteille.addEventListener('click', function(){
+            if(bouteille.classList.contains('listeBouteilleParListe')){
+                bouteille.classList.remove('listeBouteilleParListe');
+                bouteille.classList.add('listeBouteilleParVignette')
+                listeBouteille.innerHTML = '<i class="fas fa-list"></i>';
+            }else{
+                bouteille.classList.remove('listeBouteilleParVignette');
+                bouteille.classList.add('listeBouteilleParListe');
+                listeBouteille.innerHTML = '<i class="fas fa-th"></i>';
             }
         });
     }
 
     /* Afficher la Filtre de recherche*/
-    var filtreRecherche = document.getElementById('filtreRecherche');
-    var recherche = document.querySelector('.recherche button')
-    recherche.addEventListener('click', function () {
-       if (filtreRecherche.style.display === 'none'){
-           recherche.innerHTML = 'Filtrer par &nbsp; <i class="fas fa-angle-up"></i>';
-           filtreRecherche.style.display = 'block';
-
-       }else{
-           recherche.innerHTML = 'Filtrer par &nbsp; <i class="fas fa-angle-down"></i>';
-           filtreRecherche.style.display = 'none';
-
-       }
-    });
+    var recherche = document.querySelector('.recherche button');
+    if(recherche){
+        var filtreRecherche = document.getElementById('filtreRecherche');
+        recherche.addEventListener('click', function () {
+            if (filtreRecherche.style.display === 'none'){
+                recherche.innerHTML = 'Filtrer par &nbsp; <i class="fas fa-angle-up"></i>';
+                filtreRecherche.style.display = 'block';
+     
+            }else{
+                recherche.innerHTML = 'Filtrer par &nbsp; <i class="fas fa-angle-down"></i>';
+                filtreRecherche.style.display = 'none';
+     
+            }
+         });    
+    }
+    
 
 
 });
