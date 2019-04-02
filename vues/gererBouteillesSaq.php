@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div id="listeBouteilles" class="listeBouteilleParVignette"></div>
+        <div id="listeBouteilles" class="listeBouteilleParListe"></div>
     </div>
 </div>
 
