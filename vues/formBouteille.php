@@ -20,7 +20,8 @@ $type = isset($data['bouteille']['type']) ? $data['bouteille']['type'] : '';
 $urlImg = isset($data['bouteille']['url_img']) ? $data['bouteille']['url_img'] : '';
 $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] : '';
 ?>
-
+<div class="encadré">
+    <div class="containeurBlanc">
 <div class="container formBouteille">
 
     <!-- Recherche-->
@@ -130,5 +131,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         </div>
     </form>
 
+</div>
+</div>
 </div>
 
