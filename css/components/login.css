@@ -1,0 +1,41 @@
+/**
+ * @file Style de la page login.php
+ * @author Julien Granero
+ * @update 2019-03-25
+ * @license Creative Commons BY-NC 3.0 (Licence Creative Commons Attribution - Pas d’utilisation commerciale 3.0 non transposé)
+ * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
+ */
+
+.btnToggle {
+  padding: 25px;
+  cursor: pointer;
+  margin: 0px;
+  font-size: 1em;
+}
+
+.sectionMobile {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease-out;
+}
+
+.sectionMobileVisible{
+  padding: 0 18px;
+  max-height: 50px;
+  overflow: hidden;
+  transition: max-height 0.6s ease-out;
+  border-bottom: 1px solid #701139;
+}
+
+@media only screen and (min-width: 600px) {
+    .formLogin{
+      padding: 10px;
+    }
+
+    .blocPrincipal {
+      background-color: rgba(255,255,255,0.7);
+      border-radius: 10px;
+      margin-top: 50px;
+    }
+}
