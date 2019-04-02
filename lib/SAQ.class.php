@@ -21,7 +21,7 @@ class SAQ extends Modele {
 
 	public function __construct() {
 		parent::__construct();
-		if (!($this -> stmt = $this -> _db -> prepare("INSERT INTO vino__bouteille__saq(nom, type, image, code_saq, pays, description, prix_saq, url_saq, url_img, format) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"))) {
+		if (!($this -> stmt = $this -> _db -> prepare("INSERT INTO vino__bouteille__saq(nom, type, image, code_saq, pays, prix_saq, url_saq, url_img, format) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"))) {
 			echo "Echec de la préparation : (" . $mysqli -> errno . ") " . $mysqli -> error;
 		}
 	}
@@ -125,7 +125,7 @@ class SAQ extends Modele {
 
 //				var_dump($aDesc[1][1]);
 
-                var_dump($info->desc->texte);
+//                var_dump($info->desc->texte);
 				$info -> desc -> texte = utf8_decode(trim($info -> desc -> texte));
 
 			}
@@ -163,8 +163,8 @@ class SAQ extends Modele {
 			$rows = $this -> _db -> query($sql);
             
 			if ($rows -> num_rows < 1) {
-			    var_dump($bte->desc);
-				$this -> stmt -> bind_param("sissssdsss", $bte -> nom, $type, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> desc -> texte, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);
+
+				$this -> stmt -> bind_param("sisssdsss", $bte -> nom, $type, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);
 				$retour -> succes = $this -> stmt -> execute();
 
 			} else {
