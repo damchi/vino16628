@@ -63,7 +63,7 @@
  
 <!--<button id="fb-share-button">Partager</button>-->
  
-<div id="listeBouteille" class="listeBouteilleParListe">
+<div id="listeBouteille" class="listeBouteilleParVignette">
     <?php
     foreach ($data['listeBouteilles'] as $cle => $bouteille) {
     ?>
@@ -101,7 +101,7 @@
 
             </div>
 
-            <div class="carte-information_2">
+            <div class="carte-information_2 mc">
                     <!-- Texte -->
                 <div class="carte-format"> Format : <?php echo $bouteille['format'] ?></span></div>
                 <div class="carte-pays">Date achat : <?php echo $bouteille['date_achat'] ?></div>
