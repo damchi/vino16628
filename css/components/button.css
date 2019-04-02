@@ -2,7 +2,7 @@ button, input[type=submit]{
     color: white;
     text-align: center;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 6px;
     font-weight: bold;
     background: #97174C;
     transition: background 0.3s ease;
