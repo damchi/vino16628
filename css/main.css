@@ -9,8 +9,9 @@
 @import url("components/typographie.css");
 @import url("components/form.css");
 @import url("components/table.css");
-@import url("components/formLogin.css");
+@import url("components/login.css");
 @import url("components/admin.css");
+
 
         /*---Index---*/
 /*
@@ -25,7 +26,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-	color: #2d2c2c;
+	  color: #2d2c2c;
     width: 100%;
     margin: 0;
 }
@@ -35,8 +36,21 @@ main{
     width: 100%;
 }
 
+
+.mc {
+    display: none;
+}
+
 .ml {
     margin-left: 10px;
+}
+
+.encadré {
+  text-align: center;
+  max-width: 100%;
+  margin-top: 0px;
+  padding: 0px;
+  background-color: white;
 }
 
 @media screen and (min-width: 600px) {
@@ -56,13 +70,20 @@ main{
         padding-top: 10px;
     }
 
-}
+    .encadré {
+      text-align: center;
+      max-width: 100%;
+      margin-top: 2%;
+      padding: 30px 0px;
+      background-color: rgba(168, 28, 64, 0.48);
+    }
 
-.mc {
-    display: none;
-}
+    .containeurBlanc {
+      width: 100%;
+      background-color: #f9f9f9;
+      padding: 1px 0px;
+    }
 
-@media screen and (min-width: 600px) {
     .mc {
         display: all;
     }

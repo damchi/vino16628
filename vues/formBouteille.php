@@ -23,6 +23,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 <div class="encadré">
     <div class="containeurBlanc">
 <div class="container formBouteille">
+    <h2> Formulaire d'ajout de bouteille</h2>
 
     <!-- Recherche-->
     <div class="form">
