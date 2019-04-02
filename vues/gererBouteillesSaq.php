@@ -3,7 +3,8 @@
 -->
 
 <script src="./js/gererBouteillesSaq.js"></script>
-
+<div class="encadré">
+    <div class="containeurBlanc">
 <div class="gererBouteilles">
     <div class="hautDePage">
         <button id="reinitialiserCatalogue"><i class="fas fa-exclamation"></i>  Réinitialiser le catalogue</button>
@@ -21,6 +22,7 @@
     <div id="listeBouteilles" class="listeBouteilleParVignette"></div>
 </div>
 
+
 <template id="templateBouteille">
     <div class="carte bouteille" data-id="(id_bouteille_saq)">
         <div class="carte-titre">
@@ -33,3 +35,5 @@
         </div>
     </div>
 </template>
+</div>
+</div>
