@@ -19,7 +19,6 @@
                     <div id="errorCellier"></div>
                     <input type="hidden" name="idUsagerCellier" value="<?= $_SESSION['user_id']?>">
                 </form>
-
             </div>
             <?php
             foreach ($data as $cle => $cellier) {
@@ -34,8 +33,7 @@
             <?php
             }
             ?>
-            <div class="cellierId" id="insertChild" data-id="">
-            </div>
+            <div class="cellierId" id="insertChild" data-id=""></div>
         </div>
     </div>
 </div>
