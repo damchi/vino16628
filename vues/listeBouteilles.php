@@ -22,8 +22,9 @@
 <div class="recherche">
     <ul class="listeAutoComplete"></ul>
     <input type="hidden" name="idCellier" value="<?= $_SESSION['idCellier']?>">
-    <button>Filtrer par &nbsp; <i class="fas fa-angle-down"></i> </button>
- 
+    <button>Filtrer par  <i class="fas fa-angle-down"></i> </button>
+<!--    <button>Filtrer par &nbsp; <i class="fas fa-angle-down"></i> </button>-->
+
     <div id="filtreRecherche" class="mc">
         <select name="pays">
             <option value="">Pays</option>
