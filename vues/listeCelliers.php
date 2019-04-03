@@ -26,6 +26,7 @@
             foreach ($data as $cle => $cellier) {
             ?>
                 <div class="cellierId listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
+                    <div class="divImgCellier">
                     <?php
                         if ($cellier['image']  === null) {
                             ?>
@@ -38,7 +39,7 @@
                         <?php
                         }
                     ?>
-
+                    </div>
                      <a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?> </a>
                          <?php if($cellier['total'] != null){
                              ?>
