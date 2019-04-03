@@ -259,7 +259,7 @@ window.addEventListener('load', () => {
                 });
         });
     }
-    console.log(rechercheCellier);
+
     if (rechercheCellier){
         let liste = document.querySelector('.listeAutoComplete');
 

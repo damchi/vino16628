@@ -4,12 +4,11 @@
 @import url("components/celliers.css");
 @import url("components/cellier.css");
 @import url("components/button.css");
-@import url("components/pied.css");
 @import url("components/carte.css");
 @import url("components/typographie.css");
 @import url("components/form.css");
-@import url("components/table.css");
 @import url("components/login.css");
+@import url("components/admin.css");
 
 
         /*---Index---*/
@@ -32,6 +31,15 @@ body{
 
 main{
     flex-grow: 1;
+    width: 100%;
+}
+
+footer {
+    background-color: #7f253c;
+    text-align: center;
+    font-size: 0.8em;
+    color: #eee;
+    padding: 5px;
     width: 100%;
 }
 
