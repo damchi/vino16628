@@ -11,11 +11,13 @@
 	border-bottom: 1px solid #701139;    
 }
 
+.descriptionCellier {
+	flex-grow: 6;
+}
+
 .nomCellier {
 	text-decoration: none;
 	color: #272727;
-	flex-grow: 1;
-	text-align: center;
 }
 
 .cellier:visited {
@@ -31,7 +33,10 @@
 }
 
 .imgCellier {
-	height: 50px;
+	width: 65px;
+	height: 100px;
+	flex: 3;
+	object-fit: cover;
 }
 
 @media screen and (min-width: 600px) {

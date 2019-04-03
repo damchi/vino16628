@@ -8,7 +8,7 @@
 ?>
 <div class="encadré">
     <div class="containeurBlanc">
-        <div class="sous-menu">
+        <div class="boutonSolo boutonHaut">
             <button name="afficheFormCellier"><i class="fas fa-plus"></i>  Ajouter un cellier</button>
         </div>
         <div class="listeCelliers">
@@ -29,7 +29,7 @@
                     <?php
                         if ($cellier['image']  === null) {
                             ?>
-                            <img src="./images/cellier.png" class="imgCellier">
+                                <img src="./images/cellier.png" class="imgCellier">
                             <?php
                         }
                         else{
