@@ -9,13 +9,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.carte-titre{
-    white-space: nowrap;
-    width: 95%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-}
+
 
 /*  .listeBouteilleParListe */
 .listeBouteilleParListe{
@@ -23,6 +17,7 @@
     flex-direction: column;
     border-bottom: 1px solid #97174C;
     margin:10px;
+    justify-content: center;
 }
 
 .listeBouteilleParListe .carte{
@@ -33,9 +28,8 @@
 }
 
 .listeBouteilleParListe .carte-entete{
-    order: 2;
-    align-self: center;
-    flex:1;
+    order: 1;
+    width: 20%;
     margin-right: 10px;
 }
 
@@ -44,38 +38,37 @@
     flex-direction: row;
     justify-content: space-between;
     order: 2;
-    flex:3;
-    align-self: center;
+    flex:auto;
 }
 
 .listeBouteilleParListe .carte-pied{
     display:flex;
     flex-wrap: wrap;
-    order: 5;
-    flex:1;
+    order: 3;
+    width: 20%;
     padding:10px;
 }
 
 .listeBouteilleParListe .carte-image{
     order: 1;
     width: 100px ;
-    align-self: center;
+    display:none;
 }
 
 .listeBouteilleParListe .carte-image>img{
     width: 75px ;
+    display:none;
 }
 
 .listeBouteilleParListe .carte-information{
-    order:3;
-    align-self: center;
+    order:2;
+    text-align: left;
 
 }
 
 .listeBouteilleParListe .carte-information_2{
     display: none;
-    order:4;
-    align-self: center;
+    order:3;
     width: 175px;
 }
 
@@ -111,6 +104,13 @@
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
+}
+.listeBouteilleParVignette .carte-titre{
+    white-space: nowrap;
+    width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 
 .listeBouteilleParVignette .carte-description{
@@ -186,21 +186,27 @@
 /* Carfte form liste*/
 
 @media only screen and (max-width: 412px){
-    .listeBouteilleParListe .carte-image{
+    .listeBouteilleParListe .carte-image>img{
         display:none
     }
 }
 @media only screen and (min-width: 600px){
     .listeBouteilleParListe{
-        justify-content: center;
+        max-width: 700px;
         margin: 10px;
+        display: inline-block;
     }
     .listeBouteilleParListe .carte{
-        align-self: center;
+
         padding: 10px;
+
     }
     .listeBouteilleParListe .carte-entete{
         width: 150px;
+    }
+
+    .listeBouteilleParListe .carte-image>img{
+        display:none
     }
 
     .listeBouteilleParListe .description{
@@ -210,13 +216,12 @@
 
     .listeBouteilleParListe .carte-information_2{
         width: 250px;
-        padding: 10px;
         display: block;
     }
 
     .listeBouteilleParListe .carte-pied{
         width: 250px;
-        padding: 10px;
+        padding-left: 10px;
     }
     .listeBouteilleParVignette{
         justify-content: center;

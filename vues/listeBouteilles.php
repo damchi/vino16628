@@ -14,7 +14,7 @@
  
     <!--Bouton choisir affichage-->
     <div id="afficheListe" class="mc">
-        <button class="afficherListeBouteille"><i class="fas fa-th"></i></button>
+        <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
     </div>
  
 </div>
