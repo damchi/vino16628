@@ -14,7 +14,7 @@
  
     <!--Bouton choisir affichage-->
     <div id="afficheListe" class="mc">
-        <button class="afficherListeBouteille"><i class="fas fa-th"></i></button>
+        <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
     </div>
  
 </div>
@@ -22,8 +22,9 @@
 <div class="recherche">
     <ul class="listeAutoComplete"></ul>
     <input type="hidden" name="idCellier" value="<?= $_SESSION['idCellier']?>">
-    <button>Filtrer par &nbsp; <i class="fas fa-angle-down"></i> </button>
- 
+    <button>Filtrer par  <i class="fas fa-angle-down"></i> </button>
+<!--    <button>Filtrer par &nbsp; <i class="fas fa-angle-down"></i> </button>-->
+
     <div id="filtreRecherche" class="mc">
         <select name="pays">
             <option value="">Pays</option>
@@ -55,12 +56,15 @@
 		    ?>
 
         </select>
+    </div>
+
+</div>
         <button id="reset"> Remettre à zéro</button>
 
         <div id="errorFiltre"></div>
     </div>
 </div>
- 
+
 <!--<button id="fb-share-button">Partager</button>-->
                     
 <div id="listeBouteille" class="listeBouteilleParVignette">
@@ -76,8 +80,7 @@
                 <?php echo $bouteille['nom'] ?>
             </div>
         </div>
-        
-        
+
         <div class="carte-description">
             <div class="carte-information">
                 <!-- Texte -->
@@ -98,31 +101,35 @@
             <div class="carte-information_2">
                 <!-- Texte -->
                 <div class="carte-format"> Format : <?php echo $bouteille['format'] ?></span></div>
-                <div class="carte-pays">Date achat : <?php echo $bouteille['date_achat'] ?></div>
-                <div class="carte-type">garde jusqu'à : <?php echo $bouteille['garde_jusqua'] ?></div>
-                <div class="carte-millesime">Notes : <?php echo $bouteille['notes'] ?></div>
+                <div class="carte-date_achat">Date achat : <?php echo $bouteille['date_achat'] ?></div>
+                <div class="carte-garde_jusqua">garde jusqu'à : <?php echo $bouteille['garde_jusqua'] ?></div>
+                <div class="carte-notes">Notes : <?php echo $bouteille['notes'] ?></div>
             </div>
-        
+
             <!-- Carte image -->
             <div class="carte-image">
                 <?php
     //            if (isset($bouteille['image'])){
     //                echo '<img src="data:image/jpeg;base64,'.base64_encode( $bouteille['image'] ).'"/>';
     //            }
-        
+
                 if ($bouteille['url_img'] == null && $bouteille['image'] == null){
                     ?>
                     <img src="./images/bouteille_vin.png" alt="Image de la bouteille">
-        
+
                     <?php
                 }
                 else{
-                    ?>
-                    <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
-        
-                    <?php
+
+                    if (trim($bouteille['image']) !== ""){
+                        echo '<img src="./images/'. $bouteille['image'] .'" alt="Image de la bouteille">';
+                    }
+                    else {
+                        ?>
+                        <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
+                        <?php
+                    }
                 }
-        
                 ?>
             </div>
         </div>

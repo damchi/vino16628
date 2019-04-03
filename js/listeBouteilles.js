@@ -163,7 +163,7 @@ window.addEventListener('load', () => {
             * Si l'id des bouteilles affichées est présent dans idResponse alors il est affiché sinon non
             **/
             divBouteille.forEach((bouteille)=>{
-                bouteille.style.display = 'grid';
+                bouteille.style.display = 'block';
                 // idDiv.push(bouteille.dataset.id)
                 console.log();
                 if (idResponse.includes(bouteille.dataset.id) == false){
@@ -178,7 +178,7 @@ window.addEventListener('load', () => {
      */
     function resetRecherche() {
         divBouteille.forEach((bouteille)=>{
-            bouteille.style.display = 'grid';
+            bouteille.style.display = 'block';
             reset.style.display='none';
             errorFiltre.style.display='none';
 
@@ -218,7 +218,7 @@ window.addEventListener('load', () => {
             /**
              * affichage du bouton remise a zéro quand le select sont touchés
              * */
-            reset.style.display ='grid';
+            reset.style.display ='block';
 
 
             let idCellier = document.querySelector("[name = 'idCellier']").value;
@@ -267,7 +267,7 @@ window.addEventListener('load', () => {
             /**
              * affichage du bouton remise a zéro quand le champ de recherche est touché
              * */
-            reset.style.display ='grid';
+            reset.style.display ='block';
 
             console.log(evt);
 
@@ -322,9 +322,21 @@ window.addEventListener('load', () => {
     /* Afficher la Filtre de recherche*/
     var recherche = document.querySelector('.recherche button');
     if(recherche){
+
         var filtreRecherche = document.getElementById('filtreRecherche');
+        // filtreRecherche.style.display = 'none';
+        // console.log(filtreRecherche);
+        // console.log(filtreRecherche.style.display);
+
+        var style = window.getComputedStyle(filtreRecherche, null);
+        // console.log(style.display);
+
+
         recherche.addEventListener('click', function () {
-            if (filtreRecherche.style.display === 'none'){
+            // console.log('eee');
+
+            if (style.display == 'none'){
+            // if (filtreRecherche.style.display == 'none'){
                 recherche.innerHTML = 'Filtrer par &nbsp; <i class="fas fa-angle-up"></i>';
                 filtreRecherche.style.display = 'block';
      

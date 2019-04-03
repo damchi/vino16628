@@ -32,15 +32,37 @@ window.addEventListener('load', () => {
                     evt.preventDefault()
                 }
                 else{
-                    var param ={
-                        "nomCellier":document.querySelector("[name='nomCellier']").value,
-                        "id": document.querySelector("[name='idUsagerCellier']").value,
-                    };
 
-                    let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: JSON.stringify(param)});
+                    var image = document.querySelector('#imageCellier').files[0];
+                    var nomCellier = document.querySelector("[name='nomCellier']").value;
+                    var id = document.querySelector("[name='idUsagerCellier']").value;
 
+                    var param = new FormData()
+                    param.append('image',image)
+                    param.append('nomCellier',nomCellier )
+                    param.append('id', id)
+
+
+                    // console.log(image);
+                    // console.log(nomCellier);
+                    // console.log(id);
+                    // console.log(param);
+
+                    // var image = document.getElementById("imageCellier");
+                    // var file = image.files[0];
+                    // console.log(file);
+                    // var param ={
+                    //     "nomCellier":document.querySelector("[name='nomCellier']").value,
+                    //     "image":file,
+                    //     "id": document.querySelector("[name='idUsagerCellier']").value
+                    // };
+
+                    let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: param});
+                    // let requete = new Request( "index.php?requete=ajoutCellier",{method:'POST', body: param});
+                    console.log(requete);
                     fetch(requete)
                         .then(response => {
+                            console.log('ee');
                             if (response.status === 200) {
                                 // console.log(response.json());
                                 return response.json();
@@ -49,18 +71,28 @@ window.addEventListener('load', () => {
                                 throw new Error('Erreur');
                             }
                         })
+
+
                         .then(response => {
                             console.log(param.nomCellier);
                             console.log(param.id);
                             console.log(response);
 
                             let output = "";
-                            output += "<a href='index.php?requete=listeBouteilleCellier&idCellier="+ response + "'>" + param.nomCellier + "</a>";
+
+                            if (response.image == null){
+                                output += "<img src=./images/cellier.png>";
+                            }
+                            else{
+                                output += "<img src=./images/"+response.image +">";
+                            }
+                            output += "<a class='nomCellier' href='index.php?requete=listeBouteilleCellier&idCellier="+ response.id_cellier + "'>" + response.nom + "</a>";
                             // output += "<button class='modifierCellier'>  Modifier </button>\n"
                             // output += "<button class='supprimerCellier'>  Supprimer</button>";
                             let insert = document.getElementById('insertChild');
-                            insert.setAttribute('data-id',response);
+                            insert.setAttribute('data-id',response.id);
                             insert.innerHTML= output;
+                            console.log(output);
                             formCellier.style.display='none';
 
                         })
@@ -85,6 +117,7 @@ window.addEventListener('load', () => {
                     "idCellier": idCellier,
                 };
                 let requete = new Request(BaseURL + "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
+                // let requete = new Request( "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
                 fetch(requete)
                     .then(response => {
                         if (response.status === 200) {
