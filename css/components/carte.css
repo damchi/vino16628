@@ -13,7 +13,7 @@
 
 /*  .listeBouteilleParListe */
 .listeBouteilleParListe{
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     border-bottom: 1px solid #97174C;
     margin:10px;
@@ -29,8 +29,8 @@
 
 .listeBouteilleParListe .carte-entete{
     order: 1;
-    width: 20%;
     margin-right: 10px;
+    width: 100px;
 }
 
 .listeBouteilleParListe .carte-description{
@@ -38,32 +38,30 @@
     flex-direction: row;
     justify-content: space-between;
     order: 2;
-    flex:auto;
 }
 
 .listeBouteilleParListe .carte-pied{
     display:flex;
     flex-wrap: wrap;
     order: 3;
-    width: 20%;
     padding:10px;
+    max-width: 150px;
 }
 
 .listeBouteilleParListe .carte-image{
     order: 1;
     width: 100px ;
-    display:none;
+    display:block;
+    align-self: center
 }
 
 .listeBouteilleParListe .carte-image>img{
     width: 75px ;
-    display:none;
 }
 
 .listeBouteilleParListe .carte-information{
     order:2;
     text-align: left;
-
 }
 
 .listeBouteilleParListe .carte-information_2{
@@ -86,9 +84,7 @@
     background-color: #97174C;
 }
 
-
 /*  .listeBouteilleParVignmtte */
-
 .listeBouteilleParVignette{
     display: flex;
     flex-direction: row;
@@ -190,39 +186,19 @@
         display:none
     }
 }
-@media only screen and (min-width: 600px){
+@media only screen and (min-width: 650px){
     .listeBouteilleParListe{
-        max-width: 700px;
         margin: 10px;
         display: inline-block;
     }
+
     .listeBouteilleParListe .carte{
-
-        padding: 10px;
-
-    }
-    .listeBouteilleParListe .carte-entete{
-        width: 150px;
+        dsiplay: flex;
     }
 
-    .listeBouteilleParListe .carte-image>img{
-        display:none
-    }
 
-    .listeBouteilleParListe .description{
-        justify-content: space-between;
-        padding: 10px;
-    }
 
-    .listeBouteilleParListe .carte-information_2{
-        width: 250px;
-        display: block;
-    }
 
-    .listeBouteilleParListe .carte-pied{
-        width: 250px;
-        padding-left: 10px;
-    }
     .listeBouteilleParVignette{
         justify-content: center;
     }

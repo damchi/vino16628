@@ -144,7 +144,7 @@ window.addEventListener('load', () => {
             errorFiltre.innerHTML = output;
             errorFiltre.style.color='red';
             if (errorFiltre.style.display='none'){
-                errorFiltre.style.display='block'
+                errorFiltre.style.display='flex'
             }
         }
         else {
@@ -163,7 +163,7 @@ window.addEventListener('load', () => {
             * Si l'id des bouteilles affichées est présent dans idResponse alors il est affiché sinon non
             **/
             divBouteille.forEach((bouteille)=>{
-                bouteille.style.display = 'block';
+                bouteille.style.display = 'flex';
                 // idDiv.push(bouteille.dataset.id)
                 console.log();
                 if (idResponse.includes(bouteille.dataset.id) == false){
@@ -178,7 +178,7 @@ window.addEventListener('load', () => {
      */
     function resetRecherche() {
         divBouteille.forEach((bouteille)=>{
-            bouteille.style.display = 'block';
+            bouteille.style.display = 'flex';
             reset.style.display='none';
             errorFiltre.style.display='none';
 
