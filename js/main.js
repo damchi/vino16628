@@ -14,14 +14,18 @@ console.log(BaseURL);
 /* --- Gestion du navbar pour le mobile --- */
 window.addEventListener('load', () => {
     let burger = document.querySelector('.burger');
-
+    var x = document.getElementById("topnav");
     burger.addEventListener('click', () => {
-          var x = document.getElementById("topnav");
-
-          if (x.className === "topnav") {
-              x.className += " responsive";
+        console.log('e');
+        console.log(x)
+        console.log(x.className);
+          if (x.className == "topnav colNav") {
+            x.classList.remove('colNav');
+            x.classList.add("responsive");
           } else {
-                x.className = "topnav";
+            console.log('eeeeee');
+               x.classList.add('colNav');
+               x.classList.remove('responsive');
           }
     });    
 });
