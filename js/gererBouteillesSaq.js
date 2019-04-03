@@ -172,13 +172,13 @@ window.addEventListener('load', () => {
             
             /*
                 On insère le bon id de bouteille dans le lien du bouton
-                modifier à la place du texte "(id_bouteille_saq)".
+                modifier à la place du texte "%id_bouteille_saq%".
             */
             
             let lienModifier = divBouteille.querySelector(".btnModifier a");
             
             lienModifier.href = lienModifier.href.replace(
-                /\(id_bouteille_saq\)/, bouteille.id_bouteille_saq
+                /%id_bouteille_saq%/, bouteille.id_bouteille_saq
             );
             
             /*

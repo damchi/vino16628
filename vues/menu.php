@@ -22,6 +22,7 @@
             /* Menu administrateur */
             ?>
             <a href="?requete=adminAccueil"><i class="fas fa-tachometer-alt"></i><span class="titreNav">TABLEAU DE BORD</span></a>
+            <a href="?requete=gererUsagers"><i class="fas fa-users"></i><span class="titreNav">USAGERS</span></a>
             <a href="?requete=gererBouteillesSaq"><i class="fas fa-wine-bottle"></i><span class="titreNav">CATALOGUE SAQ</span></a>
             <a href="?requete=logout"><i class="fas fa-sign-out-alt"></i><span class="titreNav">DÉCONNEXION</span></a>
             <?php
