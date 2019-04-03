@@ -25,6 +25,8 @@
     flex-direction: row;
     border-bottom: 1px solid #97174C;
     margin:10px;
+    max-width: 599px;
+    justify-content: space-between;
 }
 
 .listeBouteilleParListe .carte-entete{
@@ -101,7 +103,7 @@
 }
 
 .listeBouteilleParVignette .carte{
-    width: 599px;
+    max-width: 599px;
 }
 
 .listeBouteilleParVignette .carte-entete{
