@@ -9,6 +9,7 @@
  */
 
 const BaseURL = document.baseURI;
+console.log(BaseURL);
 
 window.addEventListener('load', () => {
     let burger = document.querySelector('.burger');
