@@ -13,14 +13,12 @@
 class Bouteille extends Modele {
     const TABLE = 'vino__bouteille';
 
-	/**
-	 * Ajoute une bouteille à un cellier.
-	 * 
-	 * @param Array $data Tableau des attributs de la bouteille.
-	 * 
-	 * @return int Id de la nouvelle bouteille
-	 */
-	public function ajouterBouteilleCellier($data) {
+    /**
+     * @param $data
+     * @return mixed
+     * ajoute une bouteille au cellier
+     */
+    public function ajouterBouteilleCellier($data) {
         $idCellier = (int) $data['id_cellier'];
         $nom = $this->_db->escape_string($data['nom']);
         $codeSaq = $this->_db->escape_string($data['code_saq']);

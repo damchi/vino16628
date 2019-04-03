@@ -120,7 +120,7 @@
                 }
                 else{
 
-                    if (isset($bouteille['image'])){
+                    if (trim($bouteille['image']) !== ""){
                         echo '<img src="./images/'. $bouteille['image'] .'" alt="Image de la bouteille">';
                     }
                     else {
