@@ -41,9 +41,10 @@
                      ?>
 
                      <a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?> </a>
-                     <div class="mc">
                          <?php if($cellier['total'] != null){
-                         ?>
+                             ?>
+                             <div class="mc">
+
 
                             <p>Nombre de bouteilles :<?= $cellier['total'] ?> </p>
                              <?php if ($cellier['total_rouge'] != null) { ?>
@@ -55,10 +56,13 @@
                                  <p>Nombre de bouteilles Blanc: <?= $cellier['total_blanc'] ?></p>
                                  <?php
                              }
+                             ?>
+                             </div>
+                     <?php
                          }
                          ?>
 
-                     </div>
+
                      <button class="modifierCellier btnCellier" id="modifCellier"><i class="fas fa-edit"></i></button>
                      <div class="supprimerCellier btnCellier"><i class="fas fa-trash-alt"></i></div>
                  </div>
@@ -66,7 +70,7 @@
             <?php
             }
             ?>
-            <div class="cellierId listeCelliers" id="insertChild" data-id="">    
+            <div class="cellierId listeCellier" id="insertChild" data-id="">
             </div>
         </div>
     </div>

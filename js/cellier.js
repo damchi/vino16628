@@ -86,7 +86,7 @@ window.addEventListener('load', () => {
                             else{
                                 output += "<img src=./images/"+response.image +">";
                             }
-                            output += "<a href='index.php?requete=listeBouteilleCellier&idCellier="+ response.id_cellier + "'>" + response.nom + "</a>";
+                            output += "<a class='nomCellier' href='index.php?requete=listeBouteilleCellier&idCellier="+ response.id_cellier + "'>" + response.nom + "</a>";
                             // output += "<button class='modifierCellier'>  Modifier </button>\n"
                             // output += "<button class='supprimerCellier'>  Supprimer</button>";
                             let insert = document.getElementById('insertChild');

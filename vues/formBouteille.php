@@ -48,14 +48,15 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <div class="group">
 <!--        <div class="group ml">-->
             <img src="<?= $urlImg ?>" class="image" alt="bouteille" style="display: <?= $urlImg ? 'inline' : 'none' ?>">
-            <?php
-            if ($urlImg === ""){
-                ?>
-                <label class="icon_form"><i class=""></i></label>
-                <input type="file" class="input" name="image">
-            <?php
-            }
-            ?>
+
+
+
+
+        </div>
+<!--        image usager-->
+        <div class="group" id="usagerImage">
+            <label class="icon_form"><i class=""></i></label>
+            <input type="file" class="input" name="image">
         </div>
 
         <!-- Nom -->
