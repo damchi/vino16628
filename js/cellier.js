@@ -4,6 +4,74 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  */
 
+/**
+ * supprime cellier
+ * @param idCellier
+ */
+function supprimeCellier(idCellier){
+
+    var param ={
+        "idCellier": idCellier,
+    };
+    let requete = new Request(BaseURL + "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
+    // let requete = new Request( "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
+    fetch(requete)
+        .then(response => {
+            if (response.status === 200) {
+                // console.log(response.json());
+                return response.json();
+            }
+            else {
+                throw new Error('Erreur');
+            }
+        })
+        .then(response =>{
+            console.log(response);
+            // console.log(response.nbBouteille);
+            if (response.succes == true ){
+
+                let result = confirm('Le cellier contient '+ response.nbBouteille +' bouteille voulez vous le supprimer ?');
+                if (result == true){
+                    console.log('aaaaa');
+                    let requeteDelete = new Request(BaseURL + "index.php?requete=supprimerCellier",{method:'POST', body: JSON.stringify(param)});
+                    fetch(requeteDelete)
+                        .then(response => {
+                            console.log(response);
+                            if (response.status === 200) {
+                                // console.log(response.json());
+                                return response.json();
+                            }
+                            else {
+                                throw new Error('Erreur');
+                            }
+                        })
+                        .then(response=>{
+                            location.reload();
+                        })
+                }
+            }
+            else {
+                let requeteDelete = new Request(BaseURL + "index.php?requete=supprimerCellier",{method:'POST', body: JSON.stringify(param)});
+                fetch(requeteDelete)
+                    .then(response => {
+                        console.log(response);
+                        if (response.status === 200) {
+                            // console.log(response.json());
+                            return response.json();
+                        }
+                        else {
+                            throw new Error('Erreur');
+                        }
+                    })
+                    .then(response=>{
+                        location.reload();
+                    })
+
+            }
+        })
+
+}
+
 window.addEventListener('load', () => {
     let btnAffichetCellier = document.querySelector("[name='afficheFormCellier']");
     let formCellier = document.getElementById("formCellier");
@@ -74,28 +142,37 @@ window.addEventListener('load', () => {
 
 
                         .then(response => {
-                            console.log(param.nomCellier);
-                            console.log(param.id);
-                            console.log(response);
 
                             let output = "";
 
                             if (response.image == null){
-                                output += "<img src=./images/cellier.png>";
+                                output += "<img class='imgCellier' src=./images/cellier.png>";
                             }
                             else{
-                                output += "<img src=./images/"+response.image +">";
+                                output += "<img class='imgCellier' src=./images/"+response.image +">";
                             }
                             var node = document.createElement("DIV");
                             output += "<a class='nomCellier' href='index.php?requete=listeBouteilleCellier&idCellier="+ response.id_cellier + "'>" + response.nom + "</a>";
                             // output += "<button class='modifierCellier'>  Modifier </button>\n"
-                            // output += "<button class='supprimerCellier'>  Supprimer</button>";
+                            output += "<div class='supprimerCellier btnCellier'><i class='fas fa-trash-alt'></i></div>";
                             // let insert = document.getElementById('insertChild');
                             // var textnode = document.createTextNode(out);
+                            node.setAttribute('data-id',response.id_cellier);
                             node.classList.add('listeCellier');
                             node.classList.add('cellierId');
                             node.innerHTML =output;
                             document.getElementById("insertChild").appendChild(node);
+
+                            document.querySelectorAll(".supprimerCellier").forEach(element => {
+
+                                element.addEventListener('click',(evt)=>{
+                                    let idCellier = evt.target.closest('.cellierId').dataset.id;
+                                    console.log(idCellier);
+                                    supprimeCellier(idCellier)
+
+                                });
+                            });
+
 
                         })
                         .catch(error => {
@@ -110,70 +187,15 @@ window.addEventListener('load', () => {
     //     if (btnModifierCellier) {
     //     }
 
+
+
     document.querySelectorAll(".supprimerCellier").forEach(element => {
+
             element.addEventListener('click',(evt)=>{
                 let idCellier = evt.target.closest('.cellierId').dataset.id;
                 console.log(idCellier);
+                supprimeCellier(idCellier)
 
-                var param ={
-                    "idCellier": idCellier,
-                };
-                let requete = new Request(BaseURL + "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
-                // let requete = new Request( "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
-                fetch(requete)
-                    .then(response => {
-                        if (response.status === 200) {
-                            // console.log(response.json());
-                            return response.json();
-                        }
-                        else {
-                            throw new Error('Erreur');
-                        }
-                    })
-                    .then(response =>{
-                            console.log(response);
-                        // console.log(response.nbBouteille);
-                        if (response.succes == true ){
-
-                            let result = confirm('Le cellier contient '+ response.nbBouteille +' bouteille voulez vous le supprimer ?');
-                            if (result == true){
-                                console.log('aaaaa');
-                                let requeteDelete = new Request(BaseURL + "index.php?requete=supprimerCellier",{method:'POST', body: JSON.stringify(param)});
-                                fetch(requeteDelete)
-                                    .then(response => {
-                                        console.log(response);
-                                        if (response.status === 200) {
-                                            // console.log(response.json());
-                                            return response.json();
-                                        }
-                                        else {
-                                            throw new Error('Erreur');
-                                        }
-                                    })
-                                    .then(response=>{
-                                        location.reload();
-                                    })
-                            }
-                        }
-                        else {
-                            let requeteDelete = new Request(BaseURL + "index.php?requete=supprimerCellier",{method:'POST', body: JSON.stringify(param)});
-                            fetch(requeteDelete)
-                                .then(response => {
-                                    console.log(response);
-                                    if (response.status === 200) {
-                                        // console.log(response.json());
-                                        return response.json();
-                                    }
-                                    else {
-                                        throw new Error('Erreur');
-                                    }
-                                })
-                                .then(response=>{
-                                    location.reload();
-                                })
-
-                        }
-                    })
             });
         });
 
