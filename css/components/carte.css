@@ -108,6 +108,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
+    width: 100vw;
 }
 .listeBouteilleParVignette .carte-titre{
     white-space: nowrap;
@@ -133,6 +134,7 @@
     padding: 10px;
     background-color: #97174C;
     color: white;
+    max-width: 599;
 }
 
 /* Partie Description de la carte*/
@@ -193,6 +195,11 @@
 @media only screen and (max-width: 412px){
     .listeBouteilleParListe .carte-image>img{
         display:none;
+    }
+}
+@media only screen and (min-width: 650px){
+    .listeBouteilleParVignette .carte-pied{
+        max-width: 99%;
     }
 }
 @media only screen and (min-width: 650px){
