@@ -14,7 +14,7 @@
 /*  .listeBouteilleParListe */
 .listeBouteilleParListe{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     border-bottom: 1px solid #97174C;
     margin:10px;
     justify-content: center;
