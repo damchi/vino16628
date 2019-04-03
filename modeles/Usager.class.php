@@ -107,19 +107,17 @@ class Usager extends Modele
 	 * @return Boolean true si l'usager est le propriétaire, false sinon
 	 */
 	public function estProprietaireBouteille($pseudo, $idBouteille) {
+        $pseudo = $this->_db->escape_string($pseudo);
+        $idBouteille = (int) $idBouteille;
+        
         $sql = "
             SELECT * FROM vino__bouteille b
             JOIN vino__cellier c ON b.id_cellier = c.id_cellier
             JOIN vino__usager u ON c.id_usager_cellier = u.id_usager
-            WHERE pseudo = ? AND id_bouteille = ?
+            WHERE pseudo = '$pseudo' AND id_bouteille = $idBouteille
         ";
-        
-        $stmt = $this->_db->prepare($sql);
-        $stmt->bind_param("si", $pseudo, $idBouteille);
-        $stmt->execute();
-		$res = $stmt->get_result();
-        
-        return (boolean) $res->fetch_assoc();
+
+        return (boolean) $this->_db->query($sql)->fetch_assoc();
     }
     
 	/**
@@ -131,18 +129,16 @@ class Usager extends Modele
 	 * @return Boolean true si l'usager est le propriétaire, false sinon
 	 */
 	public function estProprietaireCellier($pseudo, $idCellier) {
+        $pseudo = $this->_db->escape_string($pseudo);
+        $idCellier = (int) $idCellier;
+        
         $sql = "
             SELECT * FROM vino__cellier c
             JOIN vino__usager u ON c.id_usager_cellier = u.id_usager
-            WHERE pseudo = ? AND id_cellier = ?
+            WHERE pseudo = '$pseudo' AND id_cellier = $idCellier
         ";
         
-        $stmt = $this->_db->prepare($sql);
-        $stmt->bind_param("si", $pseudo, $idCellier);
-        $stmt->execute();
-		$res = $stmt->get_result();
-        
-        return (boolean) $res->fetch_assoc();
+        return (boolean) $this->_db->query($sql)->fetch_assoc();
     }
     
 	/**
