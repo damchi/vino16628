@@ -27,10 +27,6 @@ class Usager extends Modele
         return (boolean) $this->_db->query($sql)->fetch_assoc();
     }
 
-
-//    public function ajoutNouveauUsager($data){
-
-
     /**
      * @param $nom
      * @param $prenom
@@ -55,10 +51,38 @@ class Usager extends Modele
             $retour -> succes = false;
         }
 
-        return $retour-> succes;
+        return $retour -> succes;
     }
 
+	/**
+	 * Cette méthode retourne la liste des usagers correspondant au terme de
+     * recherche passé en paramètre.
+	 * 
+	 * @param string $nom La chaine de caractère à rechercher
+	 * @param int $nbResultats Le nombre de résultat maximal à retourner.
+	 * 
+	 * @return array Attributs de l'usager pris dans la BD
+	 */   
+	public function autocomplete($nom, $nbResultats = 10) {		
+		$nom = $this->_db->escape_string($nom);
+		$nom = preg_replace("/\*/","%" , $nom);
+        $nbResultats = (int) $nbResultats;
+		 
+		$sql = "
+            SELECT * FROM vino__usager
+            WHERE LOWER(nom) LIKE LOWER('%$nom%') LIMIT 0, $nbResultats
+        ";
 
+        $res = $this->_db->query($sql);
+		$rows = Array();
+        
+        while ($row = $res->fetch_assoc()) {
+            $rows[] = $row;					
+        }
+        
+		return $rows;
+	}
+	
     /**
      * @param $identifiant
      * @param $password
@@ -158,4 +182,24 @@ class Usager extends Modele
         
         return (int) $row['count'];
     }
+
+	/**
+	 * Supprime un usager selon son id.
+	 *
+	 * @param int idUsager
+	 *
+     * @return int 1 si supprimé, 0 si inexistant
+	 */
+	public function supprimer($idUsager) {
+        $idUsager = (int) $idUsager;
+        
+		$sql = "
+            DELETE FROM vino__usager
+            WHERE id_usager = $idUsager
+        ";
+
+        $this->_db->query($sql);
+        
+        return $this->_db->affected_rows;
+	}
 }

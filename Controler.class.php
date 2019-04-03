@@ -190,6 +190,23 @@ class Controler
                     $this->fermerSession();
                 }
                 break;
+            case 'gererUsagers':
+                if (isset($_SESSION['admin'])) {
+                    $this->gererUsagers();
+                } else {
+                    $this->fermerSession();
+                }
+                break;
+            case 'autocompleteUsager':
+                if (isset($_SESSION['admin'])) {
+                    $this->autocompleteUsager();
+                }
+                break;
+            case 'supprimerUsager':
+                if (isset($_SESSION['admin'])) {
+                    $this->supprimerUsager();
+                }
+                break;
             case 'gererBouteillesSaq':
                 if (isset($_SESSION['admin'])) {
                     $this->gererBouteillesSaq();
@@ -272,7 +289,6 @@ class Controler
         $body = json_decode(file_get_contents('php://input'));
         $listeBouteille = $saq->autocomplete($body->nom);
         echo json_encode($listeBouteille);
-
     }
 
     private function autocompleteBouteilleListe()
@@ -528,6 +544,29 @@ class Controler
                 echo json_encode($resultat);
             }
         }
+    }
+
+    private function gererUsagers()
+    {
+        include("vues/entete.php");
+        include("vues/gererUsagers.php");
+        include("vues/pied.php");
+    }
+    
+    private function autocompleteUsager()
+    {
+        $usr = new Usager();
+        $body = json_decode(file_get_contents('php://input'));
+        $listeUsagers = $usr->autocomplete($body->nom);
+        echo json_encode($listeUsagers);
+    }
+
+    private function supprimerUsager()
+    {
+        $body = json_decode(file_get_contents('php://input'));
+        $usr = new Usager();
+        $res = $usr->supprimer($body->id);
+        echo json_encode($res);
     }
 
     private function gererBouteillesSaq()
