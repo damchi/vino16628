@@ -11,7 +11,7 @@
 }
 .carte-titre{
     white-space: nowrap;
-    width: inherit;
+    width: 95%;
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
@@ -109,14 +109,8 @@
 
 .listeBouteilleParVignette .carte-entete{
     font-size: 1.5rem;
-    margin:10px;
     font-weight: bold;
     text-align: center;
-    white-space: nowrap;
-    width: inherit;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
 }
 
 .listeBouteilleParVignette .carte-description{
