@@ -39,14 +39,16 @@ class MonSQL {
 	public static function getInstance() {
 
 		if (is_null(self::$_instance)) {
+
 			self::$_instance = new mysqli(HOST, USER, PASSWORD, DATABASE);
 			if (self::$_instance-> connect_errno) {
 				echo "Echec lors de la connexion à MySQL : (" . self::$_instance -> connect_errno . ") " . self::$_instance-> connect_error;
 			}
 			else {
-				self::$_instance->set_charset("utf8");	
+				self::$_instance->set_charset("utf8");
 			}
 		}
+
 
 		return self::$_instance;
 	}

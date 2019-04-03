@@ -60,6 +60,13 @@ class Controler
                     $this->fermerSession();
                 }
                 break;
+            case 'bouteilleIndividuelle':
+                if (isset($_SESSION['user_pseudo'])) {
+                    $this->voirBouteille();
+                } else {
+                    header("Location: index.php?requete=login");
+                }
+                break;
             case 'supprimerBouteille':
                 if (isset($_SESSION['user_pseudo'])) {
                     $this->supprimerBouteille();
@@ -145,6 +152,7 @@ class Controler
                 break;
             case 'ajoutCellier':
                 if (isset($_SESSION['user_pseudo'])) {
+//                    var_dump('rrr');
                     $this->ajoutCellier();
                 } else {
                     header("Location:index.php?requete=login");
@@ -206,6 +214,7 @@ class Controler
     {
         $cellier = new Cellier();
         $data = $cellier->getUsagerCellier($_SESSION['user_id']);
+//        $dataBouteille = $cellier->countBouteille($_SESSION['user_id']);
         include("vues/entete.php");
         include("vues/listeCelliers.php");
         include("vues/pied.php");
@@ -292,6 +301,8 @@ class Controler
 
                     foreach ($_POST as $cle => $valeur) {
                         $bouteille[$cle] = !empty($valeur) ? $valeur : null;
+//                        echo "<pre>";
+//                        var_dump($bouteille);
                     }
 
                     $bte->ajouterBouteilleCellier($bouteille);
@@ -322,11 +333,25 @@ class Controler
                     foreach ($_POST as $cle => $valeur) {
                         $bouteille[$cle] = !empty($valeur) ? $valeur : null;
                     }
-
                     $bte->modifierBouteille($bouteille);
                     header("Location: index.php?requete=listeBouteilleCellier&idCellier=" . $bouteille['id_cellier']);
                     break;
             }
+        }
+    }
+
+    private function voirBouteille()
+    {
+        $bte = new Bouteille();
+        $usr = new Usager();
+
+        if ($usr->estProprietaireBouteille($_SESSION['user_pseudo'], $_GET['idBouteille'])) {
+
+            $data['bouteille'] = $bte->getBouteille($_GET['idBouteille']);
+            $data['types'] = $bte->getTypes();
+            include("vues/entete.php");
+            include("vues/bouteilleIndividuelle.php");
+            include("vues/pied.php");
         }
     }
 
@@ -477,10 +502,14 @@ class Controler
 
     private function ajoutCellier()
     {
-        $body = json_decode(file_get_contents('php://input'));
-        if (!empty($body)) {
+
+
+//        $body = json_decode(file_get_contents('php://input'));
+//        var_dump(file_get_contents('php://input'));
+        if (!empty($_POST['nomCellier']) && !empty($_POST['id'])) {
             $cellier = new Cellier();
-            $resultat = $cellier->ajoutCellierUsager($body);
+//            $resultat = $cellier->ajoutCellierUsager($body);
+            $resultat = $cellier->ajoutCellierUsager($_POST['nomCellier'],$_POST['id']);
             echo json_encode($resultat);
         }
     }

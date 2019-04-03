@@ -6,9 +6,9 @@
                 unObjet.style.borderColor ="red";
                 return false
             }
-            else{
+            // else{
                 // unObjet.style.borderColor="green";
-            }
+            // }
         };
 
         obj.estNom = (unNom)=>{

@@ -61,7 +61,9 @@
         <button id="reset"> Remettre à zéro</button>
 
         <div id="errorFiltre"></div>
- 
+    </div>
+</div>
+
 <!--<button id="fb-share-button">Partager</button>-->
                     
 <div id="listeBouteille" class="listeBouteilleParVignette">
@@ -77,8 +79,7 @@
                 <?php echo $bouteille['nom'] ?>
             </div>
         </div>
-        
-        
+
         <div class="carte-description">
             <div class="carte-information">
                 <!-- Texte -->
@@ -103,27 +104,31 @@
                 <div class="carte-garde_jusqua">garde jusqu'à : <?php echo $bouteille['garde_jusqua'] ?></div>
                 <div class="carte-notes">Notes : <?php echo $bouteille['notes'] ?></div>
             </div>
-        
+
             <!-- Carte image -->
             <div class="carte-image">
                 <?php
     //            if (isset($bouteille['image'])){
     //                echo '<img src="data:image/jpeg;base64,'.base64_encode( $bouteille['image'] ).'"/>';
     //            }
-        
+
                 if ($bouteille['url_img'] == null && $bouteille['image'] == null){
                     ?>
                     <img src="./images/bouteille_vin.png" alt="Image de la bouteille">
-        
+
                     <?php
                 }
                 else{
-                    ?>
-                    <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
-        
-                    <?php
+
+                    if (isset($bouteille['image'])){
+                        echo '<img src="./images/'. $bouteille['image'] .'" alt="Image de la bouteille">';
+                    }
+                    else {
+                        ?>
+                        <img src="https:<?php echo $bouteille['url_img'] ?>" alt="Image de la bouteille">
+                        <?php
+                    }
                 }
-        
                 ?>
             </div>
         </div>
