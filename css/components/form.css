@@ -18,7 +18,7 @@
     background-color: #97174C;
     padding: 8px;
     min-width: 50px;
-    border-radius: 8px 0px 0px 8px;
+    border-radius: 6px 0px 0px 6px;
     color: white;
     text-align: center;
     box-shadow: 1px 2px 5px rgba(0,0,0,.09);
@@ -35,7 +35,7 @@
 input, select, textarea{
     flex-grow: 1;
     padding: 8px;
-    border-radius: 0px 8px 8px 0px;
+    border-radius: 2px;
     background-color: #fff;
     box-shadow: 1px 2px 5px rgba(0,0,0,.09);
     border: solid 1px #cbc9c9;

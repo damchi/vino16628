@@ -10,6 +10,7 @@
 
 const BaseURL = document.baseURI;
 
+/* --- Gestion du navbar pour le mobile --- */
 window.addEventListener('load', () => {
     let burger = document.querySelector('.burger');
     var x = document.getElementById("topnav");
