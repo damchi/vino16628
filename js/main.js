@@ -11,6 +11,7 @@
 const BaseURL = document.baseURI;
 console.log(BaseURL);
 
+/* --- Gestion du navbar pour le mobile --- */
 window.addEventListener('load', () => {
     let burger = document.querySelector('.burger');
     var x = document.getElementById("topnav");
