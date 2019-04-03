@@ -30,10 +30,17 @@
     display: none;
 }
 
+
+
+.recherche{
+   display: flex;
+}
+
 #reset{
     clear:both;
 
 }
+
 
 @media only screen and (min-width: 600px){
     #recherche_bouteille_cellier{
@@ -44,7 +51,6 @@
         display: flex;
         flex-direction: row;
     }
-
      .hautDePage .boutonHaut{
         flex: 1;
     } 

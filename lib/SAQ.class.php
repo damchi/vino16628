@@ -100,6 +100,7 @@ class SAQ extends Modele
 		$doc = new DOMDocument();
 		$doc -> recover = true;
 		$doc -> strictErrorChecking = false;
+//		$doc -> loadHTML(self::$_webpage);
 		@$doc -> loadHTML(self::$_webpage);
 		$elements = $doc -> getElementsByTagName("div");
 		$i = 0;
@@ -110,7 +111,7 @@ class SAQ extends Modele
 				if ($retour -> succes == false) {
 					echo "erreur : " . $retour -> raison . "<br>";
 					echo "<pre>";
-					var_dump($info);
+//					var_dump($info);
 					echo "</pre>";
 					echo "<br>";
 				} else {
@@ -248,13 +249,16 @@ class SAQ extends Modele
                 
 				if (isset($aDesc[1][1])) {
 					preg_match("/(.*),(.*)/", $aDesc[1][1], $aRes);
+
 					$info -> desc -> pays = trim($aRes[1]);
 					$info -> desc -> format = substr(trim($aRes[2]), 2);
 				}
+
                 
 				if (isset($aDesc[1][0])) {
 					$info -> desc -> type = trim($aDesc[1][0]);
 				}
+
                 
 				$info -> desc -> texte = trim($info -> desc -> texte);
 			}
@@ -292,6 +296,7 @@ class SAQ extends Modele
 			$rows = $this -> _db -> query($sql);
             
 			if ($rows -> num_rows < 1) {
+
 				$this -> stmt -> bind_param("sissdsss", $bte -> nom, $type, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);
 				$retour -> succes = $this -> stmt -> execute();
 			} else {
