@@ -27,11 +27,9 @@ button a{
     margin-right: 10px;
 }
 
- .recherche select, .recherche button{
+ .recherche select, .recherche button, #filtreError{
     width: 60vw;
-    align-self: center;
  }
-
 
 
 @media only screen and (max-width: 599px){
@@ -42,8 +40,8 @@ button a{
     .recherche{
         text-align: center;
     }
-    .recherche button, .recherche select{
+    .recherche button, .recherche select {
         width: 90vw;
-        align-self: center;
+        text-align: center;
     }
 }

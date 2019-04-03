@@ -20,7 +20,15 @@
 }
 
 #reset{
+    position: relative;
+    left: 20%;
+    width: 60vw;
     display: none;
+}
+
+#reset{
+    clear:both;
+
 }
 
 @media only screen and (min-width: 600px){
@@ -67,13 +75,13 @@
     }
 
 
-    .listeBouteille{
+   /* .listeBouteille{
         display: grid;
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: 10px;
         margin: 10px;
-    }
+    }*/
 }
 
 

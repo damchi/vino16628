@@ -5,6 +5,17 @@
     background-color: white;
 }
 
+.carte-notes{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.carte-titre{
+    white-space: nowrap;
+    width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
 
 /*  .listeBouteilleParListe */
 .listeBouteilleParListe{
@@ -98,17 +109,14 @@
 
 .listeBouteilleParVignette .carte-entete{
     font-size: 1.5rem;
-    margin:10px;
     font-weight: bold;
     text-align: center;
-    height: 15%;
 }
 
 .listeBouteilleParVignette .carte-description{
     display: flex;
     flex-direction: row;
     margin: 5px;
-    height: 55%;
     text-align: left;
 }
 
@@ -121,7 +129,6 @@
     padding: 10px;
     background-color: #97174C;
     color: white;
-    height: 25%;
 }
 
 /* Partie Description de la carte*/
@@ -158,13 +165,13 @@
 
 .listeBouteilleParVignette .carte-information{
     order:3;
-    align-self: center;
+    /*align-self: center;*/
     flex:auto;
 }
 
 .listeBouteilleParVignette .carte-information_2{
     order:4;
-    align-self: center;
+    /*align-self: center;*/
     flex:auto;
     display: none;
 }
@@ -221,7 +228,6 @@
     }
     .listeBouteilleParVignette .carte-information_2{
         order:4;
-        align-self: center;
         flex:auto;
         display: block;
     }
