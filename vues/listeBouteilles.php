@@ -55,11 +55,12 @@
 		    ?>
 
         </select>
+    </div>
+
+</div>
         <button id="reset"> Remettre à zéro</button>
 
         <div id="errorFiltre"></div>
-    </div>
-</div>
  
 <!--<button id="fb-share-button">Partager</button>-->
                     

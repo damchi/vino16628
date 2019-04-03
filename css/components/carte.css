@@ -11,7 +11,10 @@
 }
 .carte-titre{
     white-space: nowrap;
-    text-overflow:ellipsis;
+    width: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 
 /*  .listeBouteilleParListe */
