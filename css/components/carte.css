@@ -29,8 +29,8 @@
 
 .listeBouteilleParListe .carte-entete{
     order: 1;
-    width: 20%;
     margin-right: 10px;
+    width: 100px;
 }
 
 .listeBouteilleParListe .carte-description{
@@ -38,32 +38,30 @@
     flex-direction: row;
     justify-content: space-between;
     order: 2;
-    flex:auto;
 }
 
 .listeBouteilleParListe .carte-pied{
     display:flex;
     flex-wrap: wrap;
     order: 3;
-    width: 20%;
     padding:10px;
+    max-width: 150px;
 }
 
 .listeBouteilleParListe .carte-image{
     order: 1;
     width: 100px ;
-    display:none;
+    display:block;
+    align-self: center
 }
 
 .listeBouteilleParListe .carte-image>img{
     width: 75px ;
-    display:none;
 }
 
 .listeBouteilleParListe .carte-information{
     order:2;
     text-align: left;
-
 }
 
 .listeBouteilleParListe .carte-information_2{
@@ -86,9 +84,7 @@
     background-color: #97174C;
 }
 
-
 /*  .listeBouteilleParVignmtte */
-
 .listeBouteilleParVignette{
     display: flex;
     flex-direction: row;
