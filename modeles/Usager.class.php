@@ -24,10 +24,7 @@ class Usager extends Modele
             WHERE mail = '$mail' OR pseudo = '$pseudo'
         ";
         
-        $res = $this->_db->query($sql);
-        $row = $res->fetch_assoc();
-        
-        return $row ? true : false;
+        return (boolean) $this->_db->query($sql)->fetch_assoc();
     }
 
 
@@ -147,8 +144,6 @@ class Usager extends Modele
      * @param Array $criteres
      *        'admin' => (boolean)
      *
-	 * @param int $idCellier id du cellier
-	 * 
 	 * @return int Le nombre d'usagers
 	 */
 	public function nbUsagers($criteres = []) {
