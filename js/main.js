@@ -9,7 +9,6 @@
  */
 
 const BaseURL = document.baseURI;
-console.log(BaseURL);
 
 /* --- Gestion du navbar pour le mobile --- */
 window.addEventListener('load', () => {

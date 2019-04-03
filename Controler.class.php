@@ -18,6 +18,17 @@ class Controler
      */
     public function gerer()
     {
+        try {
+            $this->switchRequete();
+        }
+        catch (Exception $e) {
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+            http_response_code(200);
+        }
+    }
+    
+    private function switchRequete()
+    {
         switch ($_GET['requete']) {
             case 'listeBouteilleCellier':
                 if (isset($_SESSION['user_pseudo'])) {
@@ -95,22 +106,16 @@ class Controler
                     header("Location:index.php?requete=login");
                 }
                 break;
-            case 'inscription':
-                $this->formInscription();
-                break;
             case 'ajoutUsager':
                 if (isset($_POST['ajouterUsager'])) {
                     if (trim($_POST['nom']) != "" || trim($_POST['prenom']) || trim($_POST['mail']) != "" || trim($_POST['password']) != "" || trim($_POST['pseudo']) != "") {
                         $this->ajoutUsager($_POST["nom"], $_POST["prenom"], $_POST['mail'], $_POST['password'], $_POST['pseudo']);
-
-//                         $this->formlogin();
                     } else {
-                        $this->formInscription();
+                        $this->formlogin();
                     }
                 } else {
                     header("Location:index.php?requete=inscription");
                 }
-//					$this->ajoutUsager();
                 break;
             case 'login':
                 $this->formlogin();
@@ -141,7 +146,6 @@ class Controler
                 break;
             case 'accueil':
                 if (isset($_SESSION['user_pseudo'])) {
-//					var_dump($_SESSION['user_pseudo']);
                     $this->accueil();
                 } else {
                     header("Location:index.php?requete=login");
@@ -428,39 +432,16 @@ class Controler
         }
     }
 
-    private function formInscription($errorMessage = "")
-    {
-        $dataMessage = $errorMessage;
-        include('vues/entete.php');
-        include('vues/ajoutUsager.php');
-        include('vues/pied.php');
-
-    }
-
     private function ajoutUsager($nom, $prenom, $mail, $password, $pseudo)
     {
-//            $body = json_decode(file_get_contents('php://input'));
-//
-//            if(!empty($body)){
-//                $usager = new Usager();
-//                //var_dump($_POST['data']);
-//
-//                //var_dump($data);
-//                $resultat = $usager->ajoutNouveauUsager($body);
-//                echo json_encode($resultat);
-//            }
-
         $usager = new Usager();
+
         if ($usager->ajoutNouveauUsager($nom, $prenom, $mail, $password, $pseudo) == true) {
             $this->formlogin();
         } else {
             $errorMessage = " l'identifiant ou pseudi existe déjà";
-
-            $this->formInscription($errorMessage);
+            $this->formlogin($errorMessage);
         }
-//        var_dump($usager->ajoutNouveauUsager($nom,$prenom,$mail,$password,$pseudo));
-
-
     }
 
     private function formlogin($errorMessage = "")
@@ -473,17 +454,8 @@ class Controler
 
     private function connexion($identifiant, $mdp)
     {
-//            $body = json_decode(file_get_contents('php://input'));
-//            if(!empty($body)){
-//                $usager = new Usager();
-//                $resultat = $usager->login($body);
-//                echo json_encode($resultat);
-//            }
-
         $usager = new Usager();
         return $usager->login($identifiant, $mdp);
-//        var_dump($usager->login($identifiant,$mdp)->succes);
-
     }
 
     private function fermerSession()

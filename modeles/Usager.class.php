@@ -15,35 +15,19 @@ class Usager extends Modele
      * @param $pseudo
      * @return bool
      */
-    public function existUsager($mail,$pseudo){
-        try {
-            #Prepare stmt or reports errors
-
-            $stmt = $this->_db->prepare("SELECT * FROM " . self::TABLE. " WHERE mail = ? OR pseudo = ?" ) or trigger_error($stmt->error, E_USER_ERROR);;
-            $stmt ->bind_param("ss",$mail,$pseudo );
-
-            #Execute stmt or reports errors
-            $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
-
-            #Save data or reports errors
-            ($stmt_result = $stmt->get_result()) or trigger_error($stmt->error, E_USER_ERROR);
-
-            #Check if are rows in query
-            if ($stmt_result->num_rows > 0) {
-
-                return true;
-
-            } else {
-
-                return false;
-            }
-            $stmt->close();
-
-        }
-        catch(Exception $e) {
-            error_log($e->getMessage());
-            exit('Error');
-        }
+    public function existUsager($mail, $pseudo) {
+        $mail = $this->_db->escape_string($mail);
+        $pseudo = $this->_db->escape_string($pseudo);
+        
+        $sql = "
+            SELECT * FROM " . self::TABLE . "
+            WHERE mail = '$mail' OR pseudo = '$pseudo'
+        ";
+        
+        $res = $this->_db->query($sql);
+        $row = $res->fetch_assoc();
+        
+        return $row ? true : false;
     }
 
 
@@ -62,20 +46,19 @@ class Usager extends Modele
         $retour = new stdClass();
 
         if ($this->existUsager($mail,$pseudo) == false){
-                //            $mdp = password_hash($data->mdp, PASSWORD_DEFAULT);
-                $mdp = password_hash($password, PASSWORD_DEFAULT);
-                $admin = '0';
-                $stmt = $this->_db->prepare("INSERT INTO " .self::TABLE . " (nom, prenom, mail, mdp, admin,pseudo) VALUES (?, ?, ?,?,?,?)");
-                $stmt->bind_param("ssssis", $nom, $prenom, $mail,$mdp,$admin,$pseudo);
+            //            $mdp = password_hash($data->mdp, PASSWORD_DEFAULT);
+            $mdp = password_hash($password, PASSWORD_DEFAULT);
+            $admin = '0';
+            $stmt = $this->_db->prepare("INSERT INTO " .self::TABLE . " (nom, prenom, mail, mdp, admin,pseudo) VALUES (?, ?, ?,?,?,?)");
+            $stmt->bind_param("ssssis", $nom, $prenom, $mail,$mdp,$admin,$pseudo);
             $retour -> succes = true;
             $stmt->execute();
-
         }
         else{
             $retour -> succes = false;
         }
-        return $retour-> succes;
 
+        return $retour-> succes;
     }
 
 
@@ -124,19 +107,17 @@ class Usager extends Modele
 	 * @return Boolean true si l'usager est le propriétaire, false sinon
 	 */
 	public function estProprietaireBouteille($pseudo, $idBouteille) {
+        $pseudo = $this->_db->escape_string($pseudo);
+        $idBouteille = (int) $idBouteille;
+        
         $sql = "
             SELECT * FROM vino__bouteille b
             JOIN vino__cellier c ON b.id_cellier = c.id_cellier
             JOIN vino__usager u ON c.id_usager_cellier = u.id_usager
-            WHERE pseudo = ? AND id_bouteille = ?
+            WHERE pseudo = '$pseudo' AND id_bouteille = $idBouteille
         ";
-        
-        $stmt = $this->_db->prepare($sql);
-        $stmt->bind_param("si", $pseudo, $idBouteille);
-        $stmt->execute();
-		$res = $stmt->get_result();
-        
-        return (boolean) $res->fetch_assoc();
+
+        return (boolean) $this->_db->query($sql)->fetch_assoc();
     }
     
 	/**
@@ -148,18 +129,16 @@ class Usager extends Modele
 	 * @return Boolean true si l'usager est le propriétaire, false sinon
 	 */
 	public function estProprietaireCellier($pseudo, $idCellier) {
+        $pseudo = $this->_db->escape_string($pseudo);
+        $idCellier = (int) $idCellier;
+        
         $sql = "
             SELECT * FROM vino__cellier c
             JOIN vino__usager u ON c.id_usager_cellier = u.id_usager
-            WHERE pseudo = ? AND id_cellier = ?
+            WHERE pseudo = '$pseudo' AND id_cellier = $idCellier
         ";
         
-        $stmt = $this->_db->prepare($sql);
-        $stmt->bind_param("si", $pseudo, $idCellier);
-        $stmt->execute();
-		$res = $stmt->get_result();
-        
-        return (boolean) $res->fetch_assoc();
+        return (boolean) $this->_db->query($sql)->fetch_assoc();
     }
     
 	/**
