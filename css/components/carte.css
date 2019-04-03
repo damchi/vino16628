@@ -13,7 +13,7 @@
 
 /*  .listeBouteilleParListe */
 .listeBouteilleParListe{
-    display: inline-block;
+    display: flex;
     flex-direction: column;
     border-bottom: 1px solid #97174C;
     margin:10px;
@@ -25,6 +25,8 @@
     flex-direction: row;
     border-bottom: 1px solid #97174C;
     margin:10px;
+    max-width: 599px;
+    justify-content: space-between;
 }
 
 .listeBouteilleParListe .carte-entete{
@@ -46,6 +48,9 @@
     order: 3;
     padding:10px;
     max-width: 150px;
+    background-color:#97174C;
+    color: white;
+
 }
 
 .listeBouteilleParListe .carte-image{
@@ -68,23 +73,28 @@
     display: none;
     order:3;
     width: 175px;
+    margin-right: 10px;
 }
 
+
+/* Partie Description de la carte*/
 .listeBouteilleParListe .carte-pied button{
-    color: #97174C;
-    background-color: white;
-    border: 1px #7f0055 solid;
-    margin: 5px;
-    width: 25%;
-    align-self: center;
-}
-
-.listeBouteilleParListe .carte-pied button:hover{
     color: white;
     background-color: #97174C;
+    align-self: center;
+    border: none;
 }
 
-/*  .listeBouteilleParVignmtte */
+.listeBouteilleParListe .carte-pied button:hover,
+.listeBouteilleParListe .carte-pied button:hover a:link,
+.listeBouteilleParListe .carte-pied button:hover a:visited{
+    color: #97174C;
+    background-color: white;
+    border: none;
+}
+
+
+/*  .listeBouteilleParVignette */
 .listeBouteilleParVignette{
     display: flex;
     flex-direction: row;
@@ -93,13 +103,14 @@
 }
 
 .listeBouteilleParVignette .carte{
-    width: 599px;
+    max-width: 599px;
 }
 
 .listeBouteilleParVignette .carte-entete{
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
+    width: 100vw;
 }
 .listeBouteilleParVignette .carte-titre{
     white-space: nowrap;
@@ -125,6 +136,7 @@
     padding: 10px;
     background-color: #97174C;
     color: white;
+    max-width: 599;
 }
 
 /* Partie Description de la carte*/
@@ -133,15 +145,16 @@
     background-color: #97174C;
     align-self: center;
     border: none;
+    width: 100%;
 }
 
 .listeBouteilleParVignette .carte-pied button:hover,
-.listeBouteilleParVignette .carte-pied button:hover a:link,
-.listeBouteilleParVignette .carte-pied button:hover a:visited{
-    color: #97174C;
-    background-color: white;
-    border: none;
-}
+ .listeBouteilleParVignette .carte-pied button:hover a:link,
+ .listeBouteilleParVignette .carte-pied button:hover a:visited{
+     color: #97174C;
+     background-color: white;
+     border: none;
+ }
 
 
 .listeBouteilleParVignette .carte-titre{
@@ -183,25 +196,35 @@
 
 @media only screen and (max-width: 412px){
     .listeBouteilleParListe .carte-image>img{
-        display:none
+        display:none;
+    }
+}
+@media only screen and (min-width: 650px){
+    .listeBouteilleParVignette .carte-pied{
+        max-width: 99%;
     }
 }
 @media only screen and (min-width: 650px){
     .listeBouteilleParListe{
-        margin: 10px;
-        display: inline-block;
+        justify-content: center;
+        text-align: -webkit-center;
     }
 
     .listeBouteilleParListe .carte{
-        dsiplay: flex;
+        display: flex;
+        width: 650px;
+        margin:10px;
     }
 
-
+    .listeBouteilleParListe .carte-information_2{
+        display: block;
+    }
 
 
     .listeBouteilleParVignette{
         justify-content: center;
     }
+
     .listeBouteilleParVignette .carte{
         margin: 10px;
         width: 500px;
