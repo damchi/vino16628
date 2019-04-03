@@ -58,6 +58,7 @@ window.addEventListener('load', () => {
                     // };
 
                     let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: param});
+                    // let requete = new Request( "index.php?requete=ajoutCellier",{method:'POST', body: param});
                     console.log(requete);
                     fetch(requete)
                         .then(response => {
@@ -116,6 +117,7 @@ window.addEventListener('load', () => {
                     "idCellier": idCellier,
                 };
                 let requete = new Request(BaseURL + "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
+                // let requete = new Request( "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
                 fetch(requete)
                     .then(response => {
                         if (response.status === 200) {

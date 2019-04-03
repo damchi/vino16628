@@ -19,14 +19,29 @@
     display: none;
 }
 
+#recherche_bouteille_cellier label{
+    margin-left: 12px;
+}
+
 #reset{
+    position: relative;
+    left: 20%;
+    width: 60vw;
     display: none;
 }
+
 
 
 .recherche{
    display: flex;
 }
+
+#reset{
+    clear:both;
+
+}
+
+
 @media only screen and (min-width: 600px){
     #recherche_bouteille_cellier{
         width: 30%;
@@ -70,13 +85,13 @@
     }
 
 
-    .listeBouteille{
+   /* .listeBouteille{
         display: grid;
         grid-area: listeBouteille;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: 10px;
         margin: 10px;
-    }
+    }*/
 }
 
 
