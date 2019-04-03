@@ -3,11 +3,16 @@
 	padding: 15px 10px;
 	border-bottom: 1px solid #701139;
 	display: flex;
-	height: 100px;
+	justify-content: space-between;
+	align-items: center;
+	height: 150px;
 }
 
+.listeCellier > div {
+
+}
 .descriptionCellier {
-	flex-grow: 6;
+	
 }
 
 .nomCellier {
@@ -22,9 +27,7 @@
 .btnCellier {
 	text-align: center;
 	color: #7f253c;
-	flex-grow: 1;
 	margin: 0px 15px;
-	align-items: center;
 	font-size: 1.5em;
 }
 
@@ -35,7 +38,18 @@
 }
 
 .divImgCellier {
-	flex-grow: 1;
+}
+
+.divTexteCellier {
+	text-align: left;
+}
+
+.divBtnCellier {
+}
+
+.sous-menu {
+	background-color: #f9f9f9;
+	padding: 10px 0px;
 }
 
 @media screen and (min-width: 600px) {
@@ -46,15 +60,13 @@
 	}
 
 	.listeCellier  {
-	width: 100%;
-	padding: 15px 10px;
-	border-bottom: 1px solid #701139;
-	display: flex;
-	align-items: center;
-	height: 400px;
+		padding: 15px 10px;
+		border-bottom: 1px solid #701139;
+		height: 400px;
 	}
 
 	.divImgCellier {
-		height: 15px;
+		width: 200px;
+		height: 250px;;
 	}
 }
