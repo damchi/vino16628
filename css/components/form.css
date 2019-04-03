@@ -47,5 +47,19 @@ input[type=file] {
   display: none;
 }
 
+label.labelImg {
+  padding: 10px;
+  background-color: #7f253c;
+  color: #f9f9f9;
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 10px;
+  display: block;
+}
 
-
+@media screen and (min-width: 600px) {
+  label.labelImg {
+    max-width: 150px;
+    margin: auto;
+  }
+}

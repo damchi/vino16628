@@ -15,7 +15,8 @@
                 <div id="divCellier">
                     <div id="formCellier">
     <!--                <div action="" id="formCellier">-->
-                        <input type="file" class="input" name="image"  id="imageCellier" accept="image/*">
+                        <label for="imageCellier" class="labelImg">Choisir une image</label>
+                        <input type="file" class="input" name="image"  id="imageCellier" accept="image/*"></br>
                         <input type="text" required name="nomCellier" placeholder="Nouveau Cellier">
                         <button name="ajouterCellier"> <i class="fas fa-plus">  </i> </button>
                         <div id="errorCellier"></div>
