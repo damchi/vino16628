@@ -35,11 +35,6 @@
         </div>
 
         <h2 class="btnToggle" id="2">Pas encore inscrit(e)?</h2>
-        <!--<div class="form">
-            <button class="group">
-                <a href="index.php?requete=inscription">Pas encore inscrit ? </a>
-            </button>
-        </div>-->
         <div class ="sectionMobile">
             <form class="form" method="post" action="index.php?requete=ajoutUsager">
                 <div class="group">
