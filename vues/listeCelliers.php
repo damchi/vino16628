@@ -23,7 +23,9 @@
                 </div>
             </div>
             <?php
+
             foreach ($data as $cle => $cellier) {
+
             ?>
 
                  <div class="cellierId listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
@@ -65,7 +67,8 @@
             <?php
             }
             ?>
-            <div class="cellierId listeCelliers" id="insertChild" data-id=""></div>
+            <div class="cellierId listeCelliers" id="insertChild" data-id="">    
+            </div>
         </div>
     </div>
 </div>

@@ -14,7 +14,7 @@ class Cellier extends Modele
      * @param $id
      * @return array
      */
-    public function getUsagerCellier($id){
+    public function getUsagerCellier($id){  
         $cellier = Array();
 
 //        $stmt = "SELECT * FROM " . self::TABLE. " WHERE id_usager_cellier = ".$id;
@@ -48,7 +48,7 @@ class Cellier extends Modele
                                     WHERE id_usager_cellier = " . $id .")
                                GROUP BY vino__bouteille.id_cellier
                             ) as d ON d.id_cellier = vino__cellier.id_cellier
-                WHERE id_usager_cellier = 82";
+                WHERE id_usager_cellier = $id";
         $stmt_result = $this->_db->query($stmt);
 
         if ($stmt_result->num_rows) {
