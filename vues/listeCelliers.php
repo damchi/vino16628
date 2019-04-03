@@ -11,7 +11,7 @@
         <div class="sous-menu">
             <button name="afficheFormCellier"><i class="fas fa-plus"></i>  Ajouter un cellier</button>
         </div>
-        <div class="listeCelliers">
+        <div class="listeCelliers" id="insertChild" >
             <div id="divCellier">
                 <div id="formCellier">
 <!--                <div action="" id="formCellier">-->
@@ -64,7 +64,7 @@
             <?php
             }
             ?>
-            <div class="cellierId listeCellier" id="insertChild" data-id=""></div>
+<!--            <div class="cellierId listeCellier" id="insertChild" data-id=""></div>-->
         </div>
     </div>
 </div>
