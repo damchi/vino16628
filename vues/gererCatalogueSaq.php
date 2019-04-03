@@ -2,7 +2,7 @@
     Vue du catalogue des bouteilles de la SAQ (admin)
 -->
 
-<script src="./js/gererBouteillesSaq.js"></script>
+<script src="./js/gererCatalogueSaq.js"></script>
 
 <div class="encadré">
     <div class="containeurBlanc">

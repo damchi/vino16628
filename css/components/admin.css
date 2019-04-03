@@ -1,0 +1,9 @@
+#listeUsagers {
+    padding: 10px;
+    margin: auto;
+}
+
+.usager {
+    display: flex;
+    justify-content: space-between;
+}

@@ -207,9 +207,9 @@ class Controler
                     $this->supprimerUsager();
                 }
                 break;
-            case 'gererBouteillesSaq':
+            case 'gererCatalogueSaq':
                 if (isset($_SESSION['admin'])) {
-                    $this->gererBouteillesSaq();
+                    $this->gererCatalogueSaq();
                 } else {
                     $this->fermerSession();
                 }
@@ -381,7 +381,7 @@ class Controler
 
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
-                $data['bouteille'] = $saq->getBouteilleSaq($_GET['idBouteilleSaq']);
+                $data['bouteille'] = $saq->getProduit($_GET['idBouteilleSaq']);
                 $data['types'] = $saq->getTypes();
                 include("vues/entete.php");
                 include("vues/formBouteilleSaq.php");
@@ -396,7 +396,7 @@ class Controler
                 }
 
                 $saq->modifieProduit($bouteille);
-                header("Location: index.php?requete=gererBouteillesSaq");
+                header("Location: index.php?requete=gererCatalogueSaq");
                 break;
         }
     }
@@ -569,10 +569,10 @@ class Controler
         echo json_encode($res);
     }
 
-    private function gererBouteillesSaq()
+    private function gererCatalogueSaq()
     {
         include("vues/entete.php");
-        include("vues/gererBouteillesSaq.php");
+        include("vues/gererCatalogueSaq.php");
         include("vues/pied.php");
     }
     
