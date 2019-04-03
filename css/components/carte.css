@@ -141,6 +141,7 @@
     background-color: #97174C;
     align-self: center;
     border: none;
+    width: 100%;
 }
 
 .listeBouteilleParVignette .carte-pied button:hover,
