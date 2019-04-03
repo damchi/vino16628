@@ -4,10 +4,11 @@
 	border-bottom: 1px solid #701139;
 	display: flex;
 	align-items: center;
+	height: 100px;
 }
 
-.listeCellier:first-of-type {
-	border-top: 1px solid #701139;    
+.listeCellier {
+	border-bottom: 1px solid #701139;    
 }
 
 .nomCellier {
@@ -26,7 +27,6 @@
 	color: #7f253c;
 	flex-grow: 1;
 	margin: 0px 15px;
-	width: 5%;
 	align-items: center;
 }
 
@@ -36,6 +36,21 @@
 
 @media screen and (min-width: 600px) {
 	.imgCellier {
-	height: 200px;
+	width: 200px;
+	height: 250px;
+	object-fit: cover;
+	}
+
+	.listeCellier  {
+	width: 100%;
+	padding: 15px 10px;
+	border-bottom: 1px solid #701139;
+	display: flex;
+	align-items: center;
+	height: 300px;
+	}
+
+	.divImgCellier {
+		height: 15px;
 	}
 }

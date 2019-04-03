@@ -8,7 +8,7 @@
 ?>
 <div class="encadré">
     <div class="containeurBlanc">
-        <div class="boutonSolo boutonHaut">
+        <div class="sous-menu">
             <button name="afficheFormCellier"><i class="fas fa-plus"></i>  Ajouter un cellier</button>
         </div>
         <div class="listeCelliers">
@@ -24,28 +24,25 @@
             </div>
             <?php
             foreach ($data as $cle => $cellier) {
-
             ?>
-
-                 <div class="cellierId listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
-                     <?php
+                <div class="cellierId listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
+                    <?php
                         if ($cellier['image']  === null) {
                             ?>
                             <img src="./images/cellier.png" class="imgCellier">
                             <?php
                         }
                         else{
-                            echo '<img src="./images/'. $cellier['image'] .'" class="imgCellier" alt="Image du cellier">';
-
+                        ?>
+                            <img src="./images/<?=$cellier['image'];?>" class="imgCellier" alt="Image du cellier">
+                        <?php
                         }
-                     ?>
+                    ?>
 
                      <a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?> </a>
                          <?php if($cellier['total'] != null){
                              ?>
                              <div class="mc">
-
-
                             <p>Nombre de bouteilles :<?= $cellier['total'] ?> </p>
                              <?php if ($cellier['total_rouge'] != null) { ?>
                                  <p>Nombre de bouteilles Rouge :<?= $cellier['total_rouge'] ?></p>
@@ -61,17 +58,13 @@
                      <?php
                          }
                          ?>
-
-
-                     <button class="modifierCellier btnCellier" id="modifCellier"><i class="fas fa-edit"></i></button>
+                     <div class="modifierCellier btnCellier" id="modifCellier"><i class="fas fa-edit"></i></div>
                      <div class="supprimerCellier btnCellier"><i class="fas fa-trash-alt"></i></div>
                  </div>
-
             <?php
             }
             ?>
-            <div class="cellierId listeCellier" id="insertChild" data-id="">
-            </div>
+            <div class="cellierId listeCellier" id="insertChild" data-id=""></div>
         </div>
     </div>
 </div>
