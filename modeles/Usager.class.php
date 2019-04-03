@@ -15,35 +15,19 @@ class Usager extends Modele
      * @param $pseudo
      * @return bool
      */
-    public function existUsager($mail,$pseudo){
-        try {
-            #Prepare stmt or reports errors
-
-            $stmt = $this->_db->prepare("SELECT * FROM " . self::TABLE. " WHERE mail = ? OR pseudo = ?" ) or trigger_error($stmt->error, E_USER_ERROR);;
-            $stmt ->bind_param("ss",$mail,$pseudo );
-
-            #Execute stmt or reports errors
-            $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
-
-            #Save data or reports errors
-            ($stmt_result = $stmt->get_result()) or trigger_error($stmt->error, E_USER_ERROR);
-
-            #Check if are rows in query
-            if ($stmt_result->num_rows > 0) {
-
-                return true;
-
-            } else {
-
-                return false;
-            }
-            $stmt->close();
-
-        }
-        catch(Exception $e) {
-            error_log($e->getMessage());
-            exit('Error');
-        }
+    public function existUsager($mail, $pseudo) {
+        $mail = $this->_db->escape_string($mail);
+        $pseudo = $this->_db->escape_string($pseudo);
+        
+        $sql = "
+            SELECT * FROM " . self::TABLE . "
+            WHERE mail = '$mail' OR pseudo = '$pseudo'
+        ";
+        
+        $res = $this->_db->query($sql);
+        $row = $res->fetch_assoc();
+        
+        return $row ? true : false;
     }
 
 
@@ -62,20 +46,19 @@ class Usager extends Modele
         $retour = new stdClass();
 
         if ($this->existUsager($mail,$pseudo) == false){
-                //            $mdp = password_hash($data->mdp, PASSWORD_DEFAULT);
-                $mdp = password_hash($password, PASSWORD_DEFAULT);
-                $admin = '0';
-                $stmt = $this->_db->prepare("INSERT INTO " .self::TABLE . " (nom, prenom, mail, mdp, admin,pseudo) VALUES (?, ?, ?,?,?,?)");
-                $stmt->bind_param("ssssis", $nom, $prenom, $mail,$mdp,$admin,$pseudo);
+            //            $mdp = password_hash($data->mdp, PASSWORD_DEFAULT);
+            $mdp = password_hash($password, PASSWORD_DEFAULT);
+            $admin = '0';
+            $stmt = $this->_db->prepare("INSERT INTO " .self::TABLE . " (nom, prenom, mail, mdp, admin,pseudo) VALUES (?, ?, ?,?,?,?)");
+            $stmt->bind_param("ssssis", $nom, $prenom, $mail,$mdp,$admin,$pseudo);
             $retour -> succes = true;
             $stmt->execute();
-
         }
         else{
             $retour -> succes = false;
         }
-        return $retour-> succes;
 
+        return $retour-> succes;
     }
 
 
