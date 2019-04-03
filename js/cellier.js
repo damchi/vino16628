@@ -86,14 +86,16 @@ window.addEventListener('load', () => {
                             else{
                                 output += "<img src=./images/"+response.image +">";
                             }
+                            var node = document.createElement("DIV");
                             output += "<a class='nomCellier' href='index.php?requete=listeBouteilleCellier&idCellier="+ response.id_cellier + "'>" + response.nom + "</a>";
                             // output += "<button class='modifierCellier'>  Modifier </button>\n"
                             // output += "<button class='supprimerCellier'>  Supprimer</button>";
-                            let insert = document.getElementById('insertChild');
-                            insert.setAttribute('data-id',response.id);
-                            insert.innerHTML= output;
-                            console.log(output);
-                            formCellier.style.display='none';
+                            // let insert = document.getElementById('insertChild');
+                            // var textnode = document.createTextNode(out);
+                            node.classList.add('listeCellier');
+                            node.classList.add('cellierId');
+                            node.innerHTML =output;
+                            document.getElementById("insertChild").appendChild(node);
 
                         })
                         .catch(error => {
