@@ -12,7 +12,7 @@
  */
 class Bouteille extends Modele {
     const TABLE = 'vino__bouteille';
-    
+
 	/**
 	 * Ajoute une bouteille à un cellier.
 	 * 
@@ -35,13 +35,65 @@ class Bouteille extends Modele {
         $quantite = (int) $data['quantite'];
         $millesime = (int) $data['millesime'];
         $type = (int) $data['type'];
-        
+//        $image = $this->_db->escape_string($_FILES['image']['name']);
+//echo "<pre>";
+//var_dump($_FILES);
+
+
+
+        if(isset($_FILES["image"]) && $_FILES["image"]["error"] == 0){
+
+            $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+            $filename = $_FILES["image"]["name"];
+            $filetype = $_FILES["image"]["type"];
+            $filesize = $_FILES["image"]["size"];
+
+            // Verify file extension
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
+
+            // Verify file size - 5MB maximum
+            $maxsize = 5 * 1024 * 1024;
+            if($filesize > $maxsize) die("Error: File size is larger than the allowed limit.");
+
+            // Verify MYME type of the file
+            if(in_array($filetype, $allowed)){
+
+
+                $key = '';
+                $keys = array_merge(range(0, 9), range('a', 'z'));
+
+                for ($i = 0; $i < 10; $i++) {
+                    $key .= $keys[array_rand($keys)];
+                }
+                $filename = $key.$filename;
+                $image = $this->_db->escape_string($filename);
+
+
+                // Check whether file exists before uploading it
+//                if(file_exists("./images/" . $filename)){
+//                    echo $filename . " is already exists.";
+//                } else{
+                    move_uploaded_file($_FILES["image"]["tmp_name"], "./images/" .$filename);
+//                    echo "Your file was uploaded successfully.";
+//                }
+            } else{
+                echo "Error: There was a problem uploading your file. Please try again.";
+            }
+        } else{
+            echo "Error: " . $_FILES["image"]["error"];
+        }
+//
+
+
+
+
         $sql = "
-            INSERT INTO vino__bouteille (id_cellier, nom, code_saq, pays, url_saq, url_img, format, date_achat, garde_jusqua, notes, prix, quantite, millesime, type)
-            VALUES ($idCellier, '$nom', '$codeSaq', '$pays', '$urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)
-        ";        
-        var_dump($sql);
+            INSERT INTO vino__bouteille (id_cellier, nom,image, code_saq, pays, url_saq, url_img, format, date_achat, garde_jusqua, notes, prix, quantite, millesime, type)
+            VALUES ($idCellier, '$nom', '$image','$codeSaq', '$pays', '$urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)";
+//        var_dump($sql);
         $this->_db->query($sql);
+
 		
         return $this->_db->insert_id;
 	}

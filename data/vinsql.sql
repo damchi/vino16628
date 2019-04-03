@@ -94,6 +94,7 @@ INSERT INTO `vino__bouteille__saq` (`id_bouteille_saq`, `nom`, `image`, `code_sa
 
 CREATE TABLE `vino__cellier` (
   `id_cellier` int(11) NOT NULL,
+  `image` varchar(200) DEFAULT NULL,
   `nom` varchar(200) NOT NULL,
   `id_usager_cellier` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -125,7 +126,9 @@ CREATE TABLE `vino__type` (
 
 INSERT INTO `vino__type` (`id_type`, `type`) VALUES
 (1, 'Vin rouge'),
-(2, 'Vin blanc');
+(2, 'Vin rouge'),
+(3, 'Vin Rosé'),
+(4, 'Vin bulles');
 
 -- --------------------------------------------------------
 
