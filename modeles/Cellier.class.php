@@ -16,7 +16,6 @@ class Cellier extends Modele
      */
     public function getUsagerCellier($id){
         $cellier = Array();
-
 //        $stmt = "SELECT * FROM " . self::TABLE. " WHERE id_usager_cellier = ".$id;
         $stmt = "SELECT vino__cellier.image, vino__cellier.id_cellier, vino__cellier.nom, vino__cellier.id_usager_cellier, b.total, c.total_rouge, d.total_blanc
                 FROM vino__cellier 
