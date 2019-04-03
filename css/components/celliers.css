@@ -1,28 +1,3 @@
-/*
-.listeCelliers {
-	text-align: center;
-}
-
-*/
-/*
-#divCellier input, #divCellier i {
-	border:0px solid;
-	display: inline-block;
-}
-
-*/
-/*
-#divCellier i {
-	background-color: #701139;
-	color: white;
-	width: 15%;
-}
-
-#divCellier input {
-	width: 80%;
-}
-
-*/
 .listeCellier  {
 	width: 100%;
 	padding: 15px 10px;
@@ -40,20 +15,27 @@
 	color: #272727;
 	flex-grow: 1;
 	text-align: center;
-/*	margin: 0px 15px;*/
-/*	width: 50%;*/
 }
 
 .cellier:visited {
 	color: #272727;
 }
 
-/*
 .btnCellier {
 	text-align: center;
-	color: #272727;
+	color: #7f253c;
 	flex-grow: 1;
 	margin: 0px 15px;
 	width: 5%;
 	align-items: center;
-}*/
+}
+
+.imgCellier {
+	height: 50px;
+}
+
+@media screen and (min-width: 600px) {
+	.imgCellier {
+	height: 200px;
+	}
+}

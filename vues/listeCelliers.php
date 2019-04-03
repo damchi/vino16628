@@ -23,7 +23,6 @@
                 </div>
             </div>
             <?php
-
             foreach ($data as $cle => $cellier) {
 
             ?>
@@ -32,17 +31,17 @@
                      <?php
                         if ($cellier['image']  === null) {
                             ?>
-                            <img src="./images/cellier.png">
+                            <img src="./images/cellier.png" class="imgCellier">
                             <?php
                         }
                         else{
-                            echo '<img src="./images/'. $cellier['image'] .'" alt="Image du cellier">';
+                            echo '<img src="./images/'. $cellier['image'] .'" class="imgCellier" alt="Image du cellier">';
 
                         }
                      ?>
 
                      <a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?> </a>
-                     <div>
+                     <div class="mc">
                          <?php if($cellier['total'] != null){
                          ?>
 
@@ -61,7 +60,7 @@
 
                      </div>
                      <button class="modifierCellier btnCellier" id="modifCellier"><i class="fas fa-edit"></i></button>
-                     <button class="supprimerCellier btnCellier"><i class="fas fa-trash-alt"></i></button>
+                     <div class="supprimerCellier btnCellier"><i class="fas fa-trash-alt"></i></div>
                  </div>
 
             <?php
