@@ -190,9 +190,26 @@ class Controler
                     $this->fermerSession();
                 }
                 break;
-            case 'gererBouteillesSaq':
+            case 'gererUsagers':
                 if (isset($_SESSION['admin'])) {
-                    $this->gererBouteillesSaq();
+                    $this->gererUsagers();
+                } else {
+                    $this->fermerSession();
+                }
+                break;
+            case 'autocompleteUsager':
+                if (isset($_SESSION['admin'])) {
+                    $this->autocompleteUsager();
+                }
+                break;
+            case 'supprimerUsager':
+                if (isset($_SESSION['admin'])) {
+                    $this->supprimerUsager();
+                }
+                break;
+            case 'gererCatalogueSaq':
+                if (isset($_SESSION['admin'])) {
+                    $this->gererCatalogueSaq();
                 } else {
                     $this->fermerSession();
                 }
@@ -272,7 +289,6 @@ class Controler
         $body = json_decode(file_get_contents('php://input'));
         $listeBouteille = $saq->autocomplete($body->nom);
         echo json_encode($listeBouteille);
-
     }
 
     private function autocompleteBouteilleListe()
@@ -365,7 +381,7 @@ class Controler
 
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
-                $data['bouteille'] = $saq->getBouteilleSaq($_GET['idBouteilleSaq']);
+                $data['bouteille'] = $saq->getProduit($_GET['idBouteilleSaq']);
                 $data['types'] = $saq->getTypes();
                 include("vues/entete.php");
                 include("vues/formBouteilleSaq.php");
@@ -380,7 +396,7 @@ class Controler
                 }
 
                 $saq->modifieProduit($bouteille);
-                header("Location: index.php?requete=gererBouteillesSaq");
+                header("Location: index.php?requete=gererCatalogueSaq");
                 break;
         }
     }
@@ -530,10 +546,33 @@ class Controler
         }
     }
 
-    private function gererBouteillesSaq()
+    private function gererUsagers()
     {
         include("vues/entete.php");
-        include("vues/gererBouteillesSaq.php");
+        include("vues/gererUsagers.php");
+        include("vues/pied.php");
+    }
+    
+    private function autocompleteUsager()
+    {
+        $usr = new Usager();
+        $body = json_decode(file_get_contents('php://input'));
+        $listeUsagers = $usr->autocomplete($body->nom);
+        echo json_encode($listeUsagers);
+    }
+
+    private function supprimerUsager()
+    {
+        $body = json_decode(file_get_contents('php://input'));
+        $usr = new Usager();
+        $res = $usr->supprimer($body->id);
+        echo json_encode($res);
+    }
+
+    private function gererCatalogueSaq()
+    {
+        include("vues/entete.php");
+        include("vues/gererCatalogueSaq.php");
         include("vues/pied.php");
     }
     

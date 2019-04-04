@@ -4,12 +4,11 @@
 @import url("components/celliers.css");
 @import url("components/cellier.css");
 @import url("components/button.css");
-@import url("components/pied.css");
 @import url("components/carte.css");
 @import url("components/typographie.css");
 @import url("components/form.css");
-@import url("components/table.css");
 @import url("components/login.css");
+@import url("components/admin.css");
 
 
         /*---Index---*/
@@ -35,10 +34,14 @@ main{
     width: 100%;
 }
 
-
-/*.mc {*/
-    /*display: none;*/
-/*}*/
+footer {
+    background-color: #7f253c;
+    text-align: center;
+    font-size: 0.8em;
+    color: #eee;
+    padding: 5px;
+    width: 100%;
+}
 
 .ml {
     margin-left: 10px;
@@ -57,7 +60,13 @@ a {
     color: inherit;
 }
 
+i {
+  margin: 0px 5px;
+}
 
+.mc {
+    display: none;
+}
 
 @media screen and (min-width: 600px) {
     body {

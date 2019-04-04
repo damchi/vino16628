@@ -46,3 +46,7 @@ button a{
         text-align: center;
     }
 }
+
+input.input{
+    width: 100%;
+}

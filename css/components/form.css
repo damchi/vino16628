@@ -32,7 +32,7 @@
     height: 0px;
 }
 
-input, select, textarea{
+#imageBouteille, input, select, textarea{
     flex-grow: 1;
     padding: 8px;
     border-radius: 2px;
@@ -43,4 +43,34 @@ input, select, textarea{
     margin-right: 10px;
 }
 
+input[type=file] {
+  display: none;
+}
+
+label.labelImg {
+  padding: 10px;
+  background-color: #7f253c;
+  color: #f9f9f9;
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 10px;
+  display: block;
+}
+
+/*Bouton choisir image dans formBouteille*/
+label.icon_form.labelImg{
+    margin-left: 0;
+    width: 100%;
+}
+
+.formBouteille div.form{
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 600px) {
+  label.labelImg {
+    max-width: 150px;
+    margin: auto;
+  }
+}
 

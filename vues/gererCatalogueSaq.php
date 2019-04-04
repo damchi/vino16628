@@ -2,7 +2,7 @@
     Vue du catalogue des bouteilles de la SAQ (admin)
 -->
 
-<script src="./js/gererBouteillesSaq.js"></script>
+<script src="./js/gererCatalogueSaq.js"></script>
 
 <div class="encadré">
     <div class="containeurBlanc">
@@ -24,13 +24,13 @@
 </div>
 
 <template id="templateBouteille">
-    <div class="carte bouteille" data-id="(id_bouteille_saq)">
+    <div class="carte bouteille" data-id="%id_bouteille_saq%">
         <div class="carte-titre">
             <h4 class="nom"></h4>
         </div>
 
         <div class="carte-pied">
-            <button class='btnModifier'><a href="index.php?requete=modifierBouteilleSaq&idBouteilleSaq=(id_bouteille_saq)"><i class="fas fa-edit"></i></a></button>
+            <button class='btnModifier'><a href="index.php?requete=modifierBouteilleSaq&idBouteilleSaq=%id_bouteille_saq%"><i class="fas fa-edit"></i></a></button>
             <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button>                
         </div>
     </div>

@@ -20,11 +20,14 @@
     justify-content: center;
 }
 
+/*Comprend 3 Sections donc entete, description, pied*/
 .listeBouteilleParListe .carte{
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #97174C;
     margin:10px;
+    max-width: 599px;
+    justify-content: space-between;
 }
 
 .listeBouteilleParListe .carte-entete{
@@ -33,6 +36,7 @@
     width: 100px;
 }
 
+/*Séparé par trois parties image bouteille, information & information 2, */
 .listeBouteilleParListe .carte-description{
     display: flex;
     flex-direction: row;
@@ -98,16 +102,20 @@
     flex-direction: row;
     flex-wrap: wrap;
     border-bottom: 1px solid #97174C;
+    width: 100vw;
+    justify-content: center;
 }
 
 .listeBouteilleParVignette .carte{
-    width: 599px;
+    max-width: 599px;
+    justify-content: center;
 }
 
 .listeBouteilleParVignette .carte-entete{
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
+    width: 100vw;
 }
 .listeBouteilleParVignette .carte-titre{
     white-space: nowrap;
@@ -133,6 +141,7 @@
     padding: 10px;
     background-color: #97174C;
     color: white;
+    max-width: 599;
 }
 
 /* Partie Description de la carte*/
@@ -141,6 +150,7 @@
     background-color: #97174C;
     align-self: center;
     border: none;
+    width: 100%;
 }
 
 .listeBouteilleParVignette .carte-pied button:hover,
@@ -195,8 +205,13 @@
     }
 }
 @media only screen and (min-width: 650px){
+    .listeBouteilleParVignette .carte-pied{
+        max-width: 99%;
+    }
+}
+@media only screen and (min-width: 650px){
     .listeBouteilleParListe{
-        justify-content: center;
+        justify-content: space-between;
         text-align: -webkit-center;
     }
 
@@ -219,6 +234,10 @@
         margin: 10px;
         width: 500px;
         flex-wrap: wrap;
+    }
+
+    .listeBouteilleParVignette .carte-titre{
+        text-align: left;
     }
     .listeBouteilleParVignette .carte-information_2{
         order:4;

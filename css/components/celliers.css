@@ -1,21 +1,21 @@
+.sous-menu {
+	background-color: #f9f9f9;
+	padding: 10px 0px;
+}
+
 .listeCellier  {
 	width: 100%;
 	padding: 15px 10px;
 	border-bottom: 1px solid #701139;
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
-	height: 100px;
-}
-
-.listeCellier {
-	border-bottom: 1px solid #701139;    
+	height: 150px;
 }
 
 .nomCellier {
 	text-decoration: none;
 	color: #272727;
-	flex-grow: 1;
-	text-align: center;
 }
 
 .cellier:visited {
@@ -25,32 +25,48 @@
 .btnCellier {
 	text-align: center;
 	color: #7f253c;
-	flex-grow: 1;
 	margin: 0px 15px;
-	align-items: center;
+	font-size: 1.1em;
 }
 
 .imgCellier {
-	height: 50px;
+	width: 65px;
+	height: 100px;
+	object-fit: cover;
+}
+
+.divTexteCellier {
+	text-align: left;
+	width: 40%;
 }
 
 @media screen and (min-width: 600px) {
 	.imgCellier {
-	width: 200px;
-	height: 250px;
-	object-fit: cover;
+		width: 200px;
+		height: 250px;
+		object-fit: cover;
 	}
 
 	.listeCellier  {
-	width: 100%;
-	padding: 15px 10px;
-	border-bottom: 1px solid #701139;
-	display: flex;
-	align-items: center;
-	height: 300px;
+		border-bottom: 1px solid #701139;
+		height: 300px;
 	}
 
 	.divImgCellier {
-		height: 15px;
+		width: 200px;
+		height: 250px;
+		margin-left: 10%;
+	}
+
+	.divTexteCellier {
+	height: 250px;
+	}
+
+	.divBtnCellier {
+		margin-right: 15%;
+	}
+
+	.btnCellier {
+		font-size: 1.5em;
 	}
 }
