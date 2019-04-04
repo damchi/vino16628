@@ -202,6 +202,8 @@ class Usager extends Modele
             WHERE id_usager = $idUsager
         ";
 
+		var_dump($sql);
+
         $this->_db->query($sql);
         
         return $this->_db->affected_rows;
