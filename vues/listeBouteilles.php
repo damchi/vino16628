@@ -41,7 +41,7 @@
             <option value="">Millésimes</option>
 		    <?php
 		    foreach ( $data['millesime'] as  $millesime){
-			    if ($millesime['millesime'] != ""){
+			    if ($millesime['millesime'] != "" && $millesime['millesime']!= 0){
 				    echo '<option value="'.$millesime['millesime'].'">'.$millesime['millesime'].'</option>';
 			    }
 		    }
@@ -87,8 +87,12 @@
                 <div class="carte-quantite">Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span></div>
                 <div class="carte-pays">Pays : <?php echo $bouteille['pays'] ?></div>
                 <div class="carte-type">Type : <?php echo $bouteille['type'] ?></div>
-                <div class="carte-millesime">Millesime : <?php echo $bouteille['millesime'] ?></div>
                 <?php
+                if ($bouteille['millesime'] != 0) {
+                    ?>
+                    <div class="carte-millesime">Millesime : <?php echo $bouteille['millesime'] ?></div>
+                    <?php
+                }
                 if ($bouteille['code_saq'] != null ) {
                     ; ?>
                     <div class="carte-code_saq">Code saq : <a
@@ -138,7 +142,7 @@
         <!-- Bouton -->
         <div class="carte-pied">
             <button class='btnAjouter'><i class="fas fa-plus"></i></button>
-            <button class='btnVoir'><a href="index.php?requete=bouteilleIndividuelle&idBouteille=<?= $bouteille['id_bouteille'] ?>"><i class="fas fa-wine-bottle"></i></a></button>
+<!--            <button class='btnVoir'><a href="index.php?requete=bouteilleIndividuelle&idBouteille=--><?//= $bouteille['id_bouteille'] ?><!--"><i class="fas fa-wine-bottle"></i></a></button>-->
             <button class='btnBoire'><i class="fas fa-minus"></i></button>
             <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>"><i class="fas fa-edit"></i></a></button>
             <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button>
