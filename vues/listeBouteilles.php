@@ -100,10 +100,15 @@
 
                     <div class="carte-information">
                         <!-- Texte -->
-                        <div class="carte-quantite">Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span></div>
-                        <div class="carte-pays">Pays : <?php echo $bouteille['pays'] ?></div>
                         <div class="carte-type">Type : <?php echo $bouteille['type'] ?></div>
+                        <div class="carte-pays">Pays : <?php echo $bouteille['pays'] ?></div>
                         <div class="carte-millesime">Millesime : <?php echo $bouteille['millesime'] ?></div>
+                        <div class="carte-date_achat">Date achat : <?php echo $bouteille['date_achat'] ?></div>
+                        <div class="carte-quantite">Quantité : <span class="quantite"><?php echo $bouteille['quantite'] ?></span></div>
+                    </div>
+
+                    <div class="carte-information-2">
+                        <!-- Texte -->
                         <?php
                         if ($bouteille['code_saq'] != null ) {
                             ; ?>
@@ -111,13 +116,8 @@
                                         href="<?php echo $bouteille['url_saq'] ?>"><?php echo $bouteille['code_saq'] ?></a></div>
                             <?php
                         }
-                            ?>
-                    </div>
-
-                    <div class="carte-information_2">
-                        <!-- Texte -->
+                        ?>
                         <div class="carte-format"> Format : <?php echo $bouteille['format'] ?></div>
-                        <div class="carte-date_achat">Date achat : <?php echo $bouteille['date_achat'] ?></div>
                         <div class="carte-garde_jusqua">garde jusqu'à : <?php echo $bouteille['garde_jusqua'] ?></div>
                         <div class="carte-notes">Notes : <?php echo $bouteille['notes'] ?></div>
                     </div>
