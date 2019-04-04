@@ -20,6 +20,7 @@
     justify-content: center;
 }
 
+/*Comprend 3 Sections donc entete, description, pied*/
 .listeBouteilleParListe .carte{
     display: flex;
     flex-direction: row;
@@ -35,6 +36,7 @@
     width: 100px;
 }
 
+/*Séparé par trois parties image bouteille, information & information 2, */
 .listeBouteilleParListe .carte-description{
     display: flex;
     flex-direction: row;
@@ -100,10 +102,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     border-bottom: 1px solid #97174C;
+    width: 100vw;
+    justify-content: center;
 }
 
 .listeBouteilleParVignette .carte{
     max-width: 599px;
+    justify-content: center;
 }
 
 .listeBouteilleParVignette .carte-entete{
@@ -206,7 +211,7 @@
 }
 @media only screen and (min-width: 650px){
     .listeBouteilleParListe{
-        justify-content: center;
+        justify-content: space-between;
         text-align: -webkit-center;
     }
 
@@ -229,6 +234,10 @@
         margin: 10px;
         width: 500px;
         flex-wrap: wrap;
+    }
+
+    .listeBouteilleParVignette .carte-titre{
+        text-align: left;
     }
     .listeBouteilleParVignette .carte-information_2{
         order:4;
