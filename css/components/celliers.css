@@ -2,6 +2,7 @@
 	background-color: #f9f9f9;
 	padding: 10px 15px;
 	border-bottom: 2px solid #7F253C;
+	min-width: 380px;
 }
 
 .listeCellier  {
@@ -13,7 +14,12 @@
 	align-items: center;
 	line-height: 0.9;
 	background-color: white;
+	min-width: 380px;
 }
+
+/*.containerCellier{*/
+	/*border-bottom: 1px solid #701139*/
+/*}*/
 
 .nomCellier {
 	text-decoration: none;
@@ -22,14 +28,6 @@
 
 .cellier:visited {
 	color: #272727;
-}
-
-.btnCellier {
-	text-align: center;
-	color: #7f253c;
-	margin: 0px 15px;
-	font-size: 1.1em;
-	cursor: pointer;
 }
 
 .imgCellier {
@@ -45,7 +43,10 @@
 	width: 40%;
 }
 
-#formCellier {
+#formCellier{
+	display: none;
+}
+.formModifCellier{
 	display: none;
 	text-align: left;
 }
@@ -68,7 +69,7 @@
 	margin: 25px 0px 10px 0px;
 }
 
-.btnAjouterCellier {
+.btnAjouterCellier, .btnCellier {
 	border: 1px solid #7F253C;
 	cursor: pointer;
 	display: inline-block;
@@ -76,10 +77,10 @@
 	text-align: center;
 	color: white;
 	border-radius: 50%;
-	padding: 10px;
+	padding: 11px 10px;
 }
 
-.btnAjouterCellier:hover {
+.btnAjouterCellier:hover, .btnCellier:hover {
 	background-color: white;
 	color: #7F253C;
 }	
@@ -91,6 +92,7 @@
 		margin-bottom: 10px;
 		width: 65%;
 		margin: auto;
+		min-width: 800px;
 	}
 
 	.sous-menu * {
@@ -102,6 +104,7 @@
 		border-bottom: 0px;
 		margin: auto;
 		margin-bottom: 10px;
+		min-width: 800px;
 	}
 
 	.divImgCellier {
