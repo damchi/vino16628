@@ -1,8 +1,11 @@
+a {
+	line-height: 1.9em;
+}
 .sous-menu {
 	background-color: #f9f9f9;
 	padding: 10px 15px;
 	border-bottom: 2px solid #7F253C;
-	min-width: 380px;
+	min-width: 300px;
 }
 
 .listeCellier  {
@@ -14,7 +17,7 @@
 	align-items: center;
 	line-height: 0.9;
 	background-color: white;
-	min-width: 380px;
+	min-width: 300px;
 }
 
 /*.containerCellier{*/
@@ -28,6 +31,10 @@
 
 .cellier:visited {
 	color: #272727;
+}
+
+.divImgCellier {
+	margin-right: 20px;
 }
 
 .imgCellier {
@@ -80,6 +87,14 @@
 	padding: 11px 10px;
 }
 
+.btnAjouterCellier {
+	padding: 11px 10px;
+}
+
+.btnCellier {
+	padding: 14px 10px;
+}
+
 .btnAjouterCellier:hover, .btnCellier:hover {
 	background-color: white;
 	color: #7F253C;
@@ -92,7 +107,7 @@
 		margin-bottom: 10px;
 		width: 65%;
 		margin: auto;
-		min-width: 800px;
+		min-width: 700px;
 	}
 
 	.sous-menu * {
@@ -104,7 +119,7 @@
 		border-bottom: 0px;
 		margin: auto;
 		margin-bottom: 10px;
-		min-width: 800px;
+		min-width: 700px;
 	}
 
 	.divImgCellier {
@@ -125,11 +140,11 @@
 	}
 
 	.divBtnCellier {
-		margin-right: 15%;
+		margin-right: 10%;
 	}
 
 	.btnCellier {
-		font-size: 1.5em;
+		font-size: 1.1em;
 	}
 
 	#formCellier {
