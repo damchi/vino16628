@@ -46,23 +46,37 @@
                     <div class="divTexteCellier">
                     <h2><a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?></a></h2>
                         <?php 
-                        if($cellier['total'] != null){
+//                        if($cellier['total'] != null){
                         ?>
                             <div class="mc">
-                            <p>Nombre de bouteilles :<?= $cellier['total'] ?> </p>
-                            <?php if ($cellier['total_rouge'] != null) { ?>
-                                 <p>Nombre de bouteilles Rouge :<?= $cellier['total_rouge'] ?></p>
-                            <?php
-                             }
-                            if ($cellier['total_blanc'] != null) {
-                            ?>
-                                <p>Nombre de bouteilles Blanc: <?= $cellier['total_blanc'] ?></p>
+                            <p>Nombre de bouteilles :
                                 <?php
-                            }
-                            ?>
+                                if($cellier['total'] != null){
+                                    echo $cellier['total'];
+                                }
+                                else{
+                                    echo "0";
+                                }?> </p>
+
+                                 <p>Nombre de bouteilles Rouge : <?php
+                                     if ($cellier['total_rouge'] != null) {
+                                         echo $cellier['total_rouge'];
+                                     }
+                                     else{
+                                         echo "0";
+                                     }?></p>
+
+                                <p>Nombre de bouteilles Blanc :
+                                    <?php if ($cellier['total_blanc'] != null) {
+                                        echo $cellier['total_blanc'];
+                                    }
+                                    else{
+                                        echo "0";
+                                    }?></p>
+
                             </div>
                         <?php
-                        }
+
                         ?>
                         </div>
                     <div class="divBtnCellier">
