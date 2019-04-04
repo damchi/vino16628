@@ -44,7 +44,7 @@
     box-shadow: 1px 2px 5px rgba(0,0,0,.09);
     border: solid 1px #cbc9c9;
     outline: none;
-    margin-right: 10px;
+/*    margin-right: 10px;*/
 }
 
 /*Correctif pou alignement parfait du bouton Filtre au dessous avec les select en bas*/

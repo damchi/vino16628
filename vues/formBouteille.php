@@ -22,7 +22,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 ?>
 <div class="encadré">
     <div class="containeurBlanc">
-<div class="container formBouteille">
+<div class="formBouteille">
     <h2> Formulaire d'ajout de bouteille</h2>
 
     <!-- Recherche-->
@@ -37,7 +37,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
     <!--Formulaire-->
 
-    <form class="form" method="post"  enctype="multipart/form-data">
+    <form class="form" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id_bouteille" value="<?= $idBouteille ?>">
         <input type="hidden" name="id_cellier" value="<?= $idCellier ?>">
         <input type="hidden" name="url_img" value="<?= $urlImg ?>">

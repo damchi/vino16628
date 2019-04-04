@@ -2,7 +2,7 @@
     <div class="containeurBlanc">
         <div class="hautDePage">
             <!-- Bouton Ajouter une bouteille -->
-            <div class="boutonSolo boutonHaut">
+            <div>
                 <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
             </div>
 
