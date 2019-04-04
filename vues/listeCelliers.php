@@ -9,11 +9,7 @@
 <div class="encadré">
     <div class="containeurBlanc">
         <div class="sous-menu">
-            <div name="afficheFormCellier" class="afficheFormCellier">
-                <h2 class="md"><i class="fas fa-plus"></i>
-                Ajouter un Cellier</h2>
-                <h2 class="mc">
-                Ajouter un Cellier  :</h2>
+            <div name="afficheFormCellier"><p><i class="fas fa-plus"></i>  Ajouter un Cellier</p>
             </div>
             <div class="listeCelliers" id="insertChild" >
                 <div id="divCellier">
@@ -22,41 +18,20 @@
                         <label for="imageCellier" class="labelImg">Choisir une image</label>
                         <input type="file" class="input" name="image"  id="imageCellier" accept="image/*">
                         <input type="text" required name="nomCellier" placeholder="Nom du Cellier">
-                        <div name="ajouterCellier" class="btnAjouterCellier"><i class="fas fa-plus"></i></div>
+                        <button name="ajouterCellier"> <i class="fas fa-plus">  </i> </button>
                         <div id="errorCellier"></div>
                         <input type="hidden" name="idUsagerCellier" value="<?= $_SESSION['user_id']?>">
                     </div>
                 </div>
             </div>
-
         </div>
             <?php
             foreach ($data as $cle => $cellier) {
             ?>
-                <div class="cellierId listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
-                        <div class="divImgCellier">
-                            <a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>
-                        <?php
-                            if ($cellier['image']  === null) {
-                                ?>
-                                    <img src="./images/cellier.png" class="imgCellier">
-                                <?php
-                            }
-                            else{
-                            ?>
-                                <img src="./images/<?=$cellier['image'];?>" class="imgCellier" alt="Image du cellier">
-                            <?php
-                            }
-                        ?>
-                            </a>
-                        </div>
-                    <div class="divTexteCellier">
-                    <h2><a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?></a></h2>
-                        <?php 
-//                        if($cellier['total'] != null){
-                        ?>
-                            <div class="mc">
-                            <p>Nombre de bouteilles :
+                <div class="containerCellier">
+                    <div class="cellierId listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
+                        <a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>
+                            <div class="divImgCellier">
                                 <?php
                                 if ($cellier['image']  === null) {
                                     ?>
@@ -118,8 +93,17 @@
                             <div class="modifierCellier btnCellier" > <i class="fas fa-edit"></i></div>
                             <div class="supprimerCellier btnCellier"><i class="fas fa-trash-alt"></i></div>
                         </div>
-<!--                    </div>-->
+                    </div>
+                    <div class="formModifCellier" id="modifier<?= $cellier['id_cellier'] ?>">
+                        <label for="imageCellierModifier" class="labelImg">Choisir une image</label>
+                        <input type="file" class="input" name="image"  id="imageCellierModifier" accept="image/*">
+                        <input type="text" required name="nomCellier" placeholder="Nom du Cellier">
+                        <input type="hidden" name="idCellegi" value="<?= $cellier['id_cellier'] ?>">
+                        <input type="hidden" name="idUsagerCellierModifier" value="<?= $_SESSION['user_id']?>">
+                        <div id="errorCellier"></div>
+                        <button name="inputModifierCellier"> <i class="fas fa-plus">  </i> </button>
 
+                    </div>
                 </div>
 
             <?php
@@ -129,3 +113,5 @@
         </div>
     </div>
 </div>
+
+
