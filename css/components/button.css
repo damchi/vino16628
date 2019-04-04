@@ -22,22 +22,12 @@ button a{
     color:white;
 }
 
-.boutonSolo {
-    margin-left: 10px;
-    margin-right: 10px;
-    align-self: center;
-}
-
  .recherche select, .recherche button, #filtreError{
     width: 60vw;
  }
 
 
 @media only screen and (max-width: 599px){
-    .boutonSolo button{
-        width: 100%;
-    }
-
     .recherche{
         text-align: center;
     }

@@ -5,7 +5,7 @@
 <script src="./js/gererUsagers.js"></script>
 
 <div class="encadré">
-    <div class="containeurBlanc">
+    <div class="containeurBlanc divAdmin">
         <div class="form">
             <div>Recherche</div>
 

@@ -1,16 +1,20 @@
 .form{
-  margin: auto;
-  margin-bottom: 30px;
-  max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 30px;
+    max-width: 400px;
+}
+
+.form > :not(:last-child) {
+    margin-bottom: 20px;
 }
 
 .group{
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-.group:not(:last-child) {
-  margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .icon_form{
@@ -40,7 +44,7 @@
     box-shadow: 1px 2px 5px rgba(0,0,0,.09);
     border: solid 1px #cbc9c9;
     outline: none;
-    margin-right: 10px;
+/*    margin-right: 10px;*/
 }
 
 /*Correctif pou alignement parfait du bouton Filtre au dessous avec les select en bas*/
@@ -56,9 +60,8 @@ label.labelImg {
   padding: 10px;
   background-color: #7f253c;
   color: #f9f9f9;
-  border-radius: 5px;
+  border-radius: 4px;
   font-weight: bold;
-  margin: 10px;
   display: block;
 }
 

@@ -1,22 +1,13 @@
 
-#recherche_bouteille_cellier, #afficheListe, #errorFiltre, #reset {
-    margin: 10px 0;
-}
-
-#recherche_bouteille_cellier .group {
-    padding:0px;
-}
-
-#recherche_bouteille_cellier .group input{
-   width: 100%;
-}
-
 #afficheListe{
     display:none;
 }
 
-#recherche_bouteille_cellier label{
-    margin-left: 12px;
+#recherche_bouteille_cellier label {
+            margin-left: 12px;
+        }
+#modifCellier{
+    display: none;
 }
 
 #reset{
@@ -39,58 +30,11 @@
     display: none;
 }
 
-
-
 @media only screen and (min-width: 600px){
-    #recherche_bouteille_cellier{
-        width: 30%;
-        flex: 1;
-    }
-    .hautDePage{
-        display: flex;
-        flex-direction: row;
-    }
-     .hautDePage .boutonHaut{
-        flex: 1;
-    } 
-
     #afficheListe{
         display:block;
         flex:1;
     }
-
-/*  .listeBouteilleParVignette{
->>>>>>> ef49de59d26d68ce888b8a3156809f80367024a6
-        display: grid;
-        grid-area: listeBouteille;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        grid-gap: 10px;
-        margin: 10px;
-    }
-
-    #listeBouteille, .hautDePage, .recherche{
-        max-width: 1000px;
-        margin: auto;
-    }
-
-    .afficheListe{
-        display: inline;
-    }
-
-    /* Alignement des bouton du haut de la page listeBoiuteile.php */
-    .hautDePage{
-        display: flex;
-        justify-content: space-between;
-    }
-
-
-   /* .listeBouteille{
-        display: grid;
-        grid-area: listeBouteille;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        grid-gap: 10px;
-        margin: 10px;
-    }*/
 }
 
 

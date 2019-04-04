@@ -5,7 +5,7 @@
 <script src="./js/gererCatalogueSaq.js"></script>
 
 <div class="encadré">
-    <div class="containeurBlanc">
+    <div class="containeurBlanc divAdmin">
         <div class="hautDePage">
             <button id="reinitialiserCatalogue"><i class="fas fa-exclamation"></i>  Réinitialiser le catalogue</button>
         </div>
@@ -19,19 +19,19 @@
             </div>
         </div>
 
-        <div id="listeBouteilles" class="listeBouteilleParListe"></div>
+        <div id="listeBouteilles">
+            <!-- templateBouteille -->
+        </div>
     </div>
 </div>
 
 <template id="templateBouteille">
-    <div class="carte bouteille" data-id="%id_bouteille_saq%">
-        <div class="carte-titre">
-            <h4 class="nom"></h4>
-        </div>
+    <div class="bouteille" data-id="">
+        <span class="nom"></span>
 
-        <div class="carte-pied">
+        <div>
             <button class='btnModifier'><a href="index.php?requete=modifierBouteilleSaq&idBouteilleSaq=%id_bouteille_saq%"><i class="fas fa-edit"></i></a></button>
-            <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button>                
+            <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button> 
         </div>
     </div>
 </template>

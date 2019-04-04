@@ -86,7 +86,7 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 <!--FIN share FACEBOOK-->
 
 
-<div class="container formBouteille" style="background-color: #ffffff">
+<div class="formBouteille" style="background-color: #ffffff">
     <div class="fb-share-button"
          data-href="https://vocomaxc.mywhc.ca/vino16628/"
          data-layout="button_count">

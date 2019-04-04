@@ -15,7 +15,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
 <div class="encadré">
     <div class="containeurBlanc">
-<div class="container formBouteille">
+<div class="formBouteille">
     <form class="form" method="post">
         <input type="hidden" name="id_bouteille_saq" value="<?= $idBouteilleSaq ?>">
         <input type="hidden" name="url_img" value="<?= $urlImg ?>">

@@ -12,6 +12,9 @@
  */
 class SAQ extends Modele
 {
+	const DUPLICATION = 'duplication';
+	const ERREURDB = 'erreurdb';
+
 	private static $_webpage;
 	private static $_status;
 	private $stmt;
