@@ -20,6 +20,10 @@ a {
 	min-width: 300px;
 }
 
+/*.containerCellier{*/
+	/*border-bottom: 1px solid #701139*/
+/*}*/
+
 .nomCellier {
 	text-decoration: none;
 	color: #272727;
@@ -46,7 +50,10 @@ a {
 	width: 40%;
 }
 
-#formCellier {
+#formCellier{
+	display: none;
+}
+.formModifCellier{
 	display: none;
 	text-align: left;
 }
