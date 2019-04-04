@@ -29,20 +29,22 @@
             foreach ($data as $cle => $cellier) {
             ?>
                 <div class="cellierId listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
-                    <div class="divImgCellier">
-                    <?php
-                        if ($cellier['image']  === null) {
-                            ?>
-                                <img src="./images/cellier.png" class="imgCellier">
-                            <?php
-                        }
-                        else{
-                        ?>
-                            <img src="./images/<?=$cellier['image'];?>" class="imgCellier" alt="Image du cellier">
+                    <a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>
+                        <div class="divImgCellier">
                         <?php
-                        }
-                    ?>
-                    </div>
+                            if ($cellier['image']  === null) {
+                                ?>
+                                    <img src="./images/cellier.png" class="imgCellier">
+                                <?php
+                            }
+                            else{
+                            ?>
+                                <img src="./images/<?=$cellier['image'];?>" class="imgCellier" alt="Image du cellier">
+                            <?php
+                            }
+                        ?>
+                        </div>
+                    </a>
                     <div class="divTexteCellier">
                     <h2><a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?></a></h2>
                         <?php 
