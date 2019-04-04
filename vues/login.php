@@ -9,7 +9,7 @@
 <script src="./js/login.js"></script>
 <div class="encadré">
     <div class="containeurBlanc">
-        <h2 class="btnToggle" id="1">Connectez-vous</h2>
+        <h3 class="btnToggle" id="1">Connectez-vous</h3>
         <div class="sectionMobileVisible">
             <form class="form" id="login" method="POST" action="index.php?requete=logedin">
                 <div class="group">
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <h2 class="btnToggle" id="2">Pas encore inscrit(e)?</h2>
+        <h3 class="btnToggle" id="2">Pas encore inscrit(e)?</h3>
         <div class ="sectionMobile">
             <form class="form" method="post" action="index.php?requete=ajoutUsager">
                 <div class="group">
