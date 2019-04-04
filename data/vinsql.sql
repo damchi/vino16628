@@ -40,8 +40,8 @@ CREATE TABLE `vino__type` (
 INSERT INTO `vino__type` (`id_type`, `type`) VALUES
 (1, 'Vin rouge'),
 (2, 'Vin blanc'),
-(3, 'Vin rosé'),
-(4, 'Vin bulles');
+(3, 'Vin rosé');
+
 
 --
 -- Index pour les tables déchargées

@@ -34,7 +34,7 @@ class SAQ extends Modele
 	 * 
 	 * @return array id et nom de la bouteille trouvée dans le catalogue
 	 */   
-	public function autocomplete($nom, $nbResultats = 10) {		
+	public function autocomplete($nom, $nbResultats = 100000) {
 		$nom = $this->_db->escape_string($nom);
 		$nom = preg_replace("/\*/","%" , $nom);
         $nbResultats = (int) $nbResultats;
@@ -79,7 +79,8 @@ class SAQ extends Modele
 	 * @param int $nombre
 	 * @param int $debut
 	 */
-	public function getProduits($nombre = 100, $debut = 0) {
+	public function getProduits($nombre , $debut ) {
+//	public function getProduits($nombre = 100, $debut = 0) {
 		$s = curl_init();
 
 		//curl_setopt($s, CURLOPT_URL, "http://www.saq.com/webapp/wcs/stores/servlet/SearchDisplay?searchType=&orderBy=&categoryIdentifier=06&showOnly=product&langId=-2&beginIndex=".$debut."&tri=&metaData=YWRpX2YxOjA8TVRAU1A%2BYWRpX2Y5OjE%3D&pageSize=". $nombre ."&catalogId=50000&searchTerm=*&sensTri=&pageView=&facet=&categoryId=39919&storeId=20002");
@@ -110,10 +111,10 @@ class SAQ extends Modele
 				$retour = $this -> ajouteProduit($info);
 				if ($retour -> succes == false) {
 					echo "erreur : " . $retour -> raison . "<br>";
-					echo "<pre>";
-//					var_dump($info);
-					echo "</pre>";
-					echo "<br>";
+//					echo "<pre>";
+////					var_dump($info);
+//					echo "</pre>";
+//					echo "<br>";
 				} else {
 					$i++;
 				}
@@ -257,6 +258,7 @@ class SAQ extends Modele
                 
 				if (isset($aDesc[1][0])) {
 					$info -> desc -> type = trim($aDesc[1][0]);
+//					var_dump($info -> desc -> type);
 				}
 
                 
@@ -286,7 +288,8 @@ class SAQ extends Modele
 		// Récupère le type
         $sql = "select id_type from vino__type where type = '" . $bte -> desc -> type . "'";
 		$rows = $this -> _db -> query($sql);
-		
+//		var_dump($bte -> desc -> type );
+
 		if ($rows -> num_rows == 1) {
 			$type = $rows -> fetch_assoc();
 			$type = $type['id_type'];
