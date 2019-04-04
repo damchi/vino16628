@@ -10,6 +10,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	line-height: 0.9;
 }
 
 .nomCellier {
@@ -29,9 +30,10 @@
 }
 
 .imgCellier {
-	width: 65px;
+	width: 75px;
 	height: 100px;
 	object-fit: cover;
+	border-radius: 4px;
 }
 
 .divTexteCellier {
@@ -49,9 +51,9 @@
 		padding: 10px 0px;
 	}
 
-	.sous-menu * {
-		display: inline-block;
-	}
+		.sous-menu * {
+			display: inline-block;
+		}
 
 	.listeCellier  {
 		border-bottom: 1px solid #701139;
@@ -60,7 +62,7 @@
 	}
 
 	.imgCellier {
-		width: 100px;
+		width: 125px;
 		height: 150px;
 		object-fit: cover;
 	}
