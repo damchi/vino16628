@@ -580,7 +580,7 @@ class Controler
     {
         $saq = new SAQ();
         $saq->supprimeTousProduits();
-        $res = $saq->getProduits(20, 0);
+        $res = $saq->getProduits(200, 0);
         echo json_encode($res);
     }
 }

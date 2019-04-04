@@ -17,7 +17,7 @@ class Cellier extends Modele
     public function getUsagerCellier($id){  
         $cellier = Array();
 //        $stmt = "SELECT * FROM " . self::TABLE. " WHERE id_usager_cellier = ".$id;
-        $stmt = "SELECT vino__cellier.image, vino__cellier.id_cellier, vino__cellier.nom, vino__cellier.id_usager_cellier, b.total, c.total_rouge, d.total_blanc
+        $stmt = "SELECT vino__cellier.image, vino__cellier.id_cellier, vino__cellier.nom, vino__cellier.id_usager_cellier, b.total, c.total_rouge, d.total_blanc, e.total_rose
                 FROM vino__cellier 
                         LEFT JOIN (
                             SELECT count(*) as total, id_cellier 
@@ -38,15 +38,24 @@ class Cellier extends Modele
                                     WHERE id_usager_cellier = ". $id .")
                                GROUP BY vino__bouteille.id_cellier
                             ) as c ON c.id_cellier = vino__cellier.id_cellier
-                       LEFT JOIN(
-                            SELECT count(vino__bouteille.type) as total_blanc, id_cellier 
+                      LEFT JOIN(
+                        SELECT count(vino__bouteille.type) as total_blanc, id_cellier 
+                        FROM vino__bouteille
+                         WHERE vino__bouteille.type = 2 AND id_cellier IN (
+                                SELECT id_cellier 
+                                FROM vino__cellier 
+                                WHERE id_usager_cellier = " . $id .")
+                           GROUP BY vino__bouteille.id_cellier
+                        ) as d ON d.id_cellier = vino__cellier.id_cellier
+                      LEFT JOIN(
+                            SELECT count(vino__bouteille.type) as total_rose, id_cellier 
                             FROM vino__bouteille
-                             WHERE vino__bouteille.type = 2 AND id_cellier IN (
+                             WHERE vino__bouteille.type = 3 AND id_cellier IN (
                                     SELECT id_cellier 
                                     FROM vino__cellier 
                                     WHERE id_usager_cellier = " . $id .")
                                GROUP BY vino__bouteille.id_cellier
-                            ) as d ON d.id_cellier = vino__cellier.id_cellier
+                            ) as e ON e.id_cellier = vino__cellier.id_cellier
                 WHERE id_usager_cellier = " .$id;
         $stmt_result = $this->_db->query($stmt);
 
