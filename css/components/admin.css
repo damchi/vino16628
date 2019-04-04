@@ -1,11 +1,38 @@
+/*
+    Un peu de CSS spécifique aux pages d'administration
+*/
+
 .divAdmin > * {
+    width: 100%;
     max-width: 600px;
+    text-align: left;
     padding: 10px;
     margin: auto;
 }
 
-/*.usager, .bouteille {*/
-.usager {
+.divAdmin .usager, .divAdmin .bouteille {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.divAdmin .usager:not(:last-child), .divAdmin .bouteille:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.divAdmin .boutons {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.divAdmin .boutons button, .divAdmin .boutons button a {
+	color: #7f253c;
+    background-color: transparent;
+	text-align: center;
+	font-size: 1.1em;
+    border: none;
+}
+
+.divAdmin .boutons > :not(:last-child) {
+    margin-right: 5px;
 }
