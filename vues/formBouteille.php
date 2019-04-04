@@ -37,7 +37,6 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
     <!--Formulaire-->
 
-<!--    <form class="form" method="post"  >-->
     <form class="form" method="post"  enctype="multipart/form-data">
         <input type="hidden" name="id_bouteille" value="<?= $idBouteille ?>">
         <input type="hidden" name="id_cellier" value="<?= $idCellier ?>">
@@ -45,48 +44,42 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <input type="hidden" name="url_saq" value="<?= $urlSaq ?>">
 
         <!-- Image de la bouteille -->
-        <div class="group">
-<!--        <div class="group ml">-->
-            <img src="<?= $urlImg ?>" class="image" alt="bouteille" style="display: <?= $urlImg ? 'inline' : 'none' ?>">
+        <img id="usagerImage" src="<?= $urlImg ?>" class="image" alt="bouteille" style="display: <?= $urlImg ? 'inline' : 'none' ?>">
 
-
-
-
-        </div>
-<!--        image usager-->
-        <div class="group" id="usagerImage">
-            <label for="imageBouteille" class="icon_form labelImg">choisir image</label>
+        <div>
+            <!-- Image usager-->
+            <label for="imageBouteille" class="icon_form labelImg">Choisir image</label>
             <input type="file" class="input" name="image" id="imageBouteille" accept="image/*">
         </div>
 
         <!-- Nom -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-ribbon"></i></label>
-            <input type="text" class="input" id="" name="nom" placeholder="Nom" required value="<?= $nom ?>">
+            <input type="text" class="input" name="nom" placeholder="Nom" required value="<?= $nom ?>">
         </div>
 
         <!-- Code SAQ -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-code"></i></label>
-            <input type="text" class="input" id="" name="code_saq" placeholder="Code SAQ" value="<?= $codeSaq ?>">
+            <input type="text" class="input" name="code_saq" placeholder="Code SAQ" value="<?= $codeSaq ?>">
         </div>
 
         <!-- Pays -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-id-card"></i></label>
-            <input type="text"  id="pays" name="pays" placeholder="Pays" value="<?= $pays ?>">
+            <input type="text" name="pays" placeholder="Pays" value="<?= $pays ?>">
         </div>
 
         <!-- Prix -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-dollar-sign"></i></label>
-            <input type="number" step="0.01" class="input" id="prix" name="prix" placeholder="Prix" value="<?= $prix ?>">
+            <input type="number" step="0.01" class="input" name="prix" placeholder="Prix" value="<?= $prix ?>">
         </div>
 
         <!-- Format -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-id-card"></i></label>
-            <input type="text" class="input" id="format" name="format" placeholder="Format" value="<?= $format ?>">
+            <input type="text" class="input" name="format" placeholder="Format" value="<?= $format ?>">
         </div>
 
         <!-- Type -->
@@ -110,32 +103,32 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <!-- Millésime -->
         <div class="group">
             <label class="icon_form" ><i class="fas fa-wine-bottle"></i></label>
-            <input type="number" class="input" id="millsime" name="millesime" placeholder="Millésime" value="<?= $millesime ?>">
+            <input type="number" class="input" name="millesime" placeholder="Millésime" value="<?= $millesime ?>" required>
         </div>
 
         <!-- Quantité -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-cash-register"></i></label>
-            <input type="number" class="input" id="quantite" name="quantite" placeholder="Quantité+" required value="<?= $quantite ?>">
+            <input type="number" class="input" name="quantite" placeholder="Quantité+" required value="<?= $quantite ?>">
         </div>
 
         <!-- Date d'achat -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-calendar-alt"></i></label>
-            <input type="date" class="input" id="date_achat" name="date_achat"  value="<?= $dateAchat ?>">
+            <input type="date" class="input" name="date_achat" value="<?= $dateAchat ?>" required>
 <!--            <input type="text" class="input" id="date_achat" name="date_achat" placeholder="Date d'achat (aaaa-mm-jj)" value="--><?//= $dateAchat ?><!--" pattern="\d\d\d\d-\d\d-\d\d">-->
         </div>
 
         <!-- Garder jusqu'à... -->
         <div class="group">
             <label class="icon_form"><i class="fas fa-calendar-alt"></i></label>
-            <input type="text" class="input" id="garde_jusqua" name="garde_jusqua" placeholder="Garder jusqu'à ..." value="<?= $gardeJusqua ?>">
+            <input type="text" class="input" name="garde_jusqua" placeholder="Garder jusqu'à ..." value="<?= $gardeJusqua ?>">
         </div>
 
         <!-- Notes -->
         <div class="group">
             <label class="icon_form"><i class="fa fa-comment"></i></label>
-            <input type="text" class="input" placeholder="Notes" id="notes" name="notes" value="<?= $notes ?>">
+            <textarea name="notes" placeholder="Notes"><?= $notes ?></textarea>
         </div>
 
         <!-- Bouton enregistrer -->

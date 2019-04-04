@@ -287,7 +287,8 @@ class Controler
     {
         $saq = new SAQ();
         $body = json_decode(file_get_contents('php://input'));
-        $listeBouteille = $saq->autocomplete($body->nom);
+        $nbResultats = isset($body->nbResultats) ? $body->nbResultats : 10000;
+        $listeBouteille = $saq->autocomplete($body->nom, $nbResultats);
         echo json_encode($listeBouteille);
     }
 
