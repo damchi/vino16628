@@ -15,10 +15,6 @@
     display:none;
 }
 
-#formCellier{
-    display: none;
-}
-
 #modifCellier{
     display: none;
 }
@@ -33,8 +29,6 @@
     width: 60vw;
     display: none;
 }
-
-
 
 .recherche{
     justify-content: center;

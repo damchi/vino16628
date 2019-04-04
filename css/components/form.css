@@ -76,6 +76,7 @@ label.icon_form.labelImg{
   label.labelImg {
     max-width: 150px;
     margin: auto;
+    display: inline-block;
   }
 }
 
