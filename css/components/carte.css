@@ -1,249 +1,78 @@
-/* Général*/
-
-
-.carte{
+.listeBouteilleParListe, .listeBouteilleParVignette {
+}
+    
+.carte {
+    display: flex;
     background-color: white;
 }
 
-.carte-notes{
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-
-/*  .listeBouteilleParListe */
-.listeBouteilleParListe{
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid #97174C;
-    margin:10px;
-    justify-content: center;
-}
-
-/*Comprend 3 Sections donc entete, description, pied*/
-.listeBouteilleParListe .carte{
-    display: flex;
-    flex-direction: row;
-    border-bottom: 1px solid #97174C;
-    margin:10px;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.listeBouteilleParListe .carte-entete{
-    order: 1;
-    margin-right: 10px;
-    width: 100px;
-}
-
-/*Séparé par trois parties image bouteille, information & information 2, */
-.listeBouteilleParListe .carte-description{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    order: 2;
-}
-
-.listeBouteilleParListe .carte-boutons{
-    display:flex;
-    flex-wrap: wrap;
-    order: 3;
-    padding:10px;
-    max-width: 150px;
-    background-color:#97174C;
-    color: white;
-
-}
-
-.listeBouteilleParListe .carte-image{
-/*    order: 1;*/
-    width: 100px ;
-    display:block;
-    align-self: center
-}
-
-.listeBouteilleParListe .carte-image>img{
-    width: 75px ;
-}
-
-.listeBouteilleParListe .carte-information{
-/*    order:2;*/
+.carte-description {
+    flex-grow: 1;
     text-align: left;
 }
 
-.listeBouteilleParListe .carte-information_2{
-    display: none;
-/*    order:3;*/
+.carte-boutons button {
+	color: #7f253c;
+    background-color: transparent;
+	text-align: center;
+	font-size: 1.1em;
+    border: none;
+}
+
+.carte-boutons button a {
+	color: #7f253c;
+    background-color: transparent;
+    text-decoration: none;
+}
+
 /*
-    width: 175px;
-    margin-right: 10px;
+    CSS spécifique à la vue par liste
 */
+
+.listeBouteilleParListe {
+    display: block;
 }
 
-
-/* Partie Description de la carte*/
-.listeBouteilleParListe .carte-boutons button{
-    color: white;
-    background-color: #97174C;
-    align-self: center;
-    border: none;
+.listeBouteilleParListe .carte {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    margin: 5px;
 }
 
-.listeBouteilleParListe .carte-boutons button:hover,
-.listeBouteilleParListe .carte-boutons button:hover a:link,
-.listeBouteilleParListe .carte-boutons button:hover a:visited{
-    color: #97174C;
-    background-color: white;
-    border: none;
+.listeBouteilleParListe .carte > :not(:last-child) {
+    margin-right: 10px;
 }
 
+/*
+    CSS spécifique à la vue par vignette (qui s'applique aussi au mobile)
+*/
 
-/*  .listeBouteilleParVignette */
-.listeBouteilleParVignette{
+.listeBouteilleParVignette {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 1000px;
-/*    margin: auto;*/
 }
 
-.listeBouteilleParVignette .carte{
-    display: flex;
+.listeBouteilleParVignette .carte {
     flex-direction: column;
-/*    align-items: center;*/
     width: 100%;
     max-width: 300px;
-    margin: 5px;
-}
-
-.listeBouteilleParVignette .carte-titre{
-    text-align: left;
-}
-
-.listeBouteilleParVignette .carte-description{
-    text-align: left;
-}
-
-.listeBouteilleParVignette .carte-boutons{
-/*
-    display:flex;
-    flex-direction: row;
-    order: 5;
-    justify-content: space-around;
-    margin: 5px;
     padding: 10px;
-    background-color: #97174C;
-    color: white;
-    max-width: 599;
-*/
+    margin: 5px;
 }
 
-/* Partie Description de la carte*/
-.listeBouteilleParVignette .carte-boutons button{
+.listeBouteilleParVignette .carte > :not(:last-child) {
+    margin-bottom: 10px;
+}
+
 /*
-    color: white;
-    background-color: #97174C;
-    align-self: center;
-    border: none;
-    width: 100%;
+    CSS spécifique au mobile (en plus du CSS de la vue par vignette)
 */
-}
 
-.listeBouteilleParVignette .carte-boutons button:hover,
- .listeBouteilleParVignette .carte-boutons button:hover a:link,
- .listeBouteilleParVignette .carte-boutons button:hover a:visited{
-     color: #97174C;
-     background-color: white;
-     border: none;
- }
-
-
-.listeBouteilleParVignette .carte-image{
-/*
-    order: 1;
-    width: 100px ;
-    align-self: center;
-*/
-}
-
-.listeBouteilleParVignette .carte-image>img{
-/*    width: 90px ;*/
-}
-
-.listeBouteilleParVignette .carte-information{
-/*
-    order:3;
-    align-self: center;
-    flex:auto;
-*/
-}
-
-.listeBouteilleParVignette .carte-information_2{
-/*
-    order:4;
-    align-self: center;
-    flex:auto;
-    display: none;
-*/
-}
-
-
-/*.carte:first-of-type {
-    border-top: 1px solid #97174C;
-}*/
-
-/*Element de la carte*/
-
-/* Carfte form liste*/
-
-@media only screen and (max-width: 412px){
-    .listeBouteilleParListe .carte-image>img{
-        display:none;
-    }
-}
-@media only screen and (min-width: 650px){
-    .listeBouteilleParVignette .carte-boutons{
-/*        max-width: 99%;*/
-    }
-}
-@media only screen and (min-width: 650px){
-    .listeBouteilleParListe{
-        justify-content: space-between;
-        text-align: -webkit-center;
-    }
-
-    .listeBouteilleParListe .carte{
-        display: flex;
-        width: 650px;
-        margin:10px;
-    }
-
-    .listeBouteilleParListe .carte-information_2{
-        display: block;
-    }
-
-
-    .listeBouteilleParVignette{
-/*        justify-content: center;*/
-    }
-
-    .listeBouteilleParVignette .carte{
-/*
-        margin: 10px;
-        width: 500px;
-        flex-wrap: wrap;
-*/
-    }
-
-    .listeBouteilleParVignette .carte-titre{
-/*        text-align: left;*/
-    }
-    .listeBouteilleParVignette .carte-information_2{
-/*
-        order:4;
-        flex:auto;
-        display: block;
-*/
+@media only screen and (max-width: 599px) {
+    .carte {
+        border-bottom: 2px solid #7f253c;        
     }
 }

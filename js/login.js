@@ -9,23 +9,20 @@
 window.addEventListener("load", function () {
 	// Lance l'animation dès le chargement de la page	
 	animationLogin();
-	// Met automatiquement la hauteur de la première section
+	// Met automatiquement la hauteur de la première section pour garantir l'animation
 	var sectionVisible = document.querySelector(".sectionMobileVisible");
 	sectionVisible.style.maxHeight = sectionVisible.scrollHeight + "px"
 })
 
 function animationLogin() {
   document.querySelectorAll(".btnToggle").forEach(btnToggle => btnToggle.addEventListener("click", function() {
-
   	var elementAMontrer = this.nextElementSibling;
-  	console.log(elementAMontrer);
+  	// L'élément à cacher est différent pour le premier bouton
   	if (this.id == 1) {
-  	  var elementACacher = this.parentNode.childNodes[9];
-  	  console.log(elementACacher);
+  	  var elementACacher = document.querySelector(".sectionMobile");
 	} 
 	else {
 	  var elementACacher = this.previousElementSibling;
-	  console.log(elementACacher);
 	}
 	elementAMontrer.style.maxHeight = elementAMontrer.scrollHeight + "px";
 	elementACacher.style.maxHeight = 0;

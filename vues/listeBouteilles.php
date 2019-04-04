@@ -127,7 +127,7 @@
                 <!-- Bouton -->
                 <div class="carte-boutons">
                     <button class='btnAjouter'><i class="fas fa-plus"></i></button>
-                    <button class='btnVoir'><a href="index.php?requete=bouteilleIndividuelle&idBouteille=<?= $bouteille['id_bouteille'] ?>"><i class="fas fa-wine-bottle"></i></a></button>
+<!--                    <button class='btnVoir'><a href="index.php?requete=bouteilleIndividuelle&idBouteille=<?= $bouteille['id_bouteille'] ?>"><i class="fas fa-wine-bottle"></i></a></button>-->
                     <button class='btnBoire'><i class="fas fa-minus"></i></button>
                     <button class='btnModifier'><a href="index.php?requete=modifierBouteille&idBouteille=<?= $bouteille['id_bouteille'] ?>"><i class="fas fa-edit"></i></a></button>
                     <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button>

@@ -16,8 +16,8 @@
                     <div id="formCellier">
     <!--                <div action="" id="formCellier">-->
                         <label for="imageCellier" class="labelImg">Choisir une image</label>
-                        <input type="file" class="input" name="image"  id="imageCellier" accept="image/*"></br>
-                        <input type="text" required name="nomCellier" placeholder="Nouveau Cellier">
+                        <input type="file" class="input" name="image"  id="imageCellier" accept="image/*">
+                        <input type="text" required name="nomCellier" placeholder="Nom du Cellier">
                         <button name="ajouterCellier"> <i class="fas fa-plus">  </i> </button>
                         <div id="errorCellier"></div>
                         <input type="hidden" name="idUsagerCellier" value="<?= $_SESSION['user_id']?>">
@@ -29,40 +29,56 @@
             foreach ($data as $cle => $cellier) {
             ?>
                 <div class="cellierId listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
-                    <div class="divImgCellier">
-                    <?php
-                        if ($cellier['image']  === null) {
-                            ?>
-                                <img src="./images/cellier.png" class="imgCellier">
-                            <?php
-                        }
-                        else{
-                        ?>
-                            <img src="./images/<?=$cellier['image'];?>" class="imgCellier" alt="Image du cellier">
+                    <a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>
+                        <div class="divImgCellier">
                         <?php
-                        }
-                    ?>
-                    </div>
+                            if ($cellier['image']  === null) {
+                                ?>
+                                    <img src="./images/cellier.png" class="imgCellier">
+                                <?php
+                            }
+                            else{
+                            ?>
+                                <img src="./images/<?=$cellier['image'];?>" class="imgCellier" alt="Image du cellier">
+                            <?php
+                            }
+                        ?>
+                        </div>
+                    </a>
                     <div class="divTexteCellier">
                     <h2><a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?></a></h2>
                         <?php 
-                        if($cellier['total'] != null){
+//                        if($cellier['total'] != null){
                         ?>
                             <div class="mc">
-                            <p>Nombre de bouteilles :<?= $cellier['total'] ?> </p>
-                            <?php if ($cellier['total_rouge'] != null) { ?>
-                                 <p>Nombre de bouteilles Rouge :<?= $cellier['total_rouge'] ?></p>
-                            <?php
-                             }
-                            if ($cellier['total_blanc'] != null) {
-                            ?>
-                                <p>Nombre de bouteilles Blanc: <?= $cellier['total_blanc'] ?></p>
+                            <p>Nombre de bouteilles :
                                 <?php
-                            }
-                            ?>
+                                if($cellier['total'] != null){
+                                    echo $cellier['total'];
+                                }
+                                else{
+                                    echo "0";
+                                }?> </p>
+
+                                 <p>Nombre de bouteilles Rouge : <?php
+                                     if ($cellier['total_rouge'] != null) {
+                                         echo $cellier['total_rouge'];
+                                     }
+                                     else{
+                                         echo "0";
+                                     }?></p>
+
+                                <p>Nombre de bouteilles Blanc :
+                                    <?php if ($cellier['total_blanc'] != null) {
+                                        echo $cellier['total_blanc'];
+                                    }
+                                    else{
+                                        echo "0";
+                                    }?></p>
+
                             </div>
                         <?php
-                        }
+
                         ?>
                         </div>
                     <div class="divBtnCellier">

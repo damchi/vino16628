@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:og="http://opengraphprotocol.org/schema/">
 <head>
     <title>Un petit verre de vino</title>
 
@@ -23,6 +23,13 @@
     <script src="./js/cellier.js"></script>
     <script src="./js/listeBouteilles.js"></script>
     <script src="./js/formBouteille.js"></script>
+<!--    <script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>-->
+    <meta property="og:title" content="Link title text!"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://example.com/"/>
+    <meta property="og:site_name" content="Link title text!"/>
+    <meta property="og:description" content="Link description text!"/>
+<!--    <meta property="og:image" content="http://example.com/fbshare.png"/>-->
 </head>
 
 <body>
