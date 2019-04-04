@@ -75,6 +75,13 @@
                                     else{
                                         echo "0";
                                     }?></p>
+                                <p>Nombre de bouteilles Rosé :
+                                    <?php if ($cellier['total_rose'] != null) {
+                                        echo $cellier['total_rose'];
+                                    }
+                                    else{
+                                        echo "0";
+                                    }?></p>
 
                             </div>
                         <?php
