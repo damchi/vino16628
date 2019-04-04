@@ -1,8 +1,10 @@
-#listeUsagers {
+.divAdmin > * {
+    max-width: 600px;
     padding: 10px;
     margin: auto;
 }
 
+/*.usager, .bouteille {*/
 .usager {
     display: flex;
     justify-content: space-between;
