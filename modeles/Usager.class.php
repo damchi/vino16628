@@ -70,14 +70,18 @@ class Usager extends Modele
 		 
 		$sql = "
             SELECT * FROM vino__usager
-            WHERE LOWER(nom) LIKE LOWER('%$nom%') LIMIT 0, $nbResultats
+            WHERE LOWER(nom) LIKE LOWER('%$nom%')
+            OR LOWER(prenom) LIKE LOWER('%$nom%')
+            OR LOWER(mail) LIKE LOWER('%$nom%')
+            OR LOWER(pseudo) LIKE LOWER('%$nom%')
+            LIMIT 0, $nbResultats
         ";
 
         $res = $this->_db->query($sql);
 		$rows = Array();
         
         while ($row = $res->fetch_assoc()) {
-            $rows[] = $row;					
+            $rows[] = $row;
         }
         
 		return $rows;

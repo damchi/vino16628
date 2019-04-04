@@ -7,6 +7,10 @@
     padding:0px;
 }
 
+#recherche_bouteille_cellier .group input{
+   width: 100%;
+}
+
 #afficheListe{
     display:none;
 }

@@ -32,7 +32,7 @@
     height: 0px;
 }
 
-input, select, textarea{
+#imageBouteille, input, select, textarea{
     flex-grow: 1;
     padding: 8px;
     border-radius: 2px;
@@ -41,6 +41,11 @@ input, select, textarea{
     border: solid 1px #cbc9c9;
     outline: none;
     margin-right: 10px;
+}
+
+/*Correctif pou alignement parfait du bouton Filtre au dessous avec les select en bas*/
+select{
+    margin-right: 0px;
 }
 
 input[type=file] {
@@ -57,6 +62,16 @@ label.labelImg {
   display: block;
 }
 
+/*Ajustement bouton image dans formBouteille*/
+label.icon_form.labelImg{
+    margin-left: 0;
+    width: 100%;
+}
+
+.formBouteille div.form{
+    margin-bottom: 0;
+}
+
 @media screen and (min-width: 600px) {
   label.labelImg {
     max-width: 150px;
@@ -64,3 +79,4 @@ label.labelImg {
     display: inline-block;
   }
 }
+

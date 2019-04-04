@@ -16,7 +16,7 @@
                     <?= $data['nbUsagers'] ?>
                 </p>
             </section>
-            <a href="?requete=gererBouteillesSaq">
+            <a href="?requete=gererCatalogueSaq">
                 <section>
                     <h2>Catalogue SAQ</h2>
                     <p>
