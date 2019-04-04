@@ -43,6 +43,11 @@
     margin-right: 10px;
 }
 
+/*Correctif pou alignement parfait du bouton Filtre au dessous avec les select en bas*/
+select{
+    margin-right: 0px;
+}
+
 input[type=file] {
   display: none;
 }
@@ -57,7 +62,7 @@ label.labelImg {
   display: block;
 }
 
-/*Bouton choisir image dans formBouteille*/
+/*Ajustement bouton image dans formBouteille*/
 label.icon_form.labelImg{
     margin-left: 0;
     width: 100%;
@@ -71,6 +76,7 @@ label.icon_form.labelImg{
   label.labelImg {
     max-width: 150px;
     margin: auto;
+    display: inline-block;
   }
 }
 

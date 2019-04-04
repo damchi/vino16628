@@ -78,16 +78,13 @@ window.addEventListener('load', () => {
     * */
     let btnAffichetCellier = document.querySelector("[name='afficheFormCellier']");
     let formCellier = document.getElementById("formCellier");
-    if (formCellier){
-        formCellier.style.display='none';
-    }
     if (btnAffichetCellier) {
         btnAffichetCellier.addEventListener('click',()=> {
-            if (formCellier.style.display == 'none'){
-                formCellier.style.display='block';
+            if (formCellier.style.display == 'block'){
+                formCellier.style.display='none';
             }
             else {
-                formCellier.style.display='none';
+                formCellier.style.display='block';
             }
 
         });

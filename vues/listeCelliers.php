@@ -16,8 +16,8 @@
                     <div id="formCellier">
     <!--                <div action="" id="formCellier">-->
                         <label for="imageCellier" class="labelImg">Choisir une image</label>
-                        <input type="file" class="input" name="image"  id="imageCellier" accept="image/*"></br>
-                        <input type="text" required name="nomCellier" placeholder="Nouveau Cellier">
+                        <input type="file" class="input" name="image"  id="imageCellier" accept="image/*">
+                        <input type="text" required name="nomCellier" placeholder="Nom du Cellier">
                         <button name="ajouterCellier"> <i class="fas fa-plus">  </i> </button>
                         <div id="errorCellier"></div>
                         <input type="hidden" name="idUsagerCellier" value="<?= $_SESSION['user_id']?>">

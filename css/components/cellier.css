@@ -7,12 +7,12 @@
     padding:0px;
 }
 
-#afficheListe{
-    display:none;
+#recherche_bouteille_cellier .group input{
+   width: 100%;
 }
 
-#formCellier{
-    display: none;
+#afficheListe{
+    display:none;
 }
 
 #modifCellier{
@@ -29,8 +29,6 @@
     width: 60vw;
     display: none;
 }
-
-
 
 .recherche{
     justify-content: center;
