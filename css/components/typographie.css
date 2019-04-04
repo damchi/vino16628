@@ -31,6 +31,10 @@ h1, h2, h3, .titreNav {
     font-family: 'Roboto', serif;
 }
 
+h2 {
+    font-size: 1.1em;
+}
+
 @media (max-width:600px){
     body{
         font-size:.9rem;
