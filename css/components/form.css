@@ -43,6 +43,10 @@
     margin-right: 10px;
 }
 
+select{
+    margin-right: 0px;
+}
+
 input[type=file] {
   display: none;
 }
