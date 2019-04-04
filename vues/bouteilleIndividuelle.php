@@ -1,54 +1,3 @@
-<!-- SHARE FACEBOOK-->
-<div id="fb-root"></div>
-<!--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_CA/sdk.js#xfbml=1&version=v3.2&appId=268127564108299&autoLogAppEvents=1"></script>-->
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '268127564108299',
-            xfbml      : true,
-            version    : 'v3.2'
-        });
-    };
-
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/fr_CA/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    window.addEventListener('load',()=>{
-        let fbShare = document.getElementById('fb-share-button');
-
-        console.log(fbShare);
-        fbShare.addEventListener('click',()=>{
-            FB.ui({
-                    method: 'feed',
-                    //link: "http://localhost:63342/projet_Web/vino16628/index.php?requete=listeBouteilleCellier&idCellier=<?//=$_SESSION['idCellier']?>//",
-                    link: "http://localhost:8889/projet_Web/vino16628/index.php",
-                    // picture: 'http://localhost:63342/projet_Web/vino16628/images/bouteille_vin.png',
-                    // picture: 'http://localhost:63342/projet_Web/vino16628/images/bouteille_vin.png',
-                    name: "cellier",
-                    description: "The description who will be displayed"
-                }, function(response){
-                    console.log(response.link);
-                }
-            );
-
-        });
-    })
-
-
-
-
-    // $('#fb-share-button').click(function() {
-    //
-    // });
-</script>
-
-
-<!--FIN sahre FACEBOOK-->
 <?php
 /**
  * Created by PhpStorm.
@@ -73,15 +22,80 @@ $quantite = isset($data['bouteille']['quantite']) ? $data['bouteille']['quantite
 $type = isset($data['bouteille']['type']) ? $data['bouteille']['type'] : '';
 $urlImg = isset($data['bouteille']['url_img']) ? $data['bouteille']['url_img'] : '';
 $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] : '';
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
 ?>
 
-<div class="container formBouteille" style="background-color: #ffffff">
+<!--<meta property="og:url"           content="https://vocomaxc.mywhc.ca/vino16628/" />-->
+<!--<meta property="og:type"          content="website" />-->
+<!--<meta property="og:title"         content="--><?//= $nom ?><!--" />-->
+<!--<meta property="og:description"   content="Test descripttion" />-->
+<!--<meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />-->
 
-    <!--            <!-- Your share button code -->
-                <div class="fb-share-button" data-href="http://localhost:8889/projet_Web/vino16628/index.php?requete=listeBouteilleCellier&idCellier=<?= $_SESSION['idCellier']?>" data-layout="button" data-size="small">
-                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a>
-                </div>
-<!--                </div>-->
+<!-- SHARE FACEBOOK-->
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '268127564108299',
+            xfbml: true,
+            version: 'v2.8'
+        });
+    };
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<span id="share_button" class="fb-btn">
+              <div class="fb_icon"></div>
+              <span class="fb-share">
+                    <i class="fa fa-facebook"></i>&nbsp;&nbsp;Share
+              </span>
+        </span>
+<script type="text/javascript">
+    document.getElementById('share_button').onclick = function () {
+
+        shareOverrideOGMeta(window.location.href,'title', 'description','image');
+
+        FB.ui({
+            method: 'share',
+            display: 'popup',
+            caption: 'Your Title',
+            picture: 'Your picture',
+            description: 'Your description',
+            href: 'Your link',
+        }, function (response) {
+        });
+    }
+    }
+
+
+
+</script>
+
+
+
+<!--FIN share FACEBOOK-->
+
+
+<div class="container formBouteille" style="background-color: #ffffff">
+    <div class="fb-share-button"
+         data-href="https://vocomaxc.mywhc.ca/vino16628/"
+         data-layout="button_count">
+    </div>
+<!--    <div class="fb-share-button"-->
+<!--         data-href="https://vocomaxc.mywhc.ca/vino16628/"-->
+<!--         data-layout="button_count">-->
+<!--    </div>-->
+
     <!--Formulaire-->
 
 <!--    <form class="form" method="post">-->

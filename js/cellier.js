@@ -73,6 +73,9 @@ function supprimeCellier(idCellier){
 }
 
 window.addEventListener('load', () => {
+    /*
+    * Toggle pour afficher les champs d'ajout celliers
+    * */
     let btnAffichetCellier = document.querySelector("[name='afficheFormCellier']");
     let formCellier = document.getElementById("formCellier");
     if (btnAffichetCellier) {
@@ -86,10 +89,13 @@ window.addEventListener('load', () => {
 
         });
     }
+
+    /* Bouton ajout de cellier*/
     let btnAjoutCellier = document.querySelector("[name='ajouterCellier']");
 
         if (btnAjoutCellier){
             btnAjoutCellier.addEventListener('click',(evt)=> {
+                /*Verification des champs obligatoire pour l'ajout de celliers */
                 if (document.querySelector("[name='nomCellier']").value == ""){
                     document.querySelector("[name='nomCellier']").style.borderColor='red';
                     document.getElementById("errorCellier").style.color='red';
@@ -97,6 +103,7 @@ window.addEventListener('load', () => {
                     evt.preventDefault()
                 }
                 else{
+                    /* Traitement des données de nouveaux formulaire*/
 
                     var image = document.querySelector('#imageCellier').files[0];
                     var nomCellier = document.querySelector("[name='nomCellier']").value;
@@ -107,21 +114,7 @@ window.addEventListener('load', () => {
                     param.append('nomCellier',nomCellier )
                     param.append('id', id)
 
-
-                    // console.log(image);
-                    // console.log(nomCellier);
-                    // console.log(id);
-                    // console.log(param);
-
-                    // var image = document.getElementById("imageCellier");
-                    // var file = image.files[0];
-                    // console.log(file);
-                    // var param ={
-                    //     "nomCellier":document.querySelector("[name='nomCellier']").value,
-                    //     "image":file,
-                    //     "id": document.querySelector("[name='idUsagerCellier']").value
-                    // };
-
+                    /* Requete pour ajouter le cellier */
                     let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: param});
                     // let requete = new Request( "index.php?requete=ajoutCellier",{method:'POST', body: param});
                     console.log(requete);
@@ -139,6 +132,8 @@ window.addEventListener('load', () => {
 
 
                         .then(response => {
+
+                            /** Créeation du nouveau Cellier sur la mem page*/
 
                             let output = "";
 
@@ -169,21 +164,13 @@ window.addEventListener('load', () => {
 
                                 });
                             });
-
-
                         })
                         .catch(error => {
                             console.error(error);
                         });
                 }
-
             });
         }
-
-    // let btnModifierCellier = document.querySelector("[name='modifierCellier']");
-    //     if (btnModifierCellier) {
-    //     }
-
 
 
     document.querySelectorAll(".supprimerCellier").forEach(element => {
