@@ -9,7 +9,11 @@
 <div class="encadré">
     <div class="containeurBlanc">
         <div class="sous-menu">
-            <div name="afficheFormCellier"><p><i class="fas fa-plus"></i>  Ajouter un Cellier</p>
+            <div name="afficheFormCellier" class="afficheFormCellier">
+                <h2 class="md"><i class="fas fa-plus"></i>
+                Ajouter un Cellier</h2>
+                <h2 class="mc">
+                Ajouter un Cellier  :</h2>
             </div>
             <div class="listeCelliers" id="insertChild" >
                 <div id="divCellier">
@@ -18,7 +22,7 @@
                         <label for="imageCellier" class="labelImg">Choisir une image</label>
                         <input type="file" class="input" name="image"  id="imageCellier" accept="image/*">
                         <input type="text" required name="nomCellier" placeholder="Nom du Cellier">
-                        <button name="ajouterCellier"> <i class="fas fa-plus">  </i> </button>
+                        <div name="ajouterCellier" class="btnAjouterCellier"><i class="fas fa-plus"></i></div>
                         <div id="errorCellier"></div>
                         <input type="hidden" name="idUsagerCellier" value="<?= $_SESSION['user_id']?>">
                     </div>
