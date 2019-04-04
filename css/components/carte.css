@@ -44,7 +44,7 @@
     order: 2;
 }
 
-.listeBouteilleParListe .carte-pied{
+.listeBouteilleParListe .carte-boutons{
     display:flex;
     flex-wrap: wrap;
     order: 3;
@@ -56,7 +56,7 @@
 }
 
 .listeBouteilleParListe .carte-image{
-    order: 1;
+/*    order: 1;*/
     width: 100px ;
     display:block;
     align-self: center
@@ -67,29 +67,31 @@
 }
 
 .listeBouteilleParListe .carte-information{
-    order:2;
+/*    order:2;*/
     text-align: left;
 }
 
 .listeBouteilleParListe .carte-information_2{
     display: none;
-    order:3;
+/*    order:3;*/
+/*
     width: 175px;
     margin-right: 10px;
+*/
 }
 
 
 /* Partie Description de la carte*/
-.listeBouteilleParListe .carte-pied button{
+.listeBouteilleParListe .carte-boutons button{
     color: white;
     background-color: #97174C;
     align-self: center;
     border: none;
 }
 
-.listeBouteilleParListe .carte-pied button:hover,
-.listeBouteilleParListe .carte-pied button:hover a:link,
-.listeBouteilleParListe .carte-pied button:hover a:visited{
+.listeBouteilleParListe .carte-boutons button:hover,
+.listeBouteilleParListe .carte-boutons button:hover a:link,
+.listeBouteilleParListe .carte-boutons button:hover a:visited{
     color: #97174C;
     background-color: white;
     border: none;
@@ -101,38 +103,30 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    border-bottom: 1px solid #97174C;
-    width: 100vw;
     justify-content: center;
+    max-width: 1000px;
+/*    margin: auto;*/
 }
 
 .listeBouteilleParVignette .carte{
-    max-width: 599px;
-    justify-content: center;
-}
-
-.listeBouteilleParVignette .carte-entete{
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    width: 100vw;
-}
-.listeBouteilleParVignette .carte-titre{
-    white-space: nowrap;
-    width: 95%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-}
-
-.listeBouteilleParVignette .carte-description{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+/*    align-items: center;*/
+    width: 100%;
+    max-width: 300px;
     margin: 5px;
+}
+
+.listeBouteilleParVignette .carte-titre{
     text-align: left;
 }
 
-.listeBouteilleParVignette .carte-pied{
+.listeBouteilleParVignette .carte-description{
+    text-align: left;
+}
+
+.listeBouteilleParVignette .carte-boutons{
+/*
     display:flex;
     flex-direction: row;
     order: 5;
@@ -142,52 +136,56 @@
     background-color: #97174C;
     color: white;
     max-width: 599;
+*/
 }
 
 /* Partie Description de la carte*/
-.listeBouteilleParVignette .carte-pied button{
+.listeBouteilleParVignette .carte-boutons button{
+/*
     color: white;
     background-color: #97174C;
     align-self: center;
     border: none;
     width: 100%;
+*/
 }
 
-.listeBouteilleParVignette .carte-pied button:hover,
- .listeBouteilleParVignette .carte-pied button:hover a:link,
- .listeBouteilleParVignette .carte-pied button:hover a:visited{
+.listeBouteilleParVignette .carte-boutons button:hover,
+ .listeBouteilleParVignette .carte-boutons button:hover a:link,
+ .listeBouteilleParVignette .carte-boutons button:hover a:visited{
      color: #97174C;
      background-color: white;
      border: none;
  }
 
 
-.listeBouteilleParVignette .carte-titre{
-    order: 2;
-    align-self: center;
-}
-
 .listeBouteilleParVignette .carte-image{
+/*
     order: 1;
     width: 100px ;
     align-self: center;
+*/
 }
 
 .listeBouteilleParVignette .carte-image>img{
-    width: 90px ;
+/*    width: 90px ;*/
 }
 
 .listeBouteilleParVignette .carte-information{
+/*
     order:3;
-    /*align-self: center;*/
+    align-self: center;
     flex:auto;
+*/
 }
 
 .listeBouteilleParVignette .carte-information_2{
+/*
     order:4;
-    /*align-self: center;*/
+    align-self: center;
     flex:auto;
     display: none;
+*/
 }
 
 
@@ -205,8 +203,8 @@
     }
 }
 @media only screen and (min-width: 650px){
-    .listeBouteilleParVignette .carte-pied{
-        max-width: 99%;
+    .listeBouteilleParVignette .carte-boutons{
+/*        max-width: 99%;*/
     }
 }
 @media only screen and (min-width: 650px){
@@ -227,21 +225,25 @@
 
 
     .listeBouteilleParVignette{
-        justify-content: center;
+/*        justify-content: center;*/
     }
 
     .listeBouteilleParVignette .carte{
+/*
         margin: 10px;
         width: 500px;
         flex-wrap: wrap;
+*/
     }
 
     .listeBouteilleParVignette .carte-titre{
-        text-align: left;
+/*        text-align: left;*/
     }
     .listeBouteilleParVignette .carte-information_2{
+/*
         order:4;
         flex:auto;
         display: block;
+*/
     }
 }
