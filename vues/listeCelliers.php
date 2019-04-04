@@ -33,8 +33,8 @@
             foreach ($data as $cle => $cellier) {
             ?>
                 <div class="cellierId listeCellier" data-id="<?= $cellier['id_cellier'] ?>">
-                    <a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>
                         <div class="divImgCellier">
+                            <a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>
                         <?php
                             if ($cellier['image']  === null) {
                                 ?>
@@ -47,8 +47,8 @@
                             <?php
                             }
                         ?>
+                            </a>
                         </div>
-                    </a>
                     <div class="divTexteCellier">
                     <h2><a class="nomCellier" href='index.php?requete=listeBouteilleCellier&idCellier=<?= $cellier['id_cellier'] ?>'>  <?= $cellier['nom']; ?></a></h2>
                         <?php 
