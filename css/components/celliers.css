@@ -1,16 +1,18 @@
 .sous-menu {
 	background-color: #f9f9f9;
-	padding: 10px 0px;
+	padding: 10px 15px;
+	border-bottom: 2px solid #7F253C;
 }
 
 .listeCellier  {
 	width: 100%;
-	padding: 15px 10px;
-	border-bottom: 1px solid #701139;
+	padding: 20px 20px;
+	border-bottom: 2px solid #7F253C;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	line-height: 0.9;
+	background-color: white;
 }
 
 .nomCellier {
@@ -27,6 +29,7 @@
 	color: #7f253c;
 	margin: 0px 15px;
 	font-size: 1.1em;
+	cursor: pointer;
 }
 
 .imgCellier {
@@ -43,22 +46,61 @@
 
 #formCellier {
 	display: none;
+	text-align: left;
 }
+
+#formCellier .labelImg {
+	border: 1px solid #7F253C;
+	margin: 25px 0px 10px 0px;
+	text-align: center;
+	cursor: pointer;
+}
+
+#formCellier .labelImg:hover {
+	background-color: white;
+	color: #7F253C;
+}
+
+#formCellier input {
+	max-width: 70%;
+	margin-left: 10%;
+	margin: 25px 0px 10px 0px;
+}
+
+.btnAjouterCellier {
+	border: 1px solid #7F253C;
+	cursor: pointer;
+	display: inline-block;
+	background-color: #7F253C;
+	text-align: center;
+	color: white;
+	border-radius: 50%;
+	padding: 10px;
+}
+
+.btnAjouterCellier:hover {
+	background-color: white;
+	color: #7F253C;
+}	
 
 @media screen and (min-width: 600px) {
 	.sous-menu {
 		background-color: white;
 		padding: 10px 0px;
+		margin-bottom: 10px;
+		width: 65%;
+		margin: auto;
 	}
 
-		.sous-menu * {
-			display: inline-block;
-		}
+	.sous-menu * {
+		display: inline-block;
+	}
 
 	.listeCellier  {
-		border-bottom: 1px solid #701139;
-		width: 60%;
+		width: 65%;
+		border-bottom: 0px;
 		margin: auto;
+		margin-bottom: 10px;
 	}
 
 	.imgCellier {
@@ -89,4 +131,20 @@
 		display: block;
 	}
 
+	.afficheFormCellier p i {
+		display: none;	}
+
+	#formCellier input {
+		max-width: 250px;
+		margin-left: 25px;
+	}
+
+	#formCellier .labelImg {
+		margin: 15px 0px 15px 25px;
+		text-align: center;
+	}
+
+	.btnAjouterCellier {
+		margin-left: 25px;
+	}
 }
