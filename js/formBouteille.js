@@ -54,7 +54,10 @@ window.addEventListener('load', function() {
             if(nom){
                 let requete = new Request(
                     "index.php?requete=autocompleteBouteille",
-                    {method: 'POST', body: '{"nom": "'+nom+'"}'}
+                    {
+                        method: 'POST',
+                        body: '{"nom": "' + nom + '", "nbResultats": 10}'
+                    }
                 );
 
                 console.log(requete);
