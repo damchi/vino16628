@@ -10,7 +10,7 @@
  */
 function supprimeCellier(idCellier){
 
-    var param ={
+    let param ={
         "idCellier": idCellier,
     };
     let requete = new Request(BaseURL + "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
@@ -72,6 +72,7 @@ function supprimeCellier(idCellier){
 
 }
 
+
 window.addEventListener('load', () => {
     /*
     * Toggle pour afficher les champs d'ajout celliers
@@ -105,14 +106,14 @@ window.addEventListener('load', () => {
                 else{
                     /* Traitement des données de nouveaux formulaire*/
 
-                    var image = document.querySelector('#imageCellier').files[0];
-                    var nomCellier = document.querySelector("[name='nomCellier']").value;
-                    var id = document.querySelector("[name='idUsagerCellier']").value;
+                    let image = document.querySelector('#imageCellier').files[0];
+                    let nomCellier = document.querySelector("[name='nomCellier']").value;
+                    let id = document.querySelector("[name='idUsagerCellier']").value;
 
-                    var param = new FormData()
-                    param.append('image',image)
-                    param.append('nomCellier',nomCellier )
-                    param.append('id', id)
+                    let param = new FormData();
+                    param.append('image',image);
+                    param.append('nomCellier',nomCellier );
+                    param.append('id', id);
 
                     /* Requete pour ajouter le cellier */
                     let requete = new Request(BaseURL + "index.php?requete=ajoutCellier",{method:'POST', body: param});
@@ -143,12 +144,12 @@ window.addEventListener('load', () => {
                             else{
                                 output += "<img class='imgCellier' src=./images/"+response.image +">";
                             }
-                            var node = document.createElement("DIV");
+                            let node = document.createElement("DIV");
                             output += "<a class='nomCellier' href='index.php?requete=listeBouteilleCellier&idCellier="+ response.id_cellier + "'>" + response.nom + "</a>";
                             // output += "<button class='modifierCellier'>  Modifier </button>\n"
                             output += "<div class='supprimerCellier btnCellier'><i class='fas fa-trash-alt'></i></div>";
                             // let insert = document.getElementById('insertChild');
-                            // var textnode = document.createTextNode(out);
+                            // let textnode = document.createTextNode(out);
                             node.setAttribute('data-id',response.id_cellier);
                             node.classList.add('listeCellier');
                             node.classList.add('cellierId');
@@ -183,6 +184,95 @@ window.addEventListener('load', () => {
             });
         });
 
+    document.querySelectorAll(".modifierCellier").forEach(element => {
+
+        element.addEventListener('click',(evt)=>{
+
+            let idCellier = evt.target.closest('.cellierId').dataset.id;
+            let fromModifier = document.getElementById('modifier'+idCellier)
+            let styleForm = window.getComputedStyle(fromModifier);
+
+            console.log(styleForm.display);
+            if (styleForm.display === 'none'){
+                fromModifier.style.display='block';
+            }
+            else {
+                fromModifier.style.display='none';
+
+            }
+
+        });
+    });
+
+
+    document.querySelectorAll(".inputModifierCellier").forEach(element => {
+
+            element.addEventListener('click',(evt)=>{
+                // console.log('ee');
+                // console.log(evt)
+                let idCellier = evt.target.closest('.formModifCellier').dataset.id;
+                console.log(idCellier);
+
+                modiferCellier(idCellier,evt)
+
+            });
+
+    });
+
+
+
+});
+
+
+function modiferCellier(idCellier,evt){
+    // let btnModifCellier = document.querySelector("[name='inputModifierCellier']");
+
+    // if (btnModifCellier){
+    //     btnAjoutCellier.addEventListener('click',(evt)=> {
+
+    // if (document.querySelector("[name='nomCellierModif']").value == ""){
+    //     console.log(document.querySelector("[name='nomCellierModif']").value)
+    //     document.querySelector("[name='nomCellierModif']").style.borderColor='red';
+    //     document.getElementById("errorCellierModif").style.color='red';
+    //     document.getElementById("errorCellierModif").innerHTML='Le champs ne peut pas être vide';
+    //     evt.preventDefault()
+    // }
+    // else {
+    //
+    //     let imageModif = document.querySelector('#imageCellierModifier').files[0];
+    //     let nomCellierModif = document.querySelector("[name='nomCellierModif']").value;
+    //     // let idUserModif = document.querySelector("[name='idUsagerCellierModifier']").value;
+    //     let idCellierModif = idCellier
+    //
+    //     let param = new FormData();
+    //     param.append('image',imageModif);
+    //     param.append('nomCellierMofif',nomCellierModif );
+    //     // param.append('idUserModif', idUserModif);
+    //     param.append('idCellierModif', idCellierModif);
+    //
+    //     let requete = new Request(BaseURL + "index.php?requete=modifierCellier",{method:'POST', body: param});
+    //
+    //     fetch(requete)
+    //         .then(response => {
+    //             console.log('ee');
+    //             if (response.status === 200) {
+    //                 // console.log(response.json());
+    //                 return response.json();
+    //             }
+    //             else {
+    //                 throw new Error('Erreur');
+    //             }
+    //         })
+    //         .then(response => {
+    //             console.log(response)
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // }
 
     // });
-});
+
+    // }
+
+}

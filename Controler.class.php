@@ -176,6 +176,13 @@ class Controler
                     header("Location:index.php?requete=login");
                 }
                 break;
+            case 'modifierCellier':
+                if (isset($_SESSION['user_pseudo'])) {
+                    $this->modificationCellier();
+                } else {
+                    header("Location:index.php?requete=login");
+                }
+                break;
             case 'filtre':
                 if (isset($_SESSION['user_pseudo'])) {
                     $this->filtreBouteille();
@@ -221,6 +228,7 @@ class Controler
                     $this->fermerSession();
                 }
                 break;
+
             default:
                 if (isset($_SESSION['user_pseudo'])) {
                     $this->accueil();
@@ -582,6 +590,17 @@ class Controler
         $saq->supprimeTousProduits();
         $res = $saq->getProduits(200, 0);
         echo json_encode($res);
+    }
+
+    private function modificationCellier(){
+
+        if (!empty($_POST['nomCellierMofif']) && !empty($_POST['idUserModif'])&& !empty($_SESSION['user_id'])) {
+            $cellier = new Cellier();
+//            $resultat = $cellier->ajoutCellierUsager($body);
+            $resultat = $cellier->updateCellier($_POST['nomCellierMofif'],$_POST['idUserModif'],$_SESSION['user_id']);
+            echo json_encode($resultat);
+        }
+
     }
 }
 ?>
