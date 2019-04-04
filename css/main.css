@@ -14,6 +14,7 @@
         /*---Index---*/
     /*
     mc = caché sur mobile
+    md = caché sur desktop
     */
 
 *{
@@ -123,4 +124,13 @@ ul {
     .hautDePage > :not(:last-child) {
         margin-right: 10px;
     }
+
+    .md {
+      display: none;
+  }
 }
+
+@media screen and (max-width: 599px) {
+  h2 {
+    font-weight: normal;
+  }

@@ -60,9 +60,8 @@ label.labelImg {
   padding: 10px;
   background-color: #7f253c;
   color: #f9f9f9;
-  border-radius: 5px;
+  border-radius: 4px;
   font-weight: bold;
-  margin: 10px;
   display: block;
 }
 
