@@ -3,8 +3,9 @@
 }
 
 #recherche_bouteille_cellier label {
-            margin-left: 12px;
-        }
+    margin-left: 12px;
+}
+
 #modifCellier{
     display: none;
 }
