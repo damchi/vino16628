@@ -195,7 +195,8 @@ window.addEventListener('load', () => {
      * @type {Element | null}
      * div avec les select pour les filtre
      */
-    let selectRecherche = document.querySelector('.recherche');
+    let selectRecherche = document.getElementById('filtreRecherche');
+    // let selectRecherche = document.querySelector('.recherche');
 
     /**
      * Liste des vignettes de bouteilles
@@ -221,7 +222,7 @@ window.addEventListener('load', () => {
              * */
             reset.style.display ='block';
 
-
+            console.log('eee');
             let idCellier = document.querySelector("[name = 'idCellier']").value;
             let millesime = document.querySelector("[name = 'millesime']").value;
             let pays = document.querySelector("[name = 'pays']").value;
@@ -229,9 +230,9 @@ window.addEventListener('load', () => {
 
 
             // console.log(select);
-            // console.log(millesime);
-            // console.log(pays);
-            // console.log(type);
+            console.log(millesime);
+            console.log(pays);
+            console.log(type);
 
             var param ={
                 "millesime" : millesime,
