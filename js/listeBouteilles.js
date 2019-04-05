@@ -144,6 +144,15 @@ window.addEventListener('load', () => {
             let output = " Désolé aucun vin ne correspond à vos critères dans votre cellier";
             errorFiltre.innerHTML = output;
             errorFiltre.style.color='red';
+
+            divBouteille.forEach((bouteille)=>{
+                bouteille.style.display = 'flex';
+                // idDiv.push(bouteille.dataset.id)
+                console.log();
+                    bouteille.style.display = 'none';
+
+            });
+
             if (errorFiltre.style.display='none'){
                 errorFiltre.style.display='flex'
             }
