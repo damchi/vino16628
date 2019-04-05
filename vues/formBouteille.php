@@ -50,6 +50,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
             <!-- Image usager-->
             <label for="imageBouteille" class="icon_form labelImg">Choisir image</label>
             <input type="file" class="input" name="image" id="imageBouteille" accept="image/*">
+            <div name="nomImage"></div>
         </div>
 
         <!-- Nom -->

@@ -14,13 +14,13 @@ section {
     margin: auto;
 }
 
-.divAdmin .usager, .divAdmin .bouteille {
+.divAdmin .itemListe {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.divAdmin .usager:not(:last-child), .divAdmin .bouteille:not(:last-child) {
+.divAdmin .itemListe:not(:last-child) {
     margin-bottom: 10px;
 }
 
