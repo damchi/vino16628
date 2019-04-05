@@ -85,6 +85,8 @@ window.addEventListener('load', () => {
      * fonction qui remet à zéro la table vino__bouteille_saq et  telecharge d'autres bouteilles
      */
     function reinitialiserCatalogue() {
+        divListeBouteilles.innerHTML = 'Réinitialisation en cours';
+        
         let requete = new Request(
             "index.php?requete=reinitialiserCatalogue",
             {method: 'POST', body: '{}'}

@@ -12,10 +12,8 @@
 header {
   display: flex;
   background-color: rgba(127, 37, 60, 0.80);
-/*  width: 100%;*/
   align-items: center;
-  justify-content: space-between;
-  padding: 0 15%;
+  justify-content: space-around;
   border-bottom: 2px solid #f9f9f9;
 }
 

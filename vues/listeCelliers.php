@@ -94,15 +94,10 @@
                     ?>
                 </div>
                     <div class="divBtnCellier">
-<!--                            <div class="modifierCellier btnCellier" > <i class="fas fa-edit"></i></div>-->
-                    <div class="supprimerCellier btnCellier"><i class="fas fa-trash-alt"></i></div>
-                </div>
-                </div>
-<!--                <div>-->
-<!--                    <input type="text" required name="nomCellier" placeholder="Nom du Cellier">-->
-<!--                </div>-->
-            </div>
 
+                            <div class="supprimerCellier btnCellier"><i class="fas fa-trash-alt fa-2x"></i></div>
+                        </div>
+                    </div>
             <?php
             }
             ?>

@@ -36,7 +36,7 @@ class Bouteille extends Modele {
         $type = (int) $data['type'];
 
 
-        if(isset($_FILES["image"]) && $_FILES["image"]["error"] == 0){
+        if(isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
 
             $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
             $filename = $_FILES["image"]["name"];
@@ -45,14 +45,14 @@ class Bouteille extends Modele {
 
             // Verifie l'extension du fichier
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
-            if(!array_key_exists($ext, $allowed)) die("Erreur: Le format image n'est pas le bon.");
+            if (!array_key_exists($ext, $allowed)) die("Erreur: Le format image n'est pas le bon.");
 
             // Verifie file size - 5MB maximum
             $maxsize = 5 * 1024 * 1024;
-            if($filesize > $maxsize) die("Erreur: La taille de l'image est trop volumineuse.");
+            if ($filesize > $maxsize) die("Erreur: La taille de l'image est trop volumineuse.");
 
             // Génére une string aleatoire a ajouter aux photos usager
-            if(in_array($filetype, $allowed)){
+            if (in_array($filetype, $allowed)) {
 
                 $key = '';
                 $keys = array_merge(range(0, 9), range('a', 'z'));
@@ -60,25 +60,24 @@ class Bouteille extends Modele {
                 for ($i = 0; $i < 10; $i++) {
                     $key .= $keys[array_rand($keys)];
                 }
-                $filename = $key.$filename;
+                $filename = $key . $filename;
                 $image = $this->_db->escape_string($filename);
 
                 // insere la photo dans le fichier ./images/
-                move_uploaded_file($_FILES["image"]["tmp_name"], "./images/" .$filename);
 
-            } else{
+                move_uploaded_file($_FILES["image"]["tmp_name"], "./images/" . $filename);
+            } else {
                 echo "Erreur: Il y a eu une erreure merci de réessayer.";
             }
-        } else{
-            echo "Error: " . $_FILES["image"]["error"];
         }
+
 
         // insertion dans la table
         $sql = "INSERT INTO vino__bouteille (id_cellier, nom,image, code_saq, pays, url_saq, url_img, format, date_achat, garde_jusqua, notes, prix, quantite, millesime, type)
             VALUES ($idCellier, '$nom', '$image','$codeSaq', '$pays', '$urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)";
+
         $this->_db->query($sql);
 
-		
         return $this->_db->insert_id;
 	}
 	
