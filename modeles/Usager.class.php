@@ -167,6 +167,20 @@ class Usager extends Modele
     }
     
 	/**
+	 * Récupère les informations sur un usager donné.
+	 * 
+	 * @param int $idUsager
+	 * 
+	 * @return Array Informations sur l'usager
+	 */
+    public function getUsager($idUsager) {
+        $idUsager = (int) $idUsager;
+        $sql = "SELECT * FROM vino__usager WHERE id_usager = $idUsager";
+        $res = $this->_db->query($sql);
+        return $res->fetch_assoc();
+    }
+    
+	/**
 	 * Retourne le nombre d'usagers correspondant à certains critères.
 	 * 
      * @param Array $criteres
@@ -201,8 +215,6 @@ class Usager extends Modele
             DELETE FROM vino__usager
             WHERE id_usager = $idUsager
         ";
-
-		var_dump($sql);
 
         $this->_db->query($sql);
         

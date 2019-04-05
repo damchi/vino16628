@@ -26,7 +26,7 @@
 </div>
 
 <template id="templateBouteille">
-    <div class="bouteille" data-id="">
+    <div class="bouteille itemListe" data-id="">
         <span class="nom"></span>
 
         <div class="boutons">

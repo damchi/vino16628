@@ -209,6 +209,11 @@ class Controler
                     $this->autocompleteUsager();
                 }
                 break;
+            case 'detailsUsager':
+                if (isset($_SESSION['admin'])) {
+                    $this->detailsUsager();
+                }
+                break;
             case 'supprimerUsager':
                 if (isset($_SESSION['admin'])) {
                     $this->supprimerUsager();
@@ -570,6 +575,16 @@ class Controler
         echo json_encode($listeUsagers);
     }
 
+    private function detailsUsager()
+    {
+        $usr = new Usager();
+        $data['usager'] = $usr->getUsager($_GET['idUsager']);
+        
+        include("vues/entete.php");
+        include("vues/detailsUsager.php");
+        include("vues/pied.php");
+    }
+
     private function supprimerUsager()
     {
         $body = json_decode(file_get_contents('php://input'));
@@ -593,11 +608,10 @@ class Controler
         echo json_encode($res);
     }
 
-    private function modificationCellier(){
-
+    private function modificationCellier()
+    {
         if (!empty($_POST['nomCellierMofif']) && !empty($_POST['idUserModif'])&& !empty($_SESSION['user_id'])) {
             $cellier = new Cellier();
-//            $resultat = $cellier->ajoutCellierUsager($body);
             $resultat = $cellier->updateCellier($_POST['nomCellierMofif'],$_POST['idUserModif'],$_SESSION['user_id']);
             echo json_encode($resultat);
         }
