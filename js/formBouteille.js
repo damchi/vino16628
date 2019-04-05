@@ -149,33 +149,6 @@ window.addEventListener('load', function() {
      *  return true si un champs est vide
      * **/
 
-    let validationFormulaire = (()=>{
-        let obj ={};
-        obj.estValide = (unObjet)=>{
-            if (unObjet.value ==""){
-                return true
-            }
-        };
-        return obj;
-    })();
 
-
-    if (submitForm){
-
-        submitForm.addEventListener('click',(event)=>{
-        // console.log(champs.nom)
-            /**
-             * Bloque l'envoie de formulaire si un des champs est vide
-             */
-            if (validationFormulaire.estValide(champs.nom ) == true ||
-                validationFormulaire.estValide(champs.pays ) == true ||
-                validationFormulaire.estValide(champs.date_achat ) == true ||
-                validationFormulaire.estValide(champs.prix) == true ||
-                validationFormulaire.estValide(champs.format ) == true ||
-                validationFormulaire.estValide(champs.type  ) == true ){
-                event.preventDefault();
-            }
-        });
-    }
 });
 
