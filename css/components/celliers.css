@@ -1,6 +1,10 @@
-a {
-	line-height: 1.9em;
-}
+/**
+ * CSS de la page listeCelliers.php
+ * Created by PhpStorm.
+ * User: Julien Granero
+ * Dernière modification : 04/04/2019
+ */
+
 .sous-menu {
 	background-color: #f9f9f9;
 	padding: 10px 15px;
@@ -19,10 +23,6 @@ a {
 	background-color: white;
 	min-width: 300px;
 }
-
-/*.containerCellier{*/
-	/*border-bottom: 1px solid #701139*/
-/*}*/
 
 .nomCellier {
 	text-decoration: none;

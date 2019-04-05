@@ -74,6 +74,16 @@ label.icon_form.labelImg{
     margin-bottom: 0;
 }
 
+.listeAutoComplete {
+    max-width: 400px;
+    margin: auto;
+}
+
+.listeAutoComplete li:hover {
+    color: white;
+    background-color: #7F253C;
+}
+
 @media screen and (min-width: 600px) {
   label.labelImg {
     max-width: 150px;
