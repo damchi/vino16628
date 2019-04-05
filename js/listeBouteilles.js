@@ -12,7 +12,8 @@ window.addEventListener('load', () => {
     function ajusterDivBouteilleSelonQuantite(divBouteille) {
         let btnSupprimer = divBouteille.querySelector('.btnSupprimer');
         let quantite = divBouteille.querySelector('.quantite').innerHTML;
-        divBouteille.querySelector('.carte-image').style.border = (quantite > 0) ? "" : "2px solid red";
+        divBouteille.querySelector('.carte-image>img').style.border = (quantite > 0) ? "" : "2px solid red";
+        divBouteille.querySelector('.carte-image>img').style.borderRadius = (quantite > 0) ? "" : "10px";
         btnSupprimer.style.display = (quantite > 0) ? 'none' : 'inline';
     }
 
@@ -127,7 +128,7 @@ window.addEventListener('load', () => {
     let errorFiltre = document.getElementById('errorFiltre');
 
     /**
-     * div du change text recherche
+     * div du champs text recherche
      * @type {HTMLElement | null}
      */
     let rechercheCellier = document.querySelector("[name ='rechercheInfo']");
@@ -139,7 +140,7 @@ window.addEventListener('load', () => {
     function resultatRecherche(response){
         console.log(response.length);
         if (response.length === 0){
-            console.log('ee');
+            // console.log('ee');
             let output = " Désolé aucun vin ne correspond à vos critères dans votre cellier";
             errorFiltre.innerHTML = output;
             errorFiltre.style.color='red';
@@ -269,7 +270,7 @@ window.addEventListener('load', () => {
              * */
             reset.style.display ='block';
 
-            console.log(evt);
+            // console.log(evt);
 
             let nom = rechercheCellier.value;
             console.log(nom);
@@ -281,7 +282,7 @@ window.addEventListener('load', () => {
                     {method: 'POST', body: '{"nom": "'+nom+'"}'}
                 );
 
-                console.log(requete);
+                // console.log(requete);
 
                 fetch(requete).then(response => {
                     if (response.status === 200) {
@@ -292,7 +293,7 @@ window.addEventListener('load', () => {
                     }
                 })
                     .then(response => {
-                        console.log(response);
+                        // console.log(response);
                         resultatRecherche(response);
                     })
                     .catch(error => {
@@ -303,18 +304,24 @@ window.addEventListener('load', () => {
     }
 
     /* Afficher la liste des bouteille par liste ou par vignette*/
-    let listeBouteille = document.querySelector('.afficherListeBouteille');
-    if(listeBouteille){
+    let listeBouteilleParVignette = document.querySelector('.afficherListeVignette');
+    if(listeBouteilleParVignette){
         let bouteille = document.getElementById('listeBouteille');
-        listeBouteille.addEventListener('click', function(){
+        listeBouteilleParVignette.addEventListener('click', function(){
             if(bouteille.classList.contains('listeBouteilleParListe')){
                 bouteille.classList.remove('listeBouteilleParListe');
                 bouteille.classList.add('listeBouteilleParVignette')
-                listeBouteille.innerHTML = '<i class="fas fa-list"></i>';
-            }else{
+            }
+        });
+    }
+
+    let listeBouteilleParListe = document.querySelector('.afficherListeBouteille');
+    if(listeBouteilleParListe){
+        let bouteille = document.getElementById('listeBouteille');
+        listeBouteilleParListe.addEventListener('click', function(){
+            if(bouteille.classList.contains('listeBouteilleParVignette')){
                 bouteille.classList.remove('listeBouteilleParVignette');
-                bouteille.classList.add('listeBouteilleParListe');
-                listeBouteille.innerHTML = '<i class="fas fa-th"></i>';
+                bouteille.classList.add('listeBouteilleParListe')
             }
         });
     }

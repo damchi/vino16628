@@ -14,7 +14,6 @@ function supprimeCellier(idCellier){
         "idCellier": idCellier,
     };
     let requete = new Request(BaseURL + "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
-    // let requete = new Request( "index.php?requete=verifierBouteille",{method:'POST', body: JSON.stringify(param)});
     fetch(requete)
         .then(response => {
             if (response.status === 200) {
@@ -26,28 +25,28 @@ function supprimeCellier(idCellier){
             }
         })
         .then(response =>{
-            console.log(response);
-            // console.log(response.nbBouteille);
+            // console.log(response);
             if (response.succes == true ){
-
+                // alert pour confirmer la suppression
                 let result = confirm('Le cellier contient '+ response.nbBouteille +' bouteille voulez vous le supprimer ?');
+                // si ok sur alert alors supression
                 if (result == true){
-                    console.log('aaaaa');
+                    // console.log('aaaaa');
                     let requeteDelete = new Request(BaseURL + "index.php?requete=supprimerCellier",{method:'POST', body: JSON.stringify(param)});
                     fetch(requeteDelete)
-                        .then(response => {
-                            console.log(response);
-                            if (response.status === 200) {
-                                // console.log(response.json());
-                                return response.json();
-                            }
-                            else {
-                                throw new Error('Erreur');
-                            }
-                        })
-                        .then(response=>{
-                            location.reload();
-                        })
+                    .then(response => {
+                        console.log(response);
+                        if (response.status === 200) {
+                            // console.log(response.json());
+                            return response.json();
+                        }
+                        else {
+                            throw new Error('Erreur');
+                        }
+                    })
+                    .then(response=>{
+                        location.reload();
+                    })
                 }
             }
             else {
@@ -66,30 +65,32 @@ function supprimeCellier(idCellier){
                     .then(response=>{
                         location.reload();
                     })
-
             }
         })
-
 }
 
 
 window.addEventListener('load', () => {
     /*
-    * Toggle pour afficher les champs d'ajout celliers
+    * Toggle pour afficher les champs d'ajout celliers en mobile
     * */
-    let btnAffichetCellier = document.querySelector("[name='afficheFormCellier']");
-    let formCellier = document.getElementById("formCellier");
-    if (btnAffichetCellier) {
-        btnAffichetCellier.addEventListener('click',()=> {
-            if (formCellier.style.display == 'block'){
-                formCellier.style.display='none';
-            }
-            else {
-                formCellier.style.display='block';
-            }
+        let btnAffichetCellier = document.querySelector("[name='afficheFormCellier']");
+        /**
+         *
+         * @element formCellier div form ajout cellier
+         */
+        let formCellier = document.getElementById("formCellier");
+        if (btnAffichetCellier) {
+            btnAffichetCellier.addEventListener('click',()=> {
+                if (formCellier.style.display == 'block'){
+                    formCellier.style.display='none';
+                }
+                else {
+                    formCellier.style.display='block';
+                }
 
-        });
-    }
+            });
+        }
 
     /* Bouton ajout de cellier*/
     let btnAjoutCellier = document.querySelector("[name='ajouterCellier']");
@@ -110,6 +111,10 @@ window.addEventListener('load', () => {
                     let nomCellier = document.querySelector("[name='nomCellier']").value;
                     let id = document.querySelector("[name='idUsagerCellier']").value;
 
+                    /**
+                     *
+                     * @type {FormData} objet form data avec les parametres cellier à ajouter
+                     */
                     let param = new FormData();
                     param.append('image',image);
                     param.append('nomCellier',nomCellier );
@@ -130,14 +135,12 @@ window.addEventListener('load', () => {
                                 throw new Error('Erreur');
                             }
                         })
-
-
                         .then(response => {
 
-                            /** Créeation du nouveau Cellier sur la mem page*/
+                            /** Créeation du nouveau Cellier sur la meme page*/
 
                             let output = "";
-                            output += "<div class='divImgCellier'>"
+                            output += "<div class='divImgCellier'>";
                             output += '<a class="nomCellier" href="index.php?requete=listeBouteilleCellier&idCellier='+ response.id_cellier +'">';
 
                             if (response.image == null){
@@ -185,107 +188,22 @@ window.addEventListener('load', () => {
                 }
             });
         }
-
-
+    /**
+     * recuperation des boutons supprimer
+     *
+     */
     document.querySelectorAll(".supprimerCellier").forEach(element => {
 
             element.addEventListener('click',(evt)=>{
+                /**
+                 *
+                 * idCellier id du cellier a supprimer
+                 */
                 let idCellier = evt.target.closest('.cellierId').dataset.id;
                 console.log(idCellier);
                 supprimeCellier(idCellier)
-
             });
         });
-
-    // document.querySelectorAll(".modifierCellier").forEach(element => {
-    //
-    //     element.addEventListener('click',(evt)=>{
-    //
-    //         let idCellier = evt.target.closest('.cellierId').dataset.id;
-    //         let fromModifier = document.getElementById('modifier'+idCellier)
-    //         let styleForm = window.getComputedStyle(fromModifier);
-    //
-    //         console.log(styleForm.display);
-    //         if (styleForm.display === 'none'){
-    //             fromModifier.style.display='block';
-    //         }
-    //         else {
-    //             fromModifier.style.display='none';
-    //
-    //         }
-    //
-    //     });
-    // });
-    //
-    //
-    // document.querySelectorAll(".inputModifierCellier").forEach(element => {
-    //
-    //         element.addEventListener('click',(evt)=>{
-    //             // console.log('ee');
-    //             // console.log(evt)
-    //             let idCellier = evt.target.closest('.formModifCellier').dataset.id;
-    //             console.log(idCellier);
-    //
-    //             modiferCellier(idCellier,evt)
-    //
-    //         });
-    //
-    // });
-
-
-
 });
 
 
-// function modiferCellier(idCellier,evt){
-//     // let btnModifCellier = document.querySelector("[name='inputModifierCellier']");
-//
-//     // if (btnModifCellier){
-//     //     btnAjoutCellier.addEventListener('click',(evt)=> {
-//
-//     // if (document.querySelector("[name='nomCellierModif']").value == ""){
-//     //     console.log(document.querySelector("[name='nomCellierModif']").value)
-//     //     document.querySelector("[name='nomCellierModif']").style.borderColor='red';
-//     //     document.getElementById("errorCellierModif").style.color='red';
-//     //     document.getElementById("errorCellierModif").innerHTML='Le champs ne peut pas être vide';
-//     //     evt.preventDefault()
-//     // }
-//     // else {
-//     //
-//     //     let imageModif = document.querySelector('#imageCellierModifier').files[0];
-//     //     let nomCellierModif = document.querySelector("[name='nomCellierModif']").value;
-//     //     // let idUserModif = document.querySelector("[name='idUsagerCellierModifier']").value;
-//     //     let idCellierModif = idCellier
-//     //
-//     //     let param = new FormData();
-//     //     param.append('image',imageModif);
-//     //     param.append('nomCellierMofif',nomCellierModif );
-//     //     // param.append('idUserModif', idUserModif);
-//     //     param.append('idCellierModif', idCellierModif);
-//     //
-//     //     let requete = new Request(BaseURL + "index.php?requete=modifierCellier",{method:'POST', body: param});
-//     //
-//     //     fetch(requete)
-//     //         .then(response => {
-//     //             console.log('ee');
-//     //             if (response.status === 200) {
-//     //                 // console.log(response.json());
-//     //                 return response.json();
-//     //             }
-//     //             else {
-//     //                 throw new Error('Erreur');
-//     //             }
-//     //         })
-//     //         .then(response => {
-//     //             console.log(response)
-//     //         })
-//     //         .catch(error => {
-//     //             console.error(error);
-//     //         });
-//     // }
-//
-//     // });
-//
-//     // }
-//
-// }

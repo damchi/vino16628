@@ -79,11 +79,9 @@ class SAQ extends Modele
 	 * @param int $nombre
 	 * @param int $debut
 	 */
-	public function getProduits($nombre , $debut ) {
-//	public function getProduits($nombre = 100, $debut = 0) {
+	public function getProduits($nombre, $debut) {
 		$s = curl_init();
 
-		//curl_setopt($s, CURLOPT_URL, "http://www.saq.com/webapp/wcs/stores/servlet/SearchDisplay?searchType=&orderBy=&categoryIdentifier=06&showOnly=product&langId=-2&beginIndex=".$debut."&tri=&metaData=YWRpX2YxOjA8TVRAU1A%2BYWRpX2Y5OjE%3D&pageSize=". $nombre ."&catalogId=50000&searchTerm=*&sensTri=&pageView=&facet=&categoryId=39919&storeId=20002");
 		curl_setopt($s, CURLOPT_URL, "https://fr.simplesite.com");
 		curl_setopt($s, CURLOPT_URL, 
         "https://www.saq.com/webapp/wcs/stores/servlet/SearchDisplay?categoryIdentifier=06&showOnly=product&langId=-2&beginIndex=" . $debut . "&pageSize=" . $nombre . "&catalogId=50000&searchTerm=*&categoryId=39919&storeId=20002");
@@ -92,8 +90,6 @@ class SAQ extends Modele
         // Quick fix pour que ça marche sous Windows sans installer les root certificates
         curl_setopt($s, CURLOPT_SSL_VERIFYPEER, false);
         
-		//curl_setopt($s, CURLOPT_FOLLOWLOCATION, 1);
-
 		self::$_webpage = curl_exec($s);
 		self::$_status = curl_getinfo($s, CURLINFO_HTTP_CODE);
 		curl_close($s);
@@ -101,7 +97,6 @@ class SAQ extends Modele
 		$doc = new DOMDocument();
 		$doc -> recover = true;
 		$doc -> strictErrorChecking = false;
-//		$doc -> loadHTML(self::$_webpage);
 		@$doc -> loadHTML(self::$_webpage);
 		$elements = $doc -> getElementsByTagName("div");
 		$i = 0;
@@ -111,10 +106,6 @@ class SAQ extends Modele
 				$retour = $this -> ajouteProduit($info);
 				if ($retour -> succes == false) {
 					echo "erreur : " . $retour -> raison . "<br>";
-//					echo "<pre>";
-////					var_dump($info);
-//					echo "</pre>";
-//					echo "<br>";
 				} else {
 					$i++;
 				}
@@ -215,7 +206,6 @@ class SAQ extends Modele
     public function supprimeTousProduits() {
         $sql = "DELETE FROM vino__bouteille__saq";
         $res = $this->_db->query($sql);
-        return $res;
     }
 
 	private function get_inner_html($node) {
@@ -254,13 +244,10 @@ class SAQ extends Modele
 					$info -> desc -> pays = trim($aRes[1]);
 					$info -> desc -> format = substr(trim($aRes[2]), 2);
 				}
-
                 
 				if (isset($aDesc[1][0])) {
 					$info -> desc -> type = trim($aDesc[1][0]);
-//					var_dump($info -> desc -> type);
 				}
-
                 
 				$info -> desc -> texte = trim($info -> desc -> texte);
 			}
@@ -280,38 +267,61 @@ class SAQ extends Modele
 		return $info;
 	}
 
+	/**
+	 * Ajoute un produit au catalogue.
+	 * 
+     * @param Array $bte Attributs de la bouteille
+     *
+	 * @return Object Résultat et raison
+	 */
 	private function ajouteProduit($bte) {
 		$retour = new stdClass();
 		$retour -> succes = false;
 		$retour -> raison = '';
 
-		// Récupère le type
+		// Récupère le type.
         $sql = "select id_type from vino__type where type = '" . $bte -> desc -> type . "'";
 		$rows = $this -> _db -> query($sql);
-//		var_dump($bte -> desc -> type );
 
+        // Récupère l'id du type. L'ajoute s'il n'y est pas encore.        
 		if ($rows -> num_rows == 1) {
-			$type = $rows -> fetch_assoc();
-			$type = $type['id_type'];
+            $type = $rows -> fetch_assoc();
+            $type = $type['id_type'];
+        }
+        else {
+            $type = $this -> ajouteType($bte -> desc -> type);
+        }
+        
+        $sql = "select id_bouteille_saq from vino__bouteille__saq where code_saq = '" . $bte -> desc -> code_SAQ . "'";
 
-            $sql = "select id_bouteille_saq from vino__bouteille__saq where code_saq = '" . $bte -> desc -> code_SAQ . "'";
+        $rows = $this -> _db -> query($sql);
 
-			$rows = $this -> _db -> query($sql);
+        if ($rows -> num_rows < 1) {
+            $this -> stmt -> bind_param(
+                "sissdsss", $bte -> nom, $type, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format
+            );
             
-			if ($rows -> num_rows < 1) {
+            $retour -> succes = $this -> stmt -> execute();
+        }
+        else {
+            $retour -> succes = false;
+            $retour -> raison = self::DUPLICATION;
+        }
 
-				$this -> stmt -> bind_param("sissdsss", $bte -> nom, $type, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);
-				$retour -> succes = $this -> stmt -> execute();
-			} else {
-				$retour -> succes = false;
-				$retour -> raison = self::DUPLICATION;
-			}
-		} else {
-			$retour -> succes = false;
-			$retour -> raison = self::ERREURDB;
-
-		}
-		return $retour;
-
+        return $retour;
 	}
+    
+	/**
+	 * Ajoute un type de vin au catalogue.
+	 * 
+     * @param string Le nom du type ('Vin rouge', etc.)
+     *
+	 * @return int L'id du nouveau type
+	 */
+	private function ajouteType($type) {
+        $type = $this->_db->escape_string($type);        
+        $sql = "INSERT INTO vino__type (type) VALUES ('$type')";
+        $this->_db->query($sql);
+        return $this->_db->insert_id;        
+    }
 }

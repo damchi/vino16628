@@ -1,4 +1,7 @@
-
+/**
+ * Forumlaire de validation pour inscription et login
+ * verification des champs requis et qu'ils correspondent aux expression régulieres si besoin
+ */
     let validationFormulaire = (()=>{
         let obj ={}
         obj.estValide = (unObjet)=>{

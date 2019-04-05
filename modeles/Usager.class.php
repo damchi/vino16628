@@ -11,6 +11,7 @@ class Usager extends Modele
     const TABLE = 'vino__usager';
 
     /**
+     * verifie l'existance d'un usager avec son mail ou pseudo
      * @param $mail
      * @param $pseudo
      * @return bool
@@ -34,12 +35,13 @@ class Usager extends Modele
      * @param $password
      * @param $pseudo
      * @return mixed
+     * ajout d'un nouveau usager dans la BDD
+     *
      */
     public function ajoutNouveauUsager($nom,$prenom,$mail,$password,$pseudo){
         $retour = new stdClass();
 
         if ($this->existUsager($mail,$pseudo) == false){
-            //            $mdp = password_hash($data->mdp, PASSWORD_DEFAULT);
             $mdp = password_hash($password, PASSWORD_DEFAULT);
             $admin = '0';
             $stmt = $this->_db->prepare("INSERT INTO " .self::TABLE . " (nom, prenom, mail, mdp, admin,pseudo) VALUES (?, ?, ?,?,?,?)");
@@ -91,6 +93,7 @@ class Usager extends Modele
      * @param $identifiant
      * @param $password
      * @return stdClass
+     * fonction de login dans l'application verification si la personne est admin ou non
      */
     public function login($identifiant,$password){
         $retour = new stdClass();
@@ -118,9 +121,7 @@ class Usager extends Modele
                 }
             }
         }
-
         return $retour;
-
     }
 
 	/**

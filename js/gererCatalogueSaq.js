@@ -54,7 +54,10 @@ window.addEventListener('load', () => {
     */
     
     chargerResultatRecherche();
-    
+
+    /**
+     *
+     */
     function chargerResultatRecherche() {
         let requete = new Request(
             "index.php?requete=autocompleteBouteille",
@@ -77,8 +80,13 @@ window.addEventListener('load', () => {
             console.error(error);
         });        
     }
-    
+
+    /**
+     * fonction qui remet à zéro la table vino__bouteille_saq et  telecharge d'autres bouteilles
+     */
     function reinitialiserCatalogue() {
+        divListeBouteilles.innerHTML = 'Réinitialisation en cours';
+        
         let requete = new Request(
             "index.php?requete=reinitialiserCatalogue",
             {method: 'POST', body: '{}'}

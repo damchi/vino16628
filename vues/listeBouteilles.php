@@ -15,6 +15,7 @@
             <!--Bouton choisir affichage-->
             <div id="afficheListe">
                 <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
+                <button class="afficherListeVignette"><i class="fas fa-th"></i></button>
             </div>
 
         </div>
@@ -111,7 +112,7 @@
                         <!-- Texte -->
                         <?php
                         if ($bouteille['code_saq'] != null ) {
-                            ; ?>
+                            ?>
                             <div class="carte-code_saq">Code saq : <a
                                         href="<?php echo $bouteille['url_saq'] ?>"><?php echo $bouteille['code_saq'] ?></a></div>
                             <?php
