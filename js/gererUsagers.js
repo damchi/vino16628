@@ -122,20 +122,21 @@ window.addEventListener('load', () => {
             */
             
             divUsager.dataset.id = usager.id_usager;
+            
             let description = usager.pseudo;
             description += (usager.admin == '1') ? ' (admin)' : '';
-            divUsager.querySelector('.description').innerHTML = description;
             
-            /*
-                On insère le bon id de usager dans le lien du bouton
-                modifier à la place du texte "%id_usager%".
+            let spanDescription = divUsager.querySelector('.description');
+            spanDescription.innerHTML = description;
+                        
+            /*                
+                Cliquer sur la description mène à la page de détails.
+                On insère le bon id d'usager dans le lien à la place du texte
+                "%id_usager%".
             */
             
-//            let lienModifier = divUsager.querySelector(".btnModifier a");
-//            
-//            lienModifier.href = lienModifier.href.replace(
-//                /%id_usager_saq%/, usager.id_usager_saq
-//            );
+            let lien = spanDescription.closest('a');
+            lien.href = lien.href.replace(/%id_usager%/, usager.id_usager);
             
             /*
                 On ajoute l'event listener du bouton supprimer. Il demande une
