@@ -20,9 +20,7 @@ a {
 	min-width: 300px;
 }
 
-/*.containerCellier{*/
-	/*border-bottom: 1px solid #701139*/
-/*}*/
+
 
 .nomCellier {
 	text-decoration: none;
@@ -121,6 +119,7 @@ a {
 		margin-bottom: 10px;
 		min-width: 700px;
 	}
+
 
 	.divImgCellier {
 		width: 125px;
