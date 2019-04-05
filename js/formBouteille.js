@@ -125,15 +125,14 @@ window.addEventListener('load', function() {
                     champs.url_img.value = response.url_img;
                     champs.format.value = response.format;
                     champs.type.value = response.type;
-
+                    champs.millesime.value = response.nom.match(/\d{4}$/);
 
                     if (img) {
-                        // console.log(imageUsager);
                         imageUsager.style.display='none';
-
                         img.src = response.url_img;
                         img.style.display = "block";
                     }
+                    
                     liste.innerHTML = "";
                     inputRecherche.value = "";
                 })
