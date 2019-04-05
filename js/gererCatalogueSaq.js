@@ -79,6 +79,8 @@ window.addEventListener('load', () => {
     }
     
     function reinitialiserCatalogue() {
+        divListeBouteilles.innerHTML = 'Réinitialisation en cours';
+        
         let requete = new Request(
             "index.php?requete=reinitialiserCatalogue",
             {method: 'POST', body: '{}'}

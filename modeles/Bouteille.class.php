@@ -67,32 +67,21 @@ class Bouteille extends Modele {
                 $filename = $key.$filename;
                 $image = $this->_db->escape_string($filename);
 
-
-                // Check whether file exists before uploading it
-//                if(file_exists("./images/" . $filename)){
-//                    echo $filename . " is already exists.";
-//                } else{
-                    move_uploaded_file($_FILES["image"]["tmp_name"], "./images/" .$filename);
-//                    echo "Your file was uploaded successfully.";
-//                }
+                move_uploaded_file($_FILES["image"]["tmp_name"], "./images/" .$filename);
             } else{
                 echo "Error: There was a problem uploading your file. Please try again.";
             }
         } else{
             echo "Error: " . $_FILES["image"]["error"];
         }
-//
-
-
-
 
         $sql = "
             INSERT INTO vino__bouteille (id_cellier, nom,image, code_saq, pays, url_saq, url_img, format, date_achat, garde_jusqua, notes, prix, quantite, millesime, type)
-            VALUES ($idCellier, '$nom', '$image','$codeSaq', '$pays', '$urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)";
-//        var_dump($sql);
+            VALUES ($idCellier, '$nom', '$image','$codeSaq', '$pays', '$urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)
+        ";
+        
         $this->_db->query($sql);
 
-		
         return $this->_db->insert_id;
 	}
 	
