@@ -144,6 +144,15 @@ window.addEventListener('load', () => {
             let output = " Désolé aucun vin ne correspond à vos critères dans votre cellier";
             errorFiltre.innerHTML = output;
             errorFiltre.style.color='red';
+
+            divBouteille.forEach((bouteille)=>{
+                bouteille.style.display = 'flex';
+                // idDiv.push(bouteille.dataset.id)
+                console.log();
+                    bouteille.style.display = 'none';
+
+            });
+
             if (errorFiltre.style.display='none'){
                 errorFiltre.style.display='flex'
             }
@@ -195,7 +204,8 @@ window.addEventListener('load', () => {
      * @type {Element | null}
      * div avec les select pour les filtre
      */
-    let selectRecherche = document.querySelector('.recherche');
+    let selectRecherche = document.getElementById('filtreRecherche');
+    // let selectRecherche = document.querySelector('.recherche');
 
     /**
      * Liste des vignettes de bouteilles
@@ -221,7 +231,7 @@ window.addEventListener('load', () => {
              * */
             reset.style.display ='block';
 
-
+            console.log('eee');
             let idCellier = document.querySelector("[name = 'idCellier']").value;
             let millesime = document.querySelector("[name = 'millesime']").value;
             let pays = document.querySelector("[name = 'pays']").value;
@@ -229,9 +239,9 @@ window.addEventListener('load', () => {
 
 
             // console.log(select);
-            // console.log(millesime);
-            // console.log(pays);
-            // console.log(type);
+            console.log(millesime);
+            console.log(pays);
+            console.log(type);
 
             var param ={
                 "millesime" : millesime,

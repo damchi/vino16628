@@ -19,7 +19,10 @@ window.addEventListener('load', function() {
 
     if (form) {
         var img = form.querySelector("img");
-        
+
+        var imgUser = document.querySelector("[name='image']");
+        console.log(imgUser.value);
+
         var champs = {
             "id_cellier": form.querySelector("[name='id_cellier']"),
             "nom": form.querySelector("[name='nom']"),
