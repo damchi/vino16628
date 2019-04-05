@@ -58,22 +58,8 @@
 	text-align: left;
 }
 
-#formCellier .labelImg {
-	border: 1px solid #7F253C;
-	margin: 25px 0px 10px 0px;
-	text-align: center;
-	cursor: pointer;
-}
-
-#formCellier .labelImg:hover {
-	background-color: white;
-	color: #7F253C;
-}
-
 #formCellier input {
-	max-width: 70%;
-	margin-left: 10%;
-	margin: 25px 0px 10px 0px;
+	margin: 3px 0px 10px 0px;
 }
 
 .btnAjouterCellier, .btnCellier {
@@ -85,6 +71,10 @@
 	color: white;
 	border-radius: 50%;
 	padding: 11px 10px;
+}
+
+.btnAjouterCellier {
+	margin-left: 10px;
 }
 
 .btnAjouterCellier {
@@ -157,11 +147,6 @@
 	#formCellier input {
 		max-width: 250px;
 		margin-left: 25px;
-	}
-
-	#formCellier .labelImg {
-		margin: 15px 0px 15px 25px;
-		text-align: center;
 	}
 
 	.btnAjouterCellier {

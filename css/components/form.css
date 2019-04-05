@@ -19,7 +19,7 @@
 
 .icon_form{
     display: inline-block;
-    background-color: #97174C;
+    background-color: #7f253c;
     padding: 8px;
     min-width: 50px;
     border-radius: 6px 0px 0px 6px;
@@ -48,12 +48,9 @@
 }
 
 /*Correctif pou alignement parfait du bouton Filtre au dessous avec les select en bas*/
+
 select{
     margin-right: 0px;
-}
-
-input[type=file] {
-  display: none;
 }
 
 label.labelImg {
@@ -61,13 +58,19 @@ label.labelImg {
   background-color: #7f253c;
   color: #f9f9f9;
   border-radius: 4px;
-  display: block;
+  display: none;
 }
 
-/*Ajustement bouton image dans formBouteille*/
+/*Ajustement dans formBouteille*/
+
+#recherche_bouteille {
+    margin-bottom: 20px;
+}
+
 label.icon_form.labelImg{
     margin-left: 0;
     width: 100%;
+    cursor: pointer;
 }
 
 .formBouteille div.form{
@@ -82,13 +85,14 @@ label.icon_form.labelImg{
 .listeAutoComplete li:hover {
     color: white;
     background-color: #7F253C;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 600px) {
   label.labelImg {
     max-width: 150px;
     margin: auto;
-    display: inline-block;
+    display: none;
   }
 }
 

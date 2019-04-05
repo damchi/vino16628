@@ -1,6 +1,10 @@
 /*
     Un peu de CSS spécifique aux pages d'administration
 */
+section {
+    text-align: center;
+    margin: auto;
+}
 
 .divAdmin > * {
     width: 100%;
@@ -35,4 +39,43 @@
 
 .divAdmin .boutons > :not(:last-child) {
     margin-right: 5px;
+}
+
+.grandNbr {
+    font-size: 3.5em;
+    font-weight: bold;
+    line-height: 2.5em;
+}
+
+.statAdmin, .statAdminCat {
+    border: 2px solid #2d2c2c;
+    border-radius: 5px;
+    width: 250px;
+    background-color: white;
+    margin: 20px 30px;
+}
+
+.statAdminCat {
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#usager h2 {
+    font-weight: bold;
+}
+
+@media screen and (min-width: 600px) {
+    #catalogue div .statAdmin {
+        margin: auto;
+    }
+
+    #usager div {
+        display: inline-block;
+    }
+
+    #titreAdmin {
+        background-color: white;
+        padding: 10px 0px;
+    }
 }

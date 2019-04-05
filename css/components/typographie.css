@@ -9,11 +9,11 @@ body {
     font-size: 10px;
 }
 .vin_text{
-    color:#97174C;
+    color:#7f253c;
 }
 
 .vin_fond{
-    color: #97174C;
+    color: #7f253c;
 }
 
 .titreNav {
@@ -23,6 +23,10 @@ body {
 
 h1, h2, h3 {
     font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-size: 1.5em;
 }
 
 h2 {

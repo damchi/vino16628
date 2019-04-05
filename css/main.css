@@ -11,37 +11,37 @@
 @import url("components/admin.css");
 
 
-        /*---Index---*/
-    /*
-    mc = caché sur mobile
-    md = caché sur desktop
-    */
+      /*---Index---*/
+  /*
+  mc = caché sur mobile
+  md = caché sur desktop
+  */
 
 *{
-    box-sizing: border-box;    
+  box-sizing: border-box;    
 }
 
 body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-	  color: #2d2c2c;
-    width: 100%;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: #2d2c2c;
+  width: 100%;
+  margin: 0;
 }
 
 main{
-    flex-grow: 1;
-    width: 100%;
+  flex-grow: 1;
+  width: 100%;
 }
 
 footer {
-    background-color: #7f253c;
-    text-align: center;
-    font-size: 0.8em;
-    color: #eee;
-    padding: 5px;
-    width: 100%;
+  background-color: #7f253c;
+  text-align: center;
+  font-size: 0.8em;
+  color: #eee;
+  padding: 5px;
+  width: 100%;
 }
 
 .ml {
@@ -57,21 +57,21 @@ footer {
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 i {
-  margin: 0px 5px;
+margin: 0px 5px;
 }
 
 ul {
-    padding: 0;
-    list-style-type: none;
+  padding: 0;
+  list-style-type: none;
 }
 
 .mc {
-    display: none;
+  display: none;
 }
 
 /*
@@ -110,49 +110,47 @@ ul {
   .hautDePage .recherche {
     flex-grow: 1;
   }
-}
 
-@media screen and (min-width: 600px) {
-    body {
-        background-image: url("../images/barril.jpg");
-    }
+  body {
+      background-image: url("../images/barril.jpg");
+  }
 
-    main {
-        margin: auto;
-        margin-top: 50px; 
-    }
+  main {
+      margin: auto;
+      margin-top: 50px; 
+  }
 
-    .conteneur {
-        background-color: rgba(255,255,255,0.7);
-        border-radius: 10px;
-        min-height: 600px;
-        padding-top: 10px;
-    }
+  .conteneur {
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 10px;
+    min-height: 600px;
+    padding-top: 10px;
+  }
 
-    .encadré {
-      text-align: center;
-      max-width: 100%;
-      margin-top: 2%;
-      margin-bottom: 2%;
-      padding: 30px 0px;
-      background-color: rgba(168, 28, 64, 0.48);
-    }
+  .encadré {
+    text-align: center;
+    max-width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 30px 0px;
+    background-color: rgba(168, 28, 64, 0.48);
+  }
 
-    .containeurBlanc {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      width: 100%;
-      background-color: #f9f9f9;
-      padding: 10px;
-    }
+  .containeurBlanc {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    background-color: #f9f9f9;
+    padding: 10px;
+  }
 
-    .mc {
-        display: block;
-    }
+  .mc {
+    display: block;
+  }
 
-    .md {
-      display: none;
+  .md {
+    display: none;
   }
 }
 
