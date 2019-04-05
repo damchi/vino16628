@@ -303,18 +303,24 @@ window.addEventListener('load', () => {
     }
 
     /* Afficher la liste des bouteille par liste ou par vignette*/
-    let listeBouteille = document.querySelector('.afficherListeBouteille');
-    if(listeBouteille){
+    let listeBouteilleParVignette = document.querySelector('.afficherListeVignette');
+    if(listeBouteilleParVignette){
         let bouteille = document.getElementById('listeBouteille');
-        listeBouteille.addEventListener('click', function(){
+        listeBouteilleParVignette.addEventListener('click', function(){
             if(bouteille.classList.contains('listeBouteilleParListe')){
                 bouteille.classList.remove('listeBouteilleParListe');
                 bouteille.classList.add('listeBouteilleParVignette')
-                listeBouteille.innerHTML = '<i class="fas fa-list"></i>';
-            }else{
+            }
+        });
+    }
+
+    let listeBouteilleParListe = document.querySelector('.afficherListeBouteille');
+    if(listeBouteilleParListe){
+        let bouteille = document.getElementById('listeBouteille');
+        listeBouteilleParListe.addEventListener('click', function(){
+            if(bouteille.classList.contains('listeBouteilleParVignette')){
                 bouteille.classList.remove('listeBouteilleParVignette');
-                bouteille.classList.add('listeBouteilleParListe');
-                listeBouteille.innerHTML = '<i class="fas fa-th"></i>';
+                bouteille.classList.add('listeBouteilleParListe')
             }
         });
     }

@@ -15,6 +15,7 @@
             <!--Bouton choisir affichage-->
             <div id="afficheListe">
                 <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
+                <button class="afficherListeVignette"><i class="fas fa-th"></i></button>
             </div>
 
         </div>
