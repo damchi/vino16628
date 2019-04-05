@@ -8,9 +8,22 @@
 ?>
 <header>
     <div id="colLogo">
-        <a href="">
-            <img src="images/logo.png" id="logo" alt="Logo Vino" title="Logo Vino">
-        </a>
+    <?php
+        if (isset($_SESSION['admin'])) {
+        ?>
+            <a href="?requete=adminAccueil">
+                <img src="images/logo.png" id="logo" alt="Logo Vino" title="Logo Vino">
+            </a>
+        <?php
+        }
+        else {
+        ?>
+            <a href="">
+                <img src="images/logo.png" id="logo" alt="Logo Vino" title="Logo Vino">
+            </a>
+        <?php
+        }
+        ?>
     </div>
     
     <nav class="topnav colNav" id="topnav">

@@ -24,6 +24,9 @@
 <template id="templateUsager">
     <div class="usager" data-id="">
         <span class="description"></span>
-        <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button> 
+      
+        <div class="boutons">
+          <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button> 
+        </div>
     </div>
 </template>

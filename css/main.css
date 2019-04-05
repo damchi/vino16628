@@ -74,6 +74,44 @@ ul {
     display: none;
 }
 
+/*
+  Le haut de page est horizontal sur les grands écrans, vertical sur mobile.
+*/
+
+.hautDePage {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+@media screen and (max-width: 599px) {
+  .hautDePage {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .hautDePage > :not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .hautDePage {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .hautDePage > :not(:last-child) {
+    margin-right: 10px;
+  }
+  
+  .hautDePage .recherche {
+    flex-grow: 1;
+  }
+}
+
 @media screen and (min-width: 600px) {
     body {
         background-image: url("../images/barril.jpg");
@@ -111,18 +149,6 @@ ul {
 
     .mc {
         display: block;
-    }
-
-    .hautDePage {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        width: 100%;
-        white-space: nowrap;
-    }
-
-    .hautDePage > :not(:last-child) {
-        margin-right: 10px;
     }
 
     .md {

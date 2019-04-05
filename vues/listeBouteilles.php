@@ -2,18 +2,18 @@
     <div class="containeurBlanc">
         <div class="hautDePage">
             <!-- Bouton Ajouter une bouteille -->
-            <div>
-                <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
-            </div>
+            <button><a href="index.php?requete=nouvelleBouteilleCellier&idCellier=<?= $data['idCellier'] ?>"><i class="fas fa-plus"></i>  Ajouter une bouteille</a></button>
 
             <!-- Recherche Bouteille-->
-            <div id="recherche_bouteille_cellier" class="group">
-                <label class="icon_form"><i class="fas fa-search"></i></label>
-                <input type="text" name="rechercheInfo" placeholder="Recherche">
+            <div class="recherche">
+                <div id="recherche_bouteille_cellier" class="group">
+                    <label class="icon_form"><i class="fas fa-search"></i></label>
+                    <input type="text" name="rechercheInfo" placeholder="Recherche">
+                </div>
             </div>
 
             <!--Bouton choisir affichage-->
-            <div id="afficheListe" class="mc">
+            <div id="afficheListe">
                 <button class="afficherListeBouteille"><i class="fas fa-list"></i></button>
             </div>
 

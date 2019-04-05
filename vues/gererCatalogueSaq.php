@@ -29,7 +29,7 @@
     <div class="bouteille" data-id="">
         <span class="nom"></span>
 
-        <div>
+        <div class="boutons">
             <button class='btnModifier'><a href="index.php?requete=modifierBouteilleSaq&idBouteilleSaq=%id_bouteille_saq%"><i class="fas fa-edit"></i></a></button>
             <button class='btnSupprimer'><i class="fas fa-trash-alt"></i></button> 
         </div>
