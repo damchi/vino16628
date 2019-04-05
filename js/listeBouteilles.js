@@ -127,7 +127,7 @@ window.addEventListener('load', () => {
     let errorFiltre = document.getElementById('errorFiltre');
 
     /**
-     * div du change text recherche
+     * div du champs text recherche
      * @type {HTMLElement | null}
      */
     let rechercheCellier = document.querySelector("[name ='rechercheInfo']");
@@ -139,7 +139,7 @@ window.addEventListener('load', () => {
     function resultatRecherche(response){
         console.log(response.length);
         if (response.length === 0){
-            console.log('ee');
+            // console.log('ee');
             let output = " Désolé aucun vin ne correspond à vos critères dans votre cellier";
             errorFiltre.innerHTML = output;
             errorFiltre.style.color='red';
@@ -269,7 +269,7 @@ window.addEventListener('load', () => {
              * */
             reset.style.display ='block';
 
-            console.log(evt);
+            // console.log(evt);
 
             let nom = rechercheCellier.value;
             console.log(nom);
@@ -281,7 +281,7 @@ window.addEventListener('load', () => {
                     {method: 'POST', body: '{"nom": "'+nom+'"}'}
                 );
 
-                console.log(requete);
+                // console.log(requete);
 
                 fetch(requete).then(response => {
                     if (response.status === 200) {
@@ -292,7 +292,7 @@ window.addEventListener('load', () => {
                     }
                 })
                     .then(response => {
-                        console.log(response);
+                        // console.log(response);
                         resultatRecherche(response);
                     })
                     .catch(error => {

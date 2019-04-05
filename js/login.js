@@ -14,6 +14,9 @@ window.addEventListener("load", function () {
 	sectionVisible.style.maxHeight = sectionVisible.scrollHeight + "px"
 })
 
+/**
+ * animatation des forms pour le login ou inscription
+ */
 function animationLogin() {
   document.querySelectorAll(".btnToggle").forEach(btnToggle => btnToggle.addEventListener("click", function() {
   	var elementAMontrer = this.nextElementSibling;

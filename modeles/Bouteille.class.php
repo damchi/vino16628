@@ -13,10 +13,11 @@
 class Bouteille extends Modele {
     const TABLE = 'vino__bouteille';
 
+
     /**
-     * @param $data
-     * @return mixed
-     * ajoute une bouteille au cellier
+     * @param $data information sur la bouteille a ajouter
+     * @return mixed id de la bouteille inserée
+     * Ajoute bouteille au cellier avec image SAQ ou image usager
      */
     public function ajouterBouteilleCellier($data) {
         $idCellier = (int) $data['id_cellier'];
@@ -33,10 +34,6 @@ class Bouteille extends Modele {
         $quantite = (int) $data['quantite'];
         $millesime = (int) $data['millesime'];
         $type = (int) $data['type'];
-//        $image = $this->_db->escape_string($_FILES['image']['name']);
-//echo "<pre>";
-//var_dump($_FILES);
-
 
 
         if(isset($_FILES["image"]) && $_FILES["image"]["error"] == 0){
@@ -46,17 +43,16 @@ class Bouteille extends Modele {
             $filetype = $_FILES["image"]["type"];
             $filesize = $_FILES["image"]["size"];
 
-            // Verify file extension
+            // Verifie l'extension du fichier
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
-            if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
+            if(!array_key_exists($ext, $allowed)) die("Erreur: Le format image n'est pas le bon.");
 
-            // Verify file size - 5MB maximum
+            // Verifie file size - 5MB maximum
             $maxsize = 5 * 1024 * 1024;
-            if($filesize > $maxsize) die("Error: File size is larger than the allowed limit.");
+            if($filesize > $maxsize) die("Erreur: La taille de l'image est trop volumineuse.");
 
-            // Verify MYME type of the file
+            // Génére une string aleatoire a ajouter aux photos usager
             if(in_array($filetype, $allowed)){
-
 
                 $key = '';
                 $keys = array_merge(range(0, 9), range('a', 'z'));
@@ -67,29 +63,19 @@ class Bouteille extends Modele {
                 $filename = $key.$filename;
                 $image = $this->_db->escape_string($filename);
 
+                // insere la photo dans le fichier ./images/
+                move_uploaded_file($_FILES["image"]["tmp_name"], "./images/" .$filename);
 
-                // Check whether file exists before uploading it
-//                if(file_exists("./images/" . $filename)){
-//                    echo $filename . " is already exists.";
-//                } else{
-                    move_uploaded_file($_FILES["image"]["tmp_name"], "./images/" .$filename);
-//                    echo "Your file was uploaded successfully.";
-//                }
             } else{
-                echo "Error: There was a problem uploading your file. Please try again.";
+                echo "Erreur: Il y a eu une erreure merci de réessayer.";
             }
         } else{
             echo "Error: " . $_FILES["image"]["error"];
         }
-//
 
-
-
-
-        $sql = "
-            INSERT INTO vino__bouteille (id_cellier, nom,image, code_saq, pays, url_saq, url_img, format, date_achat, garde_jusqua, notes, prix, quantite, millesime, type)
+        // insertion dans la table
+        $sql = "INSERT INTO vino__bouteille (id_cellier, nom,image, code_saq, pays, url_saq, url_img, format, date_achat, garde_jusqua, notes, prix, quantite, millesime, type)
             VALUES ($idCellier, '$nom', '$image','$codeSaq', '$pays', '$urlSaq', '$urlImg', '$format', '$dateAchat', '$gardeJusqua', '$notes', $prix, $quantite, $millesime, $type)";
-//        var_dump($sql);
         $this->_db->query($sql);
 
 		
@@ -247,7 +233,7 @@ class Bouteille extends Modele {
     /**
      * Donne le nombre de bouteilles dans un cellier donné.
      * @param int $idCellier
-     * @return stdClass
+     * @return stdClass true si il y a des bouteilles False si vide
      */
     public function countBouteilleCellier($idCellier) {
         $idCellier = (int) $idCellier;
@@ -273,30 +259,6 @@ class Bouteille extends Modele {
         return $retour;
     }
 
-//    /**
-//     * @param $idCellier
-//     * @param $nom
-//     * @param int $nb_resultat
-//     * @return array
-//     */
-//	public function chercheBouteille($idCellier, $nom, $nbResultats = 10) {
-//        $idCellier = (int) $idCellier;
-//        $nom = $this->_db->escape_string($nom);
-//        $nom = preg_replace("/\*/", "%", $nom);
-//        $nbResultats = (int) $nbResultats;
-//
-//        $sql = "
-//            SELECT DISTINCT nom FROM " . self::TABLE . "
-//            WHERE id_cellier = $idCellier AND LOWER(nom) LIKE LOWER('%$nom%')
-//            LIMIT 0, $nbResultats
-//        ";
-//        $res = $this->_db->query($sql);
-//        $rows = Array();
-//        while ($row = $res->fetch_assoc()) {
-//            $rows[] = $row;
-//        }
-//        return $rows;
-//    }
 
     /**
      * rempli select millisime dans le filtre
@@ -362,7 +324,7 @@ class Bouteille extends Modele {
     }
 
     /**
-     * @param $data
+     * @param $data informations a filtrer
      * @return array
      * @throws Exception
      * filtre les bouteilles dans le celliers via les selects
@@ -388,8 +350,6 @@ class Bouteille extends Modele {
         if (trim($type) != ""){
             $sql .= " AND type = ".$type;
         }
-
-//        var_dump($sql);
 
         if (!($res = $this->_db->query($sql))) {
             throw new Exception($this->_err['requete'] . $this->_db->error, 1);
