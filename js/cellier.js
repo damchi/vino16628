@@ -159,7 +159,7 @@ window.addEventListener('load', () => {
                                 output += "</div>";
                             output += "</div>";
                             output += "<div class='divBtnCellier'>";
-                                output += "<div class='supprimerCellier btnCellier'><i class='fas fa-trash-alt'></i></div>";
+                                output += "<div class='supprimerCellier btnCellier'><i class='fas fa-trash-alt fa-2x'></i></div>";
                             output += "</div>";
 
                             let node = document.createElement("DIV");

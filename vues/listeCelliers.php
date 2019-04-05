@@ -94,7 +94,7 @@
                         </div>
                         <div class="divBtnCellier">
 <!--                            <div class="modifierCellier btnCellier" > <i class="fas fa-edit"></i></div>-->
-                            <div class="supprimerCellier btnCellier"><i class="fas fa-trash-alt"></i></div>
+                            <div class="supprimerCellier btnCellier"><i class="fas fa-trash-alt fa-2x"></i></div>
                         </div>
                     </div>
             <?php
