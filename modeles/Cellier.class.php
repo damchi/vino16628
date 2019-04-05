@@ -11,12 +11,12 @@ class Cellier extends Modele
     const TABLE ='vino__cellier';
 
     /**
-     * @param $id
+     * @param $id du cellier
      * @return array
+     * recupere les celliers usagers avec les informations de contenu
      */
     public function getUsagerCellier($id){  
         $cellier = Array();
-//        $stmt = "SELECT * FROM " . self::TABLE. " WHERE id_usager_cellier = ".$id;
         $stmt = "SELECT vino__cellier.image, vino__cellier.id_cellier, vino__cellier.nom, vino__cellier.id_usager_cellier, b.total, c.total_rouge, d.total_blanc, e.total_rose
                 FROM vino__cellier 
                         LEFT JOIN (
@@ -68,76 +68,10 @@ class Cellier extends Modele
         return $cellier;
     }
 
-
-//    public function updateCellier($nom, $idUsager,$idCellier){
-//
-//        if(isset($_FILES["image"]) && $_FILES["image"]["error"] == 0){
-//
-//            $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
-//            $filename = $_FILES["image"]["name"];
-//            $filetype = $_FILES["image"]["type"];
-//            $filesize = $_FILES["image"]["size"];
-//
-//            // Verify file extension
-//            $ext = pathinfo($filename, PATHINFO_EXTENSION);
-//            if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
-//
-//            // Verify file size - 5MB maximum
-//            $maxsize = 5 * 1024 * 1024;
-//            if($filesize > $maxsize) die("Error: File size is larger than the allowed limit.");
-//
-//            // Verify MYME type of the file
-//            if(in_array($filetype, $allowed)){
-//
-//
-//                $key = '';
-//                $keys = array_merge(range(0, 9), range('a', 'z'));
-//
-//                for ($i = 0; $i < 10; $i++) {
-//                    $key .= $keys[array_rand($keys)];
-//                }
-//                $filename = $key.$filename;
-//                $image = $this->_db->escape_string($filename);
-//
-//
-//                // Check whether file exists before uploading it
-////                if(file_exists("./images/" . $filename)){
-////                    echo $filename . " is already exists.";
-////                } else{
-//                move_uploaded_file($_FILES["image"]["tmp_name"], "./images/" .$filename);
-////                    echo "Your file was uploaded successfully.";
-////                }
-//            } else{
-//                echo "Error: There was a problem uploading your file. Please try again.";
-//            }
-//        }
-//        else{
-//            echo "Error: " . $_FILES["image"]["error"];
-//        }
-//
-//
-//        if (isset($image)){
-//
-//            $sql = "UPDATE " .self::TABLE." SET(nom,image) VALUES ('".$nom."','".$image."') WHERE id_cellier = " .$idCellier. " AND id_usager_cellier =".$idUsager;
-//        }
-//        else{
-//            $sql = "UPDATE " .self::TABLE." SET(nom) VALUES ('".$nom."') WHERE id_cellier = " .$idCellier. " AND id_usager_cellier =".$idUsager;        }
-//
-//        var_dump($sql);
-////        die();
-//        $this->_db->query($sql);
-//
-//        $id = $this->_db->insert_id;
-//        $result = $this->_db->query("SELECT * FROM ". self::TABLE." WHERE id_cellier = {$id}");
-//        $cellier = $result->fetch_object();
-////        var_dump($cellier);
-//        return $cellier;
-//
-//    }
-
     /**
-     * @param $data
-     * @return mixed
+     * @param $nom du cellier
+     * @param $id de l'usager
+     * @return mixed inforamtion du cellier
      */
     public function ajoutCellierUsager($nom, $id) {
 //            var_dump($_FILES["image"]);
@@ -212,8 +146,9 @@ class Cellier extends Modele
     }
 
     /**
-     * @param $data
+     * @param $data information du cellier
      * @return mixed
+     * suppression deu cellier
      */
     public function supprimeCellierUsager($data){
 //        var_dump($data);
@@ -222,13 +157,5 @@ class Cellier extends Modele
        return $stmt->execute();
     }
 
-
-
-
-//    public function countBouteille($data){
-//        $stmt = " SELECT COUNT(*) FROM vino__bouteille where id_cellier = " . $data->idCellier;
-//        $stmt_result = $this->_db->query($stmt);
-//        return $stmt_result;
-//    }
 
 }

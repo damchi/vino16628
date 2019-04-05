@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
     burger.addEventListener('click', () => {
         // console.log('e');
         // console.log(x)
-        console.log(x.className);
+        // console.log(x.className);
           if (x.className == "topnav colNav") {
             x.classList.remove('colNav');
             x.classList.add("responsive");

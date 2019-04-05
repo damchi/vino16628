@@ -112,7 +112,7 @@
                         <!-- Texte -->
                         <?php
                         if ($bouteille['code_saq'] != null ) {
-                            ; ?>
+                            ?>
                             <div class="carte-code_saq">Code saq : <a
                                         href="<?php echo $bouteille['url_saq'] ?>"><?php echo $bouteille['code_saq'] ?></a></div>
                             <?php

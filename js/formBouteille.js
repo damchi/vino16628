@@ -39,7 +39,8 @@ window.addEventListener('load', function() {
     }
 
     /*
-        L'input recherche est un autocomplete qui remplit la liste.
+        L'input recherche est un autocomplete qui remplit la liste avec les bouteilles presente dans la table
+        vino__bouteille__saq.
     */
     
     if (inputRecherche) {
@@ -47,8 +48,8 @@ window.addEventListener('load', function() {
             console.log(evt);
             
             let nom = inputRecherche.value;
-            console.log('nom');
-            console.log(nom);
+            // console.log('nom');
+            // console.log(nom);
             liste.innerHTML = "";
 
             if(nom){
@@ -60,7 +61,7 @@ window.addEventListener('load', function() {
                     }
                 );
 
-                console.log(requete);
+                // console.log(requete);
                 
                 fetch(requete).then(response => {
                     if (response.status === 200) {
@@ -71,7 +72,7 @@ window.addEventListener('load', function() {
                     }
                 })
                 .then(response => {
-                    console.log(response);
+                    // console.log(response);
 
                     response.forEach(function(element){
                         liste.innerHTML += "<li data-id='"+ element.id_bouteille_saq +"'>"+element.nom+"</li>";
@@ -129,9 +130,7 @@ window.addEventListener('load', function() {
 
                         img.src = response.url_img;
                         img.style.display = "block";
-
                     }
-
                     liste.innerHTML = "";
                     inputRecherche.value = "";
                 })
@@ -142,7 +141,10 @@ window.addEventListener('load', function() {
         });        
     }
 
-    /** VALIDTION DU FORMULAIRE **/
+    /**
+     * VALIDTION DU FORMULAIRE
+     *  return true si un champs est vide
+     * **/
 
     let validationFormulaire = (()=>{
         let obj ={};
@@ -159,6 +161,9 @@ window.addEventListener('load', function() {
 
         submitForm.addEventListener('click',(event)=>{
         // console.log(champs.nom)
+            /**
+             * Bloque l'envoie de formulaire si un des champs est vide
+             */
             if (validationFormulaire.estValide(champs.nom ) == true ||
                 validationFormulaire.estValide(champs.pays ) == true ||
                 validationFormulaire.estValide(champs.date_achat ) == true ||
@@ -168,10 +173,6 @@ window.addEventListener('load', function() {
                 event.preventDefault();
             }
         });
-
-
     }
-
-
 });
 
