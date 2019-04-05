@@ -23,7 +23,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 <div class="encadré">
     <div class="containeurBlanc">
 <div class="formBouteille">
-    <h2> Formulaire d'ajout de bouteille</h2>
+    <h1> Formulaire d'ajout de bouteille</h1>
 
     <!-- Recherche-->
     <div class="form">
@@ -55,7 +55,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
         <!-- Nom -->
         <div class="group">
-            <label class="icon_form"><i class="fas fa-ribbon"></i></label>
+            <label class="icon_form"><i class="fas fa-ribbon"></i>*</label>
             <input type="text" class="input" name="nom" placeholder="Nom" required value="<?= $nom ?>">
         </div>
 
@@ -85,7 +85,7 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
         <!-- Type -->
         <div class="group">
-            <label class="icon_form"><i class="fas fa-id-card"></i></label>
+            <label class="icon_form"><i class="fas fa-id-card"></i>*</label>
             <select class="select_form" name="type" required>
                 <option value="" selected disabled>Type</option>
                 <?php
@@ -103,19 +103,19 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
 
         <!-- Millésime -->
         <div class="group">
-            <label class="icon_form" ><i class="fas fa-wine-bottle"></i></label>
+            <label class="icon_form" ><i class="fas fa-wine-bottle"></i>*</label>
             <input type="number" class="input" name="millesime" placeholder="Millésime" value="<?= $millesime ?>" required>
         </div>
 
         <!-- Quantité -->
         <div class="group">
-            <label class="icon_form"><i class="fas fa-cash-register"></i></label>
+            <label class="icon_form"><i class="fas fa-cash-register"></i>*</label>
             <input type="number" class="input" name="quantite" placeholder="Quantité+" required value="<?= $quantite ?>">
         </div>
 
         <!-- Date d'achat -->
         <div class="group">
-            <label class="icon_form"><i class="fas fa-calendar-alt"></i></label>
+            <label class="icon_form"><i class="fas fa-calendar-alt"></i>*</label>
             <input type="date" class="input" name="date_achat" value="<?= $dateAchat ?>" required>
 <!--            <input type="text" class="input" id="date_achat" name="date_achat" placeholder="Date d'achat (aaaa-mm-jj)" value="--><?//= $dateAchat ?><!--" pattern="\d\d\d\d-\d\d-\d\d">-->
         </div>
@@ -130,6 +130,11 @@ $urlSaq = isset($data['bouteille']['url_saq']) ? $data['bouteille']['url_saq'] :
         <div class="group">
             <label class="icon_form"><i class="fa fa-comment"></i></label>
             <textarea name="notes" placeholder="Notes"><?= $notes ?></textarea>
+        </div>
+
+        <!-- Légende -->
+        <div>
+            Tous les champs (*) sont obligatoires
         </div>
 
         <!-- Bouton enregistrer -->

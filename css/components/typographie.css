@@ -1,13 +1,6 @@
 /* --- Google Fonts --- */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Montserrat:400,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto|Merriweather");
-
-/* --- Couleur de référence pour le site Vino --- */
-    /*background-color: #701139;*/ /*Foncé*/
-    /*background-color: #97174C;*/ /*Medium*/
-    /*background-color: #A80549;*/ /*Plus rouge?tre*/
-
-
 /* --- Fonts --- */
 
 body {
@@ -16,20 +9,24 @@ body {
     font-size: 10px;
 }
 .vin_text{
-    color:#97174C;
+    color:#7f253c;
 }
 
 .vin_fond{
-    color: #97174C;
+    color: #7f253c;
 }
 
 .titreNav {
-    font-family: 'Roboto', serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 500;
 }
 
 h1, h2, h3 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-size: 1.5em;
 }
 
 h2 {
@@ -38,6 +35,19 @@ h2 {
 
 h3 {
     font-size: 1.1em;
+}
+
+/* --- Page listeCelliers --- */
+
+.nomCellier {
+    font-family: 'Merriweather', serif;
+    line-height: 1.2em;
+}
+
+/* --- Page listeBouteilles --- */
+
+.carte-titre {
+    font-family: 'Merriweather', serif;
 }
 
 @media (max-width:600px){

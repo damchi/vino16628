@@ -5,26 +5,27 @@
 <div class="encadré">
     <div class="containeurBlanc">
         <div class="tableauBord">
-        <h1>Section d'administration</h1>
+        <h1 id="titreAdmin">Section d'administration</h1>
+        <a href="?requete=gererUsagers">
             <section id="usager">
-            <a href="?requete=gererUsagers">
                 <h2>Usagers</h2>
-                <p>
-                    <span>Nombre d'administrateurs : </span>
+                <div class="statAdmin">
+                    <h3>Nombre d'administrateurs : </h3>
                     <span class="grandNbr"><?= $data['nbAdmin'] ?></span>
-                </p>
-                <p>
-                    <span>Nombre d'usagers : </span>
+                </div>
+                <div class="statAdmin">
+                    <h3>Nombre d'usagers : </h3>
                     <span class="grandNbr"><?= $data['nbUsagers'] ?></span>
-                </p>
+                </div>
             </section id="catalogue">
+            </a>
             <a href="?requete=gererCatalogueSaq">
                 <section>
                     <h2>Catalogue SAQ</h2>
-                    <p>
-                        <span>Nombre de produits dans le catalogue SAQ : </span>
+                    <div class="statAdminCat">
+                        <h3>Nombre de produits dans le catalogue SAQ : </h3>
                         <span class="grandNbr"><?= $data['nbProduitsSaq'] ?></span>
-                    </p>
+                    </div>
                 </section>
             </a>
         </div>

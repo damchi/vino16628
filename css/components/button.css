@@ -4,7 +4,7 @@ button, input[type=submit]{
     padding: 8px;
     border-radius: 6px;
     font-weight: bold;
-    background: #97174C;
+    background: #7f253c;
     transition: background 0.3s ease;
     min-width: 50px;
     text-align: center;
@@ -18,7 +18,7 @@ button:hover {
 
 button a{
     text-decoration: none;
-    background-color: #97174C;
+    background-color: #7f253c;
     color:white;
 }
 
